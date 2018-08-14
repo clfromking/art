@@ -1,0 +1,35 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/custom/custom",
+    "pages/lottery/lottery",
+    "pages/my/my"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarTitleText": "哥送艺术",
+    "navigationBarBackgroundColor":"#fff",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "backgroundColor":"#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "送礼物"
+      },
+      {
+        "pagePath": "pages/lottery/lottery",
+        "text": "抽奖"
+      },
+      {
+        "pagePath": "pages/custom/custom",
+        "text": "客服"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的"
+      }
+    ]
+  }
+}

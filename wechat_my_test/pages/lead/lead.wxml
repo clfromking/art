@@ -1,0 +1,3 @@
+<!--pages/lead/lead.wxml-->
+<text>哥送艺术需要获取您的定位信息，请到设置中开启</text>
+<button open-type='openSetting' bindopensetting="bindopenset">确认开启</button>

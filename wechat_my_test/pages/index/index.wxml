@@ -1,0 +1,3 @@
+<text>{{address}}</text>
+<button bindtap='getLocation'>开启定位</button>
+<button open-type='getUserInfo'>登陆</button>
