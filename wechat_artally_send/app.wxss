@@ -1,0 +1,10 @@
+.clear::after{
+  content: ""; 
+  display: block; 
+  height: 0; 
+  clear: both; 
+  visibility: hidden;  
+}
+page{
+  background: #f2f2f2;
+}

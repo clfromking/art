@@ -1,1 +1,85 @@
 /* pages/lottery/lottery.wxss */
+.jw-lottery-banner{
+  height: 252rpx;
+  display: block;
+  width: 100%
+}
+.jw-lottery-title{
+  display: block;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #111;
+  margin: 30rpx 0;
+}
+.jw-lottery-view{
+  width: 690rpx;
+  margin: 0 auto;
+  padding-bottom: 1rpx
+}
+.jw-lottery-el{
+  width: 100%;
+  height: 310rpx;
+  border-radius: 4rpx;
+  background-color: #ffffff;
+  box-shadow: 0 0 8rpx 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 30rpx;
+  padding-top: 30rpx;
+  box-sizing: border-box
+}
+.jw-lottery-main{
+  height: 250rpx;
+  width: calc(100% - 60rpx);
+  margin: 0 auto;
+}
+.jw-lottery-imgView,.jw-lottery-msgView{
+  float: left;
+  height: 100%
+}
+.jw-lottery-imgView{
+  width: 250rpx;
+}
+.jw-lottery-msgView{
+  width: calc(100% - 250rpx);
+  position: relative
+}
+.jw-lottery-elNum,.jw-lottery-elName{
+  float: right;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.jw-lottery-elNum{
+  color: #cbaa7c;
+  margin-left: 20rpx
+}
+.jw-lottery-elName{
+  color: #111
+}
+.jw-lottery-elAlt{
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #999;
+  float: right;
+  margin: 10rpx 0; 
+}
+.jw-lottery-elTime{
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #cbaa7c;
+  float: right
+}
+.jw-lottery-btn{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: block;
+  height: 56rpx;
+  width: 178rpx;
+  border-radius: 26.5rpx;
+  background-color: #cbaa7c;
+  color: #fff;
+  text-align: center;
+  line-height: 56rpx;
+  font-size: 22rpx;
+  font-weight: bold
+}

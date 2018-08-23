@@ -1,0 +1,8 @@
+<view class='jw-raffle-background'>
+</view>
+<view class='jw-raffle-main'>
+    <view class='jw-art-logo'></view>
+    <text class='jw-art-name'>哥送艺术</text>
+    <text class='jw-art-alt'>发起一个抽奖，{{raffleTime}}开奖</text>
+    <text class='jw-art-other'>大吉大利，送你好礼</text>
+</view>

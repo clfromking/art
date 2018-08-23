@@ -1,11 +1,20 @@
 // pages/lottery/lottery.js
+let lottery_list = [{ 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'name': '云上弦音 雕塑', 'num': 1, 'alt': '现代雕塑 艺术品摆件 云上弦音', 'year': '2014年', 'time': '2月3日 18:30', 'id': 0 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'name': '云上弦音 雕塑', 'num': 1, 'alt': '现代雕塑 艺术品摆件 云上弦音', 'year': '2014年', 'time': '2月3日 18:30', 'id': 1 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'name': '云上弦音 雕塑', 'num': 1, 'alt': '现代雕塑 艺术品摆件 云上弦音', 'year': '2014年', 'time': '2月3日 18:30', 'id': 2 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'name': '云上弦音 雕塑', 'num': 1, 'alt': '现代雕塑 艺术品摆件 云上弦音', 'year': '2014年', 'time': '2月3日 18:30', 'id': 3 }]
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    lottery_list:lottery_list,  //抽奖列表
+    lottery_btnText:'立即抽奖'
+  },
+
+  //点击抽奖事件
+  goRaffle:function(e){
+    wx.navigateTo({
+      url: '../raffle/raffle?time=' + this.data.lottery_list[e.currentTarget.dataset.id].time,
+    })
   },
 
   /**

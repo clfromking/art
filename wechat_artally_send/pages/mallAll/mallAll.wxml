@@ -1,0 +1,70 @@
+<!--pages/mallAll/mallAll.wxml-->
+<scroll-view scroll-y='{{ishideScreen}}' scrollTop='{{scrollTop_num}}' bindscroll='scroll'>
+  <swiper class='jw-banner-swiper' indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
+    <block wx:for='{{banner_src}}' wx:key='item'>
+      <swiper-item>
+        <image class='jw-mall-banner' src='{{item}}'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='jw-search-view'>
+    <image src='https://pic.forunart.com/artgive/wx/mall_icon_search.png' class='jw-search-icon' ></image>
+    <text bindtap='clearInput' class='jw-search-cancel' hidden='{{inputCancel_ishide}}'>取消</text>
+    <input confirm-type='search' value="{{input_val}}" bindblur='search_input_blur' bindfocus='search_input_focus' style='width:{{inputCancel_ishide==true?"568rpx":"516rpx"}};margin-right:{{inputCancel_ishide==true?"32rpx":"0rpx"}}' class='jw-search-input' placeholder='搜你想送的'></input>
+  </view>
+  <view class='jw-zhanwei'></view>
+  <view class='jw-screen-view {{isfixed?"jw-screen-fixed":""}}' >
+    <view bindtap='showScreen' data-id='0' class='jw-left-screen {{isScreen[0]?"isscreen":""}}'>
+      <view class='jw-include-view'>
+        <text hidden='{{priceCover}}'>价格</text>
+        <text style='color:#da0202' hidden='{{!priceCover}}'>{{priceCover}}</text>
+        <image hidden='{{!priceCover||isScreen.indexOf(true)<=-1}}' src='https://pic.forunart.com/artgive/wx/all_fliter_icon_red.png'></image>
+        <image hidden='{{!(!priceCover||isScreen.indexOf(true)<=-1)}}' src='{{isScreen[0]?"https://pic.forunart.com/artgive/wx/all_fliter_icon_red.png":"https://pic.forunart.com/artgive/wx/all_fliter_icon_gray.png"}}'></image>
+      </view>
+    </view>
+    <view bindtap='showScreen' data-id='1' class='jw-right-screen  {{isScreen[1]?"isscreen":""}}'>
+      <view class='jw-include-view'>
+        <text hidden='{{scCover}}'>排序</text>
+        <text style='color:#da0202' hidden='{{!scCover}}'>{{scCover}}</text>
+        <image hidden='{{!scCover||isScreen.indexOf(true)<=-1}}' src='https://pic.forunart.com/artgive/wx/all_fliter_icon_red.png'></image>
+        <image hidden='{{!(!scCover||isScreen.indexOf(true)<=-1)}}' src='{{isScreen[1]?"https://pic.forunart.com/artgive/wx/all_fliter_icon_red.png":"https://pic.forunart.com/artgive/wx/all_fliter_icon_gray.png"}}'></image>
+      </view>
+    </view>
+    <view class='jw-screen-selects-view'  hidden='{{ishideScreen}}'>
+      <view wx:for='{{screen_msg}}' data-screenId='{{screenId}}' wx:key='item' data-id='{{item.id}}' bindtap='selectScreen'>
+        <text class='jw-screen-text {{item.isselect?"isselect":""}}' >{{item.text}}</text>
+        <image hidden='{{!item.isselect}}' src='https://pic.forunart.com/artgive/wx/all_fliter_icon_red.png'></image>
+      </view>
+      </view>
+  </view>
+  <view class='jw-allGifts-view'>
+    <view wx:for='{{ware_list}}' data-id='{{item.id}}' bindtap='goDetail' wx:key='{{item}}' class='jw-el-ware'>
+      <view class='jw-el-ware-img'>
+        <view style='width:100%;height:100%'>
+          <image mode="aspectFit" style="width:100%;height:100%;display:block" src='{{item.src}}'></image>
+        </view>
+      </view>
+      <text class='jw-ware-alt'>{{item.alt}}</text>
+      <text class='jw-ware-money'>￥{{item.money}}</text>
+    </view>
+    <text class='jw-bottom-hint'>没有更多了...</text>
+  </view>
+
+  <view class='jw-bottom-view'>
+    <view  bindtap='goMall' class='jw-bottom-btns'>
+      <image src='https://pic.forunart.com/artgive/wx/mall_nav_icon_chosen_default.png' class='jw-bottom-icon'></image>
+      <text class='jw-bottom-alt'>精选</text>
+    </view>
+    <view class='jw-bottom-btns'>
+      <image src='https://pic.forunart.com/artgive/wx/mall_nav_icon_all_pressed.png' class='jw-bottom-icon'></image>
+      <text class='jw-bottom-alt jw-bottom-rightAlt'>全部</text>
+    </view>
+  </view>
+
+
+  <view class='jw-screen-shade'  hidden='{{ishideScreen}}'>
+
+  </view>
+
+  <image class='jw-backTop' bindtap='backTop' hidden='{{!isfixed}}' src='https://pic.forunart.com/artgive/wx/all_icon_top.png'></image>
+</scroll-view>

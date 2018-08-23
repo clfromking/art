@@ -1,0 +1,57 @@
+/* pages/raffle/raffle.wxss */
+page{
+  background: #fff
+}
+.jw-raffle-background{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8)
+}
+.jw-raffle-main{
+  width: 659rpx;
+  height: 768rpx;
+  border-radius: 4rpx;
+  background: url(https://pic.forunart.com/artgive/wx/gift_bg_img_2.png) no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto
+}
+.jw-art-logo{
+  width: 90rpx;
+  height: 90rpx;
+  position: absolute;
+  top: 159rpx;
+  border-radius: 50%;
+  background: #fff;
+  left: 273rpx
+}
+.jw-art-name{
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ecc897;
+  display: block;
+  text-align: center;
+  position: absolute;
+  top: 268rpx;
+  width: 97%
+}
+.jw-art-alt,.jw-art-other{
+  position: absolute;
+  width: 97%;
+  text-align: center;
+  color: #ecc897;
+}
+.jw-art-alt{
+  font-size: 24rpx;
+  top: 315rpx
+}
+.jw-art-other{
+  top: 388rpx;
+  font-size: 40rpx;
+  font-weight: bold
+}

@@ -20,6 +20,7 @@ App({
     })
     return promise;
   },
+
   //用法
   //const app=getApp()  在需要用到request请求的页面中的顶部获取app.js中的App
   // app.post('https://server.artally.com.cn/zuzu/api/painting/paintinghot').then((res) => {
@@ -33,7 +34,7 @@ App({
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () {
-    
+
   },
 
   /**

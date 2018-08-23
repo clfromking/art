@@ -1,2 +1,24 @@
-<!--pages/lottery/lottery.wxml-->
-<text>pages/lottery/lottery.wxml</text>
+<image class='jw-lottery-banner' src='../imgs/1.png'></image>
+<text class='jw-lottery-title'>每日抽奖</text>
+<view class='jw-lottery-view'>
+  <view class='jw-lottery-el' bindtap='goRaffle' data-id='{{item.id}}' wx:for='{{lottery_list}}' wx:key='item'>
+    <view class='jw-lottery-main'>
+      <view class='jw-lottery-imgView'>
+        <image mode='aspectFit' style='width:100%;height:100%' src='{{item.src}}'></image>
+      </view>
+      <view class='jw-lottery-msgView'>
+        <view class='clear'>
+          <text class='jw-lottery-elNum'>{{item.num}}件</text>
+          <text class='jw-lottery-elName'>{{item.name}}</text>
+        </view>
+        <view class='clear'>
+          <text class='jw-lottery-elAlt'>{{item.alt}}</text>
+        </view>
+        <view  class='clear'>
+          <text class='jw-lottery-elTime'>{{item.year}}{{item.time}} 开奖</text>
+        </view>
+        <text class='jw-lottery-btn'>{{lottery_btnText}}</text>
+      </view>
+    </view>
+  </view>
+</view>

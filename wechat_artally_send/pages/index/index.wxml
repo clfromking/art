@@ -1,2 +1,105 @@
-<image src="{{src}}"></image>
-<view></view>     
+<image class="jw-index-banner" src="{{src}}"></image>
+<view class='jw-index-body' >
+  <view class='jw-gifts-view' hidden='{{!gift_lists}}'>
+    <view class='jw-gift-lists' wx:for="{{gift_lists}}" wx:key="item">
+      <view class='jw-gifts-main-view'>
+        <view class='jw-gifts-img-view' >
+          <image class='jw-gifts-img' mode="aspectFit" src="{{item.url}}"></image>
+        </view>
+        <view class='jw-gifts-msg-view'>
+          <text class='jw-gifts-msg-title'>{{item.title}}</text>
+          <text class='jw-gifts-msg-alt'>{{item.alt}}</text>
+          <text class='jw-gifts-msg-stock'>库存{{item.stock}}</text>
+          <view class='clear' style='margin-top: 36rpx'>
+            <text class='jw-gifts-msg-univalent'>￥{{item.univalent}}</text>
+            <view class='jw-gifts-btns-view'>
+              <text class='jw-gifts-sub-btn'>－</text>
+              <text class='jw-gifts-msg-num'>{{item.num}}</text>
+              <text class='jw-gifts-add-btn'>+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='jw-ishave-view clear'>
+      <text class='jw-total-gifts'>共件礼物</text>
+      <text bindtap='goMall' class='jw-continue'>继续挑选礼物</text>
+    </view>
+  </view>
+  <view bindtap='goMall' class='jw-select-gift-view' hidden='{{gift_lists}}'>
+    <!-- <image class='jw-select-gift-left-icon'></image> -->
+    <text class='jw-select-gift-title'>开始挑选礼物</text>
+    <text class='jw-select-gift-content'>点击这里,挑选喜欢的礼物</text>
+    <image src='../imgs/all_icon_choice.png' class='jw-select-gift-right-icon jw-icon-choice'></image>
+  </view>
+  <view class='jw-select-type' bindtap='showOptionsSheet'>
+    <image src='../imgs/home_way_icon_gift.png' class='jw-oneToone-view-icon'></image>
+    <text class='jw-gift-options'>{{optionsText}}</text>
+    <view class='jw-oneToone-view'>
+      <image src='../imgs/all_icon_choice.png' class='jw-one-choice jw-icon-choice'></image>
+      <text class='jw-oneToone-view-text'>{{selectSheetContent}}</text>
+      
+    </view>
+    <view class='jw-times-view'>
+
+    </view>
+    <view class='jw-persons-view'>
+
+    </view>
+  </view>
+  <view class='jw-set-persons' hidden='{{fullPlay}}'>
+    <view class='jw-set-Opersons'>
+      <text class='jw-sets-title'>开奖人数</text>
+      <text class='jw-sets-other'>人</text>
+      <input placeholder='填写人数' class='jw-sets-input' type='number'></input>
+      
+    </view>
+    <view class='jw-set-Gpersons'>
+      <text class='jw-sets-title'>中奖人数</text>
+      <text class='jw-sets-other'>人</text>
+      <input placeholder='填写人数' class='jw-sets-input' type='number'></input>
+      
+    </view>
+  </view>
+  <view class='jw-set-times'  hidden='{{timesPlay}}'>
+    <view class='jw-set-Otimes'>
+      <picker mode="multiSelector" class='jw-sets-title' bindchange="colConfirm" bindcolumnchange="colChange" value="{{index}}" range="{{times_array}}">
+    <view class="picker">
+      <!-- 当前选择：{{times_array[0][index[0]]}}{{times_array[1][index[1]]}}{{times_array[2][index[2]]}} -->
+      {{select_times}}
+      <image src='../imgs/all_icon_choice.png' class='jw-select-times-icon'></image>
+    </view>
+    
+  </picker>
+      
+    </view>
+    <view class='jw-set-Gpersons'>
+      <text class='jw-sets-title'>中奖人数</text>
+      <text class='jw-sets-other'>人</text>
+      <input placeholder='填写人数' class='jw-sets-input' type='number'></input>
+    </view>
+  </view>
+  <view class='jw-bless-view'>
+    <text class='jw-bless-hint'>送上心意，撰写祝福语</text>
+    <picker class='jw-choose-bless' mode='selector' range="{{bless_arr}}" value='{{bless_index}}' bindchange='blessConfirm'>
+      <view>选择祝福语</view>
+    </picker>
+  </view>
+  
+  <input class='jw-bless-input' maxlength='10' value='{{bless_value}}'></input>
+  <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view>
+  <button open-type='getUserInfo' bindgetuserinfo="test" class='jw-compound-gift'>生成礼物红包</button>
+</view>
+
+
+
+
+
+<action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
+    <block wx:for="{{actionSheetItems}}" wx:key="item"> 
+        <action-sheet-item data-id="{{index}}" bindtap="changeSheetText">{{item}}</action-sheet-item>
+    </block>
+    <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
+
+

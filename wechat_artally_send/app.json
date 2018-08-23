@@ -1,9 +1,15 @@
 {
   "pages":[
+    
     "pages/index/index",
-    "pages/custom/custom",
     "pages/lottery/lottery",
-    "pages/my/my"
+    "pages/custom/custom",
+    "pages/my/my",
+    "pages/mall/mall",
+    "pages/mallAll/mallAll",
+    "pages/hintDetail/hintDetail",
+    "pages/raffle/raffle",
+    "pages/subject/subject"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -13,22 +19,31 @@
   },
   "tabBar": {
     "backgroundColor":"#fff",
+    "selectedColor":"#da0202",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "送礼物"
+        "text": "送礼物",
+        "iconPath":"pages/imgs/home_nav_icon_gift_default.png",
+        "selectedIconPath":"pages/imgs/home_nav_icon_gift_pressed.png"
       },
       {
         "pagePath": "pages/lottery/lottery",
-        "text": "抽奖"
+        "text": "抽奖",
+        "iconPath": "pages/imgs/home_nav_icon_lottery_default.png",
+        "selectedIconPath": "pages/imgs/home_nav_icon_lottery_pressed.png"
       },
       {
         "pagePath": "pages/custom/custom",
-        "text": "客服"
+        "text": "客服",
+        "iconPath": "pages/imgs/home_nav_icon_service_default.png",
+        "selectedIconPath": "pages/imgs/home_nav_icon_service_pressed.png"
       },
       {
         "pagePath": "pages/my/my",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "pages/imgs/home_nav_icon_personal_default.png",
+        "selectedIconPath": "pages/imgs/home_nav_icon_personal_pressed.png"
       }
     ]
   }
