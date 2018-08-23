@@ -1,0 +1,25 @@
+<!--pages/address/address.wxml-->
+<view class='lq-address'>
+  <view class='a-li' wx:for="{{addresslist}}" wx:key="{{item.id}}">
+    <view class='a-l-top'>
+      <text class='a-l-name'>{{item.name}}</text>
+      <text>{{item.phone}}</text>
+      <text class='a-l-info'>{{item.region}}\n{{item.detail}}</text>
+    </view>
+    <view class='a-l-editbox clear'>
+      <view class="fl {{item.default?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" bindtap='setDefault'>
+        <view class='a-l-icon'></view>
+        <text>设为默认地址</text>
+      </view>
+      <view class='a-l-del fr' data-id="{{item.id}}" data-index="{{index}}" bindtap='deladd'>删除</view>
+      <view class='a-l-edit fr'>
+        <navigator url='/pages/addressedit/addressedit?type=2&id={{item.id}}'>编辑</navigator>
+      </view>
+    </view>
+  </view>
+  <view class='nothing' hidden='{{addresslist.length>0}}'>
+    <image></image>
+    <view>您暂时还没有收获地址</view>
+  </view>
+  <navigator class='newaddress' url='/pages/addressedit/addressedit?type=1'><button>新增地址</button></navigator>
+</view>

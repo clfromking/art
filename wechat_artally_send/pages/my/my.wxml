@@ -1,2 +1,80 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<!-- 头部 -->
+<view class="lq-headbox">
+  <view class="h-pic">
+     <image src="../../img/follow_code.jpg"></image>
+  </view>
+  <view class="h-name">用户名称</view>  
+  <view class="h-set">
+  <navigator url='/pages/setting/setting'>
+    <image src="https://pic.forunart.com/artgive/wx/personal_icon_set.png"></image>
+  </navigator>
+  </view>
+</view>
+<!-- 导航栏 -->
+<view class="lq-nav">
+  <navigator class="n-li" url='/pages/mygifts/mygifts?type=0'>我收到的<text>0</text></navigator>
+  <navigator class="n-li" url='/pages/mygifts/mygifts?type=1'>我送出的<text>0</text></navigator>
+  <navigator class="n-li" url='/pages/mygifts/mygifts?type=2'>我参与的<text>10</text></navigator>
+</view>
+<!-- 礼物篮 -->
+<view class='lq-giftbox'>
+  <view class='g-tit'>礼物篮</view>
+  <!-- 没有礼物 -->
+  <view class='nothing' hidden='{{gifts.length>0}}'>
+    <image src='../../img/follow_code.jpg'></image>
+    <text>暂时没订单</text>
+    <navigator open-type="switchTab" url='/pages/index/index'>返回送礼物</navigator>
+  </view>
+  <!-- 有礼物 -->
+  <view class='g-main' hidden='{{gifts.length==0}}'>
+    <!-- 全选按钮 -->
+    <view class="g-m-all clear {{checkAllStatus?'active':''}}">
+      <view class='fl' bindtap='checkAll'>
+        <view class='g-m-icon'></view>
+        <text>全选</text>
+      </view>
+    </view>
+    <!-- 商品选项 -->
+    <view class='g-m-group clear' style="margin-bottom:{{operation?'88rpx':''}}">
+      <view class='g-m-item' wx:for="{{gifts}}" wx:key="{{item.id}}">
+        <view class="g-m-check {{item.selected?'active':''}}" data-index="{{index}}" data-id="{{item.id}}" bindtap='chooseitem'><view class='g-m-icon'></view></view>
+        <view class='g-m-head fr'>
+          <image src='{{item.fromimg}}'></image>
+          <text class='g-m-h-name'>{{item.fromname}}</text>
+          <text class='g-m-h-time'>{{item.createtime}}</text>
+        </view>
+        <view class='g-m-info'>
+          <image mode='aspectFit' src='{{item.img}}'></image>
+          <view class='g-m-con'>
+            <view>{{item.name}}</view>
+            <text class='g-m-des'>{{item.dec}}</text>
+            <view class='g-m-numbox'>
+              <text>数量:</text>
+              <view class='g-m-numedit fr'>
+                <view data-index="{{index}}" data-type="-" bindtap="bindCartNum">-</view>
+                <input type='number' value='{{item.num}}' />
+                <view data-index="{{index}}" data-type="+" bindtap="bindCartNum">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 操作选项 -->
+    <view class='g-cover'>
+      <view class='g-callphone' style="bottom:{{operation?'110rpx':''}}" bindtap='callphone'></view>
+      <view class='g-operate-box' hidden='{{!operation}}'>
+        <view bindtap='takegoods'>提货</view>
+        <view bindtap='discount'>折现</view>
+        <view bindtap='sendother'>转赠</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+

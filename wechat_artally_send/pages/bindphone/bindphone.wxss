@@ -1,0 +1,61 @@
+/* pages/bindphone/bindphone.wxss */
+.lq-bindphone{
+  background: #fff;
+}
+.lq-bindphone .b-li{
+  padding: 0 30rpx;
+  border-bottom: solid 1px #e9e9e9;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+}
+.lq-bindphone .b-li text{
+  width: 140rpx;
+	color: #333333;
+  line-height: 90rpx;
+}
+.lq-bindphone .b-li input{
+  line-height: 90rpx;
+  color: #999999;
+  flex: 2;
+}
+.lq-bindphone .b-getcode{
+  width: 30%;
+  height: 56rpx;
+  line-height: 56rpx;
+  margin-left: 40rpx;
+  background: transparent;
+  font-size: 28rpx;
+	color: #da0202;
+  border-radius: 28rpx;
+	border: solid 2rpx #da0202;
+  text-align: center;
+}
+.lq-bindphone .b-getcode.active{
+  color: #999999;
+  border-color: #999999;
+}
+.lq-bindphone .b-okbtn{
+  width: 690rpx;
+	height: 80rpx;
+  margin: 0 auto;
+	border-radius: 40rpx;
+	background-color: #da0202;
+	box-shadow: 0 2rpx 15rpx 0 rgba(218, 2, 2, 0.66);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 20rpx;
+  font-size: 28rpx;
+	font-weight: 500;
+	color: #ffffff;
+}
+
+
+
+
+
+
+
+
+

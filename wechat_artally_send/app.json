@@ -9,7 +9,14 @@
     "pages/mallAll/mallAll",
     "pages/hintDetail/hintDetail",
     "pages/raffle/raffle",
-    "pages/subject/subject"
+    "pages/subject/subject",
+    "pages/setting/setting",
+    "pages/bindphone/bindphone",
+    "pages/address/address",
+    "pages/addressedit/addressedit",
+    "pages/mygifts/mygifts",
+    "pages/takegoods/takegoods",
+    "pages/discount/discount"
   ],
   "window":{
     "backgroundTextStyle":"light",

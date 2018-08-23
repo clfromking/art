@@ -1,0 +1,61 @@
+<!--pages/mygifts/mygifts.wxml-->
+<view class='lq-gifts'>
+<!-- 导航栏 -->
+  <view class='g-nav'>
+    <view wx:for="{{navlist[titleIndex]}}" wx:key="{{index}}" class="{{navIndex==index?'active':''}}" data-index="{{index}}" bindtap='chooseNav'>{{item}}</view>
+  </view>
+  <!-- 单个 -->
+  <view class='g-li' wx:for="{{orderlist}}" wx:key="item.id">
+  <!-- 顶部订单编号 -->
+    <view class='g-l-top'>
+      <text>订单编号  {{item.number}}</text>
+      <view class='g-l-icon'></view>
+      <text class='status'>{{item.satustext}}</text>
+    </view>
+    <!-- 中间详情 -->
+    <view class='g-l-cen'>
+      <view class='g-l-pic'>
+        <image mode='aspectFit' src="{{item.goods.img}}"></image>
+      </view>
+      <!-- 基本样式 -->
+      <view class='g-l-info' wx:if="{{titleIndex!=0 || (titleIndex==0&&navIndex==0)}}">
+        <view class='bold'>{{item.goods.name}}</view>
+        <view class='thin'>x{{item.goods.num}}</view>
+        <view class='bold'>{{item.goods.price}}</view>
+        <view class='thin' wx:if="{{titleIndex==0&&navIndex==0}}">提货时间 {{item.goods.time}}</view> 
+      </view>
+      <!-- 已折现 -->
+      <view class='g-l-info' wx:if="{{titleIndex==0&&navIndex==1}}">
+        <view class='bold'>{{item.goods.name}}</view>
+        <view class='thin'>x{{item.goods.num}}</view>
+        <view>
+          <text class='bold'>折现价 {{item.goods.price}}</text>
+          <text> 原价 {{item.goods.price}}</text>
+        </view>
+        <view class='thin'>申请时间 {{item.goods.time}} 预计3-5天到账）</view> 
+      </view>
+      <!-- 已转赠 -->
+      <view class='g-l-info' wx:if="{{titleIndex==0&&navIndex==2}}">
+        <view class='thin fr'>x{{item.goods.num}}</view>    
+        <view class='bold'>{{item.goods.name}}</view>
+        <view class='bold'>{{item.goods.price}}</view>
+        <view class='thin'>提货时间 {{item.goods.time}}</view> 
+        <view class='thin'>转赠人 {{item.goods.name}}</view> 
+      </view>
+    </view>
+    <!-- 底部送礼人 -->
+    <view class='g-l-bot clear' wx:if="{{titleIndex!=1}}">
+      <!-- 我收到的显示 -->
+      <view wx:if="{{titleIndex==0}}">
+        <view class='g-l-b-pic fl'>
+          <image mode='aspectFit' src="https://pic.forunart.com/artgive/wx/mall_label_seven.png"></image>
+        </view>
+        <view class='time'>2018.10.23 12:20:22 收到 你好 的礼物</view>
+      </view>
+      <!-- 我参与的显示 -->
+      <view wx:if="{{titleIndex==2}}">
+        <view class='time'>你好送出  2018.10.23  12:00 开奖 </view>
+      </view>
+    </view>
+  </view>
+</view>

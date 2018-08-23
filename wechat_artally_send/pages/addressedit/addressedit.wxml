@@ -1,0 +1,29 @@
+<!--pages/addressedit/addressedit.wxml-->
+<view class='lq-addedit'>
+  <view class='ae-li ae-name'>
+    <text>收货人</text>
+    <input placeholder='请输入收货人' value='{{temp.name}}'></input>
+    <!-- <view class='ae-icon' bindtap='choosefriend'></view> -->
+  </view>
+  <view class='ae-li'>
+    <text>联系电话</text>
+    <input type='number' placeholder='请输入联系电话' value='{{temp.phone}}'></input>
+  </view>
+  <view class='ae-li ae-area'>
+    <text>所在地区</text>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" >
+      <view class="picker">{{region[0]}}，{{region[1]}}，{{region[2]}}
+  </view>
+    </picker>
+    <view class='ae-icon fr' bindtap='lookpos'></view>
+  </view>
+  <view class='ae-li area clear'>
+    <text>详细地址</text>
+    <textarea class='fr' placeholder='请填写详细地址' value='{{temp.address}}'></textarea>
+  </view>
+  <view class='ae-li default clear'>
+    <text>默认地址</text>
+    <view class='ae-switch'><switch checked="{{temp.default}}" bindchange="switchChange"></switch></view>
+  </view>
+  <button class='a-savebtn' bindtap='saveData'>保存</button>
+</view>

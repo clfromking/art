@@ -1,0 +1,12 @@
+<!--pages/setting/setting.wxml-->
+<view class='lq-setting'>
+  <navigator class='s-li' url='/pages/bindphone/bindphone'>
+    <text>账号安全（绑定手机）</text>
+    <icon></icon>
+    <text class='s-nobind'>未绑定</text>    
+  </navigator>
+  <navigator class='s-li' url='/pages/address/address'>
+    <text>地址管理</text>
+    <icon></icon>
+  </navigator>
+</view>

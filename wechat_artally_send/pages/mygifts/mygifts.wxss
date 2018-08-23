@@ -1,0 +1,84 @@
+/* pages/mygifts/mygifts.wxss */
+.lq-gifts .g-nav{
+  height: 80rpx;
+	background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+}
+.lq-gifts .g-nav view{
+  font-size: 26rpx;
+	color: #111111;
+  line-height: 80rpx;
+  text-align: center;
+}
+.lq-gifts .g-nav .active{
+	color: #cbaa7c;
+  border-bottom: solid 4rpx #cbaa7c;
+}
+.lq-gifts .g-li{
+	border-radius: 4rpx;
+	background-color: #ffffff;
+	box-shadow: 0 0 8rpx 0 rgba(0, 0, 0, 0.1);
+  margin: 30rpx 30rpx 0;
+}
+.lq-gifts .g-l-top{
+  line-height: 90rpx;
+  font-size: 24rpx;
+  color: #999999;
+  padding: 0 20rpx;
+  border-bottom: solid 1rpx #e9e9e9;
+}
+.lq-gifts .g-l-icon{
+  float: right;
+  width: 10rpx;
+  height: 20rpx;
+  margin: 35rpx 0 0 10rpx;
+  background: transparent url('https://pic.forunart.com/artgive/wx/all_icon_choice.png') no-repeat right;
+  background-size: contain;
+}
+.lq-gifts .g-l-top .status{
+  color: #da0202;
+  float: right;
+}
+.lq-gifts .g-l-cen{
+  padding: 10rpx 20rpx 0;
+  display: flex;
+  align-items:center;
+}
+.lq-gifts .g-l-cen .g-l-pic,.lq-gifts .g-l-cen .g-l-pic image{
+  width: 200rpx;
+	height: 200rpx;
+}
+.lq-gifts .g-l-cen .g-l-info{
+  flex: 2;
+  margin-left: 20rpx;
+  line-height: 2;
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #999999;
+}
+.lq-gifts .g-l-cen .g-l-info .bold{
+  font-size: 26rpx;
+	color: #111111;
+}
+.lq-gifts .g-l-cen .g-l-info .thin{
+  font-size: 22rpx;
+}
+.lq-gifts .g-l-bot{
+  border-top: solid 1rpx #e9e9e9;
+  font-size: 24rpx;
+  line-height: 50rpx;
+	color: #111111;
+  padding: 10rpx 20rpx;
+}
+.lq-gifts .g-l-b-pic{
+  margin-right: 30rpx;
+}
+.lq-gifts .g-l-b-pic,.lq-gifts .g-l-b-pic image{
+  width: 50rpx;
+	height: 50rpx;
+}
+
+
+
+

@@ -1,0 +1,13 @@
+<!--pages/bindphone/bindphone.wxml-->
+<view class='lq-bindphone'>
+  <view class='b-li'>
+    <text>手机号</text>
+    <input type='number' placeholder='输入手机号码' value='{{temp.phone}}' data-name="temp.phone" bindblur="bindinputblur"></input>
+  </view>
+  <view class='b-li'>
+    <text>验证码</text>
+    <input type='number' placeholder='请输入验证码' data-name="temp.code" value='{{temp.code}}' bindblur="bindinputblur"></input>
+    <view class="b-getcode {{codeObj.canclick?'':'active'}}" bindtap='getcode'>{{codeObj.text}}</view>
+  </view>
+  <button class='b-okbtn' bindtap='bindphone'>确认绑定</button>
+</view>
