@@ -1,11 +1,13 @@
-<swiper class='jw-banner-swiper' indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
-  <block wx:for='{{banner_src}}' wx:key='item'>
-    <swiper-item>
-      <image class='jw-mall-banner' src='{{item}}'></image>
+<swiper class='jw-banner-swiper' bindchange='changeSwiper' interval='3000' duration='500' circular autoplay indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
+  <block wx:for='{{banner_src}}' wx:key='item' >
+    <swiper-item data-id='{{item.id}}' bindtap='goSubject'>
+      <image class='jw-mall-banner' src='{{item.src}}'></image>
     </swiper-item>
   </block>
 </swiper>
-
+<view class='swiper_block_view'>
+  <text class='swiper_texts {{item?"select_swiper":""}}' wx:for='{{swiper_block}}' wx:key='item'></text>
+</view>
 <view class='jw-search-view'>
   <image src='https://pic.forunart.com/artgive/wx/mall_icon_search.png' class='jw-search-icon' ></image>
   <text bindtap='clearInput' class='jw-search-cancel' hidden='{{inputCancel_ishide}}'>取消</text>

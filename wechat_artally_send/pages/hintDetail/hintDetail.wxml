@@ -36,8 +36,8 @@
 </view>
 
 
-<cover-view catchtouchmove="true" hidden='{{isHidebuy}}' class='jw-buy-shade'>
-</cover-view>
+<view catchtouchmove="true" hidden='{{isHidebuy}}' class='jw-buy-shade'>
+</view>
 
 
 <view catchtouchmove="true" class='jw-buy-msgs' hidden='{{isHidebuy}}'>

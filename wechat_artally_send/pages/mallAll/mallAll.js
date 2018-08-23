@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    banner_src: ['https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'https://pic.forunart.com/artgive/wx/mall_banner_img.png'],    //banner图src
+    banner_src: [{ 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 0 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 1 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 2 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 3 }],   //banner图src
     inputCancel_ishide: true, //取消按钮是否隐藏
     input_val: '',            //绑定的搜索框中的值
     ware_list: ware_list,     //下方商品列表
@@ -21,7 +21,8 @@ Page({
     scCover:'',   //排序 覆盖上的文字
     screenId:0,    //出现的下拉筛选选项绑定的父元素的ID，即价格或者排序
     isfixed:false,  //筛选按钮是否固定
-    scrollTop_num:0  //scroll-view距离顶部的数值
+    scrollTop_num:0,  //scroll-view距离顶部的数值
+    swiper_block: [true, false, false, false]
   },
 
   //搜索输入框聚焦事件
@@ -166,6 +167,25 @@ Page({
   backTop:function(){
     this.setData({
       scrollTop_num:0
+    })
+  },
+
+  //swiper改变时事件
+  changeSwiper: function (e) {
+    var swiper_block = this.data.swiper_block
+    for (var i = 0; i < swiper_block.length; i++) {
+      swiper_block[i] = false
+    }
+    swiper_block[e.detail.current] = true
+    this.setData({
+      swiper_block
+    })
+  },
+
+  //点击轮播去专题页
+  goSubject: function (e) {
+    wx.navigateTo({
+      url: '../subject/subject?id=' + e.currentTarget.dataset.id,
     })
   },
 

@@ -7,6 +7,26 @@ page{
   height: 310rpx;
   margin: 0
 }
+.swiper_block_view{
+  position: absolute;
+  top:240rpx;
+  height: 3rpx;
+  left: 320rpx
+}
+.swiper_block_view text{
+  float: left;
+  display: block;
+  margin-right: 20rpx;
+  width: 15rpx;
+  height: 3rpx;
+  
+}
+.swiper_texts{
+  background: #95968d
+}
+.select_swiper{
+  background: #fff
+}
 .jw-mall-banner{
   height: 310rpx;
   display: block;

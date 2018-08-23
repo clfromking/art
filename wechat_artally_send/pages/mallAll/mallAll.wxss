@@ -9,6 +9,26 @@ swiper{
 scroll-view{
   height: 100vh;
 }
+.swiper_block_view{
+  position: absolute;
+  top:240rpx;
+  height: 3rpx;
+  left: 320rpx
+}
+.swiper_block_view text{
+  float: left;
+  display: block;
+  margin-right: 20rpx;
+  width: 15rpx;
+  height: 3rpx;
+  
+}
+.swiper_texts{
+  background: #95968d
+}
+.select_swiper{
+  background: #fff
+}
 .jw-zhanwei{
   position: absolute;
   height: 24rpx;

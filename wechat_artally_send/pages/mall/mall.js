@@ -10,11 +10,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    banner_src: ['https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'https://pic.forunart.com/artgive/wx/mall_banner_img.png'],
+    banner_src: [{ 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 0 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 1 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 2 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 3 }],
     swiper_msgs:swiper_msgs,
     ware_list:ware_list,
     inputCancel_ishide:true,
-    input_val:''
+    input_val:'',
+    swiper_block:[true,false,false,false]
   },
   search_input_focus:function(){
     this.setData({
@@ -45,6 +46,25 @@ Page({
       url: '../mallAll/mallAll',
     })
   }, 
+
+  //swiper改变时事件
+  changeSwiper:function(e){
+    var swiper_block = this.data.swiper_block
+    for(var i=0;i<swiper_block.length;i++){
+      swiper_block[i]=false
+    }
+    swiper_block[e.detail.current]=true
+    this.setData({
+      swiper_block
+    })
+  },
+
+  //点击轮播去专题页
+  goSubject:function(e){
+    wx.navigateTo({
+      url: '../subject/subject?id='+e.currentTarget.dataset.id,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载

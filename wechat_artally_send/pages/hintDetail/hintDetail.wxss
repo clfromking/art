@@ -115,7 +115,7 @@ video{
 }
 .jw-buy-shade{
   width: 100%;
-  height: calc(100% - 663rpx);
+  height:100%;
   position: fixed;
   background:rgba(0, 0,0,0.5);
   top:0;

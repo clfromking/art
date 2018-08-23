@@ -55,3 +55,14 @@ page{
   font-size: 40rpx;
   font-weight: bold
 }
+.jw-raffle-btn{
+  display: block;
+  width: 173rpx;
+  height: 173rpx;
+  background:none;
+  border-radius: 50%;
+  top: 710rpx;
+  position: absolute;
+  left: 285rpx;
+
+}
