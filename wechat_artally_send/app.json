@@ -1,6 +1,5 @@
 {
   "pages":[
-    
     "pages/index/index",
     "pages/lottery/lottery",
     "pages/custom/custom",
@@ -16,7 +15,8 @@
     "pages/addressedit/addressedit",
     "pages/mygifts/mygifts",
     "pages/takegoods/takegoods",
-    "pages/discount/discount"
+    "pages/discount/discount"    
+    
   ],
   "window":{
     "backgroundTextStyle":"light",

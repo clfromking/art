@@ -1,2 +1,61 @@
 <!--pages/discount/discount.wxml-->
-<text>pages/discount/discount.wxml</text>
+<view class='lq-discount'>
+  <!-- 提示栏 -->
+  <view class='d-tip'>温馨提示：礼物折现不会通知送礼人，我们帮你保密呦！</view>
+  <!-- 商品栏 -->
+  <view class='d-li' wx:for="{{gifts}}" wx:key="{{index}}">
+    <view class='d-l-cen'>
+      <view class='d-l-pic'>
+        <image mode='aspectFit' src="{{item.img}}"></image>
+      </view>
+      <view class='d-l-info'>
+        <view>{{item.name}}</view>
+        <view class='num'>x{{item.num}}</view>
+        <view>{{item.price}}</view>
+      </view>
+    </view>
+    <view class='d-l-bot'>
+      <text>订单编号 2130912839384</text>
+      <text class='fr'>预计三小时内到账</text>
+    </view>
+  </view>
+  <!-- 其他信息 -->
+  <view class='d-other'>
+    <view class='d-o-li'>
+      <text>折现账户</text>
+      <view>
+        <image mode='aspectFit' class='d-icon' src="https://pic.forunart.com/artgive/wx/personal_gift_img_wecat.png"></image>
+        <text>微信零钱</text>
+      </view>
+    </view>
+    <view class='d-o-li'>
+      <text>礼物购买价格</text>
+      <view>
+        <text>2,000元</text>
+      </view>
+    </view>
+    <view class='d-o-li'>
+      <text>手续费（12%，优惠后10%）</text>
+      <view>
+        <text>20元</text>
+      </view>
+    </view>
+    <view class='d-o-li'>
+      <text>实际折现</text>
+      <view class='price'>
+        <text>2,000元</text>
+      </view>
+    </view>
+  </view>
+  <!-- 底部栏 -->
+  <view class='d-botbox'>
+    <view class='d-b-tip'>请仔细阅读《折现/退款须知》</view>
+    <view class='d-b-main clear'>
+      <view class='d-b-left'>
+        <text>合计：2,000元</text>
+        <text class='fr'>共1件</text>
+      </view>
+      <button class='d-b-btn'>确认折现</button>
+    </view>
+  </view>
+</view>

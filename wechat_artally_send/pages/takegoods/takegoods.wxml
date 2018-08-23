@@ -1,2 +1,37 @@
 <!--pages/takegoods/takegoods.wxml-->
-<text>pages/takegoods/takegoods.wxml</text>
+<view class='lq-takegoods'>
+  <!-- 地址选择栏 -->
+  <view class='t-chooseadd'>
+    <!-- 没有地址 -->
+    <view class='nothing' hidden='{{addressinfo.id}}'>
+      <view class='t-icon'></view>
+      <text>点击添加地址</text>
+    </view>
+    <!-- 有地址 -->
+    <view class='t-addinfo' hidden='{{!addressinfo.id}}'>
+      <text class='t-name'>{{addressinfo.name}}</text>
+      <text>{{addressinfo.phone}}</text>
+      <text class='t-info'>{{addressinfo.region}}\n{{addressinfo.detail}}</text>
+    </view>
+    <view class='t-nexticon'></view>
+  </view>
+  <!-- 商品栏 -->
+  <view class='t-li' wx:for="{{gifts}}" wx:key="{{index}}">
+    <view class='t-l-cen'>
+      <view class='t-l-pic'>
+        <image mode='aspectFit' src="{{item.img}}"></image>
+      </view>
+      <view class='t-l-info'>
+        <view>{{item.name}}</view>
+        <view class='num'>x{{item.num}}</view>
+        <view>{{item.price}}</view>
+      </view>
+    </view>
+    <view class='t-l-bot'>
+      <text>订单编号 2130912839384</text>
+      <text class='fr'>预计五天之内发货</text>
+    </view>
+  </view>
+  <!-- 确认按钮 -->
+  <button class='t-okbtn'>确认提货</button>
+</view>

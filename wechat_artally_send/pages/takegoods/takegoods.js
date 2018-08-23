@@ -5,14 +5,43 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    addressinfo:{},
+    gifts:[]
   },
-
+  // 获取地址
+  getaddress:function(){
+    let addressinfo={
+      id:1,
+      name:'啊啊啊',
+      phone:'3456789',
+      region:'北京市北京市朝阳区',
+      detail:'分工会尽快了'
+    }
+    this.setData({
+      addressinfo: addressinfo
+    })
+  },
+  // 获取礼物列表
+  getGifts:function(){
+    let gifts =[
+      {
+        id:1,
+        img:'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
+        name:'事实上',
+        num:'1',
+        price:200
+      }
+    ];
+    this.setData({
+      gifts: gifts
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getaddress();
+    this.getGifts();
   },
 
   /**
