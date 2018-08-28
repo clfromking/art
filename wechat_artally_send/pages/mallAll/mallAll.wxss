@@ -4,7 +4,9 @@ page{
  
 }
 swiper{
-  height: 310rpx
+  height: 310rpx;
+  position: relative;
+  z-index: 8
 }
 scroll-view{
   height: 100vh;

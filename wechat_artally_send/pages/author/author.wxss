@@ -1,0 +1,53 @@
+/* pages/author/author.wxss */
+page{
+  background: #fff;
+  border-top:solid 1rpx #e9e9e9;
+}
+.jw-art-logo{
+  width: 160rpx;
+  height: 160rpx;
+  background: #d8d8d8;
+  margin: 0 auto;
+  margin-top: 151rpx;
+  border-radius: 50%
+}
+.jw-art-name{
+  display: block;
+  text-align: center;
+  font-size:  38rpx;
+  color: #111;
+  margin-top: 16rpx
+}
+.jw-fenge{
+  width: 630rpx;
+  border-top: 1rpx solid #e9e9e9;
+  margin: 57rpx auto 0;
+
+}
+.jw-author-body{
+  width: 630rpx;
+  margin: 0 auto;
+}
+.jw-author-title,.jw-author-alt,.jw-author-btn{
+  display: block;
+}
+.jw-author-title{
+  font-size: 34rpx;
+  color: #111;
+  margin-top: 50rpx;
+}
+.jw-author-alt{
+  font-size: 30rpx;
+  color: #666666;
+  margin-top: 34rpx;
+}
+.jw-author-btn{
+  width: 630rpx;
+  height: 96rpx;
+  border-radius: 6rpx;
+  background: #19ad19;
+  color: #fff;
+  font-size: 38rpx;
+  line-height: 96rpx;
+  margin-top: 31rpx
+}

@@ -76,9 +76,9 @@ video{
 }
 .jw-detail-showImg{
   width: 100%;
-  height: 574rpx;
+  /* height: 574rpx; */
   display: block;
-  background: aqua;
+  /* background: aqua; */
 
 }
 .jw-bottom-view{

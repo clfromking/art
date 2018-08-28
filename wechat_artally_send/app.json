@@ -15,7 +15,8 @@
     "pages/addressedit/addressedit",
     "pages/mygifts/mygifts",
     "pages/takegoods/takegoods",
-    "pages/discount/discount"    
+    "pages/discount/discount",
+    "pages/author/author"   
     
   ],
   "window":{

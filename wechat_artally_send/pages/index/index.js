@@ -2,7 +2,8 @@
 const times = require('../../utils/util.js');  
 const weekDay=["周日","周一","周二","周三","周四","周五","周六"]
 let times_arr=[[],[],[]]
-let test_gift_list = [{ 'url': '../imgs/1.png', 'title': '蒙娜丽莎 雕塑', 'alt': '现代雕塑 艺术品摆件 云上弦音', 'stock': '192件', 'univalent': '200', 'num': '3' }, { 'url': '../imgs/1.png','title': '蒙娜丽莎 雕塑', 'alt': '现代雕塑 艺术品摆件 云上弦音', 'stock': '192件', 'univalent': '200', 'num': '3' }]
+// let test_gift_list = [{ 'url': '../imgs/1.png', 'title': '蒙娜丽莎 雕塑', 'alt': '现代雕塑 艺术品摆件 云上弦音', 'stock': '192件', 'univalent': '200', 'num': '3' }, { 'url': '../imgs/1.png','title': '蒙娜丽莎 雕塑', 'alt': '现代雕塑 艺术品摆件 云上弦音', 'stock': '192件', 'univalent': '200', 'num': '3' }]
+let gift_lists
 const app=getApp()
 Page({
 
@@ -15,7 +16,7 @@ Page({
     src:'../imgs/1.png',
     optionsText:'礼物红包',
     actionSheetHidden: true,
-    actionSheetItems: ['礼物红包', '限时开奖', '人满开奖'],
+    actionSheetItems: [{ 'title': '礼物红包','alt':'收礼人直接领取礼物'},{'title':'限时开奖','alt':'到达指定时间，发送红包'},{'title':'人满开奖','alt':'到达人数，开奖'}],
     bless_arr: ['心想事成，好礼相赠！','真好真好真好！','哈哈哈哈哈！'],
     bless_index:0,
     bless_value:'心想事成，好礼相赠！',
@@ -25,7 +26,8 @@ Page({
     const_time_arr:[[],[],[]],
     select_times:''||'开奖时间',
     money:'0.00',
-    gift_lists:test_gift_list
+    gift_lists:gift_lists,
+    gifts_total:0
     // gift_lists:''
   },
   //显示玩法上拉类型列表
@@ -47,7 +49,7 @@ Page({
   //选择后改变文字事件
   changeSheetText:function(e){
     this.setData({
-      optionsText: this.data.actionSheetItems[e.currentTarget.dataset.id],
+      optionsText: this.data.actionSheetItems[e.currentTarget.dataset.id].title,
       actionSheetHidden: !this.data.actionSheetHidden
     })
     if (e.currentTarget.dataset.id==1){  //如果选择定时开奖 执行 初始时间 判断时间
@@ -185,11 +187,52 @@ Page({
     })
   },
 
+  //生成礼物红包
+  makePacket:function(){
+    wx.getSetting({
+      success:function(res){
+        console.log(res.authSetting['scope.userInfo'])
+        if (res.authSetting['scope.userInfo'] == false || res.authSetting['scope.userInfo']==undefined){
+          wx.navigateTo({
+            url: '../author/author',
+          })
+        }
+        else{
+          wx.getStorage({
+            key: 'userInfo',
+            success: function(res) {
+              console.log(res.data)
+            },
+          })
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that=this
+    wx.getStorage({
+      key: 'gifts',
+      success: function(res) {
+        gift_lists=res.data
+        that.setData({
+          gift_lists
+        })
+        console.log(that.data.gift_lists)
+        if(!res){
+
+        }
+      },
+      fail:function(){
+        console.log(1)
+      }
+      // complete:function(){
+      //   console.log(1)
+      // }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -202,7 +245,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+    
   },
 
   /**
@@ -216,7 +259,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    
   },
 
   /**

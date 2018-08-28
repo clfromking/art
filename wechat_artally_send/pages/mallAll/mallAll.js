@@ -1,9 +1,9 @@
 // pages/mallAll/mallAll.js
-let ware_list = [{ 'src': 'https://pic.forunart.com/artgive/wx/home_way_icon_gift.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }]
-
-let price_screen = [{ 'text': '全部', 'isselect': true, 'id': 0 }, { 'text': '100元以下', 'isselect': false, 'id': 1 }, { 'text': '100-500元', 'isselect': false, 'id': 2 }, { 'text': '500-1000元', 'isselect': false, 'id': 3 }, { 'text': '1000元以上', 'isselect': false, 'id': 4}]
-let sc_screen = [{ 'text': 'hahaha', 'isselect': true, 'id': 0 }, { 'text': 'aaaa', 'isselect': false, 'id': 1 }, { 'text': 'bbbb', 'isselect': false, 'id': 2 }, { 'text': 'cccc', 'isselect': false, 'id': 3 }]
-
+const app=getApp()
+let ware_list = []
+let price_screen = []
+let sc_screen = []
+const Rpx = 750 / wx.getSystemInfoSync().windowWidth
 Page({
 
   /**
@@ -22,7 +22,11 @@ Page({
     screenId:0,    //出现的下拉筛选选项绑定的父元素的ID，即价格或者排序
     isfixed:false,  //筛选按钮是否固定
     scrollTop_num:0,  //scroll-view距离顶部的数值
-    swiper_block: [true, false, false, false]
+    swiper_block: [true, false, false, false],
+    select_name1:'',  //第一类类名
+    select_name2: '',  //第二类类名
+    select_id1:0,   //点击的第一类选项id
+    select_id2: 0   //点击的第二类选项id
   },
 
   //搜索输入框聚焦事件
@@ -103,12 +107,14 @@ Page({
 
   //点击筛选选项时事件
   selectScreen:function(e){  
+    var e_id=e.currentTarget.dataset.id
+    // console.log(e_id)
     if(e.currentTarget.dataset.screenid==0){   //当screenid为0时，即价格
       var pricecover='' 
       if(e.currentTarget.dataset.id==0){      //选择的选项id为0时，即全部
       }   
       else{
-        pricecover = this.data.screen_msg[e.currentTarget.dataset.id].text   //不为0时 把选取价格下的文字赋给该变量
+        pricecover = this.data.screen_msg[e.currentTarget.dataset.id].name   //不为0时 把选取价格下的文字赋给该变量
       }
       var priceMsg = this.data.screen_msg
       for (var i = 0; i < priceMsg.length; i++) {     //把所有选项是否选中状态变为false,即不出现红色与图标
@@ -118,7 +124,8 @@ Page({
       price_screen=priceMsg
       this.setData({
         priceCover: pricecover,
-        screen_msg: priceMsg
+        screen_msg: priceMsg,
+        select_id1:e_id
       })
     }
     else{
@@ -126,7 +133,7 @@ Page({
       if (e.currentTarget.dataset.id == 0) {
       }
       else {
-        sccover = this.data.screen_msg[e.currentTarget.dataset.id].text
+        sccover = this.data.screen_msg[e.currentTarget.dataset.id].name
       }
       var scMsg = this.data.screen_msg
       for (var i = 0; i < scMsg.length; i++) {
@@ -136,7 +143,8 @@ Page({
       sc_screen = scMsg
       this.setData({
         scCover: sccover,
-        screen_msg: scMsg
+        screen_msg: scMsg,
+        select_id2: e_id
       })
     }
     var isScreen = this.data.isScreen
@@ -147,11 +155,25 @@ Page({
       ishideScreen:true,
       isScreen:isScreen
     })
+    console.log(this.data.select_id1, this.data.select_id2)
+    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2}
+    var that=this
+    app.post('gifts/lists',data).then((res)=>{
+      console.log(res)
+      if(res.data.code== 200){
+        ware_list = res.data.data.lists
+        that.setData({
+          ware_list
+        })
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
   },
 
   scroll:function(e){
-    var Scrolltop = e.detail.scrollTop / e.detail.scrollHeight
-    if (Scrolltop>0.122){
+    var Scrolltop = e.detail.scrollTop * Rpx
+    if (Scrolltop>310){
       this.setData({
         isfixed:true
       })
@@ -193,7 +215,45 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that=this
+    //加载全部列表
+    var data = { "hot": 0 }
+    app.post('gifts/lists', data).then((res) => {
+      if (res.data.code == 200) {
+        ware_list = res.data.data.lists
+        that.setData({
+          ware_list
+        })
+
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+
+    //加载下拉选项数据
+    app.post('gifts/types').then((res)=>{
+      console.log(res)
+      if(res.data.code==200){
+        price_screen=res.data.data[0].children
+        sc_screen=res.data.data[1].children
+        for(var i=0;i<price_screen.length;i++){
+          if(i==0){
+            price_screen[0].isselect=true
+            sc_screen[0].isselect=true
+          }
+          else{
+            price_screen[i].isselect = false
+            sc_screen[i].isselect = false
+          }
+        }
+        that.setData({
+          select_name1: res.data.data[0].name,
+          select_name2: res.data.data[1].name,
+        })
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
   },
 
   /**

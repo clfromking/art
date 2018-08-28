@@ -1,17 +1,17 @@
 <image class="jw-index-banner" src="{{src}}"></image>
 <view class='jw-index-body' >
   <view class='jw-gifts-view' hidden='{{!gift_lists}}'>
-    <view class='jw-gift-lists' wx:for="{{gift_lists}}" wx:key="item">
+    <view class='jw-gift-lists' wx:for="{{gift_lists}}" data-id='{{item.id}}' wx:key="item">
       <view class='jw-gifts-main-view'>
         <view class='jw-gifts-img-view' >
-          <image class='jw-gifts-img' mode="aspectFit" src="{{item.url}}"></image>
+          <image class='jw-gifts-img' mode="aspectFit" src="{{item.image}}"></image>
         </view>
         <view class='jw-gifts-msg-view'>
-          <text class='jw-gifts-msg-title'>{{item.title}}</text>
-          <text class='jw-gifts-msg-alt'>{{item.alt}}</text>
-          <text class='jw-gifts-msg-stock'>库存{{item.stock}}</text>
+          <text class='jw-gifts-msg-title'>{{item.name}}</text>
+          <text class='jw-gifts-msg-alt'>{{item.describe}}</text>
+          <text class='jw-gifts-msg-stock'>库存{{item.repertory}}</text>
           <view class='clear' style='margin-top: 36rpx'>
-            <text class='jw-gifts-msg-univalent'>￥{{item.univalent}}</text>
+            <text class='jw-gifts-msg-univalent'>￥{{item.price}}</text>
             <view class='jw-gifts-btns-view'>
               <text class='jw-gifts-sub-btn'>－</text>
               <text class='jw-gifts-msg-num'>{{item.num}}</text>
@@ -37,8 +37,8 @@
     <text class='jw-gift-options'>{{optionsText}}</text>
     <view class='jw-oneToone-view'>
       <image src='../imgs/all_icon_choice.png' class='jw-one-choice jw-icon-choice'></image>
-      <text class='jw-oneToone-view-text'>{{selectSheetContent}}</text>
-      
+      <!-- <text class='jw-oneToone-view-text'>{{selectSheetContent}}</text> -->
+      <text class='jw-oneToone-view-text'>更改玩法</text>
     </view>
     <view class='jw-times-view'>
 
@@ -88,7 +88,7 @@
   
   <input class='jw-bless-input' maxlength='10' value='{{bless_value}}'></input>
   <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view>
-  <button open-type='getUserInfo' bindgetuserinfo="test" class='jw-compound-gift'>生成礼物红包</button>
+  <button bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
 </view>
 
 
@@ -97,7 +97,10 @@
 
 <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
     <block wx:for="{{actionSheetItems}}" wx:key="item"> 
-        <action-sheet-item data-id="{{index}}" bindtap="changeSheetText">{{item}}</action-sheet-item>
+        <action-sheet-item data-id="{{index}}" bindtap="changeSheetText">
+          <text>{{item.title}} </text>
+          <text> {{item.alt}}</text>
+        </action-sheet-item>
     </block>
     <action-sheet-cancel>取消</action-sheet-cancel>
 </action-sheet>

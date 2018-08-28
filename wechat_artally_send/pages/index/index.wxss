@@ -10,7 +10,7 @@ action-sheet-item{
   line-height: 44px
 }
 .jw-set-Otimes picker{
-  width: calc(100% - 20rpx)
+  width: 325rpx
 }
  page{
    padding-bottom: 117rpx
@@ -217,7 +217,7 @@ action-sheet-item{
   color:#fff;
   font-size: 28rpx;
   font-weight: 500;
-
+  line-height: 80rpx;
 }
 .jw-gifts-view{
   margin-top: 20rpx;
