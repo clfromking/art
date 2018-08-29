@@ -13,13 +13,13 @@ Page({
   data: {
     timesPlay:true,
     fullPlay:true,
-    src:'../imgs/1.png',
+    banner_msgs:{},
     optionsText:'礼物红包',
     actionSheetHidden: true,
     actionSheetItems: [{ 'title': '礼物红包','alt':'收礼人直接领取礼物'},{'title':'限时开奖','alt':'到达指定时间，发送红包'},{'title':'人满开奖','alt':'到达人数，开奖'}],
-    bless_arr: ['心想事成，好礼相赠！','真好真好真好！','哈哈哈哈哈！'],
+    bless_arr: [],
     bless_index:0,
-    bless_value:'心想事成，好礼相赠！',
+    bless_value:'',
     selectSheetContent:'收礼人直接领取礼物',
     times_array:times_arr,
     index:[0,0,0],
@@ -175,7 +175,8 @@ Page({
   //确定选择祝福语
   blessConfirm:function(e){
     this.setData({
-      bless_value:this.data.bless_arr[e.detail.value]
+      bless_value:this.data.bless_arr[e.detail.value],
+      bless_index: e.detail.value
     })
   },
 
@@ -209,6 +210,106 @@ Page({
     })
   },
 
+  //banner点击事件
+  bannerTap:function(e){
+    switch(e.currentTarget.dataset.go){
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      case 5:
+        break;
+      case 6:
+        break;
+    }
+  },
+
+  //祝福语聚焦事件
+  blessFocus:function(e){
+    this.setData({
+      bless_value:''
+    })
+  },
+
+  //祝福语输入事件
+  blessInput:function(e){
+    this.setData({
+      bless_value:e.detail.value
+    })
+  },
+
+
+  //祝福语失焦事件
+  blessBlur:function(e){
+    if (this.Trim(this.data.bless_value)){
+
+    }
+    else{
+      console.log(this.data.bless_index)
+      this.setData({
+        bless_value: this.data.bless_arr[this.data.bless_index]
+      })
+      
+    }
+  },
+
+  addNum:function(e){
+    console.log(e)
+    console.log(gift_lists[e.currentTarget.dataset.index])
+    gift_lists[e.currentTarget.dataset.index].num = Number(gift_lists[e.currentTarget.dataset.index].num)+1
+    if (gift_lists[e.currentTarget.dataset.index].num > gift_lists[e.currentTarget.dataset.index].repertory){
+      gift_lists[e.currentTarget.dataset.index].num = gift_lists[e.currentTarget.dataset.index].repertory
+    }
+    this.setData({
+      gift_lists: gift_lists
+    })
+  },
+
+  subNum:function(e){
+    gift_lists[e.currentTarget.dataset.index].num = Number(gift_lists[e.currentTarget.dataset.index].num) -1
+    if (gift_lists[e.currentTarget.dataset.index].num <1) {
+      gift_lists.splice(e.currentTarget.dataset.index,1)
+    }
+    console.log(gift_lists.length)
+    if(gift_lists.length==0){
+      gift_lists=''
+    }
+    this.setData({
+      gift_lists: gift_lists
+    })
+  },
+
+  inputNum:function(e){
+    gift_lists[e.currentTarget.dataset.index].num=Number(e.detail.value)
+    if (Number(e.detail.value)> gift_lists[e.currentTarget.dataset.index].repertory){
+      gift_lists[e.currentTarget.dataset.index].num = gift_lists[e.currentTarget.dataset.index].repertory
+    }
+    else if (Number(e.detail.value)<0){
+      gift_lists[e.currentTarget.dataset.index].num=1
+    }
+    this.setData({
+      gift_lists
+    })
+  },
+
+  inputBlur:function(e){
+    // console.log(gift_lists[e.currentTarget.dataset.index].num)
+    if (gift_lists[e.currentTarget.dataset.index].num<=0){
+      gift_lists.splice(e.currentTarget.dataset.index, 1)
+      if (gift_lists.length == 0) {
+        gift_lists = ''
+      }
+      this.setData({
+        gift_lists
+      })
+    }
+    
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -217,14 +318,18 @@ Page({
     wx.getStorage({
       key: 'gifts',
       success: function(res) {
-        gift_lists=res.data
-        that.setData({
-          gift_lists
-        })
-        console.log(that.data.gift_lists)
-        if(!res){
 
+        gift_lists=res.data
+        var gifts_total
+        gifts_total = that.data.gifts_total
+        for(var i=0;i<gift_lists.length;i++){
+          gifts_total+=Number(gift_lists[i].num)
+          gift_lists[i].index=i
         }
+        that.setData({
+          gift_lists:gift_lists,
+          gifts_total: gifts_total 
+        })
       },
       fail:function(){
         console.log(1)
@@ -232,6 +337,27 @@ Page({
       // complete:function(){
       //   console.log(1)
       // }
+    })
+    var postData={'position':1}
+    app.post('banner/lists',postData).then((res)=>{
+      if(res.code==200){
+        that.setData({
+          banner_msgs : res.data.business_list[0]
+        })
+        
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
+    app.post('order/wishlist').then((res)=>{
+      if(res.code==200){
+        that.setData({
+          bless_arr:res.data,
+          bless_value:res.data[0]
+        })
+      }
+    }).catch((error)=>{
+      console.log(error)
     })
   },
   /**
@@ -252,7 +378,24 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+    if (gift_lists.length==0){
+      wx.removeStorage({
+        key: 'gifts',
+        success: function(res) {
+          console.log(res)
+        },
+      })
+    }
+    else{
+      console.log(gift_lists)
+      wx.setStorage({
+        key: 'gifts',
+        data: gift_lists,
+        success:function(res){
+          console.log(res)
+        }
+      })
+    }
   },
 
   /**
@@ -371,5 +514,10 @@ Page({
     }
   },
 
+
+  //去空格
+  Trim:function(str){
+    return str.replace(/(^\s*)|(\s*$)/g, "");
+  },
 
 })

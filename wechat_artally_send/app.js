@@ -15,7 +15,7 @@ App({
         method:'POST',
         header: { 'content-type': 'application/x-www-form-urlencoded' },
         success: function (res) {
-          resolve(res)
+          resolve(res.data)
         },
         error: function (e) {
           reject('网络出错');

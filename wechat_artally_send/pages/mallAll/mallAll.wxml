@@ -2,18 +2,18 @@
 <scroll-view scroll-y='{{ishideScreen}}' scrollTop='{{scrollTop_num}}' bindscroll='scroll'>
   <swiper bindchange='changeSwiper' interval='3000' duration='500' circular autoplay  class='jw-banner-swiper' indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
     <block wx:for='{{banner_src}}' wx:key='item'>
-      <swiper-item data-id='{{item.id}}' bindtap='goSubject'>
-        <image class='jw-mall-banner' src='{{item.src}}'></image>
+      <swiper-item data-id='{{item.id}}' data-go='{{item.go}}' data-go_id='{{item.go_id}}' bindtap='goSubject'>
+        <image class='jw-mall-banner' src='{{item.avatar}}'></image>
       </swiper-item>
     </block>
-  </swiper>
-  <view class='swiper_block_view'>
+  </swiper> 
+  <view class='swiper_block_view clear' style='width:{{swiper_block_width}}'>
     <text class='swiper_texts {{item?"select_swiper":""}}' wx:for='{{swiper_block}}' wx:key='item'></text>
   </view>
   <view class='jw-search-view'>
-    <image src='https://pic.forunart.com/artgive/wx/mall_icon_search.png' class='jw-search-icon' ></image>
+    <image src='https://pic.forunart.com/artgive/wx/mall_icon_search.png' bindtap='search_msg' class='jw-search-icon' ></image>
     <text bindtap='clearInput' class='jw-search-cancel' hidden='{{inputCancel_ishide}}'>取消</text>
-    <input confirm-type='search' value="{{input_val}}" bindblur='search_input_blur' bindfocus='search_input_focus' style='width:{{inputCancel_ishide==true?"568rpx":"516rpx"}};margin-right:{{inputCancel_ishide==true?"32rpx":"0rpx"}}' class='jw-search-input' placeholder='搜你想送的'></input>
+    <input confirm-type='search' bindconfirm='search_msg' bindinput='search_input' value="{{input_val}}" bindblur='search_input_blur' bindfocus='search_input_focus' style='width:{{inputCancel_ishide==true?"568rpx":"516rpx"}};margin-right:{{inputCancel_ishide==true?"32rpx":"0rpx"}}' class='jw-search-input' placeholder='搜你想送的'></input>
   </view>
   <view class='jw-zhanwei'></view>
   <view class='jw-screen-view {{isfixed?"jw-screen-fixed":""}}' >
@@ -40,6 +40,7 @@
       </view>
       </view>
   </view>
+  <view class='jw-screen_view' hidden='{{!isfixed}}' style='width:100%;height:80rpx'></view>
   <view class='jw-allGifts-view'>
     <view wx:for='{{ware_list}}' data-id='{{item.id}}' bindtap='goDetail' wx:key='{{item}}' class='jw-el-ware'>
       <view class='jw-el-ware-img'>

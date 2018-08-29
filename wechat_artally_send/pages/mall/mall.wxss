@@ -1,7 +1,8 @@
 /* pages/mall/mall.wxss */
 page{
   background: #fff;
-  padding-bottom: 211rpx
+  padding-bottom: 211rpx;
+  position: relative
 }
 .jw-banner-swiper{
   height: 310rpx;
@@ -11,8 +12,12 @@ page{
   position: absolute;
   top:240rpx;
   height: 3rpx;
-  left: 320rpx
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 9
 }
+
 .swiper_block_view text{
   float: left;
   display: block;
@@ -20,6 +25,9 @@ page{
   width: 15rpx;
   height: 3rpx;
   
+}
+.swiper_block_view text:last-child{
+  margin-right: 0
 }
 .swiper_texts{
   background: #95968d
@@ -72,12 +80,12 @@ page{
 }
 swiper{
   /* margin-top: 64rpx; */
-  height: 464rpx
+  max-height: 464rpx
 }
 .jw-swiper-main-view{
   width: 670rpx;
   margin: 40rpx auto 0;
-  height: calc(100% - 40rpx)
+  max-height: 424rpx
 }
 .jw-el-view{
   display: inline-block;

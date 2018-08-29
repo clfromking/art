@@ -93,9 +93,7 @@ Page({
 
   //确定购买
   confirmBuy:function(){
-    // wx.reLaunch({
-    //   url: '../index/index',
-    // })
+    
     var that=this
     wx.getStorageInfo({
       success: function (res) {
@@ -122,6 +120,9 @@ Page({
             data: data,
             success:function(res){
               console.log(res)
+              wx.reLaunch({
+                url: '../index/index',
+              })
             }
           })
         }
@@ -136,7 +137,7 @@ Page({
                 if (that.data.specification[i].isselect == true) {
                   for(var j=0;j<data.length;j++){
                     if(that.data.specification[i].id==data[j].id){
-                      data[j].num =Number(data[j].num)+Number(that.data.gifts_num)
+                      data[j].num =Number(that.data.gifts_num)
                       iscommon=true
                     }
                   }
@@ -161,7 +162,10 @@ Page({
                 key: 'gifts',
                 data: data,
                 success: function (res) {
-                  console.log(res)
+                  // console.log(res)
+                  wx.reLaunch({
+                    url: '../index/index',
+                  })
                 }
               })
             },
@@ -180,8 +184,8 @@ Page({
     var that=this
     app.post('gifts/detail', data).then((res)=>{
       // console.log(res)
-      if(res.data.code== 200){
-        var specification = res.data.data.lists.specification
+      if(res.code== 200){
+        var specification = res.data.lists.specification
         for (var i = 0; i < specification.length;i++){
           if(i==0){
             specification[i].isselect=true
@@ -191,12 +195,12 @@ Page({
           }
          
         }
-        swiper_imgs=res.data.data.lists.imgs
-        detail_msg = { 'name': res.data.data.lists.name, 'describe': res.data.data.lists.describe, 'price': res.data.data.lists.price}
+        swiper_imgs=res.data.lists.imgs
+        detail_msg = { 'name': res.data.lists.name, 'describe': res.data.lists.describe, 'price': res.data.lists.price}
         that.setData({
           swiper_imgs:swiper_imgs,
           detail_msg:detail_msg,
-          detail_image: res.data.data.lists.detail_image,
+          detail_image: res.data.lists.detail_image,
           specification: specification,
           specification_img: specification[0].image,
           specification_repertory: specification[0].repertory,

@@ -1,8 +1,8 @@
 // pages/mall/mall.js
 const app=getApp()
-let swiper_msgs = [[{ 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }], [{ 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她2' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_label_her.png', 'alt': '送她' }]]
+let swiper_msgs = []
 
-let ware_list = [{ 'src': 'https://pic.forunart.com/artgive/wx/home_way_icon_gift.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }]
+let ware_list = []
 
 Page({
 
@@ -10,26 +10,65 @@ Page({
    * 页面的初始数据
    */
   data: {
-    banner_src: [{ 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 0 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 1 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 2 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 3 }],
+    banner_src: [],
     swiper_msgs:swiper_msgs,
     ware_list:ware_list,
     inputCancel_ishide:true,
     input_val:'',
-    swiper_block:[true,false,false,false]
+    swiper_block:[],
+    isshowIndicator:true,
+    swiper_block_width:''
   },
   search_input_focus:function(){
     this.setData({
       inputCancel_ishide: false
     })
   },
+  //搜索框失焦
+  search_input_blur: function () {
+    this.setData({
+      inputCancel_ishide: true
+    })
+  },
+
+  //搜索框输入
+  search_input:function(e){
+    this.setData({
+      input_val:e.detail.value
+    })
+  },
+
   clearInput:function(){
-    
     this.setData({
       input_val: '',
       inputCancel_ishide: true,
     })
     
   },
+
+  //点击搜索
+  search_msg:function(){
+    console.log(this.data.input_val)
+    var that=this
+    app.post('gifts/lists',{'search':this.data.input_val}).then((res)=>{
+      console.log(res)
+      if(res.code==200){
+        if(res.data.lists.length<=0){
+          that.setData({
+            ware_list:''
+          })
+        }
+        else{
+          that.setData({
+            ware_list:res.data.lists
+          })
+        }
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
+  },
+
 
   //去商品详情
   goDetail:function(e){
@@ -61,6 +100,36 @@ Page({
 
   //点击轮播去专题页
   goSubject:function(e){
+    switch (Number(e.currentTarget.dataset.go)) {
+      case 1:
+        break;
+      case 2:
+        wx.reLaunch({
+          url: '../index/index',
+        })
+        break;
+      case 3:
+        wx.navigateTo({
+          url: '../hintDetail/hintDetail?id='+e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 4:
+        wx.navigateTo({
+          url: '../raffle/raffle?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 5:
+        wx.navigateTo({
+          url: '../subject/subject?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 6:
+        break;
+    }
+  },
+  
+  //标签筛选
+  labelScreen:function(e){
     wx.navigateTo({
       url: '../subject/subject?id='+e.currentTarget.dataset.id,
     })
@@ -71,17 +140,45 @@ Page({
    */
   onLoad: function (options) {
     var that=this
-    app.post('gifts/tags').then((res)=>{
-      if(res.data.code==200){
-          var page_num=Math.ceil(res.data.data.tags.length/8)
+    app.post('banner/lists',{'position':2}).then((res) => {
+      console.log(res)
+      var swiper_block=[]
+      if (res.code == 200) {
+        for(var i=0;i<res.data.business_list.length;i++){
+          if(i==0){
+            swiper_block[i]=true
+          }
+          else{
+            swiper_block[i] = false
+          }
+        }
+        
+        that.setData({
+          banner_src:res.data.business_list,
+          swiper_block:swiper_block,
+          swiper_block_width: 15 * res.data.business_list.length + 20 * (res.data.business_list.length-1)+1+'rpx'
+        })
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+    app.post('gifts/subjects').then((res)=>{
+      console.log(res)
+      if(res.code==200){
+          if(res.data.tags.length<=8){
+            that.setData({
+              isshowIndicator:false
+            })
+          }
+          var page_num=Math.ceil(res.data.tags.length/8)
           // console.log(page_num)
           for(var i=0;i<page_num;i++){
             swiper_msgs[i]=[]
             for(var j=i*8;j<8*(i+1);j++){            
-              if(res.data.data.tags[j]==undefined){
+              if(res.data.tags[j]==undefined){
               }
               else{
-                swiper_msgs[i].push(res.data.data.tags[j])
+                swiper_msgs[i].push(res.data.tags[j])
               }
             }
           }
@@ -94,8 +191,8 @@ Page({
     })
     var data={"hot":1}
     app.post('gifts/lists',data).then((res)=>{
-      if(res.data.code==200){
-        ware_list=res.data.data.lists
+      if(res.code==200){
+        ware_list=res.data.lists
         that.setData({
           ware_list
         })

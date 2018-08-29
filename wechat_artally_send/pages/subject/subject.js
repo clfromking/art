@@ -1,5 +1,6 @@
 // pages/subject/subject.js
-let ware_list = [{ 'src': 'https://pic.forunart.com/artgive/wx/home_way_icon_gift.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'alt': '《蒙娜丽莎》雕塑', 'money': '2,000', 'id': '1' }]
+const app=getApp()
+
 
 Page({
 
@@ -7,15 +8,42 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title_img_src:'https://pic.forunart.com/artgive/wx/mall_title_img.jpg',
-    ware_list: ware_list,
+    title_img_src:'',
+    ware_list: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    if (options.id){
+      app.post('gifts/giftspecial', { 'giftspecial_id': options.id }).then((res) => {
+        console.log(res)
+        if (res.code == 200) {
+          that.setData({
+            title_img_src: res.data.giftspecial.image,
+            ware_list: res.data.gifts
+          })
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
+    else if (options.screenid){
+
+    }
+
     console.log(options.id)
+   
+    
+  },
+
+
+  goDetail:function(e){
+    wx.navigateTo({
+      url: '../hintDetail/hintDetail?id='+e.currentTarget.dataset.id,
+    })
   },
 
   /**

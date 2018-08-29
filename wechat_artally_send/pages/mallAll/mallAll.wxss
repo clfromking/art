@@ -15,8 +15,12 @@ scroll-view{
   position: absolute;
   top:240rpx;
   height: 3rpx;
-  left: 320rpx
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 9
 }
+
 .swiper_block_view text{
   float: left;
   display: block;
@@ -24,6 +28,9 @@ scroll-view{
   width: 15rpx;
   height: 3rpx;
   
+}
+.swiper_block_view text:last-child{
+  margin-right: 0
 }
 .swiper_texts{
   background: #95968d

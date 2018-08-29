@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    banner_src: [{ 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 0 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 1 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 2 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'id': 3 }],   //banner图src
+    banner_src: [],   //banner图src
     inputCancel_ishide: true, //取消按钮是否隐藏
     input_val: '',            //绑定的搜索框中的值
     ware_list: ware_list,     //下方商品列表
@@ -22,11 +22,13 @@ Page({
     screenId:0,    //出现的下拉筛选选项绑定的父元素的ID，即价格或者排序
     isfixed:false,  //筛选按钮是否固定
     scrollTop_num:0,  //scroll-view距离顶部的数值
-    swiper_block: [true, false, false, false],
+    swiper_block: [],
     select_name1:'',  //第一类类名
     select_name2: '',  //第二类类名
     select_id1:0,   //点击的第一类选项id
-    select_id2: 0   //点击的第二类选项id
+    select_id2: 0,   //点击的第二类选项id
+    swiper_block_width: ''
+
   },
 
   //搜索输入框聚焦事件
@@ -41,7 +43,29 @@ Page({
       inputCancel_ishide:true
     })
   },
+  //搜索框输入
+  search_input: function (e) {
+    this.setData({
+      input_val: e.detail.value
+    })
+  },
 
+  //点击搜索
+  search_msg: function () {
+    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2, 'search': this.data.input_val }
+    var that = this
+    app.post('gifts/lists', data).then((res) => {
+      console.log(res)
+      if (res.code == 200) {
+        ware_list = res.data.lists
+        that.setData({
+          ware_list
+        })
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
 
   //“取消按钮” 清空搜索栏
   clearInput: function () {
@@ -155,13 +179,12 @@ Page({
       ishideScreen:true,
       isScreen:isScreen
     })
-    console.log(this.data.select_id1, this.data.select_id2)
-    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2}
+    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2,'search':this.data.input_val}
     var that=this
     app.post('gifts/lists',data).then((res)=>{
       console.log(res)
-      if(res.data.code== 200){
-        ware_list = res.data.data.lists
+      if(res.code== 200){
+        ware_list = res.data.lists
         that.setData({
           ware_list
         })
@@ -172,13 +195,13 @@ Page({
   },
 
   scroll:function(e){
-    var Scrolltop = e.detail.scrollTop * Rpx
-    if (Scrolltop>310){
+    var Scrolltop = Number(e.detail.scrollTop) * Number(Rpx)
+    if (Scrolltop>=310&&this.data.isfixed==false){
       this.setData({
         isfixed:true
       })
     }
-    else{
+    else if (Scrolltop < 310 && this.data.isfixed == true){
       this.setData({
         isfixed: false
       })
@@ -206,9 +229,32 @@ Page({
 
   //点击轮播去专题页
   goSubject: function (e) {
-    wx.navigateTo({
-      url: '../subject/subject?id=' + e.currentTarget.dataset.id,
-    })
+    switch (Number(e.currentTarget.dataset.go)) {
+      case 1:
+        break;
+      case 2:
+        wx.reLaunch({
+          url: '../index/index',
+        })
+        break;
+      case 3:
+        wx.navigateTo({
+          url: '../hintDetail/hintDetail?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 4:
+        wx.navigateTo({
+          url: '../raffle/raffle?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 5:
+        wx.navigateTo({
+          url: '../subject/subject?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 6:
+        break;
+    }
   },
 
   /**
@@ -216,11 +262,35 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    //加载banner
+    app.post('banner/lists', { 'position': 2 }).then((res) => {
+      console.log(res)
+      var swiper_block=[]
+      if (res.code == 200) {
+        for (var i = 0; i < res.data.business_list.length; i++) {
+          if (i == 0) {
+            swiper_block[i] = true
+          }
+          else {
+            swiper_block[i] = false
+          }
+        }
+
+        that.setData({
+          banner_src: res.data.business_list,
+          swiper_block: swiper_block,
+          swiper_block_width: 15 * res.data.business_list.length + 20 * (res.data.business_list.length - 1) + 1 + 'rpx'
+        })
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+
     //加载全部列表
     var data = { "hot": 0 }
     app.post('gifts/lists', data).then((res) => {
-      if (res.data.code == 200) {
-        ware_list = res.data.data.lists
+      if (res.code == 200) {
+        ware_list = res.data.lists
         that.setData({
           ware_list
         })
@@ -233,9 +303,9 @@ Page({
     //加载下拉选项数据
     app.post('gifts/types').then((res)=>{
       console.log(res)
-      if(res.data.code==200){
-        price_screen=res.data.data[0].children
-        sc_screen=res.data.data[1].children
+      if(res.code==200){
+        price_screen=res.data[0].children
+        sc_screen=res.data[1].children
         for(var i=0;i<price_screen.length;i++){
           if(i==0){
             price_screen[0].isselect=true
@@ -247,8 +317,8 @@ Page({
           }
         }
         that.setData({
-          select_name1: res.data.data[0].name,
-          select_name2: res.data.data[1].name,
+          select_name1: res.data[0].name,
+          select_name2: res.data[1].name,
         })
       }
     }).catch((error)=>{
@@ -283,7 +353,7 @@ Page({
   onUnload: function () {
   
   },
-
+  
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

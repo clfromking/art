@@ -6,8 +6,9 @@ page{
 }
 .jw-title-img{
   width: 100%;
-  height: 155rpx;
-  display: block
+  /* height: 155rpx; */
+  display: block;
+  margin: 40rpx 0
 }
 .jw-ware-list-view{
   width: 670rpx;

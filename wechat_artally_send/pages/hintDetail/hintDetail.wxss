@@ -182,7 +182,7 @@ video{
   font-weight: bold
 }
 .jw-spec-btns{
-  width: 101rpx;
+  /* width: 101rpx; */
   height: 50rpx;
   border-radius: 5rpx;
   border: solid 2rpx #f2f2f2;
@@ -192,7 +192,8 @@ video{
   color: #111;
   display: inline-block;
   text-align: center;
-  line-height: 50rpx
+  line-height: 50rpx;
+  padding: 0 20rpx
 }
 .jw-select-prec{
   border-color: #d0021b;
