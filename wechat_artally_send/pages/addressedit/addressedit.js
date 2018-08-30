@@ -10,19 +10,21 @@ Page({
       phone:"",
       province:"",
       city:"",
-      area:"",
-      address:"",
+      county:"",
+      detail:"",
       default:false
     },
     region: [],
   },
-  //选择通讯录好友
-  choosefriend:function(){},
   // 城市选择器
   bindRegionChange: function (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
+    let val = e.detail.value;
     this.setData({
-      region: e.detail.value
+      region: val,
+      'temp.province': val[0],
+      'temp.city': val[1],
+      'temp.county':val[2]
     })
   },
   // 定位
@@ -32,7 +34,7 @@ Page({
       success: function (resp) {
         // console.log(resp)
         that.setData({
-          'temp.address':resp.name
+          'temp.detail':resp.name
         })
       },
       fail:function(res){
@@ -58,22 +60,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    options = { type: "2", id: "1" };
-    let that = this;
+    console.log(options)
+    let that = this, temp = {}, region=[];
     if (options.type==1){
       console.log('新增')
+      wx.chooseAddress({
+        success: function (res) {
+          temp.name = res.userName;
+          temp.phone = res.telNumber;
+          temp.province = res.provinceName;
+          temp.city = res.cityName;
+          temp.county = res.countyName;
+          temp.detail = res.detailInfo;
+          temp.default=false;
+          region = [temp.province, temp.city, temp.county];
+          that.setData({
+            temp: temp,
+            region: region
+          })
+        },
+        fail: function (res) {
+          console.log(res)
+        }
+      })
     } else if (options.type == 2){
       console.log('编辑')
-      let temp={
-          name: "收货人",
-          phone:"1213123123",
-          province:"广东省",
-          city:"广州市",
-          area:"海珠区",
-          address:"sdsdfsfdsaf",
-          default: true
-        },
-        region=[temp.province, temp.city,temp.area];
+      temp =wx.getStorageSync('addressedit');
+      console.log(temp)
+      region = [temp.province, temp.city, temp.county];
       that.setData({
         temp:temp,
         region: region

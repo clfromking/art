@@ -4,7 +4,7 @@
     <view class='a-l-top'>
       <text class='a-l-name'>{{item.name}}</text>
       <text>{{item.phone}}</text>
-      <text class='a-l-info'>{{item.region}}\n{{item.detail}}</text>
+      <text class='a-l-info'>{{item.province}}{{item.city}}{{item.county}}\n{{item.detail}}</text>
     </view>
     <view class='a-l-editbox clear'>
       <view class="fl {{item.default?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" bindtap='setDefault'>
@@ -12,9 +12,7 @@
         <text>设为默认地址</text>
       </view>
       <view class='a-l-del fr' data-id="{{item.id}}" data-index="{{index}}" bindtap='deladd'>删除</view>
-      <view class='a-l-edit fr'>
-        <navigator url='/pages/addressedit/addressedit?type=2&id={{item.id}}'>编辑</navigator>
-      </view>
+      <view class='a-l-edit fr' data-id="{{item.id}}" data-index="{{index}}" bindtap="editadd">编辑</view>
     </view>
   </view>
   <view class='nothing' hidden='{{addresslist.length>0}}'>

@@ -16,8 +16,9 @@
     "pages/mygifts/mygifts",
     "pages/takegoods/takegoods",
     "pages/discount/discount",
-    "pages/author/author"   
-    
+    "pages/lotterydetail/lotterydetail",
+    "pages/joinpeople/joinpeople",
+    "pages/author/author" 
   ],
   "window":{
     "backgroundTextStyle":"light",

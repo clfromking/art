@@ -76,6 +76,18 @@
   font-size: 24rpx;
 	color: #999999;
   border-top: 1rpx solid #e9e9e9;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.lq-takegoods .t-l-bot image{
+  width:50rpx;
+  height:50rpx;
+  margin-right:18rpx;
+  border-radius:50%;
+}
+.lq-takegoods .t-l-bot .t-l-name{
+  flex: 2;
 }
 /* 确认按钮 */
 .lq-takegoods .t-okbtn{

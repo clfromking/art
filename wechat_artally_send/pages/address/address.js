@@ -15,21 +15,27 @@ Page({
         id:1,
         name:'哈哈哈',
         phone:'13213412412',
-        region:'北京市北京市好阳区',
+        province: '北京市',
+        city:'北京市',
+        county:'朝阳区',
         detail:'和法国进口还舍不得v',
         default:true,
       },{
         id: 2,
         name: '哈哈哈1',
         phone: '13213412412',
-        region: '北京市北京市好阳区',
+        province: '北京市',
+        city: '北京市',
+        county: '朝阳区',
         detail: '和法国进口还舍不得v',
         default: false,
       }, {
         id: 3,
         name: '哈哈哈2',
         phone: '13213412412',
-        region: '北京市北京市好阳区',
+        province: '北京市',
+        city: '北京市',
+        county: '朝阳区',
         detail: '和法国进口还舍不得v',
         default: false,
       }
@@ -54,6 +60,19 @@ Page({
       addresslist: addresslist
     })
   },
+  //编辑地址
+  editadd:function(e){
+    let id=e.currentTarget.dataset.id,
+      index = e.currentTarget.dataset.index;
+    wx.setStorageSync({
+      key: 'addressedit',
+      data: this.data.addresslist[index]
+    })
+    console.log(this.data.addresslist[index])
+    wx.navigateTo({
+      url: '/pages/addressedit/addressedit?type=2&id='+id,
+    })
+  },
   // 删除地址
   deladd:function(e){
     let that = this,
@@ -75,7 +94,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getaddlist();
+    // console.log(options)
+    // return
+    this.getaddlist();
   },
 
   /**

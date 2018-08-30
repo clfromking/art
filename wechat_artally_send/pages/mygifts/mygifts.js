@@ -1,4 +1,5 @@
 // pages/mygifts/mygifts.js
+const app = getApp();
 Page({
 
   /**
@@ -7,7 +8,7 @@ Page({
   data: {
     titles: ['我收到的','我送出的','我参与的'],
     navlist:[
-      ['已提货', '已折现', '已转增'],
+      ['已提货', '已折现', '已转赠'],
       ['礼物红包', '定时红包', '人满开奖'],
       ['待开奖','已开奖','未中奖'],
     ],
@@ -18,41 +19,24 @@ Page({
   // 导航栏筛选
   chooseNav:function(e){
     let val=e.currentTarget.dataset.index;
+    if (val == this.data.navIndex) return
     this.setData({
       navIndex: val
     })
+    this.getReceiveOrders(val+1);
   },
-  // 获取订单列表
-  getOrders:function(){
+  // 获取我收到的订单列表
+  getReceiveOrders:function(way=1){
     let that=this,
-      orderlist=[
-      {
-        number:32131203123,
-        status:1,
-        satustext:'折现中',
-        goods:{
-          img:'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
-          name:'蒙娜丽莎',
-          num:1,
-          price:2000,
-          time:'1212121212'
-        }
-      },
-      {
-        number: 3456789,
-        status: 2,
-        satustext: '已折现',
-        goods: {
-          img: 'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
-          name: '蒙娜丽莎2',
-          num: 3,
-          price: 1000,
-          time: '1212121212'
-        }
+      orderlist=[];
+    app.post('order/mygifts_receive', { uid: 2, way: way}).then(res=>{
+      console.log(res)
+      if(res.code==200){
+        orderlist=res.data.lists;
+        that.setData({
+          orderlist: orderlist
+        })
       }
-    ];
-    that.setData({
-      orderlist: orderlist
     })
   },
   /**
@@ -60,7 +44,7 @@ Page({
    */
   onLoad: function (options) {
     let that=this;
-    options={type:2};
+    // console.log(options)
     this.setData({
       titleIndex: options.type,
       navIndex:0
@@ -69,6 +53,7 @@ Page({
       wx.setNavigationBarTitle({
         title: this.data.titles[0]
       })
+      that.getReceiveOrders();
     } else if (options.type == 1) {
       wx.setNavigationBarTitle({
         title: this.data.titles[1]
@@ -78,7 +63,6 @@ Page({
         title: this.data.titles[2]
       })
     }
-    this.getOrders();
   },
 
   /**

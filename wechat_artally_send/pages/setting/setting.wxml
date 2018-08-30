@@ -5,7 +5,7 @@
     <icon></icon>
     <text class='s-nobind'>未绑定</text>    
   </navigator>
-  <navigator class='s-li' url='/pages/address/address'>
+  <navigator class='s-li' url='/pages/address/address?source=2'>
     <text>地址管理</text>
     <icon></icon>
   </navigator>

@@ -1,0 +1,70 @@
+<!--pages/lotterydetail/lotterydetail.wxml-->
+<view class='lq-lotdetail'>
+  <!-- 状态区 -->
+  <view class='l-statusbox'>
+    <view class='tip'>抽奖成功，等待开奖</view>
+    <view>满200人开奖</view>
+    <view>邀请好友参与抽奖，提高中奖几率</view>
+  </view>
+  <!-- 送礼人信息区 -->
+  <view class='fromInfo'>
+    <image src="https://pic.forunart.com/artgive/wx/mall_label_birthday.png"></image>
+    <view>你好送出3份礼物</view>
+    <view class='greet'>恭喜发财，大吉大利</view>
+  </view>
+  <!-- 礼物轮播区 -->
+  <view class='l-giftsbox'>
+    <swiper previous-margin="160rpx" next-margin="160rpx" circular bindchange="swiperchange">
+      <swiper-item wx:for="{{gifts}}" wx:key="index" class="{{currentSwiper==index?'active':''}}">
+        <view class="slide-image">
+          <image mode='aspectFit' src="{{item.img}}"/>
+        </view>
+        <view class='slide-name'>{{item.name}}</view>
+      </swiper-item>
+  </swiper>
+  </view>
+  <!-- 中奖几率 -->
+  <view class='l-chance'>
+    <view class='top'>中奖几率</view>
+    <view class='con'>
+      <view class='num'>您的中奖几率已 <text>×1</text> 倍</view>
+      <text>邀请好友参与抽奖，提高中奖几率</text>
+    </view>
+  </view>
+  <!-- 其他入口 -->
+  <view class='l-otherbox'>
+    <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/mall_banner_img.png"></image>
+  </view>
+  <!-- 参与人数区 -->
+  <view class='l-joinbox'>
+    <navigator class='l-j-num' url='/pages/joinpeople/joinpeople'>已有 <text>{{heads.length}}</text> 人参与</navigator>
+    <view class='l-j-peoples'>
+      <view class='l-j-headimg' wx:for="{{heads}}" wx:key="{{index}}">
+        <image src="{{item}}"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 中奖人区 -->
+  <view class='l-winners'>
+    <view class='l-w-tit'>中奖人</view>
+    <view class='l-w-li'>
+      <view class='l-w-headimg' >
+        <image src="https://pic.forunart.com/artgive/wx/mall_label_birthday.png"></image>
+      </view>
+      <view class='l-w-name'>应户名</view>
+      <view>34567890</view>
+    </view>
+  </view>
+  <!-- 按钮区 -->
+  <view class='l-bths'>
+    <button class='invite' bindtap='share'>邀请好友抽奖</button>
+    <button>参与更多抽奖</button>
+  </view>
+  <!-- 分享选项 -->
+  <action-sheet hidden="{{notShare}}">
+    <block wx:for="{{sharelist}}" wx:key="{{index}}">
+      <action-sheet-item data-index="{{index}}" bindtap="shareChange">{{item}}</action-sheet-item>
+    </block>
+    <action-sheet-cancel bindtap="share">取消</action-sheet-cancel>
+  </action-sheet>
+</view>

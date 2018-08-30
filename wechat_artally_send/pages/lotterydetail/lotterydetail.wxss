@@ -1,0 +1,190 @@
+/* pages/lotterydetail/lotterydetail.wxss */
+page{
+  background: #da0202;
+}
+.lq-lotdetail{
+  background: #fff;
+  padding-bottom: 120rpx;
+}
+/* 状态区 */
+.lq-lotdetail .l-statusbox{
+	height: 260rpx;
+  padding-top:30rpx; 
+	background: #da0202 url('https://pic.forunart.com/artgive/wx/gift_details.png');
+  background-size: contain;
+	box-shadow: 0 3rpx 10rpx 0 rgba(0, 0, 0, 0.5);
+  font-size: 26rpx;
+  line-height: 2;
+	color: #f9c985;
+  text-align: center;
+}
+.lq-lotdetail .l-statusbox .tip{
+  font-size: 40rpx;
+	font-weight: 500;
+	color: #f9c985;
+}
+/* 送礼人信息区 */
+.lq-lotdetail .fromInfo{
+  text-align: center;
+  color: #111111;
+  font-size: 24rpx;
+	font-weight: 500;
+}
+.lq-lotdetail .fromInfo image{
+  width: 98rpx;
+	height: 98rpx;
+  margin: -52rpx auto 10rpx; 
+  border-radius: 50%;
+  border: solid 6rpx #f9c985;
+}
+.lq-lotdetail .fromInfo .greet{
+  font-size: 30rpx;
+}
+/* 礼物轮播区 */
+.lq-lotdetail .l-giftsbox,.lq-lotdetail .l-giftsbox swiper{
+  height: 420rpx;
+}
+.lq-lotdetail .l-giftsbox swiper-item{
+  -webkit-filter: blur(2.7rpx);
+	filter: blur(2.7rpx);
+  opacity: 0.35;
+}
+.lq-lotdetail .slide-image{
+  width: 240rpx;
+	height: 240rpx;
+  margin: 50rpx auto 0;
+  transition: all 0.3s ease;
+}
+.lq-lotdetail .slide-image image{
+  width: 100%;
+  height: 100%;
+}
+.lq-lotdetail .slide-name{
+  line-height: 2;
+  font-size: 26rpx;
+	font-weight: 500;
+	color: #111111;
+  text-align: center;
+}
+.lq-lotdetail .l-giftsbox swiper-item .slide-name{
+  display: none;
+}
+.lq-lotdetail swiper-item.active{
+  opacity: 1;
+  filter: none;
+}
+.lq-lotdetail swiper-item.active .slide-name{
+  display: block;
+}
+.lq-lotdetail swiper-item.active .slide-image{
+  width: 340rpx;
+  height: 340rpx;
+  margin-top: 0;
+}
+/* 中奖几率 */
+.lq-lotdetail .l-chance{
+  margin: 0 30rpx 30rpx;
+  text-align: center;
+  border-radius: 4rpx;
+	box-shadow: 0 0 9rpx 0 rgba(0, 0, 0, 0.2);
+}
+.lq-lotdetail .l-chance .top{
+  line-height: 80rpx;
+	background-color: #da0202;
+  font-size: 28rpx;
+	font-weight: 600;
+	color: #ffffff;
+}
+.lq-lotdetail .l-chance .con{
+  padding: 30rpx 0;
+  font-size: 24rpx;
+	color: #999999;
+}
+.lq-lotdetail .l-chance .con .num{
+  font-size: 34rpx;
+	font-weight: 600;
+  color: #000000;
+  margin-bottom: 10rpx;
+}
+.lq-lotdetail .l-chance .con .num text{
+  font-size: 60rpx;
+	color: #da0202;
+}
+/* 其他入口区 */
+.lq-lotdetail .l-otherbox,.lq-lotdetail .l-otherbox image{
+  width: 100%;
+}
+/* 参与人数区 */
+.lq-lotdetail .l-joinbox{
+  padding: 40rpx 40rpx 40rpx 60rpx;
+  font-size: 24rpx;
+	text-align: center;
+	color: #111111;
+}
+.lq-lotdetail .l-j-num text{
+  text-decoration: underline;
+}
+.lq-lotdetail .l-j-peoples{
+  display: flex;
+  flex-wrap:wrap;
+  margin-top: 10rpx;
+}
+.lq-lotdetail .l-j-headimg{
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+.lq-lotdetail .l-j-headimg,.lq-lotdetail .l-j-headimg image{
+  width: 60rpx;
+	height: 60rpx;
+}
+/* 中奖人区 */
+.lq-lotdetail .l-winners{
+  font-size: 24rpx;
+  color: #111111;
+  padding: 0 30rpx;
+}
+.lq-lotdetail .l-winners .l-w-tit{
+  line-height: 2;
+}
+.lq-lotdetail .l-w-li{
+  line-height: 86rpx;
+  display: flex;
+  margin-top: 10rpx;
+}
+.lq-lotdetail .l-w-li .l-w-headimg{
+  width: 86rpx;
+	height: 86rpx;
+  margin-right: 20rpx;
+}
+.lq-lotdetail .l-w-li .l-w-headimg image{
+  width: 100%;
+  height: 100%;
+}
+.lq-lotdetail .l-w-name{
+  flex: 2;
+}
+/* 按钮区 */
+.lq-lotdetail .l-bths{
+  width: 100%;
+  position: fixed;
+  bottom: 20rpx;
+  left: 0;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.lq-lotdetail .l-bths button{
+  width: 330rpx;
+	height: 80rpx;
+	border-radius: 40rpx;
+	background-color: #ffffff;
+	box-shadow: 0 2rpx 15rpx 0 rgba(218, 2, 2, 0.66);
+  font-size: 28rpx;
+	font-weight: 500;
+	color: #da0202;
+}
+.lq-lotdetail .l-bths .invite{
+  color: #fff;
+  background-color: #da0202;
+}

@@ -7,48 +7,38 @@ Page({
    */
   data: {
     nav:0,
+    orderNums:{
+      receive:0,
+      send:0,
+      join: 0
+    },
     gifts:[],
     selectids: [],
     operation:false,
     checkAllStatus:false
   },
   getgiftlist:function(){
-    let that=this;
-    let gifts = [
-      {
-        id: '1',
-        img: 'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
-        name: '凤飞飞',
-        dec: '更合适的附件是快递费',
-        total: 2, fromimg: 'https://pic.forunart.com/artgive/wx/mall_label_birthday.png',
-        fromname: "你好",
-        createtime: '2018.10.23 12:20:22'
-      },
-      {
-        id: '2',
-        img: 'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
-        name: '凤飞飞2',
-        dec: '是你发神经的浪费你接收到',
-        total: 2, fromimg: 'https://pic.forunart.com/artgive/wx/mall_label_birthday.png',
-        fromname: "你好",
-        createtime: '2018.10.23 12:20:22'
-      },
-      {
-        id: '3',
-        img: 'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
-        name: '凤飞飞2',
-        dec: '是你发神经的浪费你接收到',
-        total: 2, fromimg: 'https://pic.forunart.com/artgive/wx/mall_label_birthday.png',
-        fromname: "你好",
-        createtime: '2018.10.23 12:20:22'
+    let that=this,
+      orderNums = this.data.orderNums,
+      gifts = [];
+    app.post('order/giftbox',{uid:2}).then(res=>{
+      // console.log(res)
+      if(res.code==200){
+        orderNums.receive = res.data.receive;
+        orderNums.send= res.data.send;
+        orderNums.join = res.data.participation;
+        res.data.lists[1].num = 2;
+        res.data.lists[2].num=20;
+        gifts=res.data.lists;
+        for (let i = 0; i < gifts.length; i++) {
+          gifts[i].choosenum = gifts[i].num;
+          gifts[i].selected = false;
+        }
+        that.setData({
+          orderNums: orderNums,
+          gifts: gifts
+        })
       }
-    ]
-    for (let i = 0; i < gifts.length;i++){
-      gifts[i].num = 1;
-      gifts[i].selected=false;
-    }
-    that.setData({
-      gifts:gifts
     })
   },
   // 点击选择按钮
@@ -90,16 +80,27 @@ Page({
     let that=this,
       index = e.currentTarget.dataset.index, 
       type = e.currentTarget.dataset.type;
-    let maxnum = this.data.gifts[index].total,
-      num = this.data.gifts[index].num;
+    let maxnum = this.data.gifts[index].num,
+      num = this.data.gifts[index].choosenum;
     if(type=='+'){
       if (num < maxnum) num++;
-    }else {
+    } else if (type == '-'){
       if(num>1) num--;
+    }else{
+      let val = Number(e.detail.value)
+      num = val;
+      if (num <1) num=1;
+      else if (num > maxnum) num= maxnum;
+      else num = val;
     }
     that.setData({
-      ['gifts[' + index + '].num']:num
+      ['gifts[' + index + '].choosenum']:num
     })
+  },
+  // 数量输入
+  changenum:function(e){
+    console.log(e)
+    let val = e.detail.value
   },
   // 全选按钮绑定事件
   checkAll() {
@@ -128,16 +129,26 @@ Page({
   },
   // 提货
   takegoods:function(){
-    let selectids=[], selectnums=[],
+    let data = { gifts: [], selectids:[], selectorderNums:[]},
       gifts = this.data.gifts;
     for (let i = 0; i < gifts.length; i++) {
       if (gifts[i].selected){
-        selectids.push(gifts[i].id)
-        selectnums.push(gifts[i].num)
+        data.gifts.push(gifts[i])
+        data.selectids.push(gifts[i].id)
+        data.selectorderNums.push(gifts[i].choosenum)
       }
     }
-    // console.log(selectids)
-    // console.log(selectnums)
+    wx.setStorage({
+      key: 'takegoods',
+      data: data,
+      success:function(){
+        // console.log(data)
+        // return
+        wx.navigateTo({
+          url: '/pages/takegoods/takegoods',
+        })
+      }
+    })
   },
   // 折现
   discount:function(){
@@ -158,6 +169,7 @@ Page({
    */
   onLoad: function (options) {
     this.getgiftlist();
+    let uid=2;
   },
 
   /**

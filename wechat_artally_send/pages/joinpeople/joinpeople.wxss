@@ -1,0 +1,25 @@
+/* pages/joinpeople/joinpeople.wxss */
+page{
+  background: #fff;
+}
+.lq-joinpeople .j-num{
+  line-height: 3;
+  font-size: 24rpx;
+	text-align: center;
+	color: #111111;
+}
+.lq-joinpeople .j-peoples{
+  display: flex;
+  flex-wrap:wrap;
+  padding: 0 40rpx 0 60rpx;
+}
+.lq-joinpeople .j-headimg{
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+.lq-joinpeople .j-headimg,.lq-joinpeople .j-headimg image{
+  width: 60rpx;
+	height: 60rpx;
+}
+
+

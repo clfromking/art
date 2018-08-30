@@ -1,4 +1,5 @@
 // pages/takegoods/takegoods.js
+const app=getApp();
 Page({
 
   /**
@@ -6,42 +7,53 @@ Page({
    */
   data: {
     addressinfo:{},
-    gifts:[]
+    data:{
+      gifts:[],
+      selectids:[],
+      selectorderNums:[]
+    }
   },
   // 获取地址
   getaddress:function(){
-    let addressinfo={
-      id:1,
-      name:'啊啊啊',
-      phone:'3456789',
-      region:'北京市北京市朝阳区',
-      detail:'分工会尽快了'
-    }
-    this.setData({
-      addressinfo: addressinfo
+    let that=this;
+    app.post('address/address_lists',{uid:2},1).then(res=>{
+      console.log(res)
+      if(res.code==200){
+        if (res.data.address.length>0){
+          that.setData({
+            addressinfo: res.data.address[0]
+          })
+        }
+      }
     })
   },
-  // 获取礼物列表
-  getGifts:function(){
-    let gifts =[
-      {
-        id:1,
-        img:'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
-        name:'事实上',
-        num:'1',
-        price:200
+  // 确认提货按钮
+  bindtakegoods:function(){
+    wx.login({
+      success:function(res){
+        console.log(res.code)
       }
-    ];
-    this.setData({
-      gifts: gifts
     })
+    let that=this;
+    if (!that.data.addressinfo.id){
+      wx.showToast({
+        title: '请添加地址',
+        icon:'none',
+        duration: 2000
+      })
+      return
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getaddress();
-    this.getGifts();
+    let that=this,
+      data=wx.getStorageSync('takegoods');
+    that.getaddress();
+    that.setData({
+      data:data
+    })
   },
 
   /**
