@@ -27,16 +27,36 @@ Page({
     select_times:''||'开奖时间',
     money:'0.00',
     gift_lists:gift_lists,
-    gifts_total:0
+    gifts_total:0,
+    lastTapDiffTime: 0,   //控制单双击
+    ClickNum: 0,          //控制单双击
+    lotteryPersonInputVal:'',   //开奖人数value
+    fullPersonInputVal:'',      //满人玩法时中奖人数value
     // gift_lists:''
   },
   //显示玩法上拉类型列表
-  showOptionsSheet:function(){
-    this.setData({
-      //取反
-      actionSheetHidden: !this.data.actionSheetHidden
-    });
+  showOptionsSheet:function(e){
+    var that = this
+    var curTime = e.timeStamp;
+    var lastTime = this.data.lastTapDiffTime;
+
+    if (this.data.lastTapDiffTime === 0) {
+      this.setData({
+        lastTapDiffTime: curTime
+      })
+      setTimeout(function () {
+        that.clickCalculation(e)
+      }, 300)
+    } else {
+      if (curTime - lastTime < 300) {
+        this.setData({
+          ClickNum: 1
+        })
+      }
+    }
+    
   },
+
 
   //列表中取消事件
   listenerActionSheet:function(){
@@ -181,6 +201,49 @@ Page({
   },
 
 
+  //开奖人数输入时事件
+  lotteryPersonInput:function(e){
+    if(Number(e.detail.value)>500){
+      wx.showToast({
+        icon:'none',
+        mask:true,
+        title: '开奖人数不得超过500人',
+      })
+      this.setData({
+        lotteryPersonInputVal:500
+      })
+    }
+  },
+
+  //开奖人数输入失焦事件
+  lotteryPersonBlur:function(e){
+    // console.log(e)
+    this.Trim(e.detail.value)
+    if (this.Trim(e.detail.value)==''){
+      this.setData({
+        lotteryPersonInputVal:''
+      })
+      return
+    }
+    this.setData({
+      lotteryPersonInputVal: Number(e.detail.value)
+    })
+  },
+
+  //人满玩法时中奖人数失焦事件
+  fullPersonInputBlur:function(e){
+    console.log(e)
+    if(this.Trim(e.detail.value)==''){
+      this.setData({
+        fullPersonInputVal:''
+      })
+      return
+    }
+    this.setData({
+      fullPersonInputVal:Number(e.detail.value)
+    })
+  },
+
   //去商城挑选礼物
   goMall:function(){
     wx.navigateTo({
@@ -190,24 +253,170 @@ Page({
 
   //生成礼物红包
   makePacket:function(){
-    wx.getSetting({
-      success:function(res){
-        console.log(res.authSetting['scope.userInfo'])
-        if (res.authSetting['scope.userInfo'] == false || res.authSetting['scope.userInfo']==undefined){
-          wx.navigateTo({
-            url: '../author/author',
+    if (gift_lists == undefined || gift_lists.length==0){
+      wx.showToast({
+        icon:'none',
+        mask:true,
+        title: '请先选择礼物',
+      })
+    }
+    else{
+      if (this.data.fullPlay == true && this.data.timesPlay==true){
+        console.log('礼物红包玩法')
+        //直接支付
+      }
+      else if (this.data.fullPlay == false && this.data.timesPlay == true){
+        console.log('满人红包玩法')
+        if (this.data.lotteryPersonInputVal == '' && this.data.lotteryPersonInputVal!==0){
+          wx.showToast({
+            icon: 'none',
+            mask: true,
+            title: '请先输入开奖人数',
+          })
+        }
+        else if (Number(this.data.lotteryPersonInputVal)==0){
+          wx.showToast({
+            icon: 'none',
+            mask: true,
+            title: '开奖人数不能为0，请重新输入',
+          })
+          this.setData({
+            lotteryPersonInputVal:''
           })
         }
         else{
-          wx.getStorage({
-            key: 'userInfo',
-            success: function(res) {
-              console.log(res.data)
-            },
-          })
+          if (this.data.fullPersonInputVal == '' && this.data.fullPersonInputVal!==0){
+            wx.showToast({
+              icon: 'none',
+              mask: true,
+              title: '请先输入中奖人数',
+            })
+          }
+          else if (Number(this.data.fullPersonInputVal) == 0){
+            wx.showToast({
+              icon: 'none',
+              mask: true,
+              title: '中奖人数不能为0，请重新输入',
+            })
+            this.setData({
+              fullPersonInputVal: ''
+            })
+          }
+          else if (Number(this.data.fullPersonInputVal) > Number(this.data.lotteryPersonInputVal)){
+            wx.showToast({
+              icon: 'none',
+              mask: true,
+              title: '中奖人数不能大于开奖人数',
+            })
+          }
+          else if (Number(this.data.fullPersonInputVal) > Number(this.data.gifts_total)){
+            wx.showToast({
+              icon: 'none',
+              mask: true,
+              title: '中奖人数不能大于礼物数',
+            })
+          }
+          else {
+            //支付
+          }
         }
       }
-    })
+      else if (this.data.fullPlay == true && this.data.timesPlay ==false){
+        console.log('限时红包玩法')
+        var selectMonth = this.data.times_array[0][this.data.index[0]]   //选中的月 日
+        var selectTimes = this.data.times_array[1][this.data.index[1]] + this.data.times_array[2][this.data.index[2]]
+        var date = new Date()
+        var nowMonth = Number((date.getMonth() + 1).toString() + date.getDate())
+        var nowTimes = Number(date.getHours().toString() + date.getMinutes())
+        selectMonth = Number(selectMonth.replace(/[^0-9]+/g, ''))
+        selectTimes = Number(selectTimes)
+        if (selectMonth>nowMonth){
+          if (this.data.fullPersonInputVal == '' && this.data.fullPersonInputVal !== 0) {
+            wx.showToast({
+              icon: 'none',
+              mask: true,
+              title: '请先输入中奖人数',
+            })
+          }
+          else if (Number(this.data.fullPersonInputVal) == 0) {
+            wx.showToast({
+              icon: 'none',
+              mask: true,
+              title: '中奖人数不能为0，请重新输入',
+            })
+            this.setData({
+              fullPersonInputVal: ''
+            })
+          }
+          else if (Number(this.data.fullPersonInputVal) > Number(this.data.gifts_total)) {
+            wx.showToast({
+              icon: 'none',
+              mask: true,
+              title: '中奖人数不能大于礼物数',
+            })
+          }
+          else {
+            //支付
+          }
+        }
+        else if (selectMonth<=nowMonth){
+          if (nowTimes>=selectTimes){
+            wx.showToast({
+              icon:'none',
+              mask:true,
+              title: '开奖时间不能小于当前时间',
+            })
+          }
+          else{
+            if (this.data.fullPersonInputVal == '' && this.data.fullPersonInputVal !== 0) {
+              wx.showToast({
+                icon: 'none',
+                mask: true,
+                title: '请先输入中奖人数',
+              })
+            }
+            else if (Number(this.data.fullPersonInputVal) == 0) {
+              wx.showToast({
+                icon: 'none',
+                mask: true,
+                title: '中奖人数不能为0，请重新输入',
+              })
+              this.setData({
+                fullPersonInputVal: ''
+              })
+            }
+            else if (Number(this.data.fullPersonInputVal) > Number(this.data.gifts_total)) {
+              wx.showToast({
+                icon: 'none',
+                mask: true,
+                title: '中奖人数不能大于礼物数',
+              })
+            }
+            else {
+              //支付
+            }
+          }
+        }
+      }
+    }
+    // wx.getSetting({
+    //   success:function(res){
+    //     console.log(res.authSetting['scope.userInfo'])
+    //     if (res.authSetting['scope.userInfo'] == false || res.authSetting['scope.userInfo']==undefined){
+    //       wx.navigateTo({
+    //         url: '../author/author',
+    //       })
+    //     }
+    //     else{
+    //       wx.getStorage({
+    //         key: 'userInfo',
+    //         success: function(res) {
+    //           console.log(res.data)
+    //         },
+    //       })
+    //     }
+    //   }
+    // })
   },
 
   //banner点击事件
@@ -257,9 +466,9 @@ Page({
     }
   },
 
+  
+
   addNum:function(e){
-    console.log(e)
-    console.log(gift_lists[e.currentTarget.dataset.index])
     gift_lists[e.currentTarget.dataset.index].num = Number(gift_lists[e.currentTarget.dataset.index].num)+1
     if (gift_lists[e.currentTarget.dataset.index].num > gift_lists[e.currentTarget.dataset.index].repertory){
       gift_lists[e.currentTarget.dataset.index].num = gift_lists[e.currentTarget.dataset.index].repertory
@@ -267,6 +476,8 @@ Page({
     this.setData({
       gift_lists: gift_lists
     })
+    this.giftTotal();
+    this.giftTotalMoney()
   },
 
   subNum:function(e){
@@ -274,13 +485,15 @@ Page({
     if (gift_lists[e.currentTarget.dataset.index].num <1) {
       gift_lists.splice(e.currentTarget.dataset.index,1)
     }
-    console.log(gift_lists.length)
+    // console.log(gift_lists.length)
     if(gift_lists.length==0){
       gift_lists=''
     }
     this.setData({
       gift_lists: gift_lists
     })
+    this.giftTotal()
+    this.giftTotalMoney()
   },
 
   inputNum:function(e){
@@ -294,6 +507,8 @@ Page({
     this.setData({
       gift_lists
     })
+    this.giftTotal()
+    this.giftTotalMoney()
   },
 
   inputBlur:function(e){
@@ -306,6 +521,8 @@ Page({
       this.setData({
         gift_lists
       })
+      this.giftTotal()
+      this.giftTotalMoney()
     }
     
   },
@@ -314,21 +531,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // wx.login({
+    //   success:function(res){
+    //     console.log(res)
+    //   }
+    // })
     var that=this
     wx.getStorage({
       key: 'gifts',
       success: function(res) {
-
         gift_lists=res.data
         var gifts_total
+        var money=0
         gifts_total = that.data.gifts_total
         for(var i=0;i<gift_lists.length;i++){
           gifts_total+=Number(gift_lists[i].num)
           gift_lists[i].index=i
+          money += Number(gift_lists[i].num)*Number(gift_lists[i].price)
         }
         that.setData({
           gift_lists:gift_lists,
-          gifts_total: gifts_total 
+          gifts_total: gifts_total ,
+          money:Number(money).toFixed(2)
         })
       },
       fail:function(){
@@ -378,7 +602,8 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    if (gift_lists.length==0){
+    // console.log(gift_lists.length)
+    if (gift_lists == undefined||gift_lists.length == 0){
       wx.removeStorage({
         key: 'gifts',
         success: function(res) {
@@ -387,7 +612,6 @@ Page({
       })
     }
     else{
-      console.log(gift_lists)
       wx.setStorage({
         key: 'gifts',
         data: gift_lists,
@@ -519,5 +743,53 @@ Page({
   Trim:function(str){
     return str.replace(/(^\s*)|(\s*$)/g, "");
   },
+
+  //控制单双击事件
+  clickCalculation: function (e) {
+    if (this.data.ClickNum === 0) {
+      // console.log("单击")
+      this.setData({
+        lastTapDiffTime: 0,
+        ClickNum: 0,
+        actionSheetHidden: !this.data.actionSheetHidden
+        
+      })
+    } else {
+      // console.log("双击")
+      this.setData({
+        lastTapDiffTime: 0,
+        ClickNum: 0
+      })
+    }
+  },
+
+
+
+  preventMove:function(){
+
+  },
+
+  //计算礼物总数
+  giftTotal: function () {
+    var giftTotal = 0
+    for (var i = 0; i < gift_lists.length; i++) {
+      giftTotal += Number(gift_lists[i].num)
+    }
+    this.setData({
+      gifts_total: giftTotal
+    })
+  },
+
+  //计算礼物总价钱
+  giftTotalMoney:function(){
+    var money = 0
+    for (var i = 0; i < gift_lists.length; i++) {
+      money += Number(gift_lists[i].num) * Number(gift_lists[i].price)
+    }
+    this.setData({
+      money:Number(money).toFixed(2)
+    })
+  }
+
 
 })

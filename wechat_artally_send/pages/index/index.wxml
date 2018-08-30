@@ -51,13 +51,13 @@
     <view class='jw-set-Opersons'>
       <text class='jw-sets-title'>开奖人数</text>
       <text class='jw-sets-other'>人</text>
-      <input placeholder='填写人数' class='jw-sets-input' type='number'></input>
+      <input placeholder='填写人数' bindinput='lotteryPersonInput' bindblur='lotteryPersonBlur' value='{{lotteryPersonInputVal}}'  class='jw-sets-input' type='number'></input>
       
     </view>
     <view class='jw-set-Gpersons'>
       <text class='jw-sets-title'>中奖人数</text>
       <text class='jw-sets-other'>人</text>
-      <input placeholder='填写人数' class='jw-sets-input' type='number'></input>
+      <input placeholder='填写人数' value='{{fullPersonInputVal}}' bindblur='fullPersonInputBlur' class='jw-sets-input' type='number'></input>
       
     </view>
   </view>
@@ -76,7 +76,7 @@
     <view class='jw-set-Gpersons'>
       <text class='jw-sets-title'>中奖人数</text>
       <text class='jw-sets-other'>人</text>
-      <input placeholder='填写人数' class='jw-sets-input' type='number'></input>
+      <input placeholder='填写人数' value='{{fullPersonInputVal}}' bindblur='fullPersonInputBlur' class='jw-sets-input' type='number'></input>
     </view>
   </view>
   <view class='jw-bless-view'>
@@ -95,7 +95,7 @@
 
 
 
-<action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
+<action-sheet catchtouchmove='preventMove' hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
     <block wx:for="{{actionSheetItems}}" wx:key="item"> 
         <action-sheet-item class='clear' data-id="{{index}}" bindtap="changeSheetText">
           <text class='actionLeft'>{{item.title}} </text>
