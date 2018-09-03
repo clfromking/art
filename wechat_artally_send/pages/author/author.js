@@ -1,4 +1,6 @@
 // pages/author/author.js
+const app=getApp()
+let code
 Page({
 
   /**
@@ -10,39 +12,66 @@ Page({
 
   //获取用户信息按钮回调
   bindgetuserinfo:function(e){
-    console.log(e)
+    var that=this
     if(e.detail.userInfo){
-      console.log(e.detail.userInfo)
-      wx.setStorage({
-        key: 'userInfo',
-        data: e.detail.userInfo,
-        success:function(){
-          wx.switchTab({
-            url: '../index/index',
+      wx.login({
+        success:function(res){
+          console.log(res.code)
+          console.log(e.detail.encryptedData)
+          console.log(e.detail.iv)
+          var postData = { 'code': res.code, 'encryptedData': e.detail.encryptedData, 'iv': e.detail.iv}
+          app.post('wxpay/get_miniprogram_userinfo',postData,1).then((res)=>{
+            // console.log(res)
+            if(res.code==600){
+              that.bindgetuserinfo(e)
+            }
+            else if(res.code==200){
+              console.log(res)
+              wx.setStorage({
+                key: 'userInfo',
+                data:res.data,
+                success: function(res) {
+                  wx.navigateBack({
+                    
+                  })
+                },
+              })
+            }
+          }).catch((error)=>{
+            console.log(error)
           })
         }
       })
+      console.log(e.detail.userInfo)
+      // wx.setStorage({
+      //   key: 'uid',
+      //   data: 2,
+      //   success:function(){
+      //     wx.navigateBack({
+            
+      //     })
+      //     // wx.switchTab({
+      //     //   url: '../index/index',
+      //     // })
+      //   }
+      // })
     }
+  },
+
+  //点击确认授权登录
+  loginTap:function(){
+    // wx.login({
+    //   success:function(res){
+    //     code=res.code
+    //   }
+    // })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.login({
-      success:function(res){
-        console.log(res)
-        wx.checkSession({
-          success: function (res) {
-            console.log('成', res)
-          },
-          fail: function (res) {
-            console.log(res)
-          }
-        })
-      }
-    })
-    
+
   },
 
   /**

@@ -19,7 +19,8 @@ Page({
     specification:[],
     specification_img:'',
     specification_repertory:0,
-    gift_id:0
+    gift_id:0,
+    isshowindicator:false
   },
   buyThis:function(){
     this.setData({
@@ -70,20 +71,13 @@ Page({
   },
 
   inputNum:function(e){
-    console.log(e)
-    console.log(Number(e.detail.value))
     if (Number(e.detail.value) > this.data.specification_repertory){
       this.setData({
         gifts_num: this.data.specification_repertory
       })
       return
     }
-    else if (Number(e.detail.value)<=0){
-      this.setData({
-        gifts_num: 1
-      })
-      return
-    }
+    
     
     this.setData({
       gifts_num:e.detail.value
@@ -91,9 +85,18 @@ Page({
     // console.log(e)
   },
 
+  inputBlur:function(e){
+    if(Number(e.detail.value) <= 0){
+      this.setData({
+        gifts_num: 1
+      })
+      return
+    }
+  },
+
+
   //确定购买
   confirmBuy:function(){
-    
     var that=this
     wx.getStorageInfo({
       success: function (res) {
@@ -115,12 +118,13 @@ Page({
             }
           }
           data.push(giftObj)
+          
           wx.setStorage({
             key: 'gifts',
             data: data,
             success:function(res){
               console.log(res)
-              wx.reLaunch({
+              wx.switchTab({
                 url: '../index/index',
               })
             }
@@ -130,7 +134,6 @@ Page({
           wx.getStorage({
             key: 'gifts',
             success: function(res) {
-              console.log(res.data)
               var data=res.data
               var giftObj = { 'name': that.data.detail_msg.name, 'describe': that.data.detail_msg.describe, 'price': that.data.detail_msg.price }
               for (var i = 0; i < that.data.specification.length; i++) {
@@ -163,7 +166,7 @@ Page({
                 data: data,
                 success: function (res) {
                   // console.log(res)
-                  wx.reLaunch({
+                  wx.switchTab({
                     url: '../index/index',
                   })
                 }
@@ -179,13 +182,19 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+
     // options.id=70
     var data={'giftid':options.id}
     var that=this
     app.post('gifts/detail', data).then((res)=>{
-      // console.log(res)
+      console.log(res)
       if(res.code== 200){
         var specification = res.data.lists.specification
+        if(res.data.lists.imgs.length>1){
+          that.setData({
+            isshowindicator:true
+          })
+        }
         for (var i = 0; i < specification.length;i++){
           if(i==0){
             specification[i].isselect=true

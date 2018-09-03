@@ -1,4 +1,5 @@
-// pages/lotterydetail/lotterydetail.js
+// pages/lotterydetail/lotterydetail.js\
+const app=getApp()
 Page({
 
   /**
@@ -21,6 +22,7 @@ Page({
         img: 'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
         name: '凤飞飞3'
       }
+      
     ],
     heads:[
       "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
@@ -39,6 +41,7 @@ Page({
       "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
       "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
       "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
+      
     ],
     currentSwiper:0,
     sharelist:["分享给朋友","分享到朋友圈"],
@@ -72,7 +75,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options)
+    if(options.source=='index'){
+      console.log(options.order_id)
+      app.post('order/order_detail', {'order_id':options.order_id}).then((res)=>{
+        console.log(res)
+      }).catch((error)=>{
+        console.log(error)
+      })
+    }
   },
 
   /**

@@ -80,7 +80,8 @@ page{
 }
 swiper{
   /* margin-top: 64rpx; */
-  max-height: 464rpx
+  height: 464rpx;
+  
 }
 .jw-swiper-main-view{
   width: 670rpx;

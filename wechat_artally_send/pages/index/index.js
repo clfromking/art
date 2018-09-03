@@ -4,6 +4,9 @@ const weekDay=["周日","周一","周二","周三","周四","周五","周六"]
 let times_arr=[[],[],[]]
 // let test_gift_list = [{ 'url': '../imgs/1.png', 'title': '蒙娜丽莎 雕塑', 'alt': '现代雕塑 艺术品摆件 云上弦音', 'stock': '192件', 'univalent': '200', 'num': '3' }, { 'url': '../imgs/1.png','title': '蒙娜丽莎 雕塑', 'alt': '现代雕塑 艺术品摆件 云上弦音', 'stock': '192件', 'univalent': '200', 'num': '3' }]
 let gift_lists
+let uid
+let openid
+let isinit=false
 const app=getApp()
 Page({
 
@@ -232,7 +235,6 @@ Page({
 
   //人满玩法时中奖人数失焦事件
   fullPersonInputBlur:function(e){
-    console.log(e)
     if(this.Trim(e.detail.value)==''){
       this.setData({
         fullPersonInputVal:''
@@ -242,6 +244,7 @@ Page({
     this.setData({
       fullPersonInputVal:Number(e.detail.value)
     })
+   
   },
 
   //去商城挑选礼物
@@ -262,11 +265,13 @@ Page({
     }
     else{
       if (this.data.fullPlay == true && this.data.timesPlay==true){
-        console.log('礼物红包玩法')
+        // console.log('礼物红包玩法')
+        //验证是否登陆
+        this.islogin()
         //直接支付
       }
       else if (this.data.fullPlay == false && this.data.timesPlay == true){
-        console.log('满人红包玩法')
+        // console.log('满人红包玩法')
         if (this.data.lotteryPersonInputVal == '' && this.data.lotteryPersonInputVal!==0){
           wx.showToast({
             icon: 'none',
@@ -317,17 +322,19 @@ Page({
             })
           }
           else {
+            //验证是否登陆
+            this.islogin()
             //支付
           }
         }
       }
       else if (this.data.fullPlay == true && this.data.timesPlay ==false){
-        console.log('限时红包玩法')
+        // console.log('限时红包玩法')
         var selectMonth = this.data.times_array[0][this.data.index[0]]   //选中的月 日
         var selectTimes = this.data.times_array[1][this.data.index[1]] + this.data.times_array[2][this.data.index[2]]
         var date = new Date()
         var nowMonth = Number((date.getMonth() + 1).toString() + date.getDate())
-        var nowTimes = Number(date.getHours().toString() + date.getMinutes())
+        var nowTimes = Number(date.getHours().toString() + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) )
         selectMonth = Number(selectMonth.replace(/[^0-9]+/g, ''))
         selectTimes = Number(selectTimes)
         if (selectMonth>nowMonth){
@@ -356,6 +363,8 @@ Page({
             })
           }
           else {
+            //验证是否登陆
+            this.islogin()
             //支付
           }
         }
@@ -393,6 +402,8 @@ Page({
               })
             }
             else {
+              //验证是否登陆
+              this.islogin()
               //支付
             }
           }
@@ -458,7 +469,7 @@ Page({
 
     }
     else{
-      console.log(this.data.bless_index)
+      // console.log(this.data.bless_index)
       this.setData({
         bless_value: this.data.bless_arr[this.data.bless_index]
       })
@@ -537,31 +548,8 @@ Page({
     //   }
     // })
     var that=this
-    wx.getStorage({
-      key: 'gifts',
-      success: function(res) {
-        gift_lists=res.data
-        var gifts_total
-        var money=0
-        gifts_total = that.data.gifts_total
-        for(var i=0;i<gift_lists.length;i++){
-          gifts_total+=Number(gift_lists[i].num)
-          gift_lists[i].index=i
-          money += Number(gift_lists[i].num)*Number(gift_lists[i].price)
-        }
-        that.setData({
-          gift_lists:gift_lists,
-          gifts_total: gifts_total ,
-          money:Number(money).toFixed(2)
-        })
-      },
-      fail:function(){
-        console.log(1)
-      }
-      // complete:function(){
-      //   console.log(1)
-      // }
-    })
+    
+    // console.log(gift_lists)
     var postData={'position':1}
     app.post('banner/lists',postData).then((res)=>{
       if(res.code==200){
@@ -595,19 +583,65 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    // console.log(getCurrentPages())
+    var that=this
+    wx.getStorage({
+      key: 'gifts',
+      success: function (res) {
+        // console.log(res)
+        gift_lists = res.data
+        var gifts_total=0
+        
+        var money = 0
+        // gifts_total = that.data.gifts_total
+        for (var i = 0; i < gift_lists.length; i++) {
+          
+          gifts_total += Number(gift_lists[i].num)
+          gift_lists[i].index = i
+          money += Number(gift_lists[i].num) * Number(gift_lists[i].price)
+        }
+        that.setData({
+          gift_lists: gift_lists,
+          gifts_total: gifts_total,
+          money: Number(money).toFixed(2)
+        })
+      },
+      fail: function () {
+        gift_lists = ''
+        that.setData({
+          gift_lists: gift_lists,
+          gifts_total: 0,
+          money: Number(0).toFixed(2)
+        })
+        // console.log(1)
+      }
+
+      // complete:function(){
+      //   console.log(1)
+      // }
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    // console.log(isinit)
+    if(isinit){
+      this.init()
+      isinit=false
+    }
     // console.log(gift_lists.length)
+    var that=this
     if (gift_lists == undefined||gift_lists.length == 0){
       wx.removeStorage({
         key: 'gifts',
         success: function(res) {
-          console.log(res)
+          // console.log(res)
+          that.setData({
+            gift_lists: gift_lists,
+           
+          })
         },
       })
     }
@@ -616,7 +650,10 @@ Page({
         key: 'gifts',
         data: gift_lists,
         success:function(res){
-          console.log(res)
+          // console.log(res)
+          that.setData({
+            gift_lists
+          })
         }
       })
     }
@@ -626,6 +663,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    // console.log('销毁')
     
   },
 
@@ -661,7 +699,7 @@ Page({
     var time2
     for (var i = 0; i < aa; i++) {
       date2.setDate(date1.getDate() + i);
-      time2 = (date2.getMonth() + 1) + "-" + (date2.getDate()) + "-" + weekDay[date2.getDay()];
+      time2 = date2.getFullYear()+'-'+(date2.getMonth() + 1) + "-" + (date2.getDate()) + "-" + weekDay[date2.getDay()];
       arr.push(time2)
     }
     return arr
@@ -789,7 +827,128 @@ Page({
     this.setData({
       money:Number(money).toFixed(2)
     })
-  }
+  },
 
+
+
+  //是否登陆过
+  islogin:function(){
+    var that=this
+    
+    wx.getStorage({
+      key: 'userInfo',
+      success: function(res) {
+        // console.log(res)
+        uid=res.data.uid
+        openid=res.data.openid
+        // console.log(res)
+        that.addOrder()
+      },
+      fail:function(res){
+        wx.navigateTo({
+          url: '../author/author',
+        })
+      }
+    })
+  },
+
+  //生成订单
+  addOrder:function(){
+    var condition
+    var play
+    var goods_ids = []
+    var goods_nums = []
+    var goods_id
+    var goods_num
+    
+    for (var i = 0; i < gift_lists.length; i++) {
+      goods_ids.push(gift_lists[i].id)
+      goods_nums.push(gift_lists[i].num)
+    }
+    goods_id = goods_ids.join(',')
+    goods_num = goods_nums.join(',')
+    if (this.data.fullPlay == true && this.data.timesPlay == true) {
+      condition = ''
+      play = 1
+    }
+    else if (this.data.fullPlay == false && this.data.timesPlay == true) {
+      condition = this.data.lotteryPersonInputVal
+      play = 3
+    }
+    else if (this.data.fullPlay == true && this.data.timesPlay == false) {
+      condition = this.data.select_times
+      
+      condition=condition.split(' ')
+      var a=condition[0]
+      a=a.split('-')
+      a.pop()
+      
+      condition = a.join('-') + ' ' + condition[1]
+      play = 2
+    }
+    var that=this
+    var postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'goods_id': goods_id, 'goods_num': goods_num }
+    // console.log(postData)
+    app.post('order/order_add', postData).then((res) => {
+      console.log(res)
+      if (res.code == 200) {
+        that.Pay(res.data.order_id)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+
+  //支付
+  Pay:function(order_id){
+    // console.log('支付成功')
+    // var that=this
+    isinit=true
+    wx.navigateTo({
+      url: '../lotterydetail/lotterydetail?source=index&order_id=' + order_id,
+    })
+    // this.init()
+    // wx.removeStorage({
+    //   key: 'gifts',
+    //   success: function (res) {
+        
+    //     // console.log(res)
+        
+    //   }
+    // })
+    
+  },
+
+
+  //付款之后跳转到状态
+  afterBuy: function () {
+    // console.log(msg)
+    
+  },
+
+  //初始化所有
+  init:function(){
+    gift_lists=''
+    this.setData({
+      timesPlay: true,
+      fullPlay: true,
+      optionsText: '礼物红包',
+      bless_index: 0,
+      bless_value: this.data.bless_arr[0],
+      selectSheetContent: '收礼人直接领取礼物',
+      times_array: times_arr,
+      index: [0, 0, 0],
+      const_time_arr: [[], [], []],
+      select_times: '' || '开奖时间',
+      money: '0.00',
+      gift_lists: gift_lists,
+      gifts_total: 0,
+      lastTapDiffTime: 0,   //控制单双击
+      ClickNum: 0,          //控制单双击
+      lotteryPersonInputVal: '',   //开奖人数value
+      fullPersonInputVal: '',      //满人玩法时中奖人数value
+
+    })
+  }
 
 })

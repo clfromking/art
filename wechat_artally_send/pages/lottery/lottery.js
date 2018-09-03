@@ -1,6 +1,6 @@
 // pages/lottery/lottery.js
 const app=getApp()
-let lottery_list = [{ 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'name': '云上弦音 雕塑', 'num': 1, 'alt': '现代雕塑 艺术品摆件 云上弦音', 'year': '2014年', 'time': '2月3日 18:30', 'id': 0 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'name': '云上弦音 雕塑', 'num': 1, 'alt': '现代雕塑 艺术品摆件 云上弦音', 'year': '2014年', 'time': '2月3日 18:30', 'id': 1 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'name': '云上弦音 雕塑', 'num': 1, 'alt': '现代雕塑 艺术品摆件 云上弦音', 'year': '2014年', 'time': '2月3日 18:30', 'id': 2 }, { 'src': 'https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'name': '云上弦音 雕塑', 'num': 1, 'alt': '现代雕塑 艺术品摆件 云上弦音', 'year': '2014年', 'time': '2月3日 18:30', 'id': 3 }]
+let lottery_list = []
 Page({
 
   /**
@@ -15,7 +15,7 @@ Page({
   //点击抽奖事件
   goRaffle:function(e){
     wx.navigateTo({
-      url: '../raffle/raffle?time=' + this.data.lottery_list[e.currentTarget.dataset.id].time,
+      url: '../raffle/raffle?time=' + this.data.lottery_list[e.currentTarget.dataset.index].condition,
     })
   },
 
@@ -53,11 +53,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // wx.setStorage({
+    //   key: 'uid',
+    //   data: '1',
+    // })
     var that=this
     app.post('banner/lists', {'position':3}).then((res) => {
-      console.log(res)
+      // console.log(res)
       if (res.code == 200) {
-        console.log(res.data.business_list[0])
+        // console.log(res.data.business_list[0])
         that.setData({
           banner_msgs: res.data.business_list[0]
         })
@@ -66,6 +70,57 @@ Page({
     }).catch((error) => {
       console.log(error)
     })
+    var that = this
+    wx.getStorage({
+      key: 'uid',
+      success: function(res) {
+        console.log(res)
+        var data={'uid':res.data}
+        app.post('order/days_lists',data).then((res) => {
+          console.log(res)
+          if (res.code == 200) {
+
+            lottery_list = []
+            for (var i = 0; i < res.data.lists.length; i++) {
+              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number }
+              lottery_list.push(lotteryObj)
+            }
+
+            console.log(lottery_list)
+
+            that.setData({
+              lottery_list: lottery_list
+            })
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+      },
+      fail:function(res){
+        app.post('order/days_lists').then((res) => {
+          console.log(res)
+          
+          if(res.code==200){
+            
+            lottery_list = []
+            for (var i = 0; i < res.data.lists.length;i++) {
+              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number}
+              lottery_list.push(lotteryObj)
+            }
+            
+            console.log(lottery_list)
+            
+            that.setData({
+              lottery_list: lottery_list
+            })
+          }
+          
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+    })
+    
   },
 
   /**

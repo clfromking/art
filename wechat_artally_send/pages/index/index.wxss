@@ -137,7 +137,7 @@ action-sheet-item{
   float: right;
   height:100%;
   min-height: 0;
-  width: 96rpx;
+  width: 145rpx;
   font-size: 24rpx;
   text-align: right;
   line-height: 88rpx
