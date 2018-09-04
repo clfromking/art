@@ -49,15 +49,14 @@ Page({
       })
       setTimeout(function () {
         that.clickCalculation(e)
-      }, 300)
+      }, 500)
     } else {
-      if (curTime - lastTime < 300) {
+      if (curTime - lastTime < 500) {
         this.setData({
           ClickNum: 1
         })
       }
     }
-    
   },
 
 
@@ -594,6 +593,7 @@ Page({
           gifts_total += Number(gift_lists[i].num)
           gift_lists[i].index = i
           money += Number(gift_lists[i].num) * Number(gift_lists[i].price)
+          gift_lists[i].new_repertory='库存'+gift_lists[i].repertory+'件'
         }
         that.setData({
           gift_lists: gift_lists,
@@ -848,7 +848,10 @@ Page({
     var goods_nums = []
     var goods_id
     var goods_num
-    
+    wx.showLoading({
+      title: '生成订单',
+      mask:true
+    })
     for (var i = 0; i < gift_lists.length; i++) {
       goods_ids.push(gift_lists[i].id)
       goods_nums.push(gift_lists[i].num)
@@ -876,35 +879,83 @@ Page({
     }
     var that=this
     var postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'goods_id': goods_id, 'goods_num': goods_num }
-    // console.log(postData)
     app.post('order/order_add', postData).then((res) => {
       console.log(res)
       if (res.code == 200) {
-        that.Pay(res.data.order_id)
+        that.Pay(res.data.order_id,res.data.number)
+      }
+      else if(res.code==600){
+        wx.hideLoading()
+        wx.showToast({
+          icon: 'none',
+          title: res.msg,
+        })
+      }
+      else if(res.code==601){
+        wx.hideLoading()
+        wx.showToast({
+          icon: 'none',
+          title: res.msg,
+        })
+        console.log(gift_lists)
       }
     }).catch((error) => {
+      wx.hideLoading()
+      wx.showToast({
+        icon:'none',
+        title: '生成订单失败，请重试',
+      })
       console.log(error)
     })
   },
 
   //支付
-  Pay:function(order_id){
-    // console.log('支付成功')
-    // var that=this
-    isinit=true
-    wx.navigateTo({
-      url: '../lotterydetail/lotterydetail?source=index&order_id=' + order_id,
+  Pay:function(order_id,num){
+    console.log(uid)
+    console.log(openid)
+    console.log(num)
+    var that=this
+    var postData={'uid':uid,'openid':openid,'order_sn':num}
+    app.post('wxpay/wxgiftjspayRequest',postData).then((res)=>{
+      console.log(res)
+      if(res.code==200){
+        
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success:function(res){
+            console.log(res)
+            wx.hideLoading()
+            isinit = true
+
+            wx.navigateTo({
+              url: '../lotterydetail/lotterydetail?source=index&order_id=' + order_id,
+            })
+          },
+          fail:function(res){
+            console.log(res)
+            wx.showToast({
+              icon:'none',
+              title: '支付失败',
+            })
+          }
+        })
+      }
+      else if(res.code==600){
+        that.Pay()
+      }
+      
+    }).catch((error)=>{
+      wx.hideLoading()
+      wx.showToast({
+        icon: 'none',
+        title: '支付发起失败，请重试',
+      })
+      console.log(error)
     })
-    // this.init()
-    // wx.removeStorage({
-    //   key: 'gifts',
-    //   success: function (res) {
-        
-    //     // console.log(res)
-        
-    //   }
-    // })
-    
   },
 
 

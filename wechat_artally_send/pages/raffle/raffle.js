@@ -1,4 +1,5 @@
 // pages/raffle/raffle.js
+const app=getApp()
 Page({
 
   /**
@@ -9,6 +10,11 @@ Page({
   },
 
   openRaffle:function(){
+    app.islogin().then((res)=>{
+      console.log(res)
+    }).catch(()=>{
+
+    })
     console.log(1)
   },
 

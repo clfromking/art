@@ -117,6 +117,7 @@ Page({
               
             }
           }
+          
           data.push(giftObj)
           
           wx.setStorage({
@@ -141,6 +142,8 @@ Page({
                   for(var j=0;j<data.length;j++){
                     if(that.data.specification[i].id==data[j].id){
                       data[j].num =Number(that.data.gifts_num)
+                      // console.log(that.data)
+                      data[j].repertory = Number(that.data.specification_repertory)
                       iscommon=true
                     }
                   }
@@ -158,6 +161,7 @@ Page({
 
               }
               else{
+                console.log(giftObj)
                 data.push(giftObj)
               }
               // data.push(giftObj)

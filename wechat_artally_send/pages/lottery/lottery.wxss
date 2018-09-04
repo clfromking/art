@@ -83,3 +83,8 @@
   font-size: 22rpx;
   font-weight: bold
 }
+
+.jw-client-btn{
+  background: #e9e9e9;
+  color: #999
+}

@@ -36,7 +36,6 @@ App({
           wx.navigateTo({
             url: '../author/author',
           })
-          reject('没有登录')
         }
       })
     })

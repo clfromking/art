@@ -72,21 +72,18 @@ Page({
     })
     var that = this
     wx.getStorage({
-      key: 'uid',
+      key: 'userInfo',
       success: function(res) {
-        console.log(res)
-        var data={'uid':res.data}
+        var data={'uid':res.data.uid}
         app.post('order/days_lists',data).then((res) => {
           console.log(res)
           if (res.code == 200) {
 
             lottery_list = []
             for (var i = 0; i < res.data.lists.length; i++) {
-              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number }
+              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number,'client': res.data.lists[i].client }
               lottery_list.push(lotteryObj)
             }
-
-            console.log(lottery_list)
 
             that.setData({
               lottery_list: lottery_list
@@ -98,17 +95,13 @@ Page({
       },
       fail:function(res){
         app.post('order/days_lists').then((res) => {
-          console.log(res)
-          
           if(res.code==200){
             
             lottery_list = []
             for (var i = 0; i < res.data.lists.length;i++) {
-              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number}
+              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number,'client':res.data.lists[i].client}
               lottery_list.push(lotteryObj)
             }
-            
-            console.log(lottery_list)
             
             that.setData({
               lottery_list: lottery_list
