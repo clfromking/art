@@ -2,11 +2,11 @@
 <view class='lq-addedit'>
   <view class='ae-li ae-name'>
     <text>收货人</text>
-    <input placeholder='请输入收货人' value='{{temp.name}}'></input>
+    <input placeholder='请输入收货人' value='{{temp.name}}' data-type='temp.name' bindinput='blurSetInput'></input>
   </view>
   <view class='ae-li'>
     <text>联系电话</text>
-    <input type='number' placeholder='请输入联系电话' value='{{temp.phone}}'></input>
+    <input type='number' placeholder='请输入联系电话' value='{{temp.phone}}' data-type='temp.phone' bindinput='blurSetInput'></input>
   </view>
   <view class='ae-li ae-area'>
     <text>所在地区</text>
@@ -18,11 +18,11 @@
   </view>
   <view class='ae-li area clear'>
     <text>详细地址</text>
-    <textarea class='fr' placeholder='请填写详细地址' value='{{temp.detail}}'></textarea>
+    <textarea class='fr' placeholder='请填写详细地址' value='{{temp.detail_address}}' data-type='temp.detail_address' bindinput='blurSetInput'></textarea>
   </view>
   <view class='ae-li default clear'>
     <text>默认地址</text>
-    <view class='ae-switch'><switch checked="{{temp.default}}" bindchange="switchChange"></switch></view>
+    <view class='ae-switch'><switch checked="{{temp.default==1}}" bindchange="switchChange"></switch></view>
   </view>
   <button class='a-savebtn' bindtap='saveData'>保存</button>
 </view>

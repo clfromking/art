@@ -1,47 +1,25 @@
 // pages/address/address.js
+const app=getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    addresslist:[]
+    addresslist:[],
+    source:0     //判断来源,提货页面==1
   },
   // 获取地址列表
   getaddlist:function(){
-    let that=this;
-    let addresslist=[
-      {
-        id:1,
-        name:'哈哈哈',
-        phone:'13213412412',
-        province: '北京市',
-        city:'北京市',
-        county:'朝阳区',
-        detail:'和法国进口还舍不得v',
-        default:true,
-      },{
-        id: 2,
-        name: '哈哈哈1',
-        phone: '13213412412',
-        province: '北京市',
-        city: '北京市',
-        county: '朝阳区',
-        detail: '和法国进口还舍不得v',
-        default: false,
-      }, {
-        id: 3,
-        name: '哈哈哈2',
-        phone: '13213412412',
-        province: '北京市',
-        city: '北京市',
-        county: '朝阳区',
-        detail: '和法国进口还舍不得v',
-        default: false,
+    let that = this, addresslist=[];
+    app.post('address/address_lists', { uid: 2 }, 1).then(res => {
+      // console.log(res)
+      if (res.code == 200) {
+        addresslist = res.data.address;
+        that.setData({
+          addresslist: addresslist
+        })
       }
-    ]
-    that.setData({
-      addresslist: addresslist
     })
   },
   // 设为默认地址
@@ -50,25 +28,29 @@ Page({
       id = e.currentTarget.dataset.id,
       index=e.currentTarget.dataset.index,
       addresslist = this.data.addresslist;
-    if (addresslist[index].default) return
-    addresslist[0].default = false;
-    addresslist[index].default=true;
-    let tempdata = addresslist[0];
-    addresslist[0] = addresslist[index];
-    addresslist[index] = tempdata;
-    that.setData({
-      addresslist: addresslist
+    if (addresslist[index].default==1) return
+    app.post('address/address_defaults',{id:id},1).then(res=>{
+      // console.log(res)
+      if(res.code==200){
+        // 来源==1是提货页来
+        if (that.data.source==1){
+          wx.navigateBack()
+          return
+        }
+        that.getaddlist();
+      }else{
+        wx.showToast({
+          title:res.msg,
+          icon:"none"
+        })
+      }
     })
   },
   //编辑地址
   editadd:function(e){
     let id=e.currentTarget.dataset.id,
-      index = e.currentTarget.dataset.index;
-    wx.setStorageSync({
-      key: 'addressedit',
-      data: this.data.addresslist[index]
-    })
-    console.log(this.data.addresslist[index])
+      index = e.currentTarget.dataset.index;    
+    wx.setStorageSync('addressedit', this.data.addresslist[index])
     wx.navigateTo({
       url: '/pages/addressedit/addressedit?type=2&id='+id,
     })
@@ -77,15 +59,26 @@ Page({
   deladd:function(e){
     let that = this,
       id = e.currentTarget.dataset.id,
-      index = e.currentTarget.dataset.index;
+      index = e.currentTarget.dataset.index,
+      addresslist = this.data.addresslist;
     wx.showModal({
       title: '提示',
       content: '您确认要删除该地址吗?',
       success: function (res) {
         if (res.confirm) {
-          console.log('用户点击确定')
+          app.post('address/address_del',{uid:2,id:id},1).then(res=>{
+            // console.log(res)
+            if(res.code==200){
+              that.getaddlist();
+            }else{
+              wx.showToast({
+                title: res.msg,
+                icon: "none"
+              })
+            }
+          })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
         }
       }
     })
@@ -95,8 +88,10 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    // return
-    this.getaddlist();
+    let source=options.source;
+    this.setData({
+      source: source
+    })
   },
 
   /**
@@ -110,7 +105,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getaddlist();
   },
 
   /**

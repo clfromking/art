@@ -1,4 +1,7 @@
 /* pages/address/address.wxss */
+.lq-address{
+  margin-bottom: 120rpx;
+}
 .lq-address .a-li{
   font-size: 24rpx;
   color: #999999;
@@ -59,6 +62,7 @@
 .lq-address .newaddress button{
   width: 690rpx;
 	height: 80rpx;
+	line-height: 80rpx;
   margin: 0 auto;
 	border-radius: 40rpx;
 	background-color: #da0202;

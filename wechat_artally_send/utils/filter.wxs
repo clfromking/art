@@ -1,0 +1,22 @@
+// filter.wxs
+//货币过滤器
+var currency=function(value, num = 2, str = '￥'){
+  var input = parseFloat(value).toFixed(num).split('.'), output;
+  if (input[0].length <= 3)
+    output = !input[0] ? '0' : input[0];
+  else {
+    var mod = input[0].length % 3;
+    output = (mod == 0 ? '' : (input[0].substring(0, mod)));
+    for (var i = 0; i < Math.floor(input[0].length / 3); i++) {
+      output += ((mod == 0) && (i == 0) ? '' : ',') + input[0].substring(mod + 3 * i, mod + 3 * i + 3);
+    }
+  }
+  return (str + output + (!input[1] ? '' : '.' + input[1]));
+}
+
+/*
+ * 导出
+ */
+module.exports = {
+  currency: currency
+}

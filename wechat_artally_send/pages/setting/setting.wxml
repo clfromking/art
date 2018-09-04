@@ -1,10 +1,10 @@
 <!--pages/setting/setting.wxml-->
 <view class='lq-setting'>
-  <navigator class='s-li' url='/pages/bindphone/bindphone'>
+  <view class='s-li' bindtap='gobindphone'>
     <text>账号安全（绑定手机）</text>
-    <icon></icon>
-    <text class='s-nobind'>未绑定</text>    
-  </navigator>
+    <icon hidden='{{phone}}'></icon>
+    <text class='s-nobind'>{{phone?phone:'未绑定'}}</text>    
+  </view>
   <navigator class='s-li' url='/pages/address/address?source=2'>
     <text>地址管理</text>
     <icon></icon>

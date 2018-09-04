@@ -1,32 +1,45 @@
 // pages/discount/discount.js
+const app=getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    gifts: []
+    data:{
+      selectids:[],
+      selectorderNums:[],
+      gifts: [],
+      totalprice:0,
+      totalnum:0
+    },
+    poundage:1
   },
-  // 获取礼物列表
-  getGifts: function () {
-    let gifts = [
-      {
-        id: 1,
-        img: 'https://pic.forunart.com/artgive/wx/mall_banner_img.png',
-        name: '事实上',
-        num: '1',
-        price: 200
-      }
-    ];
-    this.setData({
-      gifts: gifts
-    })
+  // 确认折现按钮
+  discountok:function(){
+    // app.post('',{}).then(res=>{
+    //   console.log(res)
+    //   if(res.code==200){
+        
+    //   }else{
+    //     wx.showToast({
+    //       title: res.msg,
+    //       icon:"none"
+    //     })
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getGifts();
+    let that = this, poundage,
+      data = wx.getStorageSync('waitOperateGifts');
+    poundage=12;
+    that.setData({
+      data: data,
+      poundage: poundage
+    })
   },
 
   /**

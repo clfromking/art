@@ -1,4 +1,7 @@
 /* pages/takegoods/takegoods.wxss */
+.lq-takegoods{
+  margin-bottom: 120rpx;
+}
 .lq-takegoods .t-chooseadd{
   background: #fff url('https://pic.forunart.com/artgive/wx/personal_gift_img_address.jpg') no-repeat bottom;
   background-size: 100% 8rpx;
@@ -97,6 +100,7 @@
   bottom: 20rpx;
   width: 690rpx;
   height: 80rpx;
+  line-height: 80rpx;
 	border-radius: 40rpx;
 	background-color: #da0202;
 	box-shadow: 0 2rpx 15rpx 0 rgba(218, 2, 2, 0.66);

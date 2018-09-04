@@ -17,23 +17,28 @@ Page({
   getaddress:function(){
     let that=this;
     app.post('address/address_lists',{uid:2},1).then(res=>{
-      console.log(res)
+      // console.log(res)
       if(res.code==200){
         if (res.data.address.length>0){
           that.setData({
             addressinfo: res.data.address[0]
           })
         }
+      }else{
+        wx.showToast({
+          title: res.msg,
+          icon:"none"
+        })
       }
     })
   },
   // 确认提货按钮
-  bindtakegoods:function(){
-    wx.login({
-      success:function(res){
-        console.log(res.code)
-      }
-    })
+  takegoodsok:function(){
+    // wx.login({
+    //   success:function(res){
+    //     console.log(res.code)
+    //   }
+    // })
     let that=this;
     if (!that.data.addressinfo.id){
       wx.showToast({
@@ -43,14 +48,14 @@ Page({
       })
       return
     }
+    console.log(1)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that=this,
-      data=wx.getStorageSync('takegoods');
-    that.getaddress();
+      data = wx.getStorageSync('waitOperateGifts');
     that.setData({
       data:data
     })
@@ -67,7 +72,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getaddress();
   },
 
   /**

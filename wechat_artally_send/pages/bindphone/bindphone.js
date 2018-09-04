@@ -32,8 +32,7 @@ Page({
     if (! /^1[35678][0-9]{9}$/.test(that.data.temp.phone)) {
       wx.showToast({
         title: '手机号格式错误',
-        icon: 'none',
-        duration: 2000
+        icon: 'none'
       })
       return
     }
@@ -62,40 +61,56 @@ Page({
       }, 1000)
     }
     clock();
-    // app.post('member/phoneCode' + sign(), { phone: this.temp.phone })
-    //   .then(res => {
-    //     //console.log(res)
-    //     if (res.data.code === 200) {
-    //       clock();
-    //     } else this.alertMsg = res.data.msg;
-    //   })
+    return
+    app.post('user/user_phone_code', { mobile: this.temp.phone, models:6})
+      .then(res => {
+        //console.log(res)
+        if (res.code == 200) {
+          clock();
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
   },
   // 确认绑定按钮
   bindphone:function(){
+    let that=this,
+      temp=this.data.temp;
     if (! /^1[35678][0-9]{9}$/.test(this.data.temp.phone)) {
       wx.showToast({
         title: '手机号格式错误',
-        icon: 'none',
-        duration: 2000
+        icon: 'none'
       })
       return
     }
     if (! /^[a-zA-Z0-9]{4}$/.test(this.data.temp.code)) {
       wx.showToast({
         title: '验证码格式错误',
-        icon: 'none',
-        duration: 2000
+        icon: 'none'
       })
       return
     }
-    console.log(this.data.temp)
-    // app.post('member/phoneCode' + sign(), { phone: this.temp.phone })
-    //   .then(res => {
-    //     //console.log(res)
-    //     if (res.data.code === 200) {
-    //       
-    //     } else this.alertMsg = res.data.msg;
-    //   })
+    console.log(temp)
+    let data={
+      uid:2,
+      mobile: temp.phone,
+      mobile_code:temp.code,
+      models:6
+    }
+    app.post('user/user_phone_bing', data,1).then(res => {
+      console.log(res)
+      if (res.code === 200) {
+          wx.navigateBack()
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon:"none"
+        })
+      }  
+    })  
   },
   /**
    * 生命周期函数--监听页面加载

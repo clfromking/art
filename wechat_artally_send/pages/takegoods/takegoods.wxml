@@ -11,7 +11,7 @@
     <view class='t-addinfo' hidden='{{!addressinfo.id}}'>
       <text class='t-name'>{{addressinfo.name}}</text>
       <text>{{addressinfo.phone}}</text>
-      <text class='t-info'>{{addressinfo.region}}\n{{addressinfo.detail}}</text>
+      <text class='t-info'>{{addressinfo.province}}{{addressinfo.city}}{{addressinfo.area}}\n{{addressinfo.detail_address}}</text>
     </view>
     <view class='t-nexticon'></view>
   </navigator>
@@ -29,10 +29,10 @@
     </view>
     <view class='t-l-bot'>
       <image src='{{item.avatar}}'></image>
-      <text class='t-l-name'>{{item.uname}}</text>
+      <text class='t-l-name ellipsis'>{{item.uname}}</text>
       <text>预计五天之内发货</text>
     </view>
   </view>
   <!-- 确认按钮 -->
-  <button class='t-okbtn' bindtap='bindtakegoods'>确认提货</button>
+  <button class='t-okbtn' bindtap='takegoodsok'>确认提货</button>
 </view>

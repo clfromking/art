@@ -8,7 +8,7 @@ Page({
   data: {
     titles: ['我收到的','我送出的','我参与的'],
     navlist:[
-      ['已提货', '已折现', '已转赠'],
+      ['已提货', '已折现'],
       ['礼物红包', '定时红包', '人满开奖'],
       ['待开奖','已开奖','未中奖'],
     ],
@@ -35,6 +35,11 @@ Page({
         orderlist=res.data.lists;
         that.setData({
           orderlist: orderlist
+        })
+      }else{
+        wx.showToast({
+          title: res.msg,
+          icon:'none'
         })
       }
     })

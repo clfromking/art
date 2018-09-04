@@ -1,4 +1,5 @@
 <!--pages/mygifts/mygifts.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter" />
 <view class='lq-gifts'>
 <!-- 导航栏 -->
   <view class='g-nav'>
@@ -21,7 +22,7 @@
       <view class='g-l-info' wx:if="{{titleIndex!=0 || (titleIndex==0&&navIndex==0)}}">
         <view class='bold'>{{item.name}}</view>
         <view class='thin'>x{{item.num}}</view>
-        <view class='bold'>{{item.price}}</view>
+        <view class='bold'>{{filter.currency(item.price)}}</view>
         <view class='thin' wx:if="{{titleIndex==0&&navIndex==0}}">提货时间 {{item.updatetime}}</view> 
       </view>
       <!-- 已折现 -->
@@ -29,18 +30,10 @@
         <view class='bold'>{{item.name}}</view>
         <view class='thin'>x{{item.num}}</view>
         <view>
-          <text class='bold'>折现价 {{item.price}}</text>
-          <text> 原价 {{item.price}}</text>
+          <text class='bold'>折现价 {{filter.currency(item.price)}}</text>
+          <text> 原价 {{filter.currency(item.price)}}</text>
         </view>
         <view class='thin'>申请时间 {{item.updatetime}} 预计3-5天到账）</view> 
-      </view>
-      <!-- 已转赠 -->
-      <view class='g-l-info' wx:if="{{titleIndex==0&&navIndex==2}}">
-        <view class='thin fr'>x{{item.num}}</view>    
-        <view class='bold'>{{item.name}}</view>
-        <view class='bold'>{{item.price}}</view>
-        <view class='thin'>提货时间 {{item.updatetime}}</view> 
-        <view class='thin'>转赠人 {{item.uname}}</view> 
       </view>
     </view>
     <!-- 底部送礼人 -->

@@ -1,18 +1,26 @@
 // pages/setting/setting.js
+const app=getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    phone:''
   },
-
+  // 跳转到绑定手机页面
+  gobindphone:function(){
+    let phone=this.data.phone;
+    if(phone)　return
+    wx.navigateTo({
+      url: '/pages/bindphone/bindphone',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
   },
 
   /**
@@ -26,7 +34,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    // let phone = wx.getStorageSync('phone')
+    let phone='';
+    this.setData({
+      phone:phone
+    })
   },
 
   /**
@@ -61,6 +73,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    
   }
 })

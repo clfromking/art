@@ -3,19 +3,20 @@
   <!-- 提示栏 -->
   <view class='d-tip'>温馨提示：礼物折现不会通知送礼人，我们帮你保密呦！</view>
   <!-- 商品栏 -->
-  <view class='d-li' wx:for="{{gifts}}" wx:key="{{index}}">
+  <view class='d-li' wx:for="{{data.gifts}}" wx:key="{{index}}">
     <view class='d-l-cen'>
       <view class='d-l-pic'>
-        <image mode='aspectFit' src="{{item.img}}"></image>
+        <image mode='aspectFit' src="{{item.image}}"></image>
       </view>
       <view class='d-l-info'>
         <view>{{item.name}}</view>
-        <view class='num'>x{{item.num}}</view>
+        <view class='num'>x{{item.choosenum}}</view>
         <view>{{item.price}}</view>
       </view>
     </view>
-    <view class='d-l-bot'>
-      <text>订单编号 2130912839384</text>
+    <view class='d-l-bot clear'>
+      <image src="{{item.avatar}}"></image>
+      <text style="flex:2">{{item.uname}}</text>
       <text class='fr'>预计三小时内到账</text>
     </view>
   </view>
@@ -31,19 +32,19 @@
     <view class='d-o-li'>
       <text>礼物购买价格</text>
       <view>
-        <text>2,000元</text>
+        <text>{{data.totalprice}} 元</text>
       </view>
     </view>
     <view class='d-o-li'>
-      <text>手续费（12%，优惠后10%）</text>
+      <text>手续费 {{poundage}}%</text>
       <view>
-        <text>20元</text>
+        <text>{{data.totalprice*poundage/100}} 元</text>
       </view>
     </view>
     <view class='d-o-li'>
       <text>实际折现</text>
       <view class='price'>
-        <text>2,000元</text>
+        <text>{{data.totalprice*(100-poundage)/100}} 元</text>
       </view>
     </view>
   </view>
@@ -52,10 +53,10 @@
     <view class='d-b-tip'>请仔细阅读《折现/退款须知》</view>
     <view class='d-b-main clear'>
       <view class='d-b-left'>
-        <text>合计：2,000元</text>
-        <text class='fr'>共1件</text>
+        <text>合计：{{data.totalprice*(100-poundage)/100}} 元</text>
+        <text class='fr'>共 {{data.totalnum}} 件</text>
       </view>
-      <button class='d-b-btn'>确认折现</button>
+      <button class='d-b-btn' bindtap='discountok'>确认折现</button>
     </view>
   </view>
 </view>

@@ -6,7 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nav:0,
     orderNums:{
       receive:0,
       send:0,
@@ -27,8 +26,6 @@ Page({
         orderNums.receive = res.data.receive;
         orderNums.send= res.data.send;
         orderNums.join = res.data.participation;
-        res.data.lists[1].num = 2;
-        res.data.lists[2].num=20;
         gifts=res.data.lists;
         for (let i = 0; i < gifts.length; i++) {
           gifts[i].choosenum = gifts[i].num;
@@ -97,11 +94,6 @@ Page({
       ['gifts[' + index + '].choosenum']:num
     })
   },
-  // 数量输入
-  changenum:function(e){
-    console.log(e)
-    let val = e.detail.value
-  },
   // 全选按钮绑定事件
   checkAll() {
     let that=this;
@@ -109,6 +101,7 @@ Page({
       selectids = this.data.selectids,
       checkAllStatus = this.data.checkAllStatus;
     checkAllStatus = !checkAllStatus;
+    selectids = [];
     if (checkAllStatus){
       for (let i = 0; i < gifts.length; i++) {
         gifts[i].selected = true;
@@ -118,7 +111,6 @@ Page({
       for (let i = 0; i < gifts.length; i++) {
         gifts[i].selected = false;
       }
-      selectids=[];
     }
     that.setData({ 
       checkAllStatus: checkAllStatus,
@@ -127,36 +119,40 @@ Page({
       selectids: selectids
     });
   },
-  // 提货
-  takegoods:function(){
-    let data = { gifts: [], selectids:[], selectorderNums:[]},
-      gifts = this.data.gifts;
+  // 底部操作
+  operateGifts:function(e){
+    let data = { gifts: [], selectids: [], selectorderNums: [], totalprice: 0, totalnum:0},
+      type=e.currentTarget.dataset.type,
+      gifts = this.data.gifts,
+      url;
     for (let i = 0; i < gifts.length; i++) {
       if (gifts[i].selected){
-        data.gifts.push(gifts[i])
-        data.selectids.push(gifts[i].id)
-        data.selectorderNums.push(gifts[i].choosenum)
+        data.gifts.push(gifts[i]);
+        data.selectids.push(gifts[i].id);
+        data.selectorderNums.push(gifts[i].choosenum);
+        data.totalprice += gifts[i].price * gifts[i].choosenum;
+        data.totalnum += gifts[i].choosenum;
       }
     }
     wx.setStorage({
-      key: 'takegoods',
+      key: 'waitOperateGifts',
       data: data,
       success:function(){
         // console.log(data)
         // return
+        //type == 1是提货,==2是折现,==3是转赠
+        if(type==1){
+          url ="/pages/takegoods/takegoods"
+        }else if(type==2){
+          url = "/pages/discount/discount"
+        }else if(type==3){
+          url="/pages/index/index"
+        }
         wx.navigateTo({
-          url: '/pages/takegoods/takegoods',
+          url: url,
         })
       }
     })
-  },
-  // 折现
-  discount:function(){
-    
-  },
-  // 转赠
-  sendother:function(){
-    
   },
   // 打电话
   callphone:function(){
@@ -170,6 +166,8 @@ Page({
   onLoad: function (options) {
     this.getgiftlist();
     let uid=2;
+    var data=new Date();
+    console.log(data)
   },
 
   /**
@@ -183,7 +181,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.data.checkAllStatus=true;
+    this.checkAll();
   },
 
   /**

@@ -4,10 +4,10 @@
     <view class='a-l-top'>
       <text class='a-l-name'>{{item.name}}</text>
       <text>{{item.phone}}</text>
-      <text class='a-l-info'>{{item.province}}{{item.city}}{{item.county}}\n{{item.detail}}</text>
+      <text class='a-l-info'>{{item.province}}{{item.city}}{{item.area}}\n{{item.detail_address}}</text>
     </view>
     <view class='a-l-editbox clear'>
-      <view class="fl {{item.default?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" bindtap='setDefault'>
+      <view class="fl {{item.default==1?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" bindtap='setDefault'>
         <view class='a-l-icon'></view>
         <text>设为默认地址</text>
       </view>

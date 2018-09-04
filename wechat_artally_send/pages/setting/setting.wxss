@@ -13,13 +13,13 @@
   width: 10rpx;
   height: 20rpx;
   margin-top: 35rpx;
+  margin-left: 10rpx;
   float: right;
   background: url('https://pic.forunart.com/artgive/wx/all_icon_choice.png') no-repeat center;
   background-size: cover;
 }
 .lq-setting .s-nobind{
   float: right;
-  margin-right: 10rpx;
   font-size: 24rpx;
 	color: #999999;
 }

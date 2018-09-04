@@ -4,3 +4,8 @@
 .clear:after{content:".";height:0;overflow:hidden;clear:both;display:block;visibility:hidden;}
 page{background: #f2f2f2;}
 view[hidden]{display: none !important;}
+.ellipsis{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}

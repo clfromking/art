@@ -38,6 +38,7 @@
 .lq-bindphone .b-okbtn{
   width: 690rpx;
 	height: 80rpx;
+	line-height: 80rpx;
   margin: 0 auto;
 	border-radius: 40rpx;
 	background-color: #da0202;
