@@ -44,6 +44,9 @@ page{
 .lq-lotdetail .l-giftsbox,.lq-lotdetail .l-giftsbox swiper{
   height: 420rpx;
 }
+.l-giftsbox{
+  margin: 20rpx 0;
+}
 .lq-lotdetail .l-giftsbox swiper-item{
   -webkit-filter: blur(2.7rpx);
 	filter: blur(2.7rpx);
@@ -183,8 +186,27 @@ page{
   font-size: 28rpx;
 	font-weight: 500;
 	color: #da0202;
+  line-height: 80rpx
 }
 .lq-lotdetail .l-bths .invite{
   color: #fff;
   background-color: #da0202;
+}
+
+.slide-name{
+  position: relative;
+  text-align: center
+}
+.name_text{
+  max-width: 340rpx;
+  display: inline-block
+  /* max-width: 100rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto */
+}
+.jw-other-text{
+  display: inline-block;
+  vertical-align: top
 }

@@ -1,28 +1,31 @@
 <!--pages/hintDetail/hintDetail.wxml-->
-<swiper indicator-dots="{{isshowindicator}}" indicator-color="#e9e9e9" indicator-active-color="#da0202">
-  <swiper-item wx:for='{{swiper_imgs}}' wx:key="item">
-    <view class='jw-detail-img-view'>
-      <image mode="aspectFit" style="width:100%;height:100%;" src='{{swiper_imgs[index]}}'></image>
-    </view>
-  </swiper-item>
-</swiper>
+<scroll-view class='jw-body-scroll-view' scroll-y='{{isHidebuy}}'>
+  <swiper indicator-dots="{{isshowindicator}}" indicator-color="#e9e9e9" indicator-active-color="#da0202">
+    <swiper-item wx:for='{{swiper_imgs}}' wx:key="item">
+      <view class='jw-detail-img-view'>
+        <image mode="aspectFit" style="width:100%;height:100%;" src='{{swiper_imgs[index]}}'></image>
+      </view>
+    </swiper-item>
+  </swiper>
 
-<view class='jw-detail-msgs'>
-  <view class='jw-detail-msg-title'>{{detail_msg.name}}</view>
-  <view class='jw-detail-msg-alt'>{{detail_msg.describe}}</view>
-  <view class='jw-detail-msg-money'>￥{{detail_msg.price}}</view>
-  <view class='jw-detail-msg-other'>
-    <image class='jw-detail-icon' src='https://pic.forunart.com/artgive/wx/details_icon.png'></image>
-    <text class='jw-details-text'>免邮</text>
-    <image class='jw-detail-icon' src='https://pic.forunart.com/artgive/wx/details_icon.png'></image>
-    <text class='jw-details-text'>艺术家亲授</text>
+  <view class='jw-detail-msgs'>
+    <view class='jw-detail-msg-title ellipsis'>{{detail_msg.name}}</view>
+    <view class='jw-detail-msg-alt ellipsis'>{{detail_msg.describe}}</view>
+    <view class='jw-detail-msg-money'>￥{{detail_msg.price}}</view>
+    <view class='jw-detail-msg-other'>
+      <image class='jw-detail-icon' src='https://pic.forunart.com/artgive/wx/details_icon.png'></image>
+      <text class='jw-details-text'>免邮</text>
+      <image class='jw-detail-icon' src='https://pic.forunart.com/artgive/wx/details_icon.png'></image>
+      <text class='jw-details-text'>艺术家亲授</text>
+    </view>
   </view>
-</view>
-<view class='jw-detail-main-view'>
-  <text class='jw-detail-main-title'>产品详情</text>
-  <!-- <video class='{{isHidebuy==false?"aa":""}}' src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'></video> -->
-  <image mode='widthFix' class='jw-detail-showImg' src='{{detail_image}}'></image>
-</view>
+  <view class='jw-detail-main-view'>
+    <text class='jw-detail-main-title'>产品详情</text>
+    <!-- <video class='{{isHidebuy==false?"aa":""}}' src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'></video> -->
+    <image mode='widthFix' class='jw-detail-showImg' src='{{detail_image}}'></image>
+  </view>
+
+</scroll-view>
 <!-- <cover-view class='jw-bottom-view'>
   <button bindtap='buyThis' class='jw-buy-btn'>立即购买</button>
 </cover-view>
@@ -41,8 +44,8 @@
 </view>
 
 
-<view catchtouchmove="true" class='jw-buy-msgs' hidden='{{isHidebuy}}'>
-  <view class='jw-buy-top-view'>
+<view   class='jw-buy-msgs' hidden='{{isHidebuy}}'>
+  <view class='jw-buy-top-view' catchtouchmove="true">
     <view class='jw-buy-mallImg'>
       <image mode="aspectFit" style="width:100%;height:100%;" class='jw-buy-coverImg' src='{{specification_img}}'></image>
     </view>
@@ -50,11 +53,13 @@
     <text class='jw-buy-money'>￥{{detail_msg.price}}</text>
     <text class='jw-buy-num'>库存{{specification_repertory}}件</text>
   </view>
+  <scroll-view scroll-y>
   <view class='jw-buy-middle-view'>
     <text class='jw-spec-title'>规格</text>
     <text data-id='{{index}}' bindtap='selectPrec' class='jw-spec-btns {{item.isselect?"jw-select-prec":""}}' wx:for='{{specification}}' wx:key='item'>{{item.title}}</text>
   </view>
-  <view class='jw-buy-bottom-view'>
+  </scroll-view>
+  <view class='jw-buy-bottom-view' catchtouchmove="true">
     <text class='jw-buy-num-title'>购买数量</text>
     <view class='jw-suboradd'>
       <text bindtap='subNum' class='jw-suboradd-btns'>-</text>
@@ -62,5 +67,5 @@
       <text bindtap='addNum' class='jw-suboradd-btns'>+</text>
     </view>
   </view>
-  <text class='jw-buy-btn' bindtap='confirmBuy'>确定</text>
+  <text class='jw-buy-btn' bindtap='confirmBuy' catchtouchmove="true">确定</text>
 </view>

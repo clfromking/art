@@ -7,8 +7,8 @@
           <image class='jw-gifts-img' mode="aspectFit" src="{{item.image}}"></image>
         </view>
         <view class='jw-gifts-msg-view'>
-          <text class='jw-gifts-msg-title'>{{item.name}}</text>
-          <text class='jw-gifts-msg-alt'>{{item.describe}}</text>
+          <text class='jw-gifts-msg-title ellipsis'>{{item.name}}</text>
+          <text class='jw-gifts-msg-alt ellipsis'>{{item.describe}}</text>
           <text class='jw-gifts-msg-stock'>库存{{item.repertory}}</text>
           <view class='clear' style='margin-top: 36rpx'>
             <text class='jw-gifts-msg-univalent'>￥{{item.price}}</text>

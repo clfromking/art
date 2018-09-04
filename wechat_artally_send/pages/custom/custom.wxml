@@ -1,2 +1,4 @@
 <!--pages/custom/custom.wxml-->
 <text>pages/custom/custom.wxml</text>
+<!-- <button open-type="contact" />
+<button open-type='contact'>sss</button> -->

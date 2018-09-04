@@ -18,7 +18,8 @@ swiper{
   box-sizing: border-box
 }
 .jw-detail-msgs view{
-  margin-left: 40rpx
+  margin-left: 40rpx;
+  margin-right: 40rpx
 }
 .jw-detail-msg-title{
   font-size: 28rpx;
@@ -90,7 +91,7 @@ video{
 }
 .jw-buy-btn{
   display: block;
-  margin: 22rpx auto 0;
+  margin: 22rpx auto 10rpx;
   width: 710rpx;
   height: 80rpx;
   border-radius: 40rpx;
@@ -122,7 +123,7 @@ video{
 }
 .jw-buy-msgs{
   width: 100%;
-  height: 663rpx;
+  /* height: 663rpx; */
   position: fixed;
   bottom: 0;
   background: #fff;
@@ -169,10 +170,19 @@ video{
   position: relative;
 
 }
+scroll-view{
+  max-height: 380rpx;
+}
+.jw-body-scroll-view{
+  max-height: 100%;
+  height: calc(100vh - 122rpx)
+}
 .jw-buy-middle-view{
-  height: 168rpx;
+  /* height: 168rpx; */
   border-top: 1px solid #e9e9e9;
-  border-bottom: 1px solid #e9e9e9
+  border-bottom: 1px solid #e9e9e9;
+  padding-bottom: 15rpx;
+  
 }
 .jw-spec-title{
   display: block;
@@ -193,7 +203,8 @@ video{
   display: inline-block;
   text-align: center;
   line-height: 50rpx;
-  padding: 0 20rpx
+  padding: 0 20rpx;
+  margin-bottom:15rpx
 }
 .jw-select-prec{
   border-color: #d0021b;

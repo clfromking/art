@@ -2,29 +2,30 @@
 <view class='lq-lotdetail'>
   <!-- 状态区 -->
   <view class='l-statusbox'>
-    <view class='tip'>抽奖成功，等待开奖</view>
-    <view>满200人开奖</view>
-    <view>邀请好友参与抽奖，提高中奖几率</view>
+    <view class='tip'>{{title_text}}</view>
+    <view>{{gift_detail.condition}}</view>
+    <view>{{isindex==true?"":other_text}}</view>
   </view>
   <!-- 送礼人信息区 -->
   <view class='fromInfo'>
-    <image src="https://pic.forunart.com/artgive/wx/mall_label_birthday.png"></image>
-    <view>你好送出3份礼物</view>
-    <view class='greet'>恭喜发财，大吉大利</view>
+    <image src="{{gift_detail.avatar?gift_detail.avatar:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
+    
+    <view>{{gift_detail.uname}}送出{{gift_detail.total}}份礼物</view>
+    <view class='greet'>{{gift_detail.wish}}</view>
   </view>
   <!-- 礼物轮播区 -->
   <view class='l-giftsbox'>
     <swiper previous-margin="160rpx" next-margin="160rpx" circular bindchange="swiperchange">
       <swiper-item wx:for="{{gifts}}" wx:key="index" class="{{currentSwiper==index?'active':''}}">
         <view class="slide-image">
-          <image mode='aspectFit' src="{{item.img}}"/>
+          <image mode='aspectFit' src="{{item.image}}"/>
         </view>
-        <view class='slide-name'>{{item.name}}</view>
+        <view class='slide-name'><text class='name_text ellipsis'>{{item.name}}</text><text class='jw-other-text'>×{{item.num}}</text></view>
       </swiper-item>
   </swiper>
   </view>
   <!-- 中奖几率 -->
-  <view class='l-chance'>
+  <view class='l-chance' hidden='{{isindex}}'>
     <view class='top'>中奖几率</view>
     <view class='con'>
       <view class='num'>您的中奖几率已 <text>×1</text> 倍</view>
@@ -36,7 +37,7 @@
     <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/mall_banner_img.png"></image>
   </view>
   <!-- 参与人数区 -->
-  <view class='l-joinbox'>
+  <view class='l-joinbox' hidden='{{isindex}}'>
     <navigator class='l-j-num' url='/pages/joinpeople/joinpeople'>已有 <text>{{heads.length}}</text> 人参与</navigator>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{heads}}" wx:key="{{index}}">
@@ -45,7 +46,7 @@
     </view>
   </view>
   <!-- 中奖人区 -->
-  <view class='l-winners'>
+  <view class='l-winners' hidden='{{isindex}}'>
     <view class='l-w-tit'>中奖人</view>
     <view class='l-w-li'>
       <view class='l-w-headimg' >

@@ -24,6 +24,24 @@ App({
     })
     return promise;
   },
+
+  islogin:function(){
+    var promise=new Promise((resolve,reject)=>{
+      wx.getStorage({
+        key: 'userInfo',
+        success: function(res) {
+          resolve(res)
+        },
+        fail:function(){
+          wx.navigateTo({
+            url: '../author/author',
+          })
+          reject('没有登录')
+        }
+      })
+    })
+    return promise
+  },
   
   //用法
   //const app=getApp()  在需要用到request请求的页面中的顶部获取app.js中的App

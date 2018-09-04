@@ -132,6 +132,7 @@ scroll-view{
   width: 325rpx;
   display: inline-block;
   margin-right: 20rpx;
+  overflow: hidden
 }
 .jw-el-ware:nth-child(2n){
   margin-right: 0

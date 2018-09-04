@@ -542,11 +542,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.login({
-    //   success:function(res){
-    //     console.log(res)
-    //   }
-    // })
     var that=this
     
     // console.log(gift_lists)
@@ -834,21 +829,14 @@ Page({
   //是否登陆过
   islogin:function(){
     var that=this
-    
-    wx.getStorage({
-      key: 'userInfo',
-      success: function(res) {
-        // console.log(res)
-        uid=res.data.uid
-        openid=res.data.openid
-        // console.log(res)
-        that.addOrder()
-      },
-      fail:function(res){
-        wx.navigateTo({
-          url: '../author/author',
-        })
-      }
+    app.islogin().then((res) => {
+      // console.log(res)
+      uid = res.data.uid
+      openid = res.data.openid
+      // console.log(res)
+      that.addOrder()
+    }).catch((res) => {
+      // console.log(res)
     })
   },
 
