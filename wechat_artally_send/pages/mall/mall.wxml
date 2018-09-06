@@ -1,56 +1,58 @@
-<swiper class='jw-banner-swiper' bindchange='changeSwiper' interval='3000' duration='500' circular autoplay indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
-  <block wx:for='{{banner_src}}' wx:key='item' >
-    <swiper-item data-id='{{item.id}}' data-go='{{item.go}}' data-go_id='{{item.go_id}}' bindtap='goSubject'>
-      <image class='jw-mall-banner' src='{{item.avatar}}'></image>
-    </swiper-item>
-  </block>
-</swiper>
-<view class='swiper_block_view clear' style='width:{{swiper_block_width}}' >
+<scroll-view>
+  <swiper class='jw-banner-swiper' bindchange='changeSwiper' interval='3000' duration='500' circular autoplay indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
+    <block wx:for='{{banner_src}}' wx:key='item' >
+      <swiper-item data-id='{{item.id}}' data-go='{{item.go}}' data-go_id='{{item.go_id}}' bindtap='goSubject'>
+        <image lazy-load='{{true}}' class='jw-mall-banner' src='{{item.avatar}}'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='swiper_block_view clear' style='width:{{swiper_block_width}}' >
 
-    <text class='swiper_texts {{item?"select_swiper":""}}' wx:for='{{swiper_block}}' wx:key='item'></text>
+      <text class='swiper_texts {{item?"select_swiper":""}}' wx:for='{{swiper_block}}' wx:key='item'></text>
 
-</view>
-<view class='jw-search-view'>
-  <image src='https://pic.forunart.com/artgive/wx/mall_icon_search.png' bindtap='search_msg' class='jw-search-icon' ></image>
-  <text bindtap='clearInput' class='jw-search-cancel' hidden='{{inputCancel_ishide}}'>取消</text>
-  <input confirm-type='search' bindconfirm='search_msg' bindblur='search_input_blur' bindinput='search_input' value="{{input_val}}" bindfocus='search_input_focus' style='width:{{inputCancel_ishide==true?"568rpx":"516rpx"}};margin-right:{{inputCancel_ishide==true?"32rpx":"0rpx"}}' class='jw-search-input' placeholder='搜你想送的'></input>
-</view>
-<swiper indicator-dots='{{isshowIndicator}}' indicator-color='#e9e9e9' indicator-active-color="#da0202">
-  <block wx:for='{{swiper_msgs}}' wx:key='item'>
-    <swiper-item>
-      <view class='jw-swiper-main-view'>      
-        <view class='jw-el-view' data-id='{{item.id}}' bindtap='labelScreen' wx:for='{{swiper_msgs[index]}}' wx:key='item'>
-          <image src="{{item.image}}" class='jw-el-mainImg'></image>
-          <image src="https://pic.forunart.com/artgive/wx/mall_label_img.png" class='jw-el-otherImg'></image>
-          <text class='jw-el-alts'>{{item.name}}</text>
+  </view>
+  <view class='jw-search-view'>
+    <image src='https://pic.forunart.com/artgive/wx/mall_icon_search.png' bindtap='search_msg' class='jw-search-icon' ></image>
+    <text bindtap='clearInput' class='jw-search-cancel' hidden='{{inputCancel_ishide}}'>取消</text>
+    <input confirm-type='search' bindconfirm='search_msg' bindblur='search_input_blur' bindinput='search_input' value="{{input_val}}" bindfocus='search_input_focus' style='width:{{inputCancel_ishide==true?"568rpx":"516rpx"}};margin-right:{{inputCancel_ishide==true?"32rpx":"0rpx"}}' class='jw-search-input' placeholder='搜你想送的'></input>
+  </view>
+  <swiper indicator-dots='{{isshowIndicator}}' indicator-color='#e9e9e9' indicator-active-color="#da0202">
+    <block wx:for='{{swiper_msgs}}' wx:key='item'>
+      <swiper-item>
+        <view class='jw-swiper-main-view'>      
+          <view class='jw-el-view' data-id='{{item.id}}' bindtap='labelScreen' wx:for='{{swiper_msgs[index]}}' wx:key='item'>
+            <image lazy-load='{{true}}' src="{{item.image}}" class='jw-el-mainImg'></image>
+            <image lazy-load='{{true}}' src="https://pic.forunart.com/artgive/wx/mall_label_img.png" class='jw-el-otherImg'></image>
+            <text class='jw-el-alts'>{{item.name}}</text>
+          </view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='jw-screen-title-view'>
+    <image class='jw-screen-title-img' src='https://pic.forunart.com/artgive/wx/mall_title_img.jpg'></image>
+  </view>
+  <view class='jw-ware-list-view'>
+    <view wx:for='{{ware_list}}' data-id='{{item.id}}' bindtap='goDetail' wx:key='{{item}}' class='jw-el-ware'>
+      <view class='jw-el-ware-img'>
+        <view style='width:100%;height:100%'>
+          <image lazy-load='{{true}}' mode="aspectFit" style="width:100%;height:100%;display:block" src='{{item.image}}'></image>
         </view>
       </view>
-    </swiper-item>
-  </block>
-</swiper>
-<view class='jw-screen-title-view'>
-  <image class='jw-screen-title-img' src='https://pic.forunart.com/artgive/wx/mall_title_img.jpg'></image>
-</view>
-<view class='jw-ware-list-view'>
-  <view wx:for='{{ware_list}}' data-id='{{item.id}}' bindtap='goDetail' wx:key='{{item}}' class='jw-el-ware'>
-    <view class='jw-el-ware-img'>
-      <view style='width:100%;height:100%'>
-        <image mode="aspectFit" style="width:100%;height:100%;display:block" src='{{item.image}}'></image>
-      </view>
+      <text class='jw-ware-alt ellipsis'>{{item.name}}</text>
+      <text class='jw-ware-money ellipsis'>￥{{item.price}}</text>
     </view>
-    <text class='jw-ware-alt ellipsis'>{{item.name}}</text>
-    <text class='jw-ware-money ellipsis'>￥{{item.price}}</text>
   </view>
-</view>
-<text class='jw-bottom-hint'>没有更多了...</text>
+  <text class='jw-bottom-hint'>没有更多了...</text>
 
-<view class='jw-bottom-view'>
-  <view class='jw-bottom-btns'>
-    <image src='https://pic.forunart.com/artgive/wx/mall_nav_icon_chosen_pressed.png' class='jw-bottom-icon'></image>
-    <text class='jw-bottom-alt'>精选</text>
+  <view class='jw-bottom-view'>
+    <view class='jw-bottom-btns'>
+      <image src='https://pic.forunart.com/artgive/wx/mall_nav_icon_chosen_pressed.png' class='jw-bottom-icon'></image>
+      <text class='jw-bottom-alt'>精选</text>
+    </view>
+    <view  bindtap='gomallAll' class='jw-bottom-btns'>
+      <image src='https://pic.forunart.com/artgive/wx/mall_nav_icon_all_default.png' class='jw-bottom-icon'></image>
+      <text class='jw-bottom-alt jw-bottom-rightAlt'>全部</text>
+    </view>
   </view>
-  <view  bindtap='gomallAll' class='jw-bottom-btns'>
-     <image src='https://pic.forunart.com/artgive/wx/mall_nav_icon_all_default.png' class='jw-bottom-icon'></image>
-    <text class='jw-bottom-alt jw-bottom-rightAlt'>全部</text>
-  </view>
-</view>
+</scroll-view>

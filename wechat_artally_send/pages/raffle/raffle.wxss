@@ -12,8 +12,6 @@ page{
   width: 659rpx;
   height: 768rpx;
   border-radius: 4rpx;
-  background: url(https://pic.forunart.com/artgive/wx/gift_bg_img_2.png) no-repeat;
-  background-size: 100% 100%;
   position: absolute;
   top: 0;
   left: 0;

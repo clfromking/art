@@ -4,13 +4,14 @@
   <view class='l-statusbox'>
     <view class='tip'>{{title_text}}</view>
     <view>{{gift_detail.condition}}</view>
+    <view hidden='{{!isoneTone}}' style='text-decoration:underline'>请前往礼物篮查看</view>
     <view>{{isindex==true?"":other_text}}</view>
   </view>
   <!-- 送礼人信息区 -->
   <view class='fromInfo'>
     <image src="{{gift_detail.avatar?gift_detail.avatar:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
     
-    <view>{{gift_detail.uname}}送出{{gift_detail.total}}份礼物</view>
+    <view>{{gift_detail.uname}}送出{{gifts.length}}种礼物</view>
     <view class='greet'>{{gift_detail.wish}}</view>
   </view>
   <!-- 礼物轮播区 -->
@@ -20,7 +21,7 @@
         <view class="slide-image">
           <image mode='aspectFit' src="{{item.image}}"/>
         </view>
-        <view class='slide-name'><text class='name_text ellipsis'>{{item.name}}</text><text class='jw-other-text'>×{{item.num}}</text></view>
+        <view class='slide-name'><text class='name_text ellipsis'>{{item.name}}</text><text class='jw-other-text'>×{{item.num}}份</text></view>
       </swiper-item>
   </swiper>
   </view>
@@ -28,9 +29,19 @@
   <view class='l-chance' hidden='{{isindex}}'>
     <view class='top'>中奖几率</view>
     <view class='con'>
-      <view class='num'>您的中奖几率已 <text>×1</text> 倍</view>
+      <view class='num'>您的中奖几率已 <text>×{{gift_detail.inviter_count+1?gift_detail.inviter_count+1:'1'}}</text> 倍</view>
       <text>邀请好友参与抽奖，提高中奖几率</text>
     </view>
+
+    <view class='l-joinbox' hidden='{{gift_detail.inviter_count==0}}'>
+    <view class='l-j-num' style='text-align:left'>已有 <text style='text-decoration:none'>{{gift_detail.inviter.length}}</text> 人为你助力</view>
+    <view class='l-j-peoples'>
+      <view class='l-j-headimg' wx:for="{{gift_detail.inviter}}" wx:key="{{index}}">
+        <image src="{{item?item:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
+      </view>
+    </view>
+
+  </view>
   </view>
   <!-- 其他入口 -->
   <view class='l-otherbox'>
@@ -41,12 +52,12 @@
     <navigator class='l-j-num' url='/pages/joinpeople/joinpeople'>已有 <text>{{heads.length}}</text> 人参与</navigator>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{heads}}" wx:key="{{index}}">
-        <image src="{{item}}"></image>
+        <image src="{{item?item:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
       </view>
     </view>
   </view>
   <!-- 中奖人区 -->
-  <view class='l-winners' hidden='{{isindex}}'>
+  <view class='l-winners' hidden='{{!isfinish}}'>
     <view class='l-w-tit'>中奖人</view>
     <view class='l-w-li'>
       <view class='l-w-headimg' >
@@ -58,13 +69,15 @@
   </view>
   <!-- 按钮区 -->
   <view class='l-bths'>
-    <button class='invite' bindtap='share'>邀请好友抽奖</button>
-    <button>参与更多抽奖</button>
+    <button hidden='{{isoneTone}}'  class='invite' bindtap='share'>邀请好友抽奖</button>
+    <button hidden='{{isoneTone}}'  bindtap='joinMore'>参与更多抽奖</button>
+    <button hidden='{{!isoneTone}}' class='invite' bindtap='goIndex'>我也要送礼物</button>
+    <button hidden='{{!isoneTone}}' bindtap='joinMore'>参与更多抽奖</button>
   </view>
   <!-- 分享选项 -->
-  <action-sheet hidden="{{notShare}}">
+  <action-sheet catchtouchmove='a' hidden="{{notShare}}">
     <block wx:for="{{sharelist}}" wx:key="{{index}}">
-      <action-sheet-item data-index="{{index}}" bindtap="shareChange">{{item}}</action-sheet-item>
+      <action-sheet-item data-index="{{index}}" bindtap="shareChange"><button open-type='{{index==0?"share":""}}' class='share_btns'>{{item}}</button></action-sheet-item>
     </block>
     <action-sheet-cancel bindtap="share">取消</action-sheet-cancel>
   </action-sheet>

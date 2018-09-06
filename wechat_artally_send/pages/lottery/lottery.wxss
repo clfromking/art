@@ -50,10 +50,13 @@
 }
 .jw-lottery-elNum{
   color: #cbaa7c;
-  margin-left: 20rpx
+  margin-left: 20rpx;
+  margin-bottom: 10rpx;
+  width: 95%
 }
 .jw-lottery-elName{
-  color: #111
+  color: #111;
+  width: 95%
 }
 .jw-lottery-elAlt{
   font-size: 22rpx;
@@ -61,12 +64,17 @@
   color: #999;
   float: right;
   margin: 10rpx 0; 
+  width: 95%
 }
 .jw-lottery-elTime{
   font-size: 22rpx;
   font-weight: bold;
   color: #cbaa7c;
-  float: right
+  float: right;
+  width: 95%
+}
+.jw-lottery-elAlt,.jw-lottery-elNum,.jw-lottery-elTime,.jw-lottery-elName{
+  text-align: right
 }
 .jw-lottery-btn{
   position: absolute;

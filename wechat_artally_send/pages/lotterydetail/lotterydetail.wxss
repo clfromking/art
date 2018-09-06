@@ -210,3 +210,11 @@ page{
   display: inline-block;
   vertical-align: top
 }
+action-sheet-item{
+  padding: 0
+}
+.share_btns{
+  border: none;
+  background: #fff;
+  border-radius: none
+}

@@ -3,7 +3,7 @@
   <swiper bindchange='changeSwiper' interval='3000' duration='500' circular autoplay  class='jw-banner-swiper' indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
     <block wx:for='{{banner_src}}' wx:key='item'>
       <swiper-item data-id='{{item.id}}' data-go='{{item.go}}' data-go_id='{{item.go_id}}' bindtap='goSubject'>
-        <image class='jw-mall-banner' src='{{item.avatar}}'></image>
+        <image lazy-load class='jw-mall-banner' src='{{item.avatar}}'></image>
       </swiper-item>
     </block>
   </swiper> 
@@ -11,7 +11,7 @@
     <text class='swiper_texts {{item?"select_swiper":""}}' wx:for='{{swiper_block}}' wx:key='item'></text>
   </view>
   <view class='jw-search-view'>
-    <image src='https://pic.forunart.com/artgive/wx/mall_icon_search.png' bindtap='search_msg' class='jw-search-icon' ></image>
+    <image lazy-load src='https://pic.forunart.com/artgive/wx/mall_icon_search.png' bindtap='search_msg' class='jw-search-icon' ></image>
     <text bindtap='clearInput' class='jw-search-cancel' hidden='{{inputCancel_ishide}}'>取消</text>
     <input confirm-type='search' bindconfirm='search_msg' bindinput='search_input' value="{{input_val}}" bindblur='search_input_blur' bindfocus='search_input_focus' style='width:{{inputCancel_ishide==true?"568rpx":"516rpx"}};margin-right:{{inputCancel_ishide==true?"32rpx":"0rpx"}}' class='jw-search-input' placeholder='搜你想送的'></input>
   </view>
@@ -21,7 +21,7 @@
       <view class='jw-include-view'>
         <text hidden='{{priceCover}}'>{{select_name1}}</text>
         <text style='color:#da0202' hidden='{{!priceCover}}'>{{priceCover}}</text>
-        <image hidden='{{!priceCover||isScreen.indexOf(true)<=-1}}' src='https://pic.forunart.com/artgive/wx/all_fliter_icon_red.png'></image>
+        <image  hidden='{{!priceCover||isScreen.indexOf(true)<=-1}}' src='https://pic.forunart.com/artgive/wx/all_fliter_icon_red.png'></image>
         <image hidden='{{!(!priceCover||isScreen.indexOf(true)<=-1)}}' src='{{isScreen[0]?"https://pic.forunart.com/artgive/wx/all_fliter_icon_red.png":"https://pic.forunart.com/artgive/wx/all_fliter_icon_gray.png"}}'></image>
       </view>
     </view>
@@ -45,7 +45,7 @@
     <view wx:for='{{ware_list}}' data-id='{{item.id}}' bindtap='goDetail' wx:key='{{item}}' class='jw-el-ware'>
       <view class='jw-el-ware-img'>
         <view style='width:100%;height:100%'>
-          <image mode="aspectFit" style="width:100%;height:100%;display:block" src='{{item.image}}'></image>
+          <image lazy-load mode="aspectFit" style="width:100%;height:100%;display:block" src='{{item.image}}'></image>
         </view>
       </view>
       <text class='jw-ware-alt ellipsis'>{{item.name}}</text>

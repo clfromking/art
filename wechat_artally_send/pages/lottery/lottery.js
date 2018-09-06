@@ -14,8 +14,14 @@ Page({
 
   //点击抽奖事件
   goRaffle:function(e){
+    if (this.data.lottery_list[e.currentTarget.dataset.index].client==true){
+      wx.navigateTo({
+        url: '../lotterydetail/lotterydetail?source=lottery&order_id=' + this.data.lottery_list[e.currentTarget.dataset.index].id,
+      })
+      return
+    }
     wx.navigateTo({
-      url: '../raffle/raffle?time=' + this.data.lottery_list[e.currentTarget.dataset.index].condition,
+      url: '../raffle/raffle?time=' + this.data.lottery_list[e.currentTarget.dataset.index].condition + '&order_id=' + this.data.lottery_list[e.currentTarget.dataset.index].id+'&inviter=-1&source=lottery',
     })
   },
 
@@ -53,10 +59,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.setStorage({
-    //   key: 'uid',
-    //   data: '1',
-    // })
     var that=this
     app.post('banner/lists', {'position':3}).then((res) => {
       // console.log(res)
@@ -70,49 +72,7 @@ Page({
     }).catch((error) => {
       console.log(error)
     })
-    var that = this
-    wx.getStorage({
-      key: 'userInfo',
-      success: function(res) {
-        var data={'uid':res.data.uid}
-        app.post('order/days_lists',data).then((res) => {
-          console.log(res)
-          if (res.code == 200) {
-
-            lottery_list = []
-            for (var i = 0; i < res.data.lists.length; i++) {
-              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number,'client': res.data.lists[i].client }
-              lottery_list.push(lotteryObj)
-            }
-
-            that.setData({
-              lottery_list: lottery_list
-            })
-          }
-        }).catch((error) => {
-          console.log(error)
-        })
-      },
-      fail:function(res){
-        app.post('order/days_lists').then((res) => {
-          if(res.code==200){
-            
-            lottery_list = []
-            for (var i = 0; i < res.data.lists.length;i++) {
-              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number,'client':res.data.lists[i].client}
-              lottery_list.push(lotteryObj)
-            }
-            
-            that.setData({
-              lottery_list: lottery_list
-            })
-          }
-          
-        }).catch((error) => {
-          console.log(error)
-        })
-      }
-    })
+    
     
   },
 
@@ -127,7 +87,49 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this
+    wx.getStorage({
+      key: 'userInfo',
+      success: function (res) {
+        var data = { 'uid': res.data.uid }
+        app.post('order/days_lists', data).then((res) => {
+          console.log(res)
+          if (res.code == 200) {
+
+            lottery_list = []
+            for (var i = 0; i < res.data.lists.length; i++) {
+              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number, 'client': res.data.lists[i].client }
+              lottery_list.push(lotteryObj)
+            }
+
+            that.setData({
+              lottery_list: lottery_list
+            })
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+      },
+      fail: function (res) {
+        app.post('order/days_lists').then((res) => {
+          if (res.code == 200) {
+            console.log(res)
+            lottery_list = []
+            for (var i = 0; i < res.data.lists.length; i++) {
+              var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number, 'client': res.data.lists[i].client }
+              lottery_list.push(lotteryObj)
+            }
+
+            that.setData({
+              lottery_list: lottery_list
+            })
+          }
+
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+    })
   },
 
   /**

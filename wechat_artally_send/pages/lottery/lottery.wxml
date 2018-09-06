@@ -8,17 +8,21 @@
       </view>
       <view class='jw-lottery-msgView'>
         <view class='clear'>
-          <text class='jw-lottery-elNum'>{{item.num}}件</text>
-          <text class='jw-lottery-elName'>{{item.name}}</text>
+          <text class='jw-lottery-elName ellipsis'>{{item.name}}</text>
         </view>
-        <view class='clear'>
-          <text class='jw-lottery-elAlt'>{{item.alt}}</text>
+        <view class='clear  ellipsis'>
+          <text class='jw-lottery-elAlt  ellipsis'>{{item.alt}}</text>
         </view>
-        <view  class='clear'>
-          <text class='jw-lottery-elTime'>{{item.condition}} 开奖</text>
+        <view class='clear  ellipsis'>
+          <text class='jw-lottery-elNum ellipsis'>{{item.num}}件</text>
+        </view>
+        <view  class='clear  ellipsis'>
+          <text class='jw-lottery-elTime  ellipsis'>{{item.condition}} 开奖</text>
         </view>
         <text class='jw-lottery-btn {{item.client?"jw-client-btn":""}}'>{{item.client==true?'已参与':'立即抽奖'}}</text>
       </view>
+      
     </view>
   </view>
 </view>
+<!-- <text>暂无每日抽奖</text> -->

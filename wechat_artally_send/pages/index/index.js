@@ -842,6 +842,18 @@ Page({
 
   //生成订单
   addOrder:function(){
+    console.log(gift_lists)
+    for(var i=0;i<gift_lists.length;i++){
+      if(Number(gift_lists[i].num)==0&&Number(gift_lists[i].repertory)==0){
+        wx.showToast({
+          icon:'none',
+          mask:true,
+          duration:2000,
+          title: '您所选择的某种商品库存为零，请手动清除',
+        })
+        return
+      }
+    }
     var condition
     var play
     var goods_ids = []
@@ -898,6 +910,40 @@ Page({
           title: res.msg,
         })
         console.log(gift_lists)
+        for(var i=0;i<res.data.repertory.length;i++){
+          for(var j=0;j<gift_lists.length;j++){
+            if(res.data.repertory[i].id==gift_lists[j].id){
+              gift_lists[j].repertory=res.data.repertory[i].repertory
+              gift_lists[j].num = res.data.repertory[i].repertory
+              gift_lists[j].new_repertory = '库存'+res.data.repertory[i].repertory+'件'
+              gift_lists.unshift(gift_lists.splice(j, 1)[0])
+              console.log(gift_lists)
+              // console.log(gift_lists.splice(j, 1))
+              // console.log(gift_lists)
+              // gift_lists.splice(j,1)
+            }
+            console.log(j)
+            console.log(gift_lists[j].num)
+          }
+        }
+        var gifts_total=0
+        var money=0
+        for (var i = 0; i < gift_lists.length;i++){
+          gifts_total += Number(gift_lists[i].num)
+          money += Number(gift_lists[i].num) * Number(gift_lists[i].price)
+        }
+        if(Number(money)==0){
+          money=Number(0).toFixed(2)
+        }
+        else{
+          money=Number(money).toFixed(2)
+        }
+        that.setData({
+          gift_lists,
+          gifts_total,
+          money
+        })
+        
       }
     }).catch((error) => {
       wx.hideLoading()
@@ -911,6 +957,10 @@ Page({
 
   //支付
   Pay:function(order_id,num){
+    wx.navigateTo({
+      url: '../lotterydetail/lotterydetail?source=lottery&order_id=' + order_id,
+    })
+    return
     console.log(uid)
     console.log(openid)
     console.log(num)
@@ -941,11 +991,19 @@ Page({
               icon:'none',
               title: '支付失败',
             })
+            app.post('wxpay/wxpaycloes', { 'order_sn': num}).then((res)=>{
+              console.log(res)
+            }).catch((error)=>{
+              console.log(error)
+            })
           }
         })
       }
       else if(res.code==600){
-        that.Pay()
+        wx.showToast({
+          icon: 'none',
+          title: res.msg,
+        })
       }
       
     }).catch((error)=>{

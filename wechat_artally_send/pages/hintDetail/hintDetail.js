@@ -1,9 +1,12 @@
 // pages/hintDetail/hintDetail.js
 const app=getApp()
-let swiper_imgs = ['https://pic.forunart.com/artgive/wx/mall_banner_img.png', 'https://pic.forunart.com/artgive/wx/mall_nav_icon_all_pressed.png', 'https://pic.forunart.com/artgive/wx/mall_nav_icon_all_pressed.png','https://pic.forunart.com/artgive/wx/mall_nav_icon_all_pressed.png']
+let swiper_imgs = []
 let detail_msg={}
-let prec=[true,false]
+let prec=[]
 let iscommon=false
+var swiperLoadnum=0
+var swipersuccessload=false
+var detailsuccessload=false
 Page({
 
   /**
@@ -181,12 +184,41 @@ Page({
       },
     })
   },
+
+
+  //轮播图加载事件
+  swiperImgLoad:function(e){
+    // console.log(swipersuccessload)
+    // console.log(e)
+    swiperLoadnum++
+    if (swiperLoadnum >= swiper_imgs.length){
+      swipersuccessload=true
+    }
+    if(swipersuccessload==true&&detailsuccessload==true){
+      wx.hideLoading()
+    }
+    // console.log(swipersuccessload)
+  },
+
+  //详情图加载事件
+  detailImgLoad:function(e){
+    detailsuccessload=true
+    if (swipersuccessload == true && detailsuccessload == true) {
+      wx.hideLoading()
+    }
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(iscommon)
     console.log(options)
-
+    wx.showLoading({
+      mask:true,
+      title: '数据加载中',
+    })
     // options.id=70
     var data={'giftid':options.id}
     var that=this
@@ -210,6 +242,27 @@ Page({
         }
         swiper_imgs=res.data.lists.imgs
         detail_msg = { 'name': res.data.lists.name, 'describe': res.data.lists.describe, 'price': res.data.lists.price}
+        if (specification.length==0){
+          wx.showToast({
+            icon:'none',
+            mask:true,
+            duration:2000,
+            title: '该商品已售罄，正在补货中',
+            success:function(){
+              that.setData({
+                swiper_imgs: swiper_imgs,
+                detail_msg: detail_msg,
+                detail_image: res.data.lists.detail_image,
+              })
+              setTimeout(function(){
+                wx.navigateBack({
+                  
+                })
+              },2000)
+              return
+            }
+          })
+        }
         that.setData({
           swiper_imgs:swiper_imgs,
           detail_msg:detail_msg,
@@ -238,21 +291,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    
+   
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    swipersuccessload = false
+    detailsuccessload = false
+    iscommon = false
+    swiperLoadnum=0
   },
 
   /**
