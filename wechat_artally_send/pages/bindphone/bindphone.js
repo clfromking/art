@@ -27,9 +27,10 @@ Page({
   // 获取验证码按钮
   getcode:function(){
     let that = this,
+      temp=that.data.temp,
       codeObj = that.data.codeObj;
     if (!codeObj.canclick) return
-    if (! /^1[35678][0-9]{9}$/.test(that.data.temp.phone)) {
+    if (! /^1[35678][0-9]{9}$/.test(temp.phone)) {
       wx.showToast({
         title: '手机号格式错误',
         icon: 'none'
@@ -61,12 +62,13 @@ Page({
       }, 1000)
     }
     clock();
-    return
-    app.post('user/user_phone_code', { mobile: this.temp.phone, models:6})
+    // return
+    let postdata = { mobile: temp.phone, models: 6 };
+    app.post('user/user_phone_code', postdata ,1)
       .then(res => {
-        //console.log(res)
+        console.log(res)
         if (res.code == 200) {
-          clock();
+          // clock();
         } else {
           wx.showToast({
             title: res.msg,
@@ -77,23 +79,23 @@ Page({
   },
   // 确认绑定按钮
   bindphone:function(){
-    let that=this,
-      temp=this.data.temp;
-    if (! /^1[35678][0-9]{9}$/.test(this.data.temp.phone)) {
+    let that = this,
+      temp = this.data.temp;
+    if (! /^1[35678][0-9]{9}$/.test(temp.phone)) {
       wx.showToast({
         title: '手机号格式错误',
         icon: 'none'
       })
       return
     }
-    if (! /^[a-zA-Z0-9]{4}$/.test(this.data.temp.code)) {
+    if (! /^[a-zA-Z0-9]{4}$/.test(temp.code)) {
       wx.showToast({
         title: '验证码格式错误',
         icon: 'none'
       })
       return
     }
-    console.log(temp)
+    // console.log(temp)
     let data={
       uid:2,
       mobile: temp.phone,
@@ -103,20 +105,23 @@ Page({
     app.post('user/user_phone_bing', data,1).then(res => {
       console.log(res)
       if (res.code === 200) {
-          wx.navigateBack()
+        let userInfo=wx.getStorageSync("userInfo");
+        userInfo.mobile=temp.phone;
+        wx.setStorageSync('userInfo', userInfo);
+        wx.navigateBack();
       } else {
         wx.showToast({
           title: res.msg,
           icon:"none"
         })
       }  
-    })  
+    }).catch(error=>{console.log(error)})
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**

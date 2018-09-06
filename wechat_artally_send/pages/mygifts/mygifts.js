@@ -6,13 +6,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    titles: ['我收到的','我送出的','我参与的'],
+    titles: ['我收到的', '我送出的', '我参与的'],
+    titleIndex: 0,
+    titleUrls: ['order/mygifts_receive', 'order/mygifts_send','order/mygifts_participation'],
+    posturl: '',
     navlist:[
       ['已提货', '已折现'],
       ['礼物红包', '定时红包', '人满开奖'],
       ['待开奖','已开奖','未中奖'],
     ],
-    titleIndex: 0,
     navIndex: 0,
     orderlist:[]
   },
@@ -23,14 +25,17 @@ Page({
     this.setData({
       navIndex: val
     })
-    this.getReceiveOrders(val+1);
+    this.getOrders();
   },
   // 获取我收到的订单列表
-  getReceiveOrders:function(way=1){
+  getOrders:function(){
     let that=this,
+      posturl = this.data.posturl,
+      way = this.data.navIndex+1,
       orderlist=[];
-    app.post('order/mygifts_receive', { uid: 2, way: way}).then(res=>{
-      console.log(res)
+    let uid = wx.getStorageSync('userInfo').uid;
+    app.post(posturl, { uid: uid, way: way}).then(res=>{
+      // console.log(res)
       if(res.code==200){
         orderlist=res.data.lists;
         that.setData({
@@ -44,30 +49,33 @@ Page({
       }
     })
   },
+  // 进入详情
+  goDetail:function(e){
+    if (this.data.titleIndex==0) return
+    let id=e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/lotterydetail/lotterydetail?source=my&id='+id,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that=this;
     // console.log(options)
+    let that=this,
+      type = Number(options.type),
+      nav = options.nav ? Number(options.nav) : 0,
+      titles = this.data.titles,
+      posturl = this.data.titleUrls[type];
+    wx.setNavigationBarTitle({
+      title:titles[type]
+    })
     this.setData({
       titleIndex: options.type,
-      navIndex:0
+      navIndex: nav,
+      posturl:posturl
     })
-    if (options.type==0){
-      wx.setNavigationBarTitle({
-        title: this.data.titles[0]
-      })
-      that.getReceiveOrders();
-    } else if (options.type == 1) {
-      wx.setNavigationBarTitle({
-        title: this.data.titles[1]
-      })
-    } else if (options.type == 2) {
-      wx.setNavigationBarTitle({
-        title: this.data.titles[2]
-      })
-    }
+    that.getOrders();
   },
 
   /**

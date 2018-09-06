@@ -6,10 +6,10 @@
   <view class='d-li' wx:for="{{data.gifts}}" wx:key="{{index}}">
     <view class='d-l-cen'>
       <view class='d-l-pic'>
-        <image mode='aspectFit' src="{{item.image}}"></image>
+        <image lazy-load mode='aspectFit' src="{{item.image}}"></image>
       </view>
       <view class='d-l-info'>
-        <view>{{item.name}}</view>
+        <view class='ellipsis'>{{item.name}}</view>
         <view class='num'>x{{item.choosenum}}</view>
         <view>{{item.price}}</view>
       </view>
@@ -24,28 +24,39 @@
   <view class='d-other'>
     <view class='d-o-li'>
       <text>折现账户</text>
-      <view>
+      <view class='fr'>
         <image mode='aspectFit' class='d-icon' src="https://pic.forunart.com/artgive/wx/personal_gift_img_wecat.png"></image>
         <text>微信零钱</text>
       </view>
     </view>
     <view class='d-o-li'>
       <text>礼物购买价格</text>
-      <view>
+      <view class='fr'>
         <text>{{data.totalprice}} 元</text>
       </view>
     </view>
     <view class='d-o-li'>
       <text>手续费 {{poundage}}%</text>
-      <view>
+      <view class='fr'>
         <text>{{data.totalprice*poundage/100}} 元</text>
       </view>
     </view>
     <view class='d-o-li'>
       <text>实际折现</text>
-      <view class='price'>
+      <view class='price fr'>
         <text>{{data.totalprice*(100-poundage)/100}} 元</text>
       </view>
+    </view>
+    <view class='d-o-li' hidden="{{temp.phone!='暂未绑定'}}">
+      <view>安全验证：为确保折现交易安全, <navigator class="bingphone" url="/pages/bindphone/bindphone">请先绑定您的手机号</navigator></view>
+    </view>
+    <view class='d-o-li'>
+      <text>手机号：{{temp.phone}}</text>
+    </view>
+    <view class='d-o-li code'>
+      <text>验证码：</text>
+      <input type='number' placeholder='请输入验证码' data-name="temp.code" value='{{temp.code}}' bindblur="bindinputblur"></input>
+      <view class="b-getcode {{codeObj.canclick?'':'active'}}" bindtap='getcode'>{{codeObj.text}}</view>
     </view>
   </view>
   <!-- 底部栏 -->

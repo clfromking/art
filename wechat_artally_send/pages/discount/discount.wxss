@@ -17,7 +17,7 @@
 	box-shadow: 0 0 8rpx 0 rgba(0, 0, 0, 0.1);
 }
 .lq-discount .d-l-cen{
-  padding: 10rpx 20rpx 0;
+  padding: 10rpx 20rpx;
   display: flex;
   align-items: center;
 }
@@ -31,6 +31,7 @@
   height: 200rpx;
 }
 .lq-discount .d-l-info{
+  width: 450rpx;
   font-size: 26rpx;
 	font-weight: 500;
 	color: #111111;
@@ -70,18 +71,48 @@
 	color: #333333;
   overflow: hidden;
 }
-.lq-discount .d-o-li view{
-  float: right;
-}
 .lq-discount .d-o-li .d-icon{
   width: 44rpx;
 	height: 36rpx;
   vertical-align:text-top;
   margin-right: 20rpx;
 }
+.lq-discount .d-o-li .bingphone{
+  color: #e16666;
+}
 .lq-discount .d-o-li .price{
   font-weight: 600;
 	color: #da0202;
+}
+.lq-discount .d-o-li .bingphone{
+  display: inline-block;
+  text-decoration: underline;
+}
+.lq-discount .d-o-li.code{
+  display: flex;
+  align-items: center;
+}
+.lq-discount .d-o-li.code input{
+  line-height: 90rpx;
+  color: #999999;
+  flex: 2;
+  margin-left: 20rpx;
+}
+.lq-discount .d-o-li.code .b-getcode{
+  width: 30%;
+  height: 56rpx;
+  line-height: 56rpx;
+  margin-left: 40rpx;
+  background: transparent;
+  font-size: 28rpx;
+	color: #da0202;
+  border-radius: 28rpx;
+	border: solid 2rpx #da0202;
+  text-align: center;
+}
+.lq-discount .d-o-li.code .b-getcode.active{
+  color: #999999;
+  border-color: #999999;
 }
 /* 底部栏 */
 .lq-discount .d-botbox{

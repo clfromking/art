@@ -10,8 +10,10 @@ Page({
     data:{
       gifts:[],
       selectids:[],
+      orderids:[],
       selectorderNums:[]
-    }
+    },
+    disabled:false
   },
   // 获取地址
   getaddress:function(){
@@ -34,12 +36,8 @@ Page({
   },
   // 确认提货按钮
   takegoodsok:function(){
-    // wx.login({
-    //   success:function(res){
-    //     console.log(res.code)
-    //   }
-    // })
-    let that=this;
+    if (this.data.disabled) return
+    let that = this;
     if (!that.data.addressinfo.id){
       wx.showToast({
         title: '请添加地址',
@@ -48,7 +46,39 @@ Page({
       })
       return
     }
-    console.log(1)
+    that.setData({
+      disabled: true
+    })
+    let data = that.data.data;
+    let postdata={
+      uid: wx.getStorageSync('userInfo').uid,
+      shop_id: data.selectids.join(','),
+      shop_num: data.selectorderNums.join(','),
+      order_id: data.orderids.join(','),
+      way:1
+    }
+    // console.log(postdata)
+    app.post('order/giftbox_go', postdata).then(res=>{
+      // console.log(res)
+      if(res.code==200){
+        wx.removeStorageSync('waitOperateGifts')
+        wx.redirectTo({
+          url: '/pages/mygifts/mygifts?type=0&nav=0',
+        })
+      }else{
+        that.setData({
+          disabled: false
+        })
+        wx.showToast({
+          title: res.msg,
+          icon:"none"
+        })      
+      }
+    }).catch(error=>{
+      that.setData({
+        disabled: false
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载

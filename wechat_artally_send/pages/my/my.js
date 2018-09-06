@@ -20,8 +20,9 @@ Page({
     let that=this,
       orderNums = this.data.orderNums,
       gifts = [];
-    app.post('order/giftbox',{uid:2}).then(res=>{
-      // console.log(res)
+    let uid = wx.getStorageSync('userInfo').uid;
+    app.post('order/giftbox',{uid:uid}).then(res=>{
+      // console.log(res)
       if(res.code==200){
         orderNums.receive = res.data.receive;
         orderNums.send= res.data.send;
@@ -64,6 +65,7 @@ Page({
       }
     }else{
       operation = false;
+      checkAllStatus = false;
     }
     that.setData({
       ['gifts[' + index + '].selected']: selected,
@@ -121,7 +123,13 @@ Page({
   },
   // 底部操作
   operateGifts:function(e){
-    let data = { gifts: [], selectids: [], selectorderNums: [], totalprice: 0, totalnum:0},
+    let data = { 
+        gifts: [], 
+        selectids: [], 
+        selectorderNums: [], 
+        orderids:[],
+        totalprice: 0, totalnum:0
+      },
       type=e.currentTarget.dataset.type,
       gifts = this.data.gifts,
       url;
@@ -129,9 +137,10 @@ Page({
       if (gifts[i].selected){
         data.gifts.push(gifts[i]);
         data.selectids.push(gifts[i].id);
+        data.orderids.push(gifts[i].order_id);
         data.selectorderNums.push(gifts[i].choosenum);
-        data.totalprice += gifts[i].price * gifts[i].choosenum;
-        data.totalnum += gifts[i].choosenum;
+        data.totalprice += Number(gifts[i].price) * Number(gifts[i].choosenum);
+        data.totalnum += Number(gifts[i].choosenum);
       }
     }
     wx.setStorage({
@@ -146,7 +155,7 @@ Page({
         }else if(type==2){
           url = "/pages/discount/discount"
         }else if(type==3){
-          url="/pages/index/index"
+          url="/pages/sendagain/sendagain"
         }
         wx.navigateTo({
           url: url,
@@ -164,23 +173,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getgiftlist();
-    let uid=2;
-    var data=new Date();
-    console.log(data)
+    app.islogin();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getgiftlist();
     this.data.checkAllStatus=true;
     this.checkAll();
   },
@@ -189,7 +196,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**

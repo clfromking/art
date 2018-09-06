@@ -13,7 +13,7 @@
 </view>
 <!-- 导航栏 -->
 <view class="lq-nav">
-  <navigator class="n-li" url='/pages/mygifts/mygifts?type=0'>我收到的<text>{{orderNums.receive}}</text></navigator>
+  <navigator class="n-li" url='/pages/mygifts/mygifts?type=0&nav=0'>我收到的<text>{{orderNums.receive}}</text></navigator>
   <navigator class="n-li" url='/pages/mygifts/mygifts?type=1'>我送出的<text>{{orderNums.send}}</text></navigator>
   <navigator class="n-li" url='/pages/mygifts/mygifts?type=2'>我参与的<text>{{orderNums.join}}</text></navigator>
 </view>
@@ -47,8 +47,8 @@
         <view class='g-m-info'>
           <image lazy-load mode='aspectFit' src='{{item.image}}'></image>
           <view class='g-m-con'>
-            <view>{{item.name}}</view>
-            <text class='g-m-des'>{{item.describe}}</text>
+            <view class='ellipsis'>{{item.name}}</view>
+             <text class='g-m-des ellipsis'>{{item.title}}</text> 
             <view class='g-m-numbox'>
               <text>数量:</text>
               <view class='g-m-numedit fr'>

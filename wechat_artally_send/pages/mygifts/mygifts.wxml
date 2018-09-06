@@ -5,22 +5,28 @@
   <view class='g-nav'>
     <view wx:for="{{navlist[titleIndex]}}" wx:key="{{index}}" class="{{navIndex==index?'active':''}}" data-index="{{index}}" bindtap='chooseNav'>{{item}}</view>
   </view>
+  <!-- 没有礼物 -->
+  <view class='nothing' hidden='{{orderlist.length>0}}'>
+    <image src='../../img/follow_code.jpg'></image>
+    <text>暂时没订单</text>
+    <navigator open-type="switchTab" url='/pages/index/index'>返回送礼物</navigator>
+  </view>
   <!-- 单个 -->
-  <view class='g-li' wx:for="{{orderlist}}" wx:key="{{index}}">
+  <view class='g-li' wx:for="{{orderlist}}" wx:key="{{index}}" data-id="{{item.order_id}}" bindtap='goDetail'>
     <!-- 顶部订单编号 -->
     <view class='g-l-top'>
       <text>订单编号  {{item.number}}</text>
       <view class='g-l-icon' wx:if="{{titleIndex!=0}}"></view>
-      <text class='status'>{{item.waydate}}</text>
+      <text class='status'>{{item.statustext}}</text>
     </view>
     <!-- 中间详情 -->
     <view class='g-l-cen'>
       <view class='g-l-pic'>
-        <image mode='aspectFit' src="{{item.image}}"></image>
+        <image lazy-load mode='aspectFit' src="{{item.image}}"></image>
       </view>
       <!-- 基本样式 -->
       <view class='g-l-info' wx:if="{{titleIndex!=0 || (titleIndex==0&&navIndex==0)}}">
-        <view class='bold'>{{item.name}}</view>
+        <view class='bold ellipsis'>{{item.name}}</view>
         <view class='thin'>x{{item.num}}</view>
         <view class='bold'>{{filter.currency(item.price)}}</view>
         <view class='thin' wx:if="{{titleIndex==0&&navIndex==0}}">提货时间 {{item.updatetime}}</view> 
@@ -41,7 +47,7 @@
       <!-- 我收到的显示 -->
       <view wx:if="{{titleIndex==0}}">
         <view class='g-l-b-pic fl'>
-          <image mode='aspectFit' src="{{item.avatar}}"></image>
+          <image lazy-load mode='aspectFit' src="{{item.avatar}}"></image>
         </view>
         <view class='time'>{{item.createtime}} 收到 {{item.uname}} 的礼物</view>
       </view>
