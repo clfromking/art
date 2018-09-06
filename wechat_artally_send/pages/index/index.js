@@ -860,6 +860,7 @@ Page({
     var goods_nums = []
     var goods_id
     var goods_num
+    var winnum
     wx.showLoading({
       title: '生成订单',
       mask:true
@@ -873,10 +874,12 @@ Page({
     if (this.data.fullPlay == true && this.data.timesPlay == true) {
       condition = ''
       play = 1
+      winnum=0
     }
     else if (this.data.fullPlay == false && this.data.timesPlay == true) {
       condition = this.data.lotteryPersonInputVal
       play = 3
+      winnum = this.data.fullPersonInputVal
     }
     else if (this.data.fullPlay == true && this.data.timesPlay == false) {
       condition = this.data.select_times
@@ -888,9 +891,11 @@ Page({
       
       condition = a.join('-') + ' ' + condition[1]
       play = 2
+      winnum = this.data.fullPersonInputVal
+      // console.log(this.data.fullPersonInputVal)
     }
     var that=this
-    var postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'goods_id': goods_id, 'goods_num': goods_num }
+    var postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'goods_id': goods_id, 'goods_num': goods_num ,'winnum':winnum}
     app.post('order/order_add', postData).then((res) => {
       console.log(res)
       if (res.code == 200) {
@@ -957,10 +962,10 @@ Page({
 
   //支付
   Pay:function(order_id,num){
-    wx.navigateTo({
-      url: '../lotterydetail/lotterydetail?source=lottery&order_id=' + order_id,
-    })
-    return
+    // wx.navigateTo({
+    //   url: '../lotterydetail/lotterydetail?source=lottery&order_id=' + order_id,
+    // })
+    // return
     console.log(uid)
     console.log(openid)
     console.log(num)
