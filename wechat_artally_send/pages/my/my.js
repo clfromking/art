@@ -135,6 +135,13 @@ Page({
       url;
     for (let i = 0; i < gifts.length; i++) {
       if (gifts[i].selected){
+        if (type == 2 && gifts[i].uid== -1 ){
+          wx.showToast({
+            title: '官方发布的奖品不能折现',
+            icon:"none"
+          })
+          return
+        }
         data.gifts.push(gifts[i]);
         data.selectids.push(gifts[i].id);
         data.orderids.push(gifts[i].order_id);

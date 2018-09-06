@@ -22,18 +22,31 @@ Page({
       }
     })
   },
+  //提货页进来后选择地址
+  chooseaddress:function(e){
+    // 来源==1是提货页来
+    if(this.data.source!=1) return
+    let id = e.currentTarget.dataset.id,
+      index = e.currentTarget.dataset.index,
+      addresslist = this.data.addresslist;
+    if (addresslist[index].default == 1){
+      wx.navigateBack()
+      return
+    }
+    this.setDefault(false,id,index,true);
+  },
   // 设为默认地址
-  setDefault:function(e){
+  setDefault:function(e,id1,index1,flag){
     let that=this,
-      id = e.currentTarget.dataset.id,
-      index=e.currentTarget.dataset.index,
+      id = e ? e.currentTarget.dataset.id : id1,
+      index=e?e.currentTarget.dataset.index:index1,
       addresslist = this.data.addresslist;
     if (addresslist[index].default==1) return
     app.post('address/address_defaults',{id:id},1).then(res=>{
       // console.log(res)
       if(res.code==200){
-        // 来源==1是提货页来
-        if (that.data.source==1){
+        //flag表示提货页来需要返回
+        if (flag){
           wx.navigateBack()
           return
         }

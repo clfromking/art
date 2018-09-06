@@ -129,7 +129,7 @@ Page({
       openid: userInfo.openid
     }
     // console.log(postdata)
-    return
+    // return
     app.post('order/giftbox_go', postdata).then(res=>{
       console.log(res)
       if(res.code==200){

@@ -1,7 +1,7 @@
 <!--pages/address/address.wxml-->
 <view class='lq-address'>
   <view class='a-li' wx:for="{{addresslist}}" wx:key="{{item.id}}">
-    <view class='a-l-top'>
+    <view class='a-l-top' data-id="{{item.id}}" data-index="{{index}}" bindtap='chooseaddress'>
       <text class='a-l-name'>{{item.name}}</text>
       <text>{{item.phone}}</text>
       <text class='a-l-info'>{{item.province}}{{item.city}}{{item.area}}\n{{item.detail_address}}</text>
