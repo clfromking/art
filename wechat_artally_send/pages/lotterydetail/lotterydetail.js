@@ -107,7 +107,7 @@ Page({
         key: 'userInfo',
         success: function(resp) {
           var postData = { 'order_id': options.order_id, 'uid':resp.data.uid}
-          postData={'order_id':138,'uid':20}
+          // postData={'order_id':138,'uid':20}
           app.post('order/order_detail',postData).then((res) => {
             console.log(res)
             if(res.code==200){
