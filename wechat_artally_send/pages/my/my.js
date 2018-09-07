@@ -151,7 +151,7 @@ Page({
       }
     }
     wx.setStorage({
-      key: 'waitOperateGifts',
+      key: 'waitOperateGifts',
       data: data,
       success:function(){
         // console.log(data)

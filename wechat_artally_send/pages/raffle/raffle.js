@@ -42,7 +42,9 @@ Page({
     console.log(options)
     this.setData({
       order_id: options.order_id,
+      order_id:138,
       source: options.source,
+      inviter: options.inviter,
     })
     var that=this
     app.post('order/order_detail',{'order_id':options.order_id}).then((res)=>{
@@ -63,7 +65,7 @@ Page({
         }
         that.setData({
           rafflecondition: rafflecondition,
-          inviter: options.inviter,
+          
           backgroundimage
         })
       }

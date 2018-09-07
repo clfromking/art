@@ -1,4 +1,97 @@
-<!--pages/sendagain/sendagain.wxml-->
-<view class='lq-sendagain'>
+<image class="jw-index-banner" bindtap='bannerTap' data-go='{{banner_msgs.go}}' data-id='{{banner_msgs.id}}' data-go_id='{{banner_msgs.go_id}}' src="{{banner_msgs.avatar}}"></image>
+<view class='jw-index-body' >
+  <view class='jw-gifts-view' hidden='{{!gift_lists}}'>
+    <view class='jw-gift-lists' wx:for="{{gift_lists}}" data-id='{{item.id}}' wx:key="item">
+      <view class='jw-gifts-main-view'>
+        <view class='jw-gifts-img-view' >
+          <image class='jw-gifts-img' mode="aspectFit" src="{{item.image}}"></image>
+        </view>
+        <view class='jw-gifts-msg-view'>
+          <text class='jw-gifts-msg-title ellipsis'>{{item.name}}</text>
+          <text class='jw-gifts-msg-alt ellipsis'>{{item.describe}}</text>
+          <text class='jw-gifts-msg-stock'>{{item.choosenum}}</text>
+          <view class='clear' style='margin-top: 36rpx'>
+            <text class='jw-gifts-msg-univalent'>￥{{item.price}}</text>
+            
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='jw-ishave-view clear'>
+      <text class='jw-total-gifts'>共{{gifts_total}}件礼物</text>
+    </view>
+  </view>
+
+  <view class='jw-select-type' bindtap='showOptionsSheet'>
+    <image src='../imgs/home_way_icon_gift.png' class='jw-oneToone-view-icon'></image>
+    <text class='jw-gift-options'>{{optionsText}}</text>
+    <view class='jw-oneToone-view'>
+      <image src='../imgs/all_icon_choice.png' class='jw-one-choice jw-icon-choice'></image>
+      <!-- <text class='jw-oneToone-view-text'>{{selectSheetContent}}</text> -->
+      <text class='jw-oneToone-view-text'>更改玩法</text>
+    </view>
+    <view class='jw-times-view'>
+
+    </view>
+    <view class='jw-persons-view'>
+
+    </view>
+  </view>
+  <view class='jw-set-persons' hidden='{{fullPlay}}'>
+    <view class='jw-set-Opersons'>
+      <text class='jw-sets-title'>开奖人数</text>
+      <text class='jw-sets-other'>人</text>
+      <input placeholder='填写人数' bindinput='lotteryPersonInput' bindblur='lotteryPersonBlur' value='{{lotteryPersonInputVal}}'  class='jw-sets-input' type='number'></input>
+      
+    </view>
+    <view class='jw-set-Gpersons'>
+      <text class='jw-sets-title'>中奖人数</text>
+      <text class='jw-sets-other'>人</text>
+      <input placeholder='填写人数' value='{{fullPersonInputVal}}' bindblur='fullPersonInputBlur' class='jw-sets-input' type='number'></input>
+      
+    </view>
+  </view>
+  <view class='jw-set-times'  hidden='{{timesPlay}}'>
+    <view class='jw-set-Otimes'>
+      <picker mode="multiSelector" class='jw-sets-title' bindchange="colConfirm" bindcolumnchange="colChange" value="{{index}}" range="{{times_array}}">
+    <view class="picker">
+      <!-- 当前选择：{{times_array[0][index[0]]}}{{times_array[1][index[1]]}}{{times_array[2][index[2]]}} -->
+      {{select_times}}
+      <image src='../imgs/all_icon_choice.png' class='jw-select-times-icon'></image>
+    </view>
+    
+  </picker>
+      
+    </view>
+    <view class='jw-set-Gpersons'>
+      <text class='jw-sets-title'>中奖人数</text>
+      <text class='jw-sets-other'>人</text>
+      <input placeholder='填写人数' value='{{fullPersonInputVal}}' bindblur='fullPersonInputBlur' class='jw-sets-input' type='number'></input>
+    </view>
+  </view>
+  <view class='jw-bless-view'>
+    <text class='jw-bless-hint'>送上心意，撰写祝福语</text>
+    <picker class='jw-choose-bless' mode='selector' range="{{bless_arr}}" value='{{bless_index}}' bindchange='blessConfirm'>
+      <view>选择祝福语</view>
+    </picker>
+  </view>
   
+  <input class='jw-bless-input' bindfocus='blessFocus' bindinput='blessInput' bindblur='blessBlur'  maxlength='10' value='{{bless_value}}'></input>
+  <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view>
+  <button bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
 </view>
+
+
+
+
+
+<action-sheet catchtouchmove='preventMove' hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
+    <block wx:for="{{actionSheetItems}}" wx:key="item"> 
+        <action-sheet-item class='clear' data-id="{{index}}" bindtap="changeSheetText">
+          <text class='actionLeft'>{{item.title}} </text>
+          <text class='actionRight'> {{item.alt}}</text>
+        </action-sheet-item>
+    </block>
+    <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet>
+

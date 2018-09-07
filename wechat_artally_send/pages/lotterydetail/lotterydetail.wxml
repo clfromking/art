@@ -4,7 +4,7 @@
   <view class='l-statusbox'>
     <view class='tip'>{{title_text}}</view>
     <view>{{gift_detail.condition}}</view>
-    <view hidden='{{!isoneTone}}' style='text-decoration:underline'>请前往礼物篮查看</view>
+    <view hidden='{{!ishave}}' bindtap='goMy' style='text-decoration:underline'>请前往礼物篮查看</view>
     <view>{{ishowodds==true?"":other_text}}</view>
   </view>
   <!-- 送礼人信息区 -->
@@ -61,10 +61,13 @@
     <view class='l-w-tit'>中奖人</view>
     <view class='l-w-li' wx:for='{{winList}}' wx:key='{{item}}'>
       <view class='l-w-headimg' >
-        <image src="{{item.avatar}}"></image>
+        <image src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
       </view>
       <view class='l-w-name ellipsis'>{{item.uname}}</view>
-      <view style='width:345rpx' class='ellipsis'>{{item.name}}</view>
+      <view style='width:345rpx;text-align:right'>
+        <text style='display:inline-block;max-width:250rpx' class='ellipsis'>{{item.name}}</text>
+        <text style='vertical-align:top;display:inline-block'>x{{item.num}}</text>
+      </view>
     </view>
   </view>
   <!-- 按钮区 -->

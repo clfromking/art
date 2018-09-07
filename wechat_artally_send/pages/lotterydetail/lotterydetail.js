@@ -25,6 +25,7 @@ Page({
     ishowSpebtn:false,
     ishowodds:false,
     winList:[],
+    ishave:false
   },
   // 轮播改变事件
   swiperchange:function(e){
@@ -106,7 +107,7 @@ Page({
         key: 'userInfo',
         success: function(resp) {
           var postData = { 'order_id': options.order_id, 'uid':resp.data.uid}
-          // postData={'order_id':9,'uid':20}
+          postData={'order_id':138,'uid':20}
           app.post('order/order_detail',postData).then((res) => {
             console.log(res)
             if(res.code==200){
@@ -115,15 +116,16 @@ Page({
               var ishowSpebtn=false
               var ishowodds=false
               var isfinish=false
+              var ishave=false
               var other_text=that.data.other_text
               if (Number(gift_detail.giftbagdata)==1){
-                title_text='抽奖成功，等待开奖'
+                title_text='请等待，成功参与抽奖'
               }
               else if (Number(gift_detail.giftbagdata)==2){
-                title_text ='很遗憾，您没有抽中大奖'
+                title_text ='很遗憾，您未抽中大奖'
                 switch(Number(gift_detail.status)){
                   case 0:
-                    title_text='很遗憾，礼物已失效'
+                    title_text='很遗憾，礼物已经过期'
                     isfinish=false
                     ishowodds=true
                     ishowSpebtn = true
@@ -131,10 +133,11 @@ Page({
                   case 1:
                     break;
                   case 2:
-                    title_text = '恭喜您，您抽中大奖'
+                    title_text = '恭喜您，您已抽中大奖'
                     other_text=''
                     ishowSpebtn=true
                     isfinish = true
+                    ishave=true
                     break;
                   case 3:
                     title_text = '很遗憾，您没有抽中大奖'
@@ -145,7 +148,10 @@ Page({
                 }
               }
               else if (Number(gift_detail.giftbagdata)==3){
-                title_text='该礼物红包已过期'
+                title_text ='很遗憾，礼物已经过期'
+                ishowodds=true
+                isfinish=false
+                ishowSpebtn=true
               }
 
               switch (Number(gift_detail.gameplaydata)) {
@@ -157,14 +163,23 @@ Page({
                   break;
                 default:
                   gift_detail.condition = '礼物红包'
-                  title_text='礼物已经领取，好开心'
-                  ishowSpebtn=true
-                  ishowodds=true
+                  if (Number(gift_detail.status)==0){
+                    title_text ='很遗憾，礼物已经抢光'
+                    // ishowSpebtn = true
+                  }
+                  else if (Number(gift_detail.status) == 2){
+                    title_text = '礼物已经领取，好开心'
+                    ishowSpebtn = true
+                    ishowodds = true
+                    ishave = true
+                  }
+                 
                   break;
               }
               if(!gift_detail.wish){
                 gift_detail.wish=''
               }
+              
               gift_detail.inviter_count = Number(gift_detail.inviter_count)
               console.log(gift_detail)
               that.setData({
@@ -177,7 +192,8 @@ Page({
                 ishowodds,
                 isfinish,
                 other_text,
-                winList:gift_detail.win
+                winList:gift_detail.win||'',
+                ishave
               })
 
             }
@@ -274,7 +290,14 @@ Page({
       url: '../lottery/lottery',
     })
   },
+  
 
+  //去礼物栏查看
+  goMy:function(){
+    wx.switchTab({
+      url: '../my/my',
+    })
+  },
   
   a:function(){}
 })
