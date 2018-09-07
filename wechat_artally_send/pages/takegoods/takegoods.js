@@ -12,8 +12,7 @@ Page({
       selectids:[],
       orderids:[],
       selectorderNums:[]
-    },
-    disabled:false
+    }
   },
   // 获取地址
   getaddress:function(){
@@ -36,7 +35,6 @@ Page({
   },
   // 确认提货按钮
   takegoodsok:function(){
-    if (this.data.disabled) return
     let that = this;
     if (!that.data.addressinfo.id){
       wx.showToast({
@@ -46,8 +44,9 @@ Page({
       })
       return
     }
-    that.setData({
-      disabled: true
+    wx.showLoading({
+      title: '提货中',
+      mask:true
     })
     let data = that.data.data;
     let postdata={
@@ -60,24 +59,20 @@ Page({
     // console.log(postdata)
     app.post('order/giftbox_go', postdata).then(res=>{
       // console.log(res)
+      wx.hideLoading();
       if(res.code==200){
         wx.removeStorageSync('waitOperateGifts')
         wx.redirectTo({
           url: '/pages/mygifts/mygifts?type=0&nav=0',
         })
       }else{
-        that.setData({
-          disabled: false
-        })
         wx.showToast({
           title: res.msg,
           icon:"none"
         })      
       }
     }).catch(error=>{
-      that.setData({
-        disabled: false
-      })
+      wx.hideLoading();
     })
   },
   /**

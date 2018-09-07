@@ -126,9 +126,24 @@
 .lq-discount .d-b-tip{
   font-size: 24rpx;
 	color: #ffffff;
-  background-color: #e16666;
-  line-height: 40rpx;
   padding: 0 30rpx;
+  background:  #e16666;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+.lq-discount .d-b-tip .db-icon{
+  width: 20rpx;
+  height: 20rpx;
+  font-size: 24rpx;
+}
+.lq-discount .d-b-word{
+  font-size: 24rpx;
+	color: #000;
+  background-color: #fff;
+  line-height: 2;
+  padding:30rpx;
+  border-bottom: 1rpx solid #e5e5e5;
 }
 .lq-discount .d-b-main{
   font-size: 26rpx;

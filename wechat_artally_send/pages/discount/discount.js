@@ -24,7 +24,13 @@ Page({
       canclick: true,
       time: 60
     },
-    disabled:false
+    ishowtip:false
+  },
+  //展开关闭折现须知
+  toggletip:function(){
+    this.setData({
+      ishowtip: !this.data.ishowtip
+    })
   },
   // 输入框失焦时绑定数据
   bindinputblur: function (e) {
@@ -96,7 +102,6 @@ Page({
   },
   // 确认折现按钮
   discountok:function(){
-    if (this.data.disabled) return
     let that=this,
       temp=this.data.temp,
       data = this.data.data;
@@ -114,8 +119,9 @@ Page({
       })
       return
     }
-    that.setData({
-      disabled: true
+    wx.showLoading({
+      title: '折现中',
+      mask: true
     })
     let userInfo = wx.getStorageSync('userInfo');
     let postdata = {
@@ -131,25 +137,21 @@ Page({
     // console.log(postdata)
     // return
     app.post('order/giftbox_go', postdata).then(res=>{
-      console.log(res)
+      // console.log(res)
+      wx.hideLoading();
       if(res.code==200){
         wx.removeStorageSync("waitOperateGifts");
         wx.redirectTo({
           url: '/pages/mygifts/mygifts?type=0&nav=1',
         })
       }else{
-        that.setData({
-          disabled: false
-        })
         wx.showToast({
           title: res.msg,
           icon:"none"
         })
       }
     }).catch(error => {
-      that.setData({
-        disabled: false
-      })
+      wx.hideLoading();
     })
   },
   /**

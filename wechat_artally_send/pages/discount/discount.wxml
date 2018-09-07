@@ -61,7 +61,13 @@
   </view>
   <!-- 底部栏 -->
   <view class='d-botbox'>
-    <view class='d-b-tip'>请仔细阅读《折现/退款须知》</view>
+    <view class='d-b-tip' bindtap='toggletip'>
+      <text>请仔细阅读《折现/退款须知》</text>
+      <image class='db-icon' src='https://pic.forunart.com/artgive/wx/all_icon_choice.png'></image>
+    </view>
+    <view class='d-b-word' hidden='{{!ishowtip}}'>
+      每个微信账户每日折现/退款上限为10笔，总金额不超过20000元。多笔折现/退款建议使用多选按钮，进行批量操作。
+    </view>
     <view class='d-b-main clear'>
       <view class='d-b-left'>
         <text>合计：{{data.totalprice*(100-poundage)/100}} 元</text>

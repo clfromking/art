@@ -13,7 +13,7 @@
 </view>
 <!-- 导航栏 -->
 <view class="lq-nav">
-  <navigator class="n-li" url='/pages/mygifts/mygifts?type=0&nav=0'>我收到的<text>{{orderNums.receive}}</text></navigator>
+  <navigator class="n-li" url='/pages/mygifts/mygifts?type=0&nav=0'>提货/折现记录<text>{{orderNums.receive}}</text></navigator>
   <navigator class="n-li" url='/pages/mygifts/mygifts?type=1'>我送出的<text>{{orderNums.send}}</text></navigator>
   <navigator class="n-li" url='/pages/mygifts/mygifts?type=2'>我参与的<text>{{orderNums.join}}</text></navigator>
 </view>

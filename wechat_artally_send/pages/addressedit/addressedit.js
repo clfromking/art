@@ -18,8 +18,7 @@ Page({
       default:false
     },
     olddata:{},
-    region: [],
-    disabled:false
+    region: []
   },
   // 输入框失焦设置值
   blurSetInput:function(e){
@@ -65,7 +64,6 @@ Page({
   },
   // 保存按钮
   saveData:function(){
-    if (this.data.disabled) return
     let that=this,
       type= this.data.type,
       temp = this.data.temp,
@@ -97,28 +95,25 @@ Page({
       })
       return
     }
-    that.setData({
-      disabled:true
+    wx.showLoading({
+      title: '保存中',
+      mask: true
     })
     if(type==1){
       temp.uid=2;
       app.post('address/address_add',temp,1).then(res=>{
         // console.log(res)
+        wx.hideLoading();
         if(res.code==200){
           wx.navigateBack();
         }else{
-          that.setData({
-            disabled: true
-          })
           wx.showToast({
             title: res.msg,
             icon:'none'
           })
         }
       }).catch(error => {
-        that.setData({
-          disabled: true
-        })
+        wx.hideLoading();
       })
     } else if (type == 2) {
       if (JSON.stringify(temp) == JSON.stringify(olddata)){
@@ -127,21 +122,17 @@ Page({
       }
       app.post('address/address_edit', temp,1).then(res => {
         // console.log(res)
+        wx.hideLoading();
         if (res.code == 200) {
           wx.navigateBack()
         } else {
-          that.setData({
-            disabled: true
-          })
           wx.showToast({
             title: res.msg,
             icon: 'none'
           })
         }
       }).catch(error=>{
-        that.setData({
-          disabled: true
-        })
+        wx.hideLoading();
       })
     }
   },

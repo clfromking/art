@@ -95,6 +95,10 @@ Page({
       })
       return
     }
+    wx.showLoading({
+      title: '绑定中',
+      mask: true
+    })
     // console.log(temp)
     let data={
       uid:2,
@@ -103,7 +107,8 @@ Page({
       models:6
     }
     app.post('user/user_phone_bing', data,1).then(res => {
-      console.log(res)
+      // console.log(res)
+      wx.hideLoading();
       if (res.code === 200) {
         let userInfo=wx.getStorageSync("userInfo");
         userInfo.mobile=temp.phone;
@@ -115,7 +120,9 @@ Page({
           icon:"none"
         })
       }  
-    }).catch(error=>{console.log(error)})
+    }).catch(error => { 
+      wx.hideLoading();
+    })
   },
   /**
    * 生命周期函数--监听页面加载

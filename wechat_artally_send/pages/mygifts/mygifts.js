@@ -6,14 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    titles: ['我收到的', '我送出的', '我参与的'],
+    titles: ['提货/折现记录', '我送出的', '我参与的'],
     titleIndex: 0,
     titleUrls: ['order/mygifts_receive', 'order/mygifts_send','order/mygifts_participation'],
     posturl: '',
     navlist:[
       ['已提货', '已折现'],
       ['礼物红包', '定时红包', '人满开奖'],
-      ['待开奖','已中奖','未中奖'],
+      ['礼物红包', '定时红包','人满开奖'],
     ],
     navIndex: 0,
     orderlist:[]
