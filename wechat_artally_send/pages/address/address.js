@@ -76,7 +76,7 @@ Page({
       addresslist = this.data.addresslist;
     wx.showModal({
       title: '提示',
-      content: '您确认要删除该地址吗?',
+      content: '您确认要删除该地址吗?',
       success: function (res) {
         if (res.confirm) {
           app.post('address/address_del',{uid:2,id:id},1).then(res=>{

@@ -9,7 +9,7 @@
     <view class='a-l-editbox clear'>
       <view class="fl {{item.default==1?'active':''}}" data-id="{{item.id}}" data-index="{{index}}" bindtap='setDefault'>
         <view class='a-l-icon'></view>
-        <text>设为默认地址</text>
+        <text>设为默认地址</text>
       </view>
       <view class='a-l-del fr' data-id="{{item.id}}" data-index="{{index}}" bindtap='deladd'>删除</view>
       <view class='a-l-edit fr' data-id="{{item.id}}" data-index="{{index}}" bindtap="editadd">编辑</view>
@@ -19,5 +19,5 @@
     <image></image>
     <view>您暂时还没有收获地址</view>
   </view>
-  <navigator class='newaddress' url='/pages/addressedit/addressedit?type=1'><button>新增地址</button></navigator>
+  <navigator class='newaddress' url='/pages/addressedit/addressedit?type=1'><button>新增地址</button></navigator>
 </view>

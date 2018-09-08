@@ -798,6 +798,12 @@ Page({
           console.log(res)
           if (res.code == 200) {
             console.log(res)
+            wx.hideLoading()
+            isinit = true
+            
+            wx.redirectTo({
+              url: '../lotterydetail/lotterydetail?source=index&order_id=' +res.data.order_id,
+            })
             // that.Pay(res.data.order_id, res.data.number)
           }
           else if (res.code == 600) {
@@ -857,12 +863,7 @@ Page({
           paySign: res.data.paySign,
           success: function (res) {
             console.log(res)
-            wx.hideLoading()
-            isinit = true
-
-            wx.navigateTo({
-              url: '../lotterydetail/lotterydetail?source=index&order_id=' + order_id,
-            })
+            
           },
           fail: function (res) {
             console.log(res)

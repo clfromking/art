@@ -66,7 +66,7 @@
       <view class='g-callphone' style="bottom:{{operation?'110rpx':''}}" bindtap='callphone'></view>
       <view class='g-operate-box' hidden='{{!operation}}'>
         <view data-type='1' bindtap='operateGifts'>提货</view>
-        <view data-type='2' bindtap='operateGifts'>折现</view>
+        <view data-type='2' bindtap='operateGifts'>折现</view>
         <view data-type='3' bindtap='operateGifts'>转赠</view>
       </view>
     </view>

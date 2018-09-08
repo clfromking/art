@@ -38,7 +38,7 @@ Page({
     let that = this;
     if (!that.data.addressinfo.id){
       wx.showToast({
-        title: '请添加地址',
+        title: '请添加地址',
         icon:'none',
         duration: 2000
       })
@@ -61,7 +61,7 @@ Page({
       // console.log(res)
       wx.hideLoading();
       if(res.code==200){
-        wx.removeStorageSync('waitOperateGifts')
+        wx.removeStorageSync('waitOperateGifts')
         wx.redirectTo({
           url: '/pages/mygifts/mygifts?type=0&nav=0',
         })

@@ -78,19 +78,19 @@ Page({
       return
     } else if (!/^1[35678][0-9]{9}$/.test(temp.phone)){
       wx.showToast({
-        title: '联系电话格式不正确',
+        title: '联系电话格式不正确',
         icon: "none"
       })
       return
     } else if (!temp.province || !temp.city || !temp.area){
       wx.showToast({
-        title: '请填写完整的地区',
+        title: '请填写完整的地区',
         icon: "none"
       })
       return
     } else if (!temp.detail_address){
       wx.showToast({
-        title: '详细地址不能为空',
+        title: '详细地址不能为空',
         icon: "none"
       })
       return
@@ -168,9 +168,9 @@ Page({
         }
       })
     } else if (options.type == 2){
-      // console.log('编辑')
+      // console.log('编辑')
       wx.setNavigationBarTitle({
-        title: '编辑收货地址'
+        title: '编辑收货地址'
       })
       temp =olddata=wx.getStorageSync('addressedit');
       // console.log(temp)

@@ -48,7 +48,7 @@ Page({
     if (!codeObj.canclick) return
     if (temp.phone =="暂未绑定") {
       wx.showToast({
-        title: '请先绑定手机号',
+        title: '请先绑定手机号',
         icon: 'none'
       })
       return
@@ -107,7 +107,7 @@ Page({
       data = this.data.data;
     if(!temp.phone){
       wx.showToast({
-        title: '请先绑定手机号',
+        title: '请先绑定手机号',
         icon: 'none'
       })
       return
@@ -140,7 +140,7 @@ Page({
       // console.log(res)
       wx.hideLoading();
       if(res.code==200){
-        wx.removeStorageSync("waitOperateGifts");
+        wx.removeStorageSync("waitOperateGifts");
         wx.redirectTo({
           url: '/pages/mygifts/mygifts?type=0&nav=1',
         })

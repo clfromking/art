@@ -48,13 +48,13 @@
       </view>
     </view>
     <view class='d-o-li' hidden="{{temp.phone!='暂未绑定'}}">
-      <view>安全验证：为确保折现交易安全, <navigator class="bingphone" url="/pages/bindphone/bindphone">请先绑定您的手机号</navigator></view>
+      <view>安全验证：为确保折现交易安全, <navigator class="bingphone" url="/pages/bindphone/bindphone">请先绑定您的手机号</navigator></view>
     </view>
     <view class='d-o-li'>
       <text>手机号：{{temp.phone}}</text>
     </view>
     <view class='d-o-li code'>
-      <text>验证码：</text>
+      <text>验证码：</text>
       <input type='number' placeholder='请输入验证码' data-name="temp.code" value='{{temp.code}}' bindblur="bindinputblur"></input>
       <view class="b-getcode {{codeObj.canclick?'':'active'}}" bindtap='getcode'>{{codeObj.text}}</view>
     </view>
