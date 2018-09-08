@@ -12,7 +12,7 @@
     <navigator open-type="switchTab" url='/pages/index/index'>返回送礼物</navigator>
   </view>
   <!-- 单个 -->
-  <view class='g-li' wx:for="{{orderlist}}" wx:key="{{index}}" data-id="{{item.order_id}}" bindtap='goDetail'>
+  <view class='g-li' wx:for="{{orderlist}}" wx:key="{{index}}" data-order_id="{{item.id}}" bindtap='goDetail'>
     <!-- 顶部订单编号 -->
     <view class='g-l-top'>
       <text>订单编号  {{item.number}}</text>

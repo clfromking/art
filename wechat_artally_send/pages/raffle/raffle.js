@@ -11,6 +11,7 @@ Page({
     inviter:0,
     source:'',
     backgroundimage:'https://pic.forunart.com/artgive/wx/gift_bg_img_2.png',
+    isshowWhite:true
   },
 
   openRaffle:function(){
@@ -42,7 +43,7 @@ Page({
     console.log(options)
     this.setData({
       order_id: options.order_id,
-      // order_id:138,
+      // order_id:149,
       source: options.source,
       inviter: options.inviter,
     })
@@ -65,7 +66,6 @@ Page({
         }
         that.setData({
           rafflecondition: rafflecondition,
-          
           backgroundimage
         })
       }
@@ -85,6 +85,7 @@ Page({
    */
   onShow: function () {
     var that=this
+    
     wx.getStorage({
       key: 'userInfo',
       success: function(res) {
@@ -92,8 +93,15 @@ Page({
         console.log(postData)
         app.post('order/client_exist', postData).then((res) => {
           if(res.data==true){
+            console.log(that.data.isshowWhite)
             wx.redirectTo({
               url: '../lotterydetail/lotterydetail?source='+that.data.source+'&order_id=' + that.data.order_id,
+            })
+          }
+          else{
+            console.log(11)
+            that.setData({
+              isshowWhite:false
             })
           }
 
@@ -102,7 +110,10 @@ Page({
         })
       },
       fail:function(){
-
+        console.log(11)
+        that.setData({
+          isshowWhite: false
+        })
       }
     })
   },
@@ -111,13 +122,18 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+    this.setData({
+      isshowWhite:true
+    })
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    this.setData({
+      isshowWhite: true
+    })
   },
 
   /**

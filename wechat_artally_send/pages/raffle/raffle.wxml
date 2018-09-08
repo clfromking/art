@@ -8,3 +8,7 @@
 </view>
 <text class='jw-raffle-btn' bindtap='openRaffle'>
 </text>
+
+<view class='whiteZ' hidden='{{!isshowWhite}}'>
+
+</view>
