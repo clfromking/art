@@ -17,7 +17,7 @@ Page({
     }
   },
   // 输入框失焦时绑定数据
-  bindinputblur:function(e){
+  bindinput:function(e){
     let data = e.detail.value,
       name = e.currentTarget.dataset.name;
     this.setData({

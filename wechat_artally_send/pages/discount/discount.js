@@ -159,7 +159,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this, poundage,
-      data = wx.getStorageSync('waitOperateGifts');
+      data = wx.getStorageSync('waitOperateGifts');
     app.post('order/fee',{}).then(res=>{
       if(res.code==200){
         poundage = res.data;

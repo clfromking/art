@@ -183,7 +183,6 @@ image{
   position: relative;
 }
 .g-m-item .g-m-con .g-m-des{
-  display: inline-block;
   font-size: 22rpx;
 	font-weight: 500;
 	color: #999999;

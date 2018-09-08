@@ -43,17 +43,23 @@
       </view>
     </view>
     <!-- 底部送礼人 -->
-    <view class='g-l-bot clear' wx:if="{{titleIndex!=1}}">
-      <!-- 我收到的显示 -->
+    <view class='g-l-bot clear'>
+      <!-- 我收到的,显示 -->
       <view wx:if="{{titleIndex==0}}">
         <view class='g-l-b-pic fl'>
           <image lazy-load mode='aspectFit' src="{{item.avatar}}"></image>
         </view>
-        <view class='time'>{{item.createtime}} 收到 {{item.uname}} 的礼物</view>
+        <view class='time'>{{item.updatetime}} 收到 {{item.uname}} 的礼物</view>
       </view>
-      <!-- 我参与的显示 -->
-      <view wx:if="{{titleIndex==2}}">
-        <view class='time'>{{item.uname}}送出 {{item.condition}} 开奖 </view>
+      <!-- 我送出的和我参与的,显示 -->
+      <view wx:if="{{titleIndex!=0}}">
+        <view class='g-l-b-pic fl' wx:if="{{titleIndex==2}}">
+          <image lazy-load mode='aspectFit' src="{{item.avatar}}"></image>
+        </view>
+        <view class='fl' wx:if="{{titleIndex==2}}">{{item.uname}} </view>
+        <view class='time' wx:if="{{navIndex==0}}">{{item.createtime}} 送出</view>
+        <view class='time' wx:if="{{navIndex==1}}">{{item.condition}} 开奖</view>
+        <view class='time' wx:if="{{navIndex==2}}">满 {{item.condition}} 人开奖</view>
       </view>
     </view>
   </view>

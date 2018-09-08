@@ -515,7 +515,7 @@ Page({
     wx.getStorage({
       key: 'waitOperateGifts',
       success: function (res) {
-        console.log(res)
+        // console.log(res)
         gift_lists = res.data.gifts
         waitOperateGifts=res.data
         var gifts_total = 0
