@@ -218,3 +218,21 @@ action-sheet-item{
   background: #fff;
   border-radius: none
 }
+
+.l-btns{
+  width: 100%;
+  position: fixed;
+  bottom: 20rpx;
+  left: 0;
+  box-sizing: border-box
+}
+.l-btns button{
+  height: 80rpx;
+	border-radius: 40rpx;
+	background-color: #da0202;
+	box-shadow: 0 2rpx 15rpx 0 rgba(218, 2, 2, 0.66);
+  font-size: 28rpx;
+	font-weight: 500;
+	color: #fff;
+  line-height: 80rpx
+}

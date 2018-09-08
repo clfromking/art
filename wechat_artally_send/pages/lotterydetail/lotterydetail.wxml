@@ -48,7 +48,7 @@
     <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/mall_banner_img.png"></image>
   </view>
   <!-- 参与人数区 -->
-  <view class='l-joinbox' hidden='{{ishowodds}}'>
+  <view class='l-joinbox' hidden='{{ishowodds1}}'>
     <navigator class='l-j-num' url='/pages/joinpeople/joinpeople'>已有 <text>{{heads.length}}</text> 人参与</navigator>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{heads}}" wx:key="{{index}}">
@@ -58,7 +58,7 @@
   </view>
   <!-- 中奖人区 -->
   <view class='l-winners' hidden='{{!isfinish}}'>
-    <view class='l-w-tit'>中奖人</view>
+    <view class='l-w-tit'>{{isreceivePerson==true?'领取人':'中奖人'}}</view>
     <view class='l-w-li' wx:for='{{winList}}' wx:key='{{item}}'>
       <view class='l-w-headimg' >
         <image src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
@@ -71,11 +71,16 @@
     </view>
   </view>
   <!-- 按钮区 -->
-  <view class='l-bths'>
-    <button hidden='{{ishowSpebtn}}'  class='invite' bindtap='share'>邀请好友抽奖</button>
+  <view class='l-bths' hidden='{{ismy}}'>
+    <button hidden='{{ishowSpebtn}}'  class='invite' bindtap='share'>{{ismy2haveBtntext}}</button>
     <button hidden='{{ishowSpebtn}}'  bindtap='joinMore'>参与更多抽奖</button>
     <button hidden='{{!ishowSpebtn}}' class='invite' bindtap='goIndex'>我也要送礼物</button>
     <button hidden='{{!ishowSpebtn}}' bindtap='joinMore'>参与更多抽奖</button>
+    
+  </view>
+  <view class='l-btns' hidden='{{!ismy}}'>
+    <button  class='invite' hidden='{{ismyOneContinue}}' bindtap='share' style='display:block'>发送给好友</button>
+    <button  class='invite' hidden='{{!ismyOneContinue}}' bindtap='goIndex' style='display:block'>{{ismyBtntext}}</button>
   </view>
   <!-- 分享选项 -->
   <action-sheet catchtouchmove='a' hidden="{{notShare}}">

@@ -42,7 +42,7 @@ Page({
     console.log(options)
     this.setData({
       order_id: options.order_id,
-      // order_id:138,
+      // order_id:149,
       source: options.source,
       inviter: options.inviter,
     })

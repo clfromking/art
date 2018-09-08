@@ -6,14 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    titles: ['提货/折现记录', '我送出的', '我参与的'],
+    titles: ['提货/折现记录', '我送出的', '我参与的'],
     titleIndex: 0,
     titleUrls: ['order/mygifts_receive', 'order/mygifts_send','order/mygifts_participation'],
     posturl: '',
     navlist:[
       ['已提货', '已折现'],
-      ['礼物红包', '定时红包', '人满开奖'],
-      ['礼物红包', '定时红包','人满开奖'],
+      ['礼物红包', '定时红包', '人满开奖'],
+      ['礼物红包', '定时红包','人满开奖'],
     ],
     navIndex: 0,
     orderlist:[]
@@ -52,9 +52,9 @@ Page({
   // 进入详情
   goDetail:function(e){
     if (this.data.titleIndex==0) return
-    let id=e.currentTarget.dataset.id;
+    let order_id = e.currentTarget.dataset.order_id;
     wx.navigateTo({
-      url: '/pages/lotterydetail/lotterydetail?source=my&id='+id,
+      url: '/pages/lotterydetail/lotterydetail?source=my&type='+this.data.titleIndex+'&order_id=' + order_id,
     })
   },
   /**
