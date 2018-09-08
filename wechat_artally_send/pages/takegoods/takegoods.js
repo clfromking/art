@@ -80,7 +80,7 @@ Page({
    */
   onLoad: function (options) {
     let that=this,
-      data = wx.getStorageSync('waitOperateGifts');
+      data = wx.getStorageSync('waitOperateGifts');
     that.setData({
       data:data
     })
