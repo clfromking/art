@@ -49,9 +49,9 @@ Page({
       })
       setTimeout(function () {
         that.clickCalculation(e)
-      }, 500)
+      }, 350)
     } else {
-      if (curTime - lastTime < 500) {
+      if (curTime - lastTime < 350) {
         this.setData({
           ClickNum: 1
         })

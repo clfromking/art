@@ -90,3 +90,8 @@
     <action-sheet-cancel bindtap="share">取消</action-sheet-cancel>
   </action-sheet>
 </view>
+
+
+<view class='whiteZ' hidden='{{!isshowWhite}}'>
+
+</view>

@@ -31,7 +31,8 @@ Page({
     ismyOneContinue:false,
     ismyBtntext:'还要送礼物',
     ismy2haveBtntext:'邀请好友抽奖',
-    isreceivePerson:false
+    isreceivePerson:false,
+    isshowWhite:true
   },
   // 轮播改变事件
   swiperchange:function(e){
@@ -76,6 +77,7 @@ Page({
 
     }
     var that=this
+    var isshowWhite = false
     var title_text='礼物已经准备完毕，送出去吧'
     console.log(options)
     // options.source='lottery'
@@ -102,7 +104,8 @@ Page({
             gift_detail: gift_detail,
             gifts: gift_detail.gifts,
             title_text,
-            uid: uid
+            uid: uid,
+            isshowWhite
           })
         }
       }).catch((error) => {
@@ -203,7 +206,8 @@ Page({
             isfinish,
             other_text,
             winList: gift_detail.win || '',
-            ishave
+            ishave,
+            isshowWhite
           })
 
         }
@@ -309,7 +313,8 @@ Page({
               isfinish,
               ismy,
               ismyOneContinue,
-              heads: gift_detail.client
+              heads: gift_detail.client,
+              isshowWhite
             })
             
           }
@@ -430,7 +435,8 @@ Page({
               ishave,
               other_text,
               ismy2haveBtntext,
-              ishowSpebtn
+              ishowSpebtn,
+              isshowWhite
             })
 
           }
