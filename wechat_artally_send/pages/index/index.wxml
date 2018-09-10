@@ -89,6 +89,7 @@
   <input class='jw-bless-input' bindfocus='blessFocus' bindinput='blessInput' bindblur='blessBlur'  maxlength='10' value='{{bless_value}}'></input>
   <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view>
   <button bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
+  <view style='text-align:center;margin-top:20rpx;font-size:28rpx'><text>使用说明</text><text>丨</text><text>用户协议</text></view>
 </view>
 
 
