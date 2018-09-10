@@ -188,8 +188,9 @@ image{
 }
 .g-m-item .g-m-con{
   width: 400rpx;
-  padding-top: 26rpx;
+  padding-top: 20rpx;
   font-size: 28rpx;
+  line-height:44rpx;
 	font-weight: 500;
 	color: #111111;
   position: relative;
@@ -198,6 +199,9 @@ image{
   font-size: 22rpx;
 	font-weight: 500;
 	color: #999999;
+}
+.g-m-item .g-m-con .price{
+  font-size: 26rpx;
 }
 .g-m-item .g-m-con .g-m-numbox{
   width: 100%;
