@@ -11,7 +11,7 @@ Page({
   },
 
   //获取用户信息按钮回调
-  bindgetuserinfo:function(e){
+  bindgetuserinfo:function(e){ 
     var that=this
     if(e.detail.userInfo){
       wx.login({
@@ -21,9 +21,14 @@ Page({
           console.log(e.detail.iv)
           var postData = { 'code': res.code, 'encryptedData': e.detail.encryptedData, 'iv': e.detail.iv}
           app.post('wxpay/get_miniprogram_userinfo',postData,1).then((res)=>{
-            // console.log(res)
+            console.log(res)
+            // res.code=600
             if(res.code==600){
-              that.bindgetuserinfo(e)
+              wx.showToast({
+                icon:'none',
+                title: '获取信息失败，请重试',
+              })
+              // that.bindgetuserinfo(e)
             }
             else if(res.code==200){
               console.log(res)
@@ -32,6 +37,7 @@ Page({
                 data:res.data,
                 success: function(res) {
                   wx.navigateBack({
+                   
                     
                   })
                 },

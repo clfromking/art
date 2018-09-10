@@ -1,4 +1,5 @@
 // pages/joinpeople/joinpeople.js
+const app=getApp()
 Page({
 
   /**
@@ -25,11 +26,29 @@ Page({
     ],
   },
 
+  //预览大图
+  loadpreviewImg:function(e){
+    console.log(e.currentTarget.dataset.src)
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.src],
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that=this
+    app.post('order/client_list',{'order_id':options.order_id,'uid':options.uid}).then((res)=>{
+      console.log(res)
+      if(res.code==200){
+        that.setData({
+          heads:res.data.list
+        })
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
   },
 
   /**

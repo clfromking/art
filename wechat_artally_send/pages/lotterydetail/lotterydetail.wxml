@@ -5,7 +5,7 @@
     <view class='tip'>{{title_text}}</view>
     <view>{{gift_detail.condition}}</view>
     <view hidden='{{!ishave}}' bindtap='goMy' style='text-decoration:underline'>请前往礼物篮查看</view>
-    <view>{{ishowodds==true?"":other_text}}</view>
+    <view>{{ishideodds==true?"":other_text}}</view>
   </view>
   <!-- 送礼人信息区 -->
   <view class='fromInfo'>
@@ -26,7 +26,7 @@
   </swiper>
   </view>
   <!-- 中奖几率 -->
-  <view class='l-chance' hidden='{{ishowodds}}'>
+  <view class='l-chance' hidden='{{ishideodds}}'>
     <view class='top'>中奖几率</view>
     <view class='con'>
       <view class='num'>您的中奖几率已 <text>×{{gift_detail.inviter_count+1?gift_detail.inviter_count+1:'1'}}</text> 倍</view>
@@ -48,8 +48,8 @@
     <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/mall_banner_img.png"></image>
   </view>
   <!-- 参与人数区 -->
-  <view class='l-joinbox' hidden='{{ishowodds1}}'>
-    <navigator class='l-j-num' url='/pages/joinpeople/joinpeople'>已有 <text>{{heads.length}}</text> 人参与</navigator>
+  <view class='l-joinbox' hidden='{{ishideodds1}}'>
+    <view bindtap='gojoinPeople' class='l-j-num'>已有 <text>{{heads.length}}</text> 人参与</view>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{heads}}" wx:key="{{index}}">
         <image src="{{item?item:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>

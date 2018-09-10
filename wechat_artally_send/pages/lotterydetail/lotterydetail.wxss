@@ -1,6 +1,6 @@
 /* pages/lotterydetail/lotterydetail.wxss */
 page{
-  background: #da0202;
+  /* background: #da0202; */
 }
 .lq-lotdetail{
   background: #fff;

@@ -2,6 +2,7 @@
 const app=getApp()
 let gift_detail={}
 let uid
+let order_id
 Page({
 
   /**
@@ -23,8 +24,8 @@ Page({
     gift_detail: gift_detail,
     uid:0,
     ishowSpebtn:false,
-    ishowodds:false,
-    ishowodds1:false,
+    ishideodds:false,
+    ishideodds1:false,
     winList:[],
     ishave:false,
     ismy:false,
@@ -80,11 +81,14 @@ Page({
     var isshowWhite = false
     var title_text='礼物已经准备完毕，送出去吧'
     console.log(options)
+    order_id = options.order_id
     // options.source='lottery'
     if(options.source=='index'){
       app.post('order/order_detail', { 'order_id': options.order_id }).then((res) => {
         console.log(res)
         if (res.code == 200) {
+          var ismy2haveBtntext = that.data.ismy2haveBtntext
+          ismy2haveBtntext='发送给好友 '
           gift_detail = res.data.order
           switch (Number(gift_detail.gameplaydata)) {
             case 2:
@@ -99,13 +103,14 @@ Page({
           }
 
           that.setData({
-            ishowodds: true,
-            ishowodds1: true,
+            ishideodds: true,
+            ishideodds1: true,
             gift_detail: gift_detail,
             gifts: gift_detail.gifts,
             title_text,
             uid: uid,
-            isshowWhite
+            isshowWhite,
+            ismy2haveBtntext
           })
         }
       }).catch((error) => {
@@ -122,45 +127,43 @@ Page({
           var gift_detail = res.data.order
           var title_text
           var ishowSpebtn = false
-          var ishowodds = false
+          var ishideodds = false
           var isfinish = false
           var ishave = false
-          var ishowodds1=false
+          var ishideodds1=false
           var other_text = that.data.other_text
           if (Number(gift_detail.giftbagdata) == 1) {
             title_text = '请等待，成功参与抽奖'
           }
           else if (Number(gift_detail.giftbagdata) == 2) {
             title_text = '很遗憾，您未抽中大奖'
+            ishowSpebtn = true
             switch (Number(gift_detail.status)) {
               case 0:
                 title_text = '很遗憾，礼物已经过期'
                 isfinish = false
-                ishowodds = true
-                ishowodds1=true
-                ishowSpebtn = true
+                ishideodds = true
+                ishideodds1=true
                 break;
               case 1:
                 break;
               case 2:
                 title_text = '恭喜您，您已抽中大奖'
-                other_text = ''
-                ishowSpebtn = true
+                other_text = ''               
                 isfinish = true
                 ishave = true
                 break;
               case 3:
                 title_text = '很遗憾，您没有抽中大奖'
                 other_text = ''
-                ishowSpebtn = true
                 isfinish = true
                 break;
             }
           }
           else if (Number(gift_detail.giftbagdata) == 3) {
             title_text = '很遗憾，礼物已经过期'
-            ishowodds = true
-            ishowodds1=true
+            ishideodds = true
+            ishideodds1=true
             isfinish = false
             ishowSpebtn = true
           }
@@ -181,8 +184,8 @@ Page({
               else if (Number(gift_detail.status) == 2) {
                 title_text = '礼物已经领取，好开心'
                 ishowSpebtn = true
-                ishowodds = true
-                ishowodds1=true
+                ishideodds = true
+                ishideodds1=true
                 ishave = true
               }
 
@@ -201,8 +204,8 @@ Page({
             heads: gift_detail.client,
             uid: uid,
             ishowSpebtn,
-            ishowodds,
-            ishowodds1,
+            ishideodds,
+            ishideodds1,
             isfinish,
             other_text,
             winList: gift_detail.win || '',
@@ -226,88 +229,75 @@ Page({
           if(res.code==200){
             var title_text=''
             var condition=''
-            var ishowodds=false
-            var ishowodds1=false
+            var ishideodds=false
+            var ishideodds1=false
             var isfinish=false
             var ismy=true
             var ismyOneContinue=false
             var gift_detail = res.data.order
             if (Number(gift_detail.gameplaydata)==1) {     //点对点
+              ishideodds = true
+              ishideodds1 = true
               if (Number(gift_detail.giftbagdata)==1){    //进行中
                 title_text ='礼物等待领取，莫着急'
                 gift_detail.condition = '礼物红包'
-                ishowodds=true
-                ishowodds1=true
                 ismyOneContinue = false
               }
               else if (Number(gift_detail.giftbagdata) == 2){    //已完成
                 title_text = '礼物已被领取，好开心'
                 gift_detail.condition = '礼物红包'
-                ishowodds = true
-                ishowodds1=true
                 isfinish=true
                 ismyOneContinue=true
               }
               else if (Number(gift_detail.giftbagdata) == 3){    //已过期
                 title_text = '礼物无人领取，已过期'
                 gift_detail.condition = '礼物红包(已为您安排退款)'
-                ishowodds = true
-                ishowodds1=true
                 ismyOneContinue = true
               }
             }
             else if (Number(gift_detail.gameplaydata)==2){   //定时
+              ishideodds = true
+              ishideodds1 = false
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = gift_detail.condition + '开奖'
-                ishowodds=true
-                ishowodds1=false
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text ='礼物已经抢光，好开心' 
                 gift_detail.condition = gift_detail.condition+'开奖'
-                ishowodds=true
-                ishowodds1=false
                 isfinish=true
                 ismyOneContinue=true
               }
               else if (Number(gift_detail.giftbagdata) == 3) {    //已过期
                 title_text ='抽奖无人参与，已过期'
                 gift_detail.condition = gift_detail.condition + '开奖(已为您安排退款)'
-                ishowodds = true
-                ishowodds1 = false
                 ismyOneContinue = true
               }
             }
             else{     //满人
+              ishideodds = true
+              ishideodds1 = false
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = '满'+gift_detail.condition+'人开奖'
-                ishowodds=true
-                ishowodds1=false
-                
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text = '礼物已被抢光，好开心'
-                gift_detail.condition = '满' + gift_detail.condition + '人开奖'
-                ishowodds = true
-                ishowodds1 = false
+                gift_detail.condition = '满' + gift_detail.condition + '人开奖'       
                 isfinish=true
                 ismyOneContinue=true
               }
               else if (Number(gift_detail.giftbagdata) == 3) {    //已过期
                 title_text = '抽奖参与未满，已过期'
                 gift_detail.condition = '满' + gift_detail.condition + '人开奖(已为您安排退款)'
-                ishowodds = true
-                ishowodds1 = false
                 ismyOneContinue = true
               }
             }
             that.setData({
               title_text,
               gift_detail,
-              ishowodds,
-              ishowodds1,
+              ishideodds,
+              ishideodds1,
               gifts: gift_detail.gifts,
               winList: gift_detail.win || '',
               isfinish,
@@ -330,8 +320,8 @@ Page({
           if(res.code==200){
             var title_text = ''
             var condition = ''
-            var ishowodds = false
-            var ishowodds1 = false
+            var ishideodds = false
+            var ishideodds1 = false
             var isfinish = false
             var ismy = true
             var ishave=false
@@ -349,8 +339,8 @@ Page({
               else if (Number(gift_detail.giftbagdata) == 2){   //已完成
                 title_text ='已经礼物领取，好开心'
                 gift_detail.condition='礼物红包'
-                ishowodds=true
-                ishowodds1=true
+                ishideodds=true
+                ishideodds1=true
                 isfinish=true
                 ismyBtntext='我也要送礼物'
                 ismyOneContinue=true,
@@ -415,15 +405,15 @@ Page({
                 title_text = '很遗憾，礼物已经过期'
                 ishowSpebtn=true
                 other_text = ''
-                ishowodds=true
-                ishowodds1=true
+                ishideodds=true
+                ishideodds1=true
               }
             }
             that.setData({
               title_text,
               gift_detail,
-              ishowodds,
-              ishowodds1,
+              ishideodds,
+              ishideodds1,
               gifts: gift_detail.gifts,
               winList: gift_detail.win || '',
               isfinish,
@@ -540,5 +530,16 @@ Page({
     })
   },
   
+  //查看更多人参与
+  gojoinPeople:function(){
+    // console.log(uid)
+    if(this.data.heads.length==0){
+      return
+    }
+    wx.navigateTo({
+      url: '../joinpeople/joinpeople?order_id='+order_id+'&uid='+uid,
+    })
+  },
+
   a:function(){}
 })
