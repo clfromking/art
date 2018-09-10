@@ -203,6 +203,9 @@ image{
 .g-m-item .g-m-con .price{
   font-size: 26rpx;
 }
+.price{
+  color: #da0202
+}
 .g-m-item .g-m-con .g-m-numbox{
   width: 100%;
   line-height:50rpx;
