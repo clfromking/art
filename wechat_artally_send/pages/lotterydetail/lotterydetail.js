@@ -79,7 +79,7 @@ Page({
     }
     var that=this
     var isshowWhite = false
-    var title_text='礼物已经准备完毕，送出去吧'
+    var title_text='礼物准备完毕，送出去'
     console.log(options)
     order_id = options.order_id
     // options.source='lottery'
@@ -503,7 +503,8 @@ Page({
     }
     return {
       title:'快来帮忙',
-      path: 'pages/raffle/raffle?time=' + this.data.gift_detail.condition + '&order_id=' + this.data.gift_detail.id+'&inviter='+uid+'&source=lottery'
+      path: 'pages/raffle/raffle?time=' + this.data.gift_detail.condition + '&order_id=' + this.data.gift_detail.id+'&inviter='+uid+'&source=lottery',
+      imageUrl:'../imgs/1.png'
     }
   },
 
