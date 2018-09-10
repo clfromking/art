@@ -19,7 +19,8 @@
     "pages/sendagain/sendagain",
     "pages/lotterydetail/lotterydetail",
     "pages/joinpeople/joinpeople",
-    "pages/author/author" 
+    "pages/author/author",
+    "pages/servers/servers"
   ],
   "window":{
     "backgroundTextStyle":"light",
