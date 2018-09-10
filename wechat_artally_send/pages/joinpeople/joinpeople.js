@@ -7,28 +7,11 @@ Page({
    */
   data: {
     heads: [
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
-      "https://pic.forunart.com/artgive/wx/mall_label_birthday.png",
     ],
   },
 
   //预览大图
   loadpreviewImg:function(e){
-    console.log(e.currentTarget.dataset.src)
     wx.previewImage({
       urls: [e.currentTarget.dataset.src],
     })
