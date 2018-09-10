@@ -1,10 +1,15 @@
 <!--pages/my/my.wxml-->
 <!-- 头部 -->
+<navigator class='lq-login-mask' url='/pages/author/author' hidden='{{islogin}}'></navigator>
 <view class="lq-headbox">
   <view class="h-pic">
-    <open-data type="userAvatarUrl"></open-data>
+    <image src='{{userInfo.avatar}}'></image>
+    <!-- <open-data type="userAvatarUrl"></open-data> -->
   </view>
-  <view class="h-name"><open-data type='userNickName'></open-data></view>  
+  <view class="h-name">
+    <!-- <open-data type='userNickName'></open-data> -->
+    <text>{{userInfo.username}}</text>
+  </view>  
   <view class="h-set">
   <navigator url='/pages/setting/setting'>
     <image src="https://pic.forunart.com/artgive/wx/personal_icon_set.png"></image>

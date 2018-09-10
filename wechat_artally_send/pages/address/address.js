@@ -11,15 +11,27 @@ Page({
   },
   // 获取地址列表
   getaddlist:function(){
+    wx.showLoading({
+      title: '数据加载中',
+      mask: true
+    })
     let that = this, addresslist=[];
     app.post('address/address_lists', { uid: 2 }, 1).then(res => {
       // console.log(res)
+      wx.hideLoading()
       if (res.code == 200) {
         addresslist = res.data.address;
         that.setData({
           addresslist: addresslist
         })
+      }else{
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
       }
+    }).catch(error => {
+      wx.hideLoading();
     })
   },
   //提货页进来后选择地址

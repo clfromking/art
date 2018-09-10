@@ -66,7 +66,7 @@ Page({
     let postdata = { mobile: temp.phone, models: 6 };
     app.post('user/user_phone_code', postdata ,1)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         if (res.code == 200) {
           // clock();
         } else {
