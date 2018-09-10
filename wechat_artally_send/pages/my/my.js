@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo:{},
+    islogin:false,
     orderNums:{
       receive:0,
       send:0,
@@ -17,12 +19,17 @@ Page({
     checkAllStatus:false
   },
   getgiftlist:function(){
+    wx.showLoading({
+      title: '数据加载中',
+      mask:true
+    })
     let that=this,
       orderNums = this.data.orderNums,
       gifts = [];
     let uid = wx.getStorageSync('userInfo').uid;
     app.post('order/giftbox',{uid:uid}).then(res=>{
       // console.log(res)
+      wx.hideLoading()
       if(res.code==200){
         orderNums.receive = res.data.receive;
         orderNums.send= res.data.send;
@@ -36,7 +43,14 @@ Page({
           orderNums: orderNums,
           gifts: gifts
         })
+      }else{
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
       }
+    }).catch(error => {
+      wx.hideLoading();
     })
   },
   // 点击选择按钮
@@ -180,7 +194,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.islogin();
+    let that=this;
+    app.islogin().then(res=>{
+      // console.log(res)
+      that.setData({
+        userInfo:res.data
+      })
+    })
   },
 
   /**
@@ -194,9 +214,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getgiftlist();
-    this.data.checkAllStatus=true;
-    this.checkAll();
+    let userInfo =wx.getStorageSync('userInfo');
+    // console.log(userInfo)
+    if (userInfo.uid){
+      this.setData({
+        islogin:true,
+        userInfo: userInfo
+      })
+      this.getgiftlist();
+      this.data.checkAllStatus = true;
+      this.checkAll();
+    }else{
+      this.setData({
+        islogin: false
+      })
+    }
   },
 
   /**
@@ -220,6 +252,7 @@ Page({
     this.getgiftlist();
     this.data.checkAllStatus = true;
     this.checkAll();
+    wx.stopPullDownRefresh()
   },
 
   /**
