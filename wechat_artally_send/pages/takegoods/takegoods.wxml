@@ -1,5 +1,6 @@
 <!--pages/takegoods/takegoods.wxml-->
 <view class='lq-takegoods'>
+<form bindsubmit='takegoodsok' report-submit='true'>
   <!-- 地址选择栏 -->
   <navigator class='t-chooseadd' url='/pages/address/address?source=1'>
     <!-- 没有地址 -->
@@ -34,5 +35,6 @@
     </view>
   </view>
   <!-- 确认按钮 -->
-  <button class='t-okbtn' bindtap='takegoodsok'>确认提货</button>
+  <button class='t-okbtn' formType="submit">确认提货</button>
+</form>
 </view>

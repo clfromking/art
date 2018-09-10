@@ -2,6 +2,7 @@
 <view class='lq-discount'>
   <!-- 提示栏 -->
   <view class='d-tip'>温馨提示：礼物折现不会通知送礼人，我们帮你保密呦！</view>
+  <form bindsubmit='discountok' report-submit='true'>
   <!-- 商品栏 -->
   <view class='d-li' wx:for="{{data.gifts}}" wx:key="{{index}}">
     <view class='d-l-cen'>
@@ -73,7 +74,8 @@
         <text>合计：{{data.totalprice*(100-poundage)/100}} 元</text>
         <text class='fr'>共 {{data.totalnum}} 件</text>
       </view>
-      <button class='d-b-btn' bindtap='discountok'>确认折现</button>
+      <button class='d-b-btn' form-type='submit'>确认折现</button>
     </view>
   </view>
+  </form>
 </view>

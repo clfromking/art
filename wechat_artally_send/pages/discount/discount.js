@@ -101,7 +101,7 @@ Page({
       })
   },
   // 确认折现按钮
-  discountok:function(){
+  discountok:function(e){
     let that=this,
       temp=this.data.temp,
       data = this.data.data;
@@ -132,7 +132,8 @@ Page({
       way: 2,
       mobile: temp.phone,
       mobile_code:temp.code,
-      openid: userInfo.openid
+      openid: userInfo.openid,
+      form_id: e.detail.formId
     }
     // console.log(postdata)
     // return

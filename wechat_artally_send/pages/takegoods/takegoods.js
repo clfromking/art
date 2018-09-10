@@ -34,9 +34,10 @@ Page({
     })
   },
   // 确认提货按钮
-  takegoodsok:function(){
-    let that = this;
-    if (!that.data.addressinfo.id){
+  takegoodsok:function(e){
+    let that = this,
+      addressid = this.data.addressinfo.id;
+    if (!addressid){
       wx.showToast({
         title: '请添加地址',
         icon:'none',
@@ -54,9 +55,12 @@ Page({
       shop_id: data.selectids.join(','),
       shop_num: data.selectorderNums.join(','),
       order_id: data.orderids.join(','),
-      way:1
+      address: addressid,
+      way:1,
+      form_id: e.detail.formId
     }
     // console.log(postdata)
+    // return
     app.post('order/giftbox_go', postdata).then(res=>{
       // console.log(res)
       wx.hideLoading();

@@ -1,0 +1,18 @@
+/* pages/servers/servers.wxss */
+page{
+  background: #fff;
+}
+.lq-servers{
+  padding: 30rpx;
+  font-size: 30rpx;
+}
+.bold{
+  font-weight: bold;
+  line-height: 2;
+}
+.center{
+  text-align: center;
+}
+.line3{
+  line-height: 3;
+}
