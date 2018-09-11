@@ -236,7 +236,15 @@ scroll-view{
   width: 78rpx;
   /* background: #e9e9e9; */
   height: 100%;
-  text-align: center
+  text-align: center;
+}
+.jw-sub-btns{
+  background: url('https://pic.forunart.com/artgive/wx/sub.png') no-repeat center;
+  background-size: 26rpx
+}
+.jw-add-btns{
+  background: url('https://pic.forunart.com/artgive/wx/add.png') no-repeat center;
+  background-size: 26rpx
 }
 .jw-num-input{
   float: left;

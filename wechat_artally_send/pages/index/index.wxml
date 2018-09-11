@@ -13,9 +13,9 @@
           <view class='clear' style='margin-top: 36rpx'>
             <text class='jw-gifts-msg-univalent'>￥{{item.price}}</text>
             <view class='jw-gifts-btns-view'>
-              <text class='jw-gifts-sub-btn' data-index='{{index}}' bindtap='subNum' >-</text>
+              <text class='jw-gifts-sub-btn' data-index='{{index}}' bindtap='subNum' ></text>
               <input type='number' class='jw-gifts-msg-num' data-index='{{index}}' bindinput='inputNum' bindblur='inputBlur' value='{{item.num}}' ></input>
-              <text class='jw-gifts-add-btn' data-index='{{index}}' bindtap='addNum'>+</text>
+              <text class='jw-gifts-add-btn' data-index='{{index}}' bindtap='addNum'></text>
             </view>
           </view>
         </view>

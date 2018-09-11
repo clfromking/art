@@ -62,9 +62,9 @@
   <view class='jw-buy-bottom-view' catchtouchmove="true">
     <text class='jw-buy-num-title'>购买数量</text>
     <view class='jw-suboradd'>
-      <text bindtap='subNum' class='jw-suboradd-btns'>-</text>
+      <text bindtap='subNum' class='jw-suboradd-btns jw-sub-btns'></text>
       <input bindinput='inputNum' bindblur='inputBlur' value='{{gifts_num}}' class='jw-num-input' type='number'></input>
-      <text bindtap='addNum' class='jw-suboradd-btns'>+</text>
+      <text bindtap='addNum' class='jw-suboradd-btns jw-add-btns'></text>
     </view>
   </view>
   <text class='jw-buy-btn' bindtap='confirmBuy' catchtouchmove="true">确定</text>

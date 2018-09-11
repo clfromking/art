@@ -303,11 +303,12 @@ action-sheet-item{
   box-sizing: border-box;
   font-size: 26rpx !important;
   min-height: 0;
-  height: 46rpx;
+  height: 50rpx;
   width: 75.8rpx;
   float: left;
   text-align: center;
-  line-height: 46rpx
+  line-height: 50rpx;
+  margin-top: -2rpx
 }
 .jw-ishave-view{
   height: 73rpx;
@@ -343,4 +344,14 @@ action-sheet-item{
   margin-right: 42rpx;
   color: #999;
   font-size: 24rpx
+}
+
+.jw-gifts-sub-btn{
+  height: 50rpx;
+  background:url('https://pic.forunart.com/artgive/wx/sub.png') no-repeat center !important;
+  background-size: 26rpx !important
+}
+.jw-gifts-add-btn{
+  background:url('https://pic.forunart.com/artgive/wx/add.png') no-repeat center !important;
+  background-size: 26rpx !important
 }
