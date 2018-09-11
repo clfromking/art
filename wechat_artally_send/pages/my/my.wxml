@@ -59,9 +59,9 @@
             <view class='g-m-numbox'>
               <text>数量:</text>
               <view class='g-m-numedit fr'>
-                <view data-index="{{index}}" data-type="-" bindtap="bindCartNum">-</view>
+                <view data-index="{{index}}" data-type="-" bindtap="bindCartNum"></view>
                 <input type='number' data-index="{{index}}" data-type="input" value='{{item.choosenum}}' bindinput='bindCartNum' />
-                <view data-index="{{index}}" data-type="+" bindtap="bindCartNum">+</view>
+                <view class='gm-add' data-index="{{index}}" data-type="+" bindtap="bindCartNum"></view>
               </view>
             </view>
           </view>

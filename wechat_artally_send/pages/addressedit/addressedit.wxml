@@ -11,7 +11,7 @@
   <view class='ae-li ae-area'>
     <text>所在地区</text>
     <picker mode="region" bindchange="bindRegionChange" value="{{region}}" >
-      <view class="picker">{{region[0]}}，{{region[1]}}，{{region[2]}}
+      <view class="picker">{{region[0]}}{{region[1]}}{{region[2]}}
   </view>
     </picker>
     <view class='ae-icon fr' bindtap='lookpos'></view>
