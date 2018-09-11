@@ -1,0 +1,23 @@
+/* pages/components/my-component.wxss */
+.barStyle{
+  text-align: center;
+  color: #fff;
+  background:#da0202;
+  font-size: 34rpx;
+  font-weight: 500;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 9
+}
+.barStyle2{
+  text-align: center;
+  color: #000;
+  background:#fff;
+  font-size: 34rpx;
+  font-weight: 500;
+  position: fixed;
+  top: 0;
+  width: 100% ;
+   z-index: 9
+}

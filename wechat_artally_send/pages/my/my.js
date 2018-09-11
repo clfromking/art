@@ -16,7 +16,9 @@ Page({
     gifts:[],
     selectids: [],
     operation:false,
-    checkAllStatus:false
+    checkAllStatus:false,
+    barHeight: app.globalData.barHeight,
+    textHeight: app.globalData.textHeight,
   },
   getgiftlist:function(){
     wx.showLoading({

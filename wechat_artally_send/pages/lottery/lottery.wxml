@@ -1,4 +1,5 @@
-<image class='jw-lottery-banner' bindtap='bannerTap'  data-id='{{banner_msgs.id}}' data-go='{{banner_msgs.go}}' data-go_id='{{banner_msgs.go_id}}' src='{{banner_msgs.avatar}}'></image>
+<my-component title="礼物详情" color="white"></my-component>
+<image style='margin-top:{{barHeight+textHeight+"rpx"}}' class='jw-lottery-banner' bindtap='bannerTap'  data-id='{{banner_msgs.id}}' data-go='{{banner_msgs.go}}' data-go_id='{{banner_msgs.go_id}}' src='{{banner_msgs.avatar}}'></image>
 <text class='jw-lottery-title'>每日抽奖</text>
 <view class='jw-lottery-view'>
   <view class='jw-lottery-el' bindtap='goRaffle' data-index='{{index}}' data-id='{{item.id}}' wx:for='{{lottery_list}}' wx:key='item'>
