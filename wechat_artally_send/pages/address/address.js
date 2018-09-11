@@ -16,7 +16,8 @@ Page({
       mask: true
     })
     let that = this;
-    app.post('address/address_lists', { uid: 2 }, 1).then(res => {
+    let uid = wx.getStorageSync('userInfo').uid;
+    app.post('address/address_lists', { uid: uid }, 1).then(res => {
       // console.log(res)
       wx.hideLoading()
       if (res.code == 200) {
