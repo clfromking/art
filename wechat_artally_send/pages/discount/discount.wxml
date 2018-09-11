@@ -16,7 +16,7 @@
       </view>
     </view>
     <view class='d-l-bot clear'>
-      <image lazy-load src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
+      <image src="{{item.avatar}}"></image>
       <text style="flex:2">{{item.uname}}</text>
       <text class='fr'>预计三小时内到账</text>
     </view>
@@ -61,12 +61,12 @@
     </view>
   </view>
   <!-- 底部栏 -->
-  <view class="d-botbox {{ishowtip?'active':''}}">
-    <view class="d-b-tip" bindtap='toggletip'>
+  <view class='d-botbox'>
+    <view class='d-b-tip' bindtap='toggletip'>
       <text>请仔细阅读《折现/退款须知》</text>
-      <image class='db-icon' mode='widthFix' src='https://pic.forunart.com/artgive/wx/icon_arrow.png'></image>
+      <image class='db-icon' src='https://pic.forunart.com/artgive/wx/all_icon_choice.png'></image>
     </view>
-    <view class="d-b-word">
+    <view class='d-b-word' hidden='{{!ishowtip}}'>
       每个微信账户每日折现/退款上限为10笔，总金额不超过20000元。多笔折现/退款建议使用多选按钮，进行批量操作。
     </view>
     <view class='d-b-main clear'>

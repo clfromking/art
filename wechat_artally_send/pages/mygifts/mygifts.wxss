@@ -1,7 +1,4 @@
 /* pages/mygifts/mygifts.wxss */
-.lq-gifts{
-  margin-bottom: 30rpx;
-}
 .lq-gifts .g-nav{
   height: 80rpx;
 	background-color: #ffffff;
