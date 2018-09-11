@@ -29,7 +29,7 @@
       </view>
     </view>
     <view class='t-l-bot'>
-      <image src='{{item.avatar}}'></image>
+      <image lazy-load src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
       <text class='t-l-name ellipsis'>{{item.uname}}</text>
       <text>预计五天之内发货</text>
     </view>

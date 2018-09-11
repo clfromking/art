@@ -50,8 +50,10 @@ Page({
       mask:true
     })
     let data = that.data.data;
+    let userInfo = wx.getStorageSync('userInfo');
     let postdata={
-      uid: wx.getStorageSync('userInfo').uid,
+      uid: userInfo.uid,
+      openid: userInfo.openid,
       shop_id: data.selectids.join(','),
       shop_num: data.selectorderNums.join(','),
       order_id: data.orderids.join(','),
