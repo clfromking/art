@@ -84,8 +84,7 @@ image{
 .lq-giftbox .nothing image{
   display: block;
   margin: 50rpx auto 0;
-  width: 280rpx;
-  height: 234rpx;
+  width: 500rpx;
 }
 .lq-giftbox .nothing text{
   display: block;

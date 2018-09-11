@@ -28,8 +28,8 @@
   <view class='g-tit'>礼物篮</view>
   <!-- 没有礼物 -->
   <view class='nothing' hidden='{{gifts.length>0}}'>
-    <image src='../../img/follow_code.jpg'></image>
-    <text>暂时没订单</text>
+    <image mode='widthFix' src='https://pic.forunart.com/artgive/wx/no_gifts.png'></image>
+    <text>您暂时还没有礼物</text>
     <navigator open-type="switchTab" url='/pages/index/index'>返回送礼物</navigator>
   </view>
   <!-- 有礼物 -->
@@ -46,7 +46,7 @@
       <view class='g-m-item' wx:for="{{gifts}}" wx:key="{{item.id}}">
         <view class="g-m-check {{item.selected?'active':''}}" data-index="{{index}}" data-id="{{item.id}}" bindtap='chooseitem'><view class='g-m-icon'></view></view>
         <view class='g-m-head fr'>
-          <image lazy-load src='{{item.avatar}}'></image>
+          <image lazy-load src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
           <text class='g-m-h-name ellipsis'>{{item.uname}}</text>
           <text class='g-m-h-time'>{{item.updatetime}}</text>
         </view>

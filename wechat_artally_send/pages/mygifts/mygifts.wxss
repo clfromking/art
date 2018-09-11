@@ -24,8 +24,7 @@
 .lq-gifts .nothing image{
   display: block;
   margin: 50rpx auto 0;
-  width: 280rpx;
-  height: 234rpx;
+  width: 500rpx;
 }
 .lq-gifts .nothing text{
   display: block;

@@ -7,8 +7,8 @@
   </view>
   <!-- 没有礼物 -->
   <view class='nothing' hidden='{{orderlist.length>0}}'>
-    <image src='../../img/follow_code.jpg'></image>
-    <text>暂时没订单</text>
+    <image mode='widthFix' src='https://pic.forunart.com/artgive/wx/no_gifts.png'></image>
+    <text>您暂时还没有订单</text>
     <navigator open-type="switchTab" url='/pages/index/index'>返回送礼物</navigator>
   </view>
   <!-- 单个 -->
@@ -47,14 +47,14 @@
       <!-- 我收到的,显示 -->
       <view wx:if="{{titleIndex==0}}">
         <view class='g-l-b-pic fl'>
-          <image lazy-load mode='aspectFit' src="{{item.avatar}}"></image>
+          <image lazy-load mode='aspectFit' src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
         </view>
         <view class='time'>{{item.updatetime}} 收到 {{item.uname}} 的礼物</view>
       </view>
       <!-- 我送出的和我参与的,显示 -->
       <view wx:if="{{titleIndex!=0}}">
         <view class='g-l-b-pic fl' wx:if="{{titleIndex==2}}">
-          <image lazy-load mode='aspectFit' src="{{item.avatar}}"></image>
+          <image lazy-load mode='aspectFit' src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
         </view>
         <view class='fl' wx:if="{{titleIndex==2}}">{{item.uname}} </view>
         <view class='time' wx:if="{{navIndex==0}}">{{item.createtime}} 送出</view>
