@@ -42,14 +42,21 @@
   </view>
   <view class='jw-screen_view' hidden='{{!isfixed}}' style='width:100%;height:80rpx'></view>
   <view class='jw-allGifts-view'>
-    <view wx:for='{{ware_list}}' data-id='{{item.id}}' bindtap='goDetail' wx:key='{{item}}' class='jw-el-ware'>
-      <view class='jw-el-ware-img'>
-        <view style='width:100%;height:100%'>
-          <image lazy-load mode="aspectFit" style="width:100%;height:100%;display:block" src='{{item.image}}'></image>
-        </view>
+    <view class='jw-ware-list-view'>
+      <view style='position:relative' class='jw-el-ware' wx:for='{{ware_list}}'  wx:key='{{item}}'>
+        <form report-submit='true' bindsubmit='getFormid'>
+          <view  data-id='{{item.id}}' >
+            <view class='jw-el-ware-img'>
+              <view style='width:100%;height:100%'>
+                <image lazy-load='{{true}}' mode="aspectFit" style="width:100%;height:100%;display:block" src='{{item.image}}'></image>
+              </view>
+            </view>
+            <text class='jw-ware-alt ellipsis'>{{item.name}}</text>
+            <text class='jw-ware-money ellipsis'>￥{{item.price}}</text>
+          </view>
+          <button form-type='submit' data-id='{{item.id}}' bindtap='goDetail' class='getFormIdBtn'></button>
+        </form>
       </view>
-      <text class='jw-ware-alt ellipsis'>{{item.name}}</text>
-      <text class='jw-ware-money ellipsis'>￥{{item.price}}</text>
     </view>
     <text class='jw-bottom-hint'>没有更多了...</text>
   </view>

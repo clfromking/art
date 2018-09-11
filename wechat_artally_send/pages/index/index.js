@@ -542,8 +542,6 @@ Page({
    */
   onLoad: function (options) {
     var that=this
-    
-    // console.log(gift_lists)
     var postData={'position':1}
     app.post('banner/lists',postData).then((res)=>{
       if(res.code==200){
@@ -1051,6 +1049,12 @@ Page({
       fullPersonInputVal: '',      //满人玩法时中奖人数value
 
     })
-  }
+  },
+
+  getFormid:function(e){
+    
+    app.data.formIds.push(e.detail.formId)
+    console.log(app.data.formIds)
+  },
 
 })

@@ -32,21 +32,26 @@
     <text class='jw-select-gift-content'>点击这里,挑选喜欢的礼物</text>
     <image src='../imgs/all_icon_choice.png' class='jw-select-gift-right-icon jw-icon-choice'></image>
   </view>
-  <view class='jw-select-type' bindtap='showOptionsSheet'>
-    <image src='../imgs/home_way_icon_gift.png' class='jw-oneToone-view-icon'></image>
-    <text class='jw-gift-options'>{{optionsText}}</text>
-    <view class='jw-oneToone-view'>
-      <image src='../imgs/all_icon_choice.png' class='jw-one-choice jw-icon-choice'></image>
-      <!-- <text class='jw-oneToone-view-text'>{{selectSheetContent}}</text> -->
-      <text class='jw-oneToone-view-text'>更改玩法</text>
-    </view>
-    <view class='jw-times-view'>
+  <form report-submit='true' bindsubmit='getFormid'>
+    <view style='position:relative'>
+      <view class='jw-select-type'>
+        <image src='../imgs/home_way_icon_gift.png' class='jw-oneToone-view-icon'></image>
+        <text class='jw-gift-options'>{{optionsText}}</text>
+        <view class='jw-oneToone-view'>
+          <image src='../imgs/all_icon_choice.png' class='jw-one-choice jw-icon-choice'></image>
+          <!-- <text class='jw-oneToone-view-text'>{{selectSheetContent}}</text> -->
+          <text class='jw-oneToone-view-text'>更改玩法</text>
+        </view>
+        <view class='jw-times-view'>
 
-    </view>
-    <view class='jw-persons-view'>
+        </view>
+        <view class='jw-persons-view'>
 
+        </view>
+      </view>
+      <button  bindtap='showOptionsSheet' form-type='submit' class='getFormIdBtn'></button>
     </view>
-  </view>
+  </form>
   <view class='jw-set-persons' hidden='{{fullPlay}}'>
     <view class='jw-set-Opersons'>
       <text class='jw-sets-title'>开奖人数</text>
@@ -81,14 +86,19 @@
   </view>
   <view class='jw-bless-view'>
     <text class='jw-bless-hint'>送上心意，撰写祝福语</text>
-    <picker class='jw-choose-bless' mode='selector' range="{{bless_arr}}" value='{{bless_index}}' bindchange='blessConfirm'>
-      <view>选择祝福语</view>
+    <picker style='position:relative' class='jw-choose-bless' mode='selector' range="{{bless_arr}}" value='{{bless_index}}' bindchange='blessConfirm'>
+      <form bindsubmit='getFormid' report-submit='true'>
+        <button form-type='submit' style='opacity:0;position:absolute' >选择祝福语</button>
+        <view >选择祝福语</view>
+      </form>
     </picker>
   </view>
   
   <input class='jw-bless-input' bindfocus='blessFocus' bindinput='blessInput' bindblur='blessBlur'  maxlength='10' value='{{bless_value}}'></input>
   <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view>
-  <button bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
+  <form report-submit='true' bindsubmit='getFormid'>
+    <button form-type='submit' bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
+  </form>
   <view style='text-align:center;margin-top:20rpx;font-size:28rpx;color:#999'><navigator style='display:inline-block;' url=''>使用说明</navigator>丨<navigator style='display:inline-block;' url='/pages/servers/servers'>用户协议</navigator></view>
 </view>
 

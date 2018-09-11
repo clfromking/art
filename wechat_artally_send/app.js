@@ -1,8 +1,10 @@
+const Rpx = 750 / wx.getSystemInfoSync().windowWidth
 App({
   data:{
     url :'https://server.artally.com.cn/',
+    formIds:[],
   },
-  
+
   //promise封装post请求
   post: function (url, data, params){
     var promise=new Promise((resolve,reject)=>{
@@ -63,7 +65,13 @@ App({
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
-  onLaunch: function () {     
+  onLaunch: function () { 
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.globalData.barHeight = (47 + res.statusBarHeight) * Number(Rpx) + 'rpx'
+      },
+    })    
     // wx.clearStorage()
     wx.removeStorage({
       key: 'gifts',
@@ -94,5 +102,8 @@ App({
    */
   onError: function (msg) {
     
+  },
+  globalData:{
+    barHeight:''
   }
 })

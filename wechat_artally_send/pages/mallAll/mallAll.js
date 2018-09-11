@@ -373,5 +373,12 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+
+  
+  getFormid: function (e) {
+
+    app.data.formIds.push(e.detail.formId)
+    console.log(app.data.formIds)
+  },
 })

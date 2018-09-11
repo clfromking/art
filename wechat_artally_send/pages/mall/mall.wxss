@@ -141,6 +141,7 @@ swiper{
   width: 323rpx;
   height: 323rpx;
   border: solid 1px #e9e9e9;
+  box-sizing: border-box
 }
 .jw-ware-alt{
   margin-top: 16rpx;
