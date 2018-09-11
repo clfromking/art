@@ -3,7 +3,7 @@
   <view class='j-num'>已有 {{heads.length}} 人参与</view>
   <view class='j-peoples'>
       <view class='j-headimg' wx:for="{{heads}}" wx:key="{{index}}">
-        <image data-src='{{item?item:""}}' bindtap='loadpreviewImg' lazy-load='{{true}}' src="{{item?item:''}}"></image>
+        <image data-src='{{item?item:"https://pic.forunart.com/artgive/wx/me_img.png"}}' bindtap='loadpreviewImg' lazy-load='{{true}}' src="{{item?item:''}}"></image>
       </view>
     </view>
 </view>

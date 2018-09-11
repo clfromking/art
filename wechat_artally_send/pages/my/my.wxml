@@ -4,7 +4,7 @@
 <navigator class='lq-login-mask' url='/pages/author/author' hidden='{{islogin}}'></navigator>
 <view class="lq-headbox">
   <view class="h-pic">
-    <image src='{{userInfo.avatar}}'></image>
+    <image src='{{userInfo.avatar?userInfo.avatar:"https://pic.forunart.com/artgive/wx/me_img.png"}}'></image>
     <!-- <open-data type="userAvatarUrl"></open-data> -->
   </view>
   <view class="h-name">

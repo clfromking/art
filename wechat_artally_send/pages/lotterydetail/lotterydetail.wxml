@@ -9,7 +9,7 @@
   </view>
   <!-- 送礼人信息区 -->
   <view class='fromInfo'>
-    <image src="{{gift_detail.avatar?gift_detail.avatar:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
+    <image src="{{gift_detail.avatar?gift_detail.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
     
     <view>{{gift_detail.uname}}送出{{gifts.length}}种礼物</view>
     <view class='greet'>{{gift_detail.wish}}</view>
@@ -37,7 +37,7 @@
     <view class='l-j-num' style='text-align:left'>已有 <text style='text-decoration:none'>{{gift_detail.inviter.length}}</text> 人为你助力</view>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{gift_detail.inviter}}" wx:key="{{index}}">
-        <image src="{{item?item:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
+        <image src="{{item?item:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
       </view>
     </view>
 
@@ -52,7 +52,7 @@
     <view bindtap='gojoinPeople' class='l-j-num'>已有 <text>{{heads.length}}</text> 人参与</view>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{heads}}" wx:key="{{index}}">
-        <image src="{{item?item:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
+        <image src="{{item?item:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
       </view>
     </view>
   </view>
@@ -61,7 +61,7 @@
     <view class='l-w-tit'>{{isreceivePerson==true?'领取人':'中奖人'}}</view>
     <view class='l-w-li' wx:for='{{winList}}' wx:key='{{item}}'>
       <view class='l-w-headimg' >
-        <image src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/mall_label_birthday.png'}}"></image>
+        <image src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
       </view>
       <view class='l-w-name ellipsis'>{{item.uname}}</view>
       <view style='width:345rpx;text-align:right'>
