@@ -10,6 +10,8 @@ Page({
   data: {
     title_img_src:'',
     ware_list: [],
+    barHeight: app.globalData.barHeight,
+    textHeight: app.globalData.textHeight,
   },
 
   /**

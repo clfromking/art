@@ -23,7 +23,9 @@ Page({
     specification_img:'',
     specification_repertory:0,
     gift_id:0,
-    isshowindicator:false
+    isshowindicator:false,
+    barHeight: app.globalData.barHeight,
+    textHeight: app.globalData.textHeight,
   },
   buyThis:function(){
     this.setData({

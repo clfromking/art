@@ -27,8 +27,9 @@ Page({
     select_name2: '',  //第二类类名
     select_id1:0,   //点击的第一类选项id
     select_id2: 0,   //点击的第二类选项id
-    swiper_block_width: ''
-
+    swiper_block_width: '',
+    barHeight: app.globalData.barHeight,
+    textHeight: app.globalData.textHeight,
   },
 
   //搜索输入框聚焦事件

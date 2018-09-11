@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "专题"
+  "navigationBarTitleText": "专题",
+  "usingComponents": {
+    "my-component": "../components/my-component"
+  }
 }

@@ -1,5 +1,6 @@
 <!--pages/hintDetail/hintDetail.wxml-->
-<scroll-view class='jw-body-scroll-view' scroll-y='{{isHidebuy}}'>
+<my-component isback='{{true}}' title='礼物详情' color='white'></my-component>
+<scroll-view style='margin-top:{{barHeight+textHeight+"rpx"}}' class='jw-body-scroll-view' scroll-y='{{isHidebuy}}'>
   <swiper indicator-dots="{{isshowindicator}}" indicator-color="#e9e9e9" indicator-active-color="#da0202">
     <swiper-item wx:for='{{swiper_imgs}}' wx:key="item">
       <view class='jw-detail-img-view'>

@@ -1,5 +1,6 @@
 <!--pages/subject/subject.wxml-->
-<image mode='widthFix' src='{{title_img_src}}' class='jw-title-img'></image>
+<my-component isback='{{true}}' color='white' title='详情'></my-component>
+<image  style='margin-top:{{barHeight+textHeight+40+"rpx"}}' mode='widthFix' src='{{title_img_src}}' class='jw-title-img'></image>
 <view class='jw-ware-list-view'>
   <view wx:for='{{ware_list}}' data-id='{{item.id}}' bindtap='goDetail' wx:key='{{item}}' class='jw-el-ware'>
     <view class='jw-el-ware-img'>

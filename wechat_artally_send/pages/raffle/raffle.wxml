@@ -1,4 +1,5 @@
-<view class='jw-raffle-background'>
+<my-component isback='{{true}}' title='礼物详情' color='white'></my-component>
+<view style='margin-top:{{barHeight+textHeight+"rpx"}}' class='jw-raffle-background'>
 </view>
 <view class='jw-raffle-main' style='background:url({{backgroundimage}}) no-repeat;background-size:100% 100%'>
     <view class='jw-art-logo'></view>

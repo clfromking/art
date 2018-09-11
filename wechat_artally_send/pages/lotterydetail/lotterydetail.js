@@ -33,7 +33,9 @@ Page({
     ismyBtntext:'还要送礼物',
     ismy2haveBtntext:'邀请好友抽奖',
     isreceivePerson:false,
-    isshowWhite:true
+    isshowWhite:true,
+    barHeight: app.globalData.barHeight,
+    textHeight: app.globalData.textHeight,
   },
   // 轮播改变事件
   swiperchange:function(e){
