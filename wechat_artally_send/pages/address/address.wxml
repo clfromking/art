@@ -15,9 +15,9 @@
       <view class='a-l-edit fr' data-id="{{item.id}}" data-index="{{index}}" bindtap="editadd">编辑</view>
     </view>
   </view>
-  <view class='nothing' hidden='{{addresslist.length>0}}'>
-    <image></image>
-    <view>您暂时还没有收获地址</view>
+  <view class='lq-nothing' hidden='{{addresslist.length>0}}'>
+    <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/no_gifts.png"></image>
+    <view>您暂时还没有收货地址</view>
   </view>
   <navigator class='newaddress' url='/pages/addressedit/addressedit?type=1'><button>新增地址</button></navigator>
 </view>

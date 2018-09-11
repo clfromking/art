@@ -27,7 +27,7 @@
 <view class='lq-giftbox'>
   <view class='g-tit'>礼物篮</view>
   <!-- 没有礼物 -->
-  <view class='nothing' hidden='{{gifts.length>0}}'>
+  <view class='lq-nothing' hidden='{{gifts.length>0}}'>
     <image mode='widthFix' src='https://pic.forunart.com/artgive/wx/no_gifts.png'></image>
     <text>您暂时还没有礼物</text>
     <navigator open-type="switchTab" url='/pages/index/index'>返回送礼物</navigator>

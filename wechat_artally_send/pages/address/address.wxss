@@ -49,14 +49,9 @@
   background: transparent url('https://pic.forunart.com/artgive/wx/address_icon_delete.png') no-repeat left;
   background-size: 30rpx 28rpx;
 }
-.lq-address .a-l-editbox .a-l-edit{
+.lq-address .a-l-editbox .a-l-edit{no
   margin-right: 60rpx;
   background-image: url('https://pic.forunart.com/artgive/wx/address_icon_edit.png');
-}
-.lq-address .nothing{
-  font-size: 26rpx;
-	color: #999999;
-  text-align: center;
 }
 /* 新增地址按钮 */
 .lq-address .newaddress button{

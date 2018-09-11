@@ -76,21 +76,7 @@ image{
 	color: #999999;
 }
 /* 没有礼物 */
-.lq-giftbox .nothing{
-  text-align: center;
-  font-size: 26rpx;
-  color: #999999;
-}
-.lq-giftbox .nothing image{
-  display: block;
-  margin: 50rpx auto 0;
-  width: 500rpx;
-}
-.lq-giftbox .nothing text{
-  display: block;
-  margin: 30rpx auto 45rpx;
-}
-.lq-giftbox .nothing navigator{
+.lq-nothing navigator{
   margin: 0 auto;
   width: 300rpx;
   border-radius: 40px;

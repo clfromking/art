@@ -35,16 +35,14 @@ Page({
     })
     let that=this,
       posturl = this.data.posturl,
-      way = this.data.navIndex+1,
-      orderlist=[];
+      way = this.data.navIndex+1;
     let uid = wx.getStorageSync('userInfo').uid;
     app.post(posturl, { uid: uid, way: way}).then(res=>{
       // console.log(res)
       wx.hideLoading()
       if(res.code==200){
-        orderlist=res.data.lists;
         that.setData({
-          orderlist: orderlist
+          orderlist: res.data.lists
         })
       }else{
         wx.showToast({

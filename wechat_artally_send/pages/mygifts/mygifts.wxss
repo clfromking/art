@@ -16,21 +16,7 @@
   border-bottom: solid 4rpx #cbaa7c;
 }
 /* 没有礼物 */
-.lq-gifts .nothing{
-  text-align: center;
-  font-size: 26rpx;
-  color: #999999;
-}
-.lq-gifts .nothing image{
-  display: block;
-  margin: 50rpx auto 0;
-  width: 500rpx;
-}
-.lq-gifts .nothing text{
-  display: block;
-  margin: 30rpx auto 45rpx;
-}
-.lq-gifts .nothing navigator{
+.lq-nothing navigator{
   margin: 0 auto;
   width: 300rpx;
   border-radius: 40px;

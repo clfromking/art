@@ -9,3 +9,18 @@ view[hidden]{display: none !important;}
   white-space: nowrap;
   text-overflow:ellipsis;
 }
+/* 没有礼物 */
+.lq-nothing{
+  text-align: center;
+  font-size: 26rpx;
+  color: #999999;
+}
+.lq-nothing image{
+  display: block;
+  margin: 50rpx auto 0;
+  width: 500rpx;
+}
+.lq-nothing text{
+  display: block;
+  margin: 30rpx auto 45rpx;
+}
