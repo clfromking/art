@@ -134,28 +134,16 @@
 }
 .lq-discount .d-b-tip .db-icon{
   width: 20rpx;
+  height: 20rpx;
   font-size: 24rpx;
-  transition: transform .4s ease;
-  transform: rotateZ(-180deg)
 }
 .lq-discount .d-b-word{
-  height: 0;
-  padding: 0 20rpx;
   font-size: 24rpx;
 	color: #000;
   background-color: #fff;
   line-height: 2;
+  padding:30rpx;
   border-bottom: 1rpx solid #e5e5e5;
-  box-sizing: border-box;
-  overflow: hidden;
-  transition: all .4s ease;
-}
-.lq-discount .d-botbox.active .db-icon{
-  transform: rotateZ(0deg);
-}
-.lq-discount .d-botbox.active .d-b-word{
-  height: 140rpx;
-  padding:20rpx;
 }
 .lq-discount .d-b-main{
   font-size: 26rpx;
