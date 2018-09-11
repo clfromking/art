@@ -31,6 +31,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    goBack:function(){
+      wx.navigateBack({
+        
+      })
+    }
   }
 })

@@ -250,13 +250,13 @@ Page({
 
   //去商城挑选礼物
   goMall:function(){
-    console.log(app.data.formIds.join(','))
-    app.post('template/get_froms_id', { 'from_ids': app.data.formIds.join(',')}).then((res)=>{
-      console.log(res)
-    })
-    // wx.navigateTo({
-    //   url: '../mall/mall',
+    // console.log(app.data.formIds.join(','))
+    // app.post('template/get_froms_id', { 'from_ids': app.data.formIds.join(',')}).then((res)=>{
+    //   console.log(res)
     // })
+    wx.navigateTo({
+      url: '../mall/mall',
+    })
   },
 
   //生成礼物红包

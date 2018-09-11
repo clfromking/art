@@ -17,7 +17,9 @@ Page({
     input_val:'',
     swiper_block:[],
     isshowIndicator:true,
-    swiper_block_width:''
+    swiper_block_width:'',
+    barHeight: app.globalData.barHeight,
+    textHeight: app.globalData.textHeight,
   },
   search_input_focus:function(){
     this.setData({
