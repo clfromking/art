@@ -93,5 +93,8 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+  getFormid: function (e) {
+    app.getFormid(e)
+  },
 })

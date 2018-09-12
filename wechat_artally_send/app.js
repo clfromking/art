@@ -13,6 +13,9 @@ App({
         // console.log(res.data.openid)
         that.post('template/get_forms_id', { 'openid': res.data.openid, 'form_ids': that.data.formIds.join(',')}).then((res) => {
           console.log(res)
+          if(res.code==200){
+            that.data.formIds=[]
+          }
         })
       },
     })
