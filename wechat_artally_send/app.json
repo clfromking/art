@@ -20,7 +20,9 @@
     "pages/lotterydetail/lotterydetail",
     "pages/joinpeople/joinpeople",
     "pages/author/author",
-    "pages/servers/servers"
+    "pages/servers/servers",
+    "pages/saveImg/saveImg"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",

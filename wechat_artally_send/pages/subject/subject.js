@@ -16,6 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '数据加载中',
+    })
     var that = this
     if (options.id){
       app.post('gifts/giftspecial', { 'giftspecial_id': options.id }).then((res) => {
@@ -25,6 +28,7 @@ Page({
             title_img_src: res.data.giftspecial.image,
             ware_list: res.data.gifts
           })
+          wx.hideLoading()
         }
       }).catch((error) => {
         console.log(error)

@@ -140,6 +140,9 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    wx.showLoading({
+      title: '数据加载中',
+    })
     app.post('banner/lists',{'position':2}).then((res) => {
       console.log(res)
       var swiper_block=[]
@@ -196,7 +199,7 @@ Page({
         that.setData({
           ware_list
         })
-        
+        wx.hideLoading()
       }
     }).catch((error)=>{
       console.log(error)

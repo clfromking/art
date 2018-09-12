@@ -190,22 +190,22 @@ Page({
   swiperImgLoad:function(e){
     // console.log(swipersuccessload)
     // console.log(e)
-    swiperLoadnum++
-    if (swiperLoadnum >= swiper_imgs.length){
-      swipersuccessload=true
-    }
-    if(swipersuccessload==true&&detailsuccessload==true){
-      wx.hideLoading()
-    }
+    // swiperLoadnum++
+    // if (swiperLoadnum >= swiper_imgs.length){
+    //   swipersuccessload=true
+    // }
+    // if(swipersuccessload==true){
+    //   wx.hideLoading()
+    // }
     // console.log(swipersuccessload)
   },
 
   //详情图加载事件
   detailImgLoad:function(e){
-    detailsuccessload=true
-    if (swipersuccessload == true && detailsuccessload == true) {
-      wx.hideLoading()
-    }
+    // detailsuccessload=true
+    // if (swipersuccessload == true && detailsuccessload == true) {
+    //   wx.hideLoading()
+    // }
   },
 
 
@@ -272,6 +272,7 @@ Page({
           specification_repertory: specification[0].repertory,
           gift_id:options.id
         })
+        wx.hideLoading()
         // console.log(this.data.specification)
       }
     }).catch((error)=>{

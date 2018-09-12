@@ -5,5 +5,6 @@
 <view class='jw-author-body'>
   <text class='jw-author-title'>请同意授权</text>
   <text class='jw-author-alt'>· 以便哥送艺术为你提供更好的服务</text>
-  <button withCredentials='{{true}}' bindtap='loginTap' open-type='getUserInfo' bindgetuserinfo='bindgetuserinfo' class='jw-author-btn'>确认授权</button>
+  <button withCredentials='{{true}}' hidden='{{issaveImg}}' bindtap='loginTap' open-type='getUserInfo' bindgetuserinfo='bindgetuserinfo' class='jw-author-btn'>确认授权</button>
+  <button withCredentials='{{true}}' hidden='{{!issaveImg}}' bindopensetting='openSettingTap' open-type='openSetting' class='jw-author-btn'>确认授权</button>
 </view>
