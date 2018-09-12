@@ -837,6 +837,13 @@ Page({
       // console.log(res)
       uid = res.data.uid
       openid = res.data.openid
+      var postData={'openid':openid,'form_ids':app.data.formIds.join(',')}
+      console.log(postData)
+      app.post('template/get_forms_id',postData).then((res)=>{
+        console.log(res)
+      }).catch((error)=>{
+
+      })
       // console.log(res)
       that.addOrder()
     }).catch((res) => {
@@ -1058,8 +1065,11 @@ Page({
   },
 
   getFormid:function(e){
+<<<<<<< HEAD
     console.log(e)
     console.log(e.detail.formId)
+=======
+>>>>>>> 修改formid
     var timestamp = Date.parse(new Date())/1000;
     var pushData=e.detail.formId+'-'+timestamp
     app.data.formIds.push(pushData)
