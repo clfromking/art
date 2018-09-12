@@ -18,6 +18,14 @@ Page({
     operation:false,
     checkAllStatus:false
   },
+  // 跳转到mygifts页面
+  goMygifts(e){
+    let url=e.currentTarget.dataset.url;
+    wx.navigateTo({
+      url: url,
+    })
+  },
+  // 获取礼物篮列表
   getgiftlist:function(){
     wx.showLoading({
       title: '数据加载中',
@@ -189,6 +197,9 @@ Page({
     wx.makePhoneCall({
       phoneNumber: '4009001813'
     })
+  },
+  getFormid(e){
+    app.getFormid(e);
   },
   /**
    * 生命周期函数--监听页面加载

@@ -19,9 +19,21 @@
 </view>
 <!-- 导航栏 -->
 <view class="lq-nav">
-  <navigator class="n-li" url='/pages/mygifts/mygifts?type=0&nav=0'>提货/折现记录<text>{{orderNums.receive}}</text></navigator>
-  <navigator class="n-li" url='/pages/mygifts/mygifts?type=1'>我送出的<text>{{orderNums.send}}</text></navigator>
-  <navigator class="n-li" url='/pages/mygifts/mygifts?type=2'>我参与的<text>{{orderNums.join}}</text></navigator>
+  <!-- 为收集formid改造页面 -->
+  <form class='pr n-li' report-submit='true' bindsubmit='getFormid'>
+    <view>提货/折现记录<text>{{orderNums.receive}}</text></view>
+    <button form-type='submit' class='getFormIdBtn' data-url="/pages/mygifts/mygifts?type=0&nav=0"  bindtap='goMygifts'></button>
+  </form>
+  <form class='pr n-li' report-submit='true' bindsubmit='getFormid'>
+    <view>我送出的<text>{{orderNums.send}}</text></view>
+    <button form-type='submit' class='getFormIdBtn' data-url='/pages/mygifts/mygifts?type=1' bindtap='goMygifts'></button>
+  </form>
+  <form class='pr n-li' report-submit='true' bindsubmit='getFormid'>
+    <view>我参与的<text>{{orderNums.join}}</text></view>
+    <button form-type='submit' class='getFormIdBtn' data-url='/pages/mygifts/mygifts?type=2' bindtap='goMygifts'></button>
+  </form>
+  <!-- <navigator class="n-li" url='/pages/mygifts/mygifts?type=1'>我送出的<text>{{orderNums.send}}</text></navigator>
+  <navigator class="n-li" url='/pages/mygifts/mygifts?type=2'>我参与的<text>{{orderNums.join}}</text></navigator> -->
 </view>
 <!-- 礼物篮 -->
 <view class='lq-giftbox'>
