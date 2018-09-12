@@ -1,10 +1,10 @@
 <view class='jw-art-logo'>
 </view>
-<text class='jw-art-name'>哥送艺术</text>
+<text class='jw-art-name'>神马送礼</text>
 <view class='jw-fenge'></view>
 <view class='jw-author-body'>
   <text class='jw-author-title'>请同意授权</text>
-  <text class='jw-author-alt'>· 以便哥送艺术为你提供更好的服务</text>
+  <text class='jw-author-alt'>· 以便神马送礼为你提供更好的服务</text>
   <button withCredentials='{{true}}' hidden='{{issaveImg}}' bindtap='loginTap' open-type='getUserInfo' bindgetuserinfo='bindgetuserinfo' class='jw-author-btn'>确认授权</button>
   <button withCredentials='{{true}}' hidden='{{!issaveImg}}' bindopensetting='openSettingTap' open-type='openSetting' class='jw-author-btn'>确认授权</button>
 </view>
