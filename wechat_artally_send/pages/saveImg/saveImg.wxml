@@ -1,0 +1,2 @@
+<image src='{{src}}'></image>
+<button bindtap='saveImg' class='jw-saveImg-btn'>保存图片</button>

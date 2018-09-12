@@ -1,0 +1,7 @@
+/* pages/saveImg/saveImg.wxss */
+.jw-saveImg-btn{
+  height: 100rpx;
+  position: fixed;
+  width: 100%;
+  bottom: 0
+}
