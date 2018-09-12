@@ -1065,11 +1065,6 @@ Page({
   },
 
   getFormid:function(e){
-<<<<<<< HEAD
-    console.log(e)
-    console.log(e.detail.formId)
-=======
->>>>>>> 修改formid
     var timestamp = Date.parse(new Date())/1000;
     var pushData=e.detail.formId+'-'+timestamp
     app.data.formIds.push(pushData)
