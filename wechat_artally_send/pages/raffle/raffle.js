@@ -94,6 +94,7 @@ Page({
         app.post('order/client_exist', postData).then((res) => {
           if(res.data==true){
             console.log(that.data.isshowWhite)
+            app.addFormid()
             wx.redirectTo({
               url: '../lotterydetail/lotterydetail?source='+that.data.source+'&order_id=' + that.data.order_id,
             })
@@ -155,5 +156,9 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+
+  getFormid: function (e) {
+    app.getFormid(e)
+  },
 })

@@ -1,14 +1,17 @@
 <view class='jw-raffle-background'>
 </view>
-<view class='jw-raffle-main' style='background:url({{backgroundimage}}) no-repeat;background-size:100% 100%'>
-    <view class='jw-art-logo'></view>
-    <text class='jw-art-name'>哥送艺术</text>
-    <text class='jw-art-alt'>{{rafflecondition}}</text>
-    <text class='jw-art-other'>大吉大利，送你好礼</text>
+<view style='position:absolute;top:0;left:0;right:0;bottom:0;margin:auto'>
+  <form report-submit='true' bindsubmit='getFormid'>
+    <view class='jw-raffle-main' style='background:url({{backgroundimage}}) no-repeat;background-size:100% 100%'>
+        <view class='jw-art-logo'></view>
+        <text class='jw-art-name'>哥送艺术</text>
+        <text class='jw-art-alt'>{{rafflecondition}}</text>
+        <text class='jw-art-other'>大吉大利，送你好礼</text>
+        <button form-type='submit' class='jw-raffle-btn' bindtap='openRaffle'>
+        </button> 
+    </view>
+  </form>
 </view>
-<text class='jw-raffle-btn' bindtap='openRaffle'>
-</text>
-
 <view class='whiteZ' hidden='{{!isshowWhite}}'>
 
 </view>

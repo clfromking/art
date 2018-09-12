@@ -59,9 +59,9 @@ page{
   height: 173rpx;
   background:none;
   border-radius: 50%;
-  top: 710rpx;
+  top:493rpx;
   position: absolute;
-  left: 285rpx;
+  left: 237rpx;
 
 }
 .whiteZ{
