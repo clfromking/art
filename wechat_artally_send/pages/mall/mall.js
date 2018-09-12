@@ -253,9 +253,6 @@ Page({
   },
 
   getFormid: function (e) {
-    var timestamp = Date.parse(new Date()) / 1000;
-    var pushData = e.detail.formId + '-' + timestamp
-    app.data.formIds.push(pushData)
-    console.log(app.data.formIds)
+    app.getFormid(e)
   },
 })

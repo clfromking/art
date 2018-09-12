@@ -5,6 +5,28 @@ App({
     formIds:[],
   },
 
+  addFormid:function(){
+    var that=this
+    wx.getStorage({
+      key: 'userInfo',
+      success: function(res) {
+        // console.log(res.data.openid)
+        that.post('template/get_forms_id', { 'openid': res.data.openid, 'form_ids': that.data.formIds.join(',')}).then((res) => {
+          console.log(res)
+        })
+      },
+    })
+    
+  },
+
+
+  getFormid:function(e){
+    var timestamp = Date.parse(new Date()) / 1000;
+    var pushData = e.detail.formId + '-' + timestamp
+    this.data.formIds.push(pushData)
+    console.log(this.data.formIds)
+  },
+
   //promise封装post请求
   post: function (url, data, params){
     var promise=new Promise((resolve,reject)=>{
