@@ -1,5 +1,0 @@
-<view class='{{color=="red"?"barStyle":"barStyle2"}}' style='height:{{barHeight+"rpx"}}'></view>
-<view style='height:{{textHeight+"rpx"}};line-height:{{textHeight+"rpx"}};top:{{barHeight+"rpx"}};'class='{{color=="red"?"barStyle":"barStyle2"}}'>
-  <image bindtap='goBack' hidden='{{!isback}}' mode='widthFix' src='{{color=="red"?"../imgs/back_white.png":"../imgs/back_black.png"}}' style='width:22.4rpx;height:34rpx;position:absolute;left:24rpx;margin-top:{{(textHeight-34)/2+1+"rpx"}}'></image>
-  <text>{{title}}</text>
-</view>

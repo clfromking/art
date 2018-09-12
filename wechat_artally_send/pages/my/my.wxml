@@ -1,9 +1,8 @@
 <!--pages/my/my.wxml-->
 <!-- 头部 -->
-<my-component color="white"></my-component>
 <wxs src="../../utils/filter.wxs" module="filter" />
 <navigator class='lq-login-mask' url='/pages/author/author' hidden='{{islogin}}'></navigator>
-<view   style='margin-top:{{barHeight+textHeight+"rpx"}}' class="lq-headbox">
+<view class="lq-headbox">
   <view class="h-pic">
     <image src='{{userInfo.avatar?userInfo.avatar:"https://pic.forunart.com/artgive/wx/me_img.png"}}'></image>
     <!-- <open-data type="userAvatarUrl"></open-data> -->

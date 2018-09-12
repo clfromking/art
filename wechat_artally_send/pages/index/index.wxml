@@ -1,5 +1,4 @@
-<my-component></my-component>
-<image style='margin-top:{{barHeight+textHeight+"rpx"}}' class="jw-index-banner" bindtap='bannerTap' data-go='{{banner_msgs.go}}' data-id='{{banner_msgs.id}}' data-go_id='{{banner_msgs.go_id}}' src="{{banner_msgs.avatar}}"></image>
+<image class="jw-index-banner" bindtap='bannerTap' data-go='{{banner_msgs.go}}' data-id='{{banner_msgs.id}}' data-go_id='{{banner_msgs.go_id}}' src="{{banner_msgs.avatar}}"></image>
 <view class='jw-index-body' >
   <view class='jw-gifts-view' hidden='{{!gift_lists}}'>
     <view class='jw-gift-lists' wx:for="{{gift_lists}}" data-id='{{item.id}}' wx:key="item">

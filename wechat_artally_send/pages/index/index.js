@@ -35,8 +35,6 @@ Page({
     ClickNum: 0,          //控制单双击
     lotteryPersonInputVal:'',   //开奖人数value
     fullPersonInputVal:'',      //满人玩法时中奖人数value
-    barHeight: app.globalData.barHeight,
-    textHeight: app.globalData.textHeight,
     // gift_lists:''
   },
   //显示玩法上拉类型列表
@@ -250,10 +248,6 @@ Page({
 
   //去商城挑选礼物
   goMall:function(){
-    // console.log(app.data.formIds.join(','))
-    // app.post('template/get_froms_id', { 'from_ids': app.data.formIds.join(',')}).then((res)=>{
-    //   console.log(res)
-    // })
     wx.navigateTo({
       url: '../mall/mall',
     })

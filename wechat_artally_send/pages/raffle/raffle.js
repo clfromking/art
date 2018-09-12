@@ -11,9 +11,7 @@ Page({
     inviter:0,
     source:'',
     backgroundimage:'https://pic.forunart.com/artgive/wx/gift_bg_img_2.png',
-    isshowWhite:true,
-    barHeight: app.globalData.barHeight,
-    textHeight: app.globalData.textHeight,
+    isshowWhite:true
   },
 
   openRaffle:function(){

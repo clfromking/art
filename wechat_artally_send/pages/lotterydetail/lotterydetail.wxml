@@ -1,6 +1,5 @@
 <!--pages/lotterydetail/lotterydetail.wxml-->
-<my-component isback='{{true}}'></my-component>
-<view  style='margin-top:{{barHeight+textHeight+"rpx"}}' class='lq-lotdetail'>
+<view class='lq-lotdetail'>
   <!-- 状态区 -->
   <view class='l-statusbox'>
     <view class='tip'>{{title_text}}</view>

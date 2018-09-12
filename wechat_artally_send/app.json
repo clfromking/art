@@ -26,8 +26,7 @@
     "backgroundTextStyle":"light",
     "navigationBarTitleText": "哥送艺术",
     "navigationBarBackgroundColor":"#fff",
-    "navigationBarTextStyle":"black",
-    "navigationStyle":"custom"
+    "navigationBarTextStyle":"black"
   },
   "tabBar": {
     "backgroundColor":"#fff",

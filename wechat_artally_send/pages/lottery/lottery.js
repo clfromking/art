@@ -9,9 +9,7 @@ Page({
   data: {
     lottery_list:lottery_list,  //抽奖列表
     lottery_btnText:'立即抽奖',
-    banner_msgs:{},
-    barHeight: app.globalData.barHeight,
-    textHeight: app.globalData.textHeight,
+    banner_msgs:{}
   },
 
   //点击抽奖事件

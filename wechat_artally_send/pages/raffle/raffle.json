@@ -1,7 +1,4 @@
 {
-  "navigationBarTitleText": "礼物详情",
-  "usingComponents": {
-    "my-component": "../components/my-component"
-  }
+  "navigationBarTitleText": "礼物详情"
 
 }

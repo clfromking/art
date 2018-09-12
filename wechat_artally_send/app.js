@@ -69,8 +69,7 @@ App({
     var that = this
     wx.getSystemInfo({
       success: function (res) {
-        that.globalData.barHeight = (res.statusBarHeight) * Number(Rpx)
-        that.globalData.textHeight=44*Number(Rpx)
+        that.globalData.barHeight = (47 + res.statusBarHeight) * Number(Rpx) + 'rpx'
       },
     })    
     // wx.clearStorage()
@@ -105,7 +104,6 @@ App({
     
   },
   globalData:{
-    barHeight:'',
-    textHeight:''
+    barHeight:''
   }
 })
