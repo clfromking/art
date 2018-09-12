@@ -9,6 +9,12 @@ view[hidden]{display: none !important;}
   white-space: nowrap;
   text-overflow:ellipsis;
 }
+.more_ellipsis{
+  display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
+}
 /* 没有礼物 */
 .lq-nothing{
   text-align: center;

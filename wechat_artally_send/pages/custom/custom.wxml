@@ -1,4 +1,19 @@
-<!--pages/custom/custom.wxml-->
-<text>pages/custom/custom.wxml</text>
-<!-- <button open-type="contact" />
-<button open-type='contact'>sss</button> -->
+<view style='background:#fff;padding-bottom:30rpx'>
+  <image class='jw-custom-banner' src='../imgs/1.png'></image>
+  <button class='jw-call-custom'>联系在线客服</button>
+</view>
+<view class='jw-questions'>
+  <view class='jw-questions-el clear' wx:for='{{questions}}' wx:key='{{item}}'>
+    <view class='fl jw-question-left'>
+      <image src='../imgs/1.png' class='jw-question-icon'></image>
+      <text class='jw-question-name'>{{item.name}}</text>
+    </view>
+    <view class='fr jw-question-right more_ellipsis'>
+      {{item.describe}}
+    </view>
+  </view>
+</view>
+<view class='jw-question-bottom'>
+  当前版本V1.0
+</view>
+<view class='g-callphone' style="bottom:{{operation?'110rpx':''}}" bindtap='callphone'></view>
