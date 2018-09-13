@@ -1,9 +1,9 @@
 {
-  "pages":["pages/my/my",
+  "pages":[
     "pages/index/index",
     "pages/lottery/lottery",
     "pages/custom/custom",
-    
+    "pages/my/my",
     "pages/mall/mall",
     "pages/mallAll/mallAll",
     "pages/hintDetail/hintDetail",
