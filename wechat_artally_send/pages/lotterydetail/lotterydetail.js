@@ -368,7 +368,7 @@ Page({
                   case 2:
                     title_text ='恭喜您，您已抽中大奖'
                     ishave=true
-                    ismy2haveBtntext='分享给好友'
+                    ishowSpebtn = true
                     break;
                   case 3:
                     title_text ='很遗憾，您未抽中大奖'
@@ -396,7 +396,7 @@ Page({
                   case 2:
                     ishave=true
                     title_text='恭喜您，您已抽中大奖'
-                    ismy2haveBtntext='分享给好友'
+                    ishowSpebtn = true
                     break;
                   case 3:
                     title_text = '很遗憾，您未抽中大奖'
