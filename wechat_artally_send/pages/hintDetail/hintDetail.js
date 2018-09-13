@@ -243,7 +243,7 @@ Page({
          
         }
         swiper_imgs=res.data.lists.imgs
-        detail_msg = { 'name': res.data.lists.name, 'describe': res.data.lists.describe, 'price': res.data.lists.price}
+        detail_msg = { 'name': res.data.lists.name, 'describe': res.data.lists.describe, 'price': res.data.lists.price, smallimg: res.data.lists.price.mini_image}
         if (specification.length==0){
           wx.showToast({
             icon:'none',
@@ -265,7 +265,7 @@ Page({
             }
           })
         }
-        that.createimg(swiper_imgs[0],detail_msg.name)
+        that.createimg(detail_msg.smallimg,detail_msg.name)
         that.setData({
           swiper_imgs:swiper_imgs,
           detail_msg:detail_msg,
