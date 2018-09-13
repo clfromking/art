@@ -216,6 +216,7 @@ Page({
   onLoad: function (options) {
     console.log(iscommon)
     console.log(options)
+    wx.hideShareMenu()
     wx.showLoading({
       mask:true,
       title: '数据加载中',
@@ -348,22 +349,26 @@ Page({
         ctx.setFillStyle('black')
         name = name.length > 16 ? name.substring(0, 16) + '...' : name;
         ctx.fillText(name, 120, 355)
-        ctx.draw();
-        wx.canvasToTempFilePath({
-          x: 0,
-          y: 0,
-          width: 500,
-          height: 400,
-          destWidth: 500,
-          destHeight: 400,
-          canvasId: 'myCanvas1',
-          success: function (res2) {
-            // console.log(res2.tempFilePath)
-            that.setData({
-              shareimg: res2.tempFilePath
-            })
-          }
-        })
+        ctx.draw(setTimeout(function(){
+          wx.canvasToTempFilePath({
+            x: 0,
+            y: 0,
+            width: 500,
+            height: 400,
+            destWidth: 500,
+            destHeight: 400,
+            canvasId: 'myCanvas1',
+            success: function (res2) {
+              // console.log(res2.tempFilePath)
+              that.setData({
+                shareimg: res2.tempFilePath
+              })
+              wx.showShareMenu()
+            },fail:function(){
+              wx.showShareMenu()
+            }
+          })
+        },1000));
       },
       fail: function (res) {
         console.log(res)
