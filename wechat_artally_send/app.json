@@ -21,6 +21,7 @@
     "pages/joinpeople/joinpeople",
     "pages/author/author",
     "pages/servers/servers",
+    "pages/instructions/instructions",
     "pages/saveImg/saveImg"
     
   ],

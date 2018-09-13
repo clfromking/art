@@ -1,0 +1,89 @@
+<!--pages/instructions/instructions.wxml-->
+<view class='lq-instructions'>
+  <view class='head'>
+    <image mode='widthFix'  src='https://pic.forunart.com/artgive/wx/shiyongshuoming_banner2@3x.png'></image>
+    <view class='bold'>使用说明</view>
+    <view>神马艺术，开启微信艺术送礼新潮流。</view>
+  </view>
+  <view class='main'>
+    <view class='m-li'>
+      <view class='m-tit'>
+        <view class='m-t-icon'>1</view>
+        <text>神马艺术是神马呀？</text>
+      </view>
+      <view class='m-con'>神马艺术是一个相当潮流并具艺术范的微信送礼方式，我们为您推荐的是极具新潮和艺术类的礼物。并且以 “礼物红包”、"限时开奖“、”人满开奖“三种玩法供广大热爱艺术，追求潮流的玩家可选择，给您以全新，有趣不一样的体验。</view>
+    </view>
+    <view class='m-li'>
+      <view class='m-tit'>
+        <view class='m-t-icon'>2</view>
+        <text>如何把礼物送出去呀？</text>
+      </view>
+      <view class='m-con'>
+        <text>1：首先点击“开始挑选礼物”</text>
+        <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/info_img1.jpeg"></image>
+      </view>
+      <view class='m-con'>
+        <text>2：礼物挑选完成以后，设定你要的玩法</text>
+        <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/info_img2.jpeg"></image>
+      </view>
+      <view class='m-con'>
+        <text>3：付款后发送给微信好友或者分享到朋友圈</text>
+        <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/info_img3.jpeg"></image>
+      </view>
+    </view>
+    <view class='m-li'>
+      <view class='m-tit'>
+        <view class='m-t-icon'>3</view>
+        <text>玩转红包的详细介绍</text>
+      </view>
+      <view class='m-con'>
+        <view class='m-c-subtit'>礼物红包</view>
+        <view>发起人首先要挑选礼物，付款后发送给好友或生成图片分享到朋友圈，收礼人点击链接或长按图片识别二维码，即可收礼。可以直接送长辈，爱人，同事等。</view>
+      </view>
+      <view class='m-con'>
+        <view class='m-c-subtit'>限时开奖</view>
+        <view>发起人必须设定开奖时间，设定中奖人数（中奖人数不得大于所选商品数量）开奖时间到达后，系统会从参与的抽奖用户中随机抽出中奖的用户并且派发所中礼物。</view>
+      </view>
+      <view class='m-con'>
+        <view class='m-c-subtit'>人满开奖</view>
+        <view>发起人必须设定开奖人数上限，设定中奖人数（中奖人数不得大于商品数量且不可大于开奖人数），当参与人数到达设定开奖人数后，系统会从参与的抽奖用户中随机抽出中奖的用户并且派发所中礼物。</view>
+      </view>
+      <view class='m-con'>
+        <view class='m-c-subtit'>温馨提示</view>
+        <view>限时开奖和人满开奖抽奖成功后，可以邀请更多好友来参与抽奖，参与者可以为邀请者增加1倍的助力，参与者助力越高，则中奖几率会越大，要多多邀请好友抽奖呦。</view>
+      </view>
+    </view>
+    <view class='m-li'>
+      <view class='m-tit'>
+        <view class='m-t-icon'>4</view>
+        <text>支付时间限制说明</text>
+      </view>
+      <view class='m-con'>发起人在生成礼物红包后，请务必在30秒之内完成支付，否则你所订购的商品在30秒后未支付，则视该订单为失效，以免给您带来不必要的困扰，所以请您及时支付。</view>
+    </view>
+    <view class='m-li'>
+      <view class='m-tit'>
+        <view class='m-t-icon'>5</view>
+        <text>礼物送出后无人领取或参与，肿么办？</text>
+      </view>
+      <view class='m-con'>1:如果是礼物红包送出后无人领取，系统会在72小时后自动为您进行退款，相关款项会退回到您所支付的账户上，请您放心。</view>
+      <view class='m-con'>2:如果是“人满开奖”，当72小时内参与人数未达到发起人所设定的人数要求时，那么此次抽奖作废，系统会在72小时后自动为您进行退款，相关款项会退回到您所支付的账户上，请您放心。</view>
+    </view>
+    <view class='m-li'>
+      <view class='m-tit'>
+        <view class='m-t-icon'>6</view>
+        <text>如有问题及时联系我们！</text>
+      </view>
+      <view class='m-con'>如您在使用过程中遇到任何问题，都可点击主页下方“客服”联系我们。</view>
+    </view>
+    <view class='m-li'>
+      <view class='m-tit'>
+        <view class='m-t-icon'>7</view>
+        <text>商务合作</text>
+      </view>
+      <view class='m-con'>
+        <text>商务合作请联系\n邮箱：forunart@artally.com.cn\n电话：010-5975-6813\n我们会第一时间回复，感谢你的一直关注。
+        </text>
+      </view>
+    </view>
+  </view>
+</view>

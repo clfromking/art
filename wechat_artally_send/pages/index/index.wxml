@@ -99,7 +99,7 @@
   <form report-submit='true' bindsubmit='getFormid'>
     <button form-type='submit' bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
   </form>
-  <view style='text-align:center;margin-top:20rpx;font-size:28rpx;color:#999'><navigator style='display:inline-block;' url=''>使用说明</navigator>丨<navigator style='display:inline-block;' url='/pages/servers/servers'>用户协议</navigator></view>
+  <view style='text-align:center;margin-top:20rpx;font-size:28rpx;color:#999'><navigator style='display:inline-block;' url='/pages/instructions/instructions'>使用说明</navigator>丨<navigator style='display:inline-block;' url='/pages/servers/servers'>用户协议</navigator></view>
 </view>
 
 
