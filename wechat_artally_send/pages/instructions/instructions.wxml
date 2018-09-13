@@ -3,15 +3,15 @@
   <view class='head'>
     <image mode='widthFix'  src='https://pic.forunart.com/artgive/wx/shiyongshuoming_banner2@3x.png'></image>
     <view class='bold'>使用说明</view>
-    <view>神马艺术，开启微信艺术送礼新潮流。</view>
+    <view>神马送礼，开启微信艺术送礼新潮流。</view>
   </view>
   <view class='main'>
     <view class='m-li'>
       <view class='m-tit'>
         <view class='m-t-icon'>1</view>
-        <text>神马艺术是神马呀？</text>
+        <text>神马送礼是神马呀？</text>
       </view>
-      <view class='m-con'>神马艺术是一个相当潮流并具艺术范的微信送礼方式，我们为您推荐的是极具新潮和艺术类的礼物。并且以 “礼物红包”、"限时开奖“、”人满开奖“三种玩法供广大热爱艺术，追求潮流的玩家可选择，给您以全新，有趣不一样的体验。</view>
+      <view class='m-con'>神马送礼是一个相当潮流并具艺术范的微信送礼方式，我们为您推荐的是极具新潮和艺术类的礼物。并且以 “礼物红包”、"限时开奖“、”人满开奖“三种玩法供广大热爱艺术，追求潮流的玩家可选择，给您以全新，有趣不一样的体验。</view>
     </view>
     <view class='m-li'>
       <view class='m-tit'>

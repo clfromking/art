@@ -1,4 +1,6 @@
 <!--pages/hintDetail/hintDetail.wxml-->
+<canvas canvas-id='myCanvas1' class='myCanvas'></canvas>
+
 <scroll-view class='jw-body-scroll-view' scroll-y='{{isHidebuy}}'>
   <swiper indicator-dots="{{isshowindicator}}" indicator-color="#e9e9e9" indicator-active-color="#da0202">
     <swiper-item wx:for='{{swiper_imgs}}' wx:key="item">

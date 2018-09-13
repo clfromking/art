@@ -9,7 +9,8 @@ Page({
   data: {
     lottery_list:lottery_list,  //抽奖列表
     lottery_btnText:'立即抽奖',
-    banner_msgs:{}
+    banner_msgs:{},
+    shareimg:''
   },
 
   //点击抽奖事件
@@ -56,11 +57,13 @@ Page({
         break;
     }
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.getShareInfo({
+      shareTicket: 'true',
+    })
     var that=this
     app.post('banner/lists', {'position':3}).then((res) => {
       // console.log(res)
@@ -69,7 +72,6 @@ Page({
         that.setData({
           banner_msgs: res.data.business_list[0]
         })
-
       }
     }).catch((error) => {
       console.log(error)
@@ -165,8 +167,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (res) {
+    let that=this,
+    name = wx.getStorageSync('userInfo').username;
+    return {
+      title: (name ? name : "我")+"邀请您参与神马送礼的官方抽奖，请点击查看",
+      imageUrl: "https://pic.forunart.com/artgive/wx/lotterybg.jpg"
+    }
   },
 
   getFormid: function (e) {

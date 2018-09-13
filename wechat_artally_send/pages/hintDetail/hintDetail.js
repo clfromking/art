@@ -7,7 +7,6 @@ let iscommon=false
 var swiperLoadnum=0
 var swipersuccessload=false
 var detailsuccessload=false
-const ctx=wx.createCanvasContext('myCanvas')
 Page({
 
   /**
@@ -24,7 +23,8 @@ Page({
     specification_img:'',
     specification_repertory:0,
     gift_id:0,
-    isshowindicator:false
+    isshowindicator:false,
+    shareimg:""
   },
   buyThis:function(){
     this.setData({
@@ -264,6 +264,7 @@ Page({
             }
           })
         }
+        that.createimg(swiper_imgs[0],detail_msg.name)
         that.setData({
           swiper_imgs:swiper_imgs,
           detail_msg:detail_msg,
@@ -318,7 +319,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    
   },
 
   /**
@@ -327,14 +328,58 @@ Page({
   onReachBottom: function () {
   
   },
-
+  // 生成图片
+  createimg: function (img,name) {
+    var that = this;
+    wx.getImageInfo({
+      src: img,
+      success: function (res1) {
+        // console.log(res1)
+        const ctx = wx.createCanvasContext('myCanvas1')
+        ctx.setFillStyle('#f2f2f2')
+        ctx.fillRect(0, 0, 500, 400)
+        ctx.setStrokeStyle('#da0202')
+        ctx.setLineWidth(8)
+        ctx.strokeRect(4, 4, 488, 392)
+        ctx.setFillStyle('white')
+        ctx.fillRect(100, 30, 300, 340)
+        ctx.drawImage(res1.path, 100, 30, 300, 300)
+        ctx.setFontSize(16)
+        ctx.setFillStyle('black')
+        name = name.length > 16 ? name.substring(0, 16) + '...' : name;
+        ctx.fillText(name, 120, 355)
+        ctx.draw();
+        wx.canvasToTempFilePath({
+          x: 0,
+          y: 0,
+          width: 500,
+          height: 400,
+          destWidth: 500,
+          destHeight: 400,
+          canvasId: 'myCanvas1',
+          success: function (res2) {
+            // console.log(res2.tempFilePath)
+            that.setData({
+              shareimg: res2.tempFilePath
+            })
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    })
+  },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    
+    let that = this, 
+      name = wx.getStorageSync('userInfo').username;
+    return{
+      title: (name ? name : "我") + "觉得这款商品不错，邀请你去看看",
+      imageUrl: that.data.shareimg
+    }
   },
-  true:function()
-  {}
 
 })
