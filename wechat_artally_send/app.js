@@ -5,6 +5,7 @@ App({
     formIds:[],
   },
 
+  //添加formid
   addFormid:function(){
     var that=this
     wx.getStorage({
@@ -22,7 +23,7 @@ App({
     
   },
 
-
+  //收集formid
   getFormid:function(e){
     var timestamp = Date.parse(new Date()) / 1000;
     var pushData = e.detail.formId + '-' + timestamp
@@ -52,6 +53,7 @@ App({
     return promise;
   },
 
+  //判断是否登录
   islogin:function(){
     var promise=new Promise((resolve,reject)=>{
       wx.getStorage({
@@ -69,6 +71,16 @@ App({
     return promise
   },
   
+  //通用分享
+  commonShare:function(res){
+    return {
+      title:'神马送礼小程序，玩转微信新潮流。',
+      path:'pages/index/index',
+      imageUrl:'https://pic.forunart.com/artgive/wx/zong_banner@3x.png'
+    }
+  },
+
+
   //用法
   //const app=getApp()  在需要用到request请求的页面中的顶部获取app.js中的App
   // app.post('https://server.artally.com.cn/zuzu/api/painting/paintinghot').then((res) => {
