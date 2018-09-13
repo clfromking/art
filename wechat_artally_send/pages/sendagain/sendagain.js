@@ -426,20 +426,7 @@ Page({
 
   //banner点击事件
   bannerTap: function (e) {
-    switch (e.currentTarget.dataset.go) {
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      case 5:
-        break;
-      case 6:
-        break;
-    }
+    app.bannerGo(e)
   },
 
   //祝福语聚焦事件

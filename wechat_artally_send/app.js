@@ -80,6 +80,37 @@ App({
     }
   },
 
+  bannerGo:function(e){
+    switch (Number(e.currentTarget.dataset.go)) {
+      case 1:
+        break;
+      case 2:
+        wx.switchTab({
+          url: '../index/index',
+        })
+        break;
+      case 3:
+        wx.navigateTo({
+          url: '../hintDetail/hintDetail?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 4:
+        wx.navigateTo({
+          url: '../raffle/raffle?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 5:
+        wx.navigateTo({
+          url: '../subject/subject?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 6:
+        wx.navigateTo({
+          url: '../mall/mall',
+        })
+        break;
+    }
+  },
 
   //用法
   //const app=getApp()  在需要用到request请求的页面中的顶部获取app.js中的App

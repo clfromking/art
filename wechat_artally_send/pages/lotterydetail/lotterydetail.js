@@ -38,7 +38,8 @@ Page({
     banner_msgs:'',
     shareTitle:'',
     shareImg:'',
-    sharePath:''
+    sharePath:'',
+    isload:false
 
   },
   // 轮播改变事件
@@ -109,15 +110,15 @@ Page({
           switch (Number(gift_detail.gameplaydata)) {
             case 2:
               gift_detail.condition = gift_detail.condition + '开奖'
-              shareTitle=gift_detail.uname+'邀请你参与抽奖，请点击查看。'
+              shareTitle=gift_detail.cname+'邀请你参与抽奖，请点击查看。'
               break;
             case 3:
               gift_detail.condition = '满' + gift_detail.condition + '人开奖'
-              shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
+              shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
               break;
             default:
               gift_detail.condition = '礼物红包'
-              shareTitle = gift_detail.uname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' :'个礼包')
+              shareTitle = gift_detail.cname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' :'个礼包')
               break;
           }
 
@@ -193,15 +194,15 @@ Page({
           switch (Number(gift_detail.gameplaydata)) {
             case 2:
               gift_detail.condition = gift_detail.condition + '开奖'
-              shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
+              shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
               break;
             case 3:
               gift_detail.condition = '满' + gift_detail.condition + '人开奖'
-              shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
+              shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
               break;
             default:
               gift_detail.condition = '礼物红包'
-              shareTitle = gift_detail.uname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
+              shareTitle = gift_detail.cname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
               if (Number(gift_detail.status) == 0) {
                 title_text = '很遗憾，礼物已经抢光'
                 // ishowSpebtn = true
@@ -270,7 +271,7 @@ Page({
                 title_text ='礼物等待领取，莫着急'
                 gift_detail.condition = '礼物红包'
                 ismyOneContinue = false
-                shareTitle = gift_detail.uname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
+                shareTitle = gift_detail.cname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
               }
               else if (Number(gift_detail.giftbagdata) == 2){    //已完成
                 title_text = '礼物已被领取，好开心'
@@ -290,7 +291,7 @@ Page({
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = gift_detail.condition + '开奖'
-                shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
+                shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
                 
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
@@ -311,7 +312,7 @@ Page({
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = '满'+gift_detail.condition+'人开奖'
-                shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
+                shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text = '礼物已被抢光，好开心'
@@ -392,7 +393,7 @@ Page({
               gift_detail.condition = gift_detail.condition + '开奖'
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text='请等待，成功参与抽奖'
-                shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
+                shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {   //已完成
                 isfinish=true
@@ -421,7 +422,7 @@ Page({
               gift_detail.condition = '满'+gift_detail.condition + '人开奖'
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='请等待，成功参与抽奖'
-                shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
+                shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {   //已完成
                 other_text=''
@@ -496,25 +497,27 @@ Page({
         word = word.length > 10 ? word.substring(0, 10) + '...' : word
         ctx.fillText(word, 170, 300)
         ctx.fillText('x' + that.data.gifts[0].num, 170, 340)
-        ctx.draw()
-        wx.canvasToTempFilePath({
-          canvasId: 'myCanvas',
-          success: function (res) {
-            console.log(res.tempFilePath)
-            that.setData({
-              // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
-              shareImg: res.tempFilePath,
-              // sharePath:'pages/index/index'
-            })
-            setTimeout(function(){
+        ctx.draw(setTimeout(function(){
+          wx.canvasToTempFilePath({
+            canvasId: 'myCanvas',
+            success: function (res) {
+              console.log(res.tempFilePath)
+              that.setData({
+                // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
+                shareImg: res.tempFilePath,
+                // sharePath:'pages/index/index'
+              })
+
               wx.hideLoading()
               wx.showShareMenu({
 
               })
-            },500)
-          },
-          
-        }, this)
+
+            },
+
+          }, this)
+        },1000))
+        
       })
     }
     else{
@@ -524,36 +527,32 @@ Page({
         that.getimginfo(that.data.gifts[1].image),
         that.getimginfo(that.data.gifts[2].image)
       ]).then((res)=>{
-        console.log(res)
         ctx.drawImage(res[0].path, 40, 260, 100, 100)
         ctx.drawImage(res[1].path, 160, 260, 100, 100)
         ctx.drawImage(res[2].path, 280, 260, 100, 100)
         ctx.fillStyle = "#da0202";
         ctx.setFontSize(24)
         ctx.fillText("· · ·", 420, 310)
-        ctx.draw(function(){
-          console.log(11)
-        })
-        wx.canvasToTempFilePath({
-          canvasId: 'myCanvas',
-          success: function (res) {
-            console.log(res.tempFilePath)
-            that.setData({
-              // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
-              shareImg: res.tempFilePath,
-              // sharePath:'pages/index/index'
-            })
-            
-            setTimeout(function () {
+        ctx.draw(setTimeout(function () {
+          wx.canvasToTempFilePath({
+            canvasId: 'myCanvas',
+            success: function (res) {
+              console.log(res.tempFilePath)
+              that.setData({
+                // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
+                shareImg: res.tempFilePath,
+                // sharePath:'pages/index/index'
+              })
+
               wx.hideLoading()
               wx.showShareMenu({
 
               })
-            }, 500)
-            console.log(that.data.shareImg)
-          },
-          
-        }, this)
+
+            },
+
+          }, this)
+        }, 1000))
       })
     }
       
@@ -565,6 +564,7 @@ Page({
   drawText:function(wish,condition){
     console.log(wish)
     console.log(condition)
+    var wishes = wish ? wish : '恭喜发财，大吉大利'
     ctx.setFillStyle('#f2f2f2')
     ctx.fillRect(0, 0, 500, 400)
     ctx.setStrokeStyle('#999')
@@ -573,7 +573,7 @@ Page({
     ctx.setFontSize(32)
     ctx.setTextAlign('center')
     ctx.fillStyle = "#da0202";
-    ctx.fillText('“' + (wish ? wish : '恭喜发财，大吉大利')+ '”', 250, 100)
+    ctx.fillText('“' + wishes+ '”', 250, 100)
     ctx.setFontSize(24)
     ctx.fillText(condition, 250, 160)
     this.drawImg()
@@ -704,32 +704,7 @@ Page({
 
   //banner点击事件
   bannerTap: function (e) {
-    switch (Number(e.currentTarget.dataset.go)) {
-      case 1:
-        break;
-      case 2:
-        wx.switchTab({
-          url: '../index/index',
-        })
-        break;
-      case 3:
-        wx.navigateTo({
-          url: '../hintDetail/hintDetail?id=' + e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 4:
-        wx.navigateTo({
-          url: '../raffle/raffle?id=' + e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 5:
-        wx.navigateTo({
-          url: '../subject/subject?id=' + e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 6:
-        break;
-    }
+    app.bannerGo(e)
   },
 
   gojoinPeople2:function(){
@@ -740,6 +715,10 @@ Page({
     wx.navigateTo({
       url: '../joinpeople/joinpeople?order_id=' + order_id + '&uid=' + uid+'&inviter='+uid,
     })
+  },
+
+  canvasImgLoad:function(e){
+    console.log(e)
   }
 
 })

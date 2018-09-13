@@ -1,7 +1,7 @@
 <!--pages/lotterydetail/lotterydetail.wxml-->
 
 <canvas canvas-id='myCanvas' class='myCanvas'></canvas>
-<image src='{{shareImg}}'></image>
+<!-- <image src='{{shareImg}}' bindload='canvasImgLoad'></image> -->
 <view class='lq-lotdetail'>
   <!-- 状态区 -->
   <view class='l-statusbox'>

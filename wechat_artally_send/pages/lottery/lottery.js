@@ -30,40 +30,12 @@ Page({
 
   //banner点击事件
   bannerTap:function(e){
-    switch (Number(e.currentTarget.dataset.go)) {
-      case 1:
-        break;
-      case 2:
-        wx.switchTab({
-          url: '../index/index',
-        })
-        break;
-      case 3:
-        wx.navigateTo({
-          url: '../hintDetail/hintDetail?id=' + e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 4:
-        wx.navigateTo({
-          url: '../raffle/raffle?id=' + e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 5:
-        wx.navigateTo({
-          url: '../subject/subject?id=' + e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 6:
-        break;
-    }
+    app.bannerGo(e)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getShareInfo({
-      shareTicket: 'true',
-    })
     var that=this
     app.post('banner/lists', {'position':3}).then((res) => {
       // console.log(res)

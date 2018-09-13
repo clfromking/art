@@ -100,32 +100,7 @@ Page({
 
   //点击轮播去专题页
   goSubject:function(e){
-    switch (Number(e.currentTarget.dataset.go)) {
-      case 1:
-        break;
-      case 2:
-        wx.reLaunch({
-          url: '../index/index',
-        })
-        break;
-      case 3:
-        wx.navigateTo({
-          url: '../hintDetail/hintDetail?id='+e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 4:
-        wx.navigateTo({
-          url: '../raffle/raffle?id=' + e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 5:
-        wx.navigateTo({
-          url: '../subject/subject?id=' + e.currentTarget.dataset.go_id,
-        })
-        break;
-      case 6:
-        break;
-    }
+    app.bannerGo(e)
   },
   
   //标签筛选
