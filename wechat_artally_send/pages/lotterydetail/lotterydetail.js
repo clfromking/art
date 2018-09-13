@@ -69,6 +69,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '数据加载中',
+      mask:true
+    })
+    wx.hideShareMenu({
+      
+    })
     try {
       var res = wx.getStorageSync('userInfo')
       uid=res.uid
@@ -94,6 +101,7 @@ Page({
     if(options.source=='index'){
       app.post('order/order_detail', { 'order_id': options.order_id }).then((res) => {
         console.log(res)
+        var shareTitle=''
         if (res.code == 200) {
           var ismy2haveBtntext = that.data.ismy2haveBtntext
           ismy2haveBtntext='发送给好友 '
@@ -101,12 +109,15 @@ Page({
           switch (Number(gift_detail.gameplaydata)) {
             case 2:
               gift_detail.condition = gift_detail.condition + '开奖'
+              shareTitle=gift_detail.uname+'邀请你参与抽奖，请点击查看。'
               break;
             case 3:
               gift_detail.condition = '满' + gift_detail.condition + '人开奖'
+              shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
               break;
             default:
               gift_detail.condition = '礼物红包'
+              shareTitle = gift_detail.uname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' :'个礼包')
               break;
           }
 
@@ -118,8 +129,10 @@ Page({
             title_text,
             uid: uid,
             isshowWhite,
-            ismy2haveBtntext
+            ismy2haveBtntext,
+            shareTitle
           })
+          that.drawText(gift_detail.wish,gift_detail.condition)
         }
       }).catch((error) => {
         console.log(error)
@@ -139,6 +152,7 @@ Page({
           var isfinish = false
           var ishave = false
           var ishideodds1=false
+          var shareTitle=''
           var other_text = that.data.other_text
           if (Number(gift_detail.giftbagdata) == 1) {
             title_text = '请等待，成功参与抽奖'
@@ -179,12 +193,15 @@ Page({
           switch (Number(gift_detail.gameplaydata)) {
             case 2:
               gift_detail.condition = gift_detail.condition + '开奖'
+              shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
               break;
             case 3:
               gift_detail.condition = '满' + gift_detail.condition + '人开奖'
+              shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
               break;
             default:
               gift_detail.condition = '礼物红包'
+              shareTitle = gift_detail.uname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
               if (Number(gift_detail.status) == 0) {
                 title_text = '很遗憾，礼物已经抢光'
                 // ishowSpebtn = true
@@ -218,8 +235,10 @@ Page({
             other_text,
             winList: gift_detail.win || '',
             ishave,
-            isshowWhite
+            isshowWhite,
+            shareTitle
           })
+          that.drawText(gift_detail.wish, gift_detail.condition)
 
         }
       }).catch((error) => {
@@ -243,6 +262,7 @@ Page({
             var ismy=true
             var ismyOneContinue=false
             var gift_detail = res.data.order
+            var shareTitle=''
             if (Number(gift_detail.gameplaydata)==1) {     //点对点
               ishideodds = true
               ishideodds1 = true
@@ -250,6 +270,7 @@ Page({
                 title_text ='礼物等待领取，莫着急'
                 gift_detail.condition = '礼物红包'
                 ismyOneContinue = false
+                shareTitle = gift_detail.uname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
               }
               else if (Number(gift_detail.giftbagdata) == 2){    //已完成
                 title_text = '礼物已被领取，好开心'
@@ -269,6 +290,8 @@ Page({
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = gift_detail.condition + '开奖'
+                shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
+                
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text ='礼物已经抢光，好开心' 
@@ -288,6 +311,7 @@ Page({
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = '满'+gift_detail.condition+'人开奖'
+                shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text = '礼物已被抢光，好开心'
@@ -312,9 +336,11 @@ Page({
               ismy,
               ismyOneContinue,
               heads: gift_detail.client,
-              isshowWhite
+              isshowWhite,
+              shareTitle
             })
-            that.drawCanvas()
+            console.log(gift_detail.condition)
+            that.drawText(gift_detail.wish, gift_detail.condition)
           }
           
         }).catch((error) => {
@@ -340,6 +366,7 @@ Page({
             var other_text = that.data.other_text
             var ismy2haveBtntext = that.data.ismy2haveBtntext
             var ishowSpebtn=false
+            var shareTitle=''
             if (Number(gift_detail.gameplaydata) == 1){     //点对点
               if (Number(gift_detail.giftbagdata) == 1){    //进行中
                 
@@ -365,6 +392,7 @@ Page({
               gift_detail.condition = gift_detail.condition + '开奖'
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text='请等待，成功参与抽奖'
+                shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {   //已完成
                 isfinish=true
@@ -393,6 +421,7 @@ Page({
               gift_detail.condition = '满'+gift_detail.condition + '人开奖'
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='请等待，成功参与抽奖'
+                shareTitle = gift_detail.uname + '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {   //已完成
                 other_text=''
@@ -434,9 +463,10 @@ Page({
               other_text,
               ismy2haveBtntext,
               ishowSpebtn,
-              isshowWhite
+              isshowWhite,
+              shareTitle
             })
-
+            that.drawText(gift_detail.wish, gift_detail.condition)
           }
         }).catch((error)=>{
           console.log(error)
@@ -447,57 +477,122 @@ Page({
     }
 
 
-    console.log(2)
-
-
-
   },
 
   //画图
-  drawCanvas:function(){
-    // console.log(1)
-    if (this.data.gift_detail.condition == '礼物红包') {
-      ctx.setFillStyle('#f2f2f2')
-      ctx.fillRect(0, 0, 500, 400) 
-      ctx.setStrokeStyle('#999')
-      ctx.setLineWidth(8)
-      ctx.strokeRect(4, 4, 488, 392)
-      ctx.setFontSize(32)
-      ctx.setTextAlign('center')
-      ctx.fillStyle = "#da0202";
-      ctx.fillText('“' + this.data.gift_detail.wish + '”', 250, 100)
-      ctx.setFontSize(24)
-      ctx.fillText('礼物红包', 250, 160)
+  drawImg:function(){
+    if(this.data.gifts.length<=3){
       var that = this
-      wx.getImageInfo({
-        src: that.data.gifts[0].image,
-        success: function (res) {
-          ctx.drawImage(res.path, 40, 240, 120, 120)
-          ctx.rect(160, 240, 300, 120)
-          ctx.setFillStyle('#fff')
-          ctx.fill()
-          ctx.setTextAlign('left')
-          ctx.setFillStyle("#000")
-          var word = that.data.gifts[0].name
-          word = word.length > 10 ? word.substring(0, 10) + '...' : word
-          ctx.fillText(word, 190, 280)
-          ctx.fillText('x' + that.data.gifts[0].num, 190, 320)
-          ctx.draw()
-          wx.canvasToTempFilePath({
-            canvasId: 'myCanvas',
-            success: function (res) {
-              console.log(res.tempFilePath)
-              that.setData({
-                shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
-                shareImg:res.tempFilePath,
-                sharePath:'pages/index/index'
+      console.log(that.getimginfo(that.data.gifts[0].image))
+      that.getimginfo(that.data.gifts[0].image).then((res)=>{
+        console.log(res)
+        ctx.drawImage(res.path, 40, 260, 100, 100)
+        ctx.rect(140, 260, 320, 100)
+        ctx.setFillStyle('#fff')
+        ctx.fill()
+        ctx.setTextAlign('left')
+        ctx.setFillStyle("#000")
+        var word = that.data.gifts[0].name
+        word = word.length > 10 ? word.substring(0, 10) + '...' : word
+        ctx.fillText(word, 170, 300)
+        ctx.fillText('x' + that.data.gifts[0].num, 170, 340)
+        ctx.draw()
+        wx.canvasToTempFilePath({
+          canvasId: 'myCanvas',
+          success: function (res) {
+            console.log(res.tempFilePath)
+            that.setData({
+              // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
+              shareImg: res.tempFilePath,
+              // sharePath:'pages/index/index'
+            })
+            setTimeout(function(){
+              wx.hideLoading()
+              wx.showShareMenu({
+
               })
-            }
-          }, this)
+            },500)
+          },
+          
+        }, this)
+      })
+    }
+    else{
+      var that=this
+      Promise.all([
+        that.getimginfo(that.data.gifts[0].image),
+        that.getimginfo(that.data.gifts[1].image),
+        that.getimginfo(that.data.gifts[2].image)
+      ]).then((res)=>{
+        console.log(res)
+        ctx.drawImage(res[0].path, 40, 260, 100, 100)
+        ctx.drawImage(res[1].path, 160, 260, 100, 100)
+        ctx.drawImage(res[2].path, 280, 260, 100, 100)
+        ctx.fillStyle = "#da0202";
+        ctx.setFontSize(24)
+        ctx.fillText("· · ·", 420, 310)
+        ctx.draw(function(){
+          console.log(11)
+        })
+        wx.canvasToTempFilePath({
+          canvasId: 'myCanvas',
+          success: function (res) {
+            console.log(res.tempFilePath)
+            that.setData({
+              // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
+              shareImg: res.tempFilePath,
+              // sharePath:'pages/index/index'
+            })
+            
+            setTimeout(function () {
+              wx.hideLoading()
+              wx.showShareMenu({
+
+              })
+            }, 500)
+            console.log(that.data.shareImg)
+          },
+          
+        }, this)
+      })
+    }
+      
+
+  },
+  
+
+  //画字
+  drawText:function(wish,condition){
+    console.log(wish)
+    console.log(condition)
+    ctx.setFillStyle('#f2f2f2')
+    ctx.fillRect(0, 0, 500, 400)
+    ctx.setStrokeStyle('#999')
+    ctx.setLineWidth(8)
+    ctx.strokeRect(4, 4, 488, 392)
+    ctx.setFontSize(32)
+    ctx.setTextAlign('center')
+    ctx.fillStyle = "#da0202";
+    ctx.fillText('“' + (wish ? wish : '恭喜发财，大吉大利')+ '”', 250, 100)
+    ctx.setFontSize(24)
+    ctx.fillText(condition, 250, 160)
+    this.drawImg()
+  },
+
+  //获取图片信息
+  getimginfo:function(img){
+    var promise = new Promise((resolve, reject)=>{
+      wx.getImageInfo({
+        src: img,
+        success:function(res){
+          resolve(res)
+        },
+        fail:function(error){
+          reject(error);
         }
       })
-
-    }
+    })
+    return promise
   },
 
 
@@ -553,6 +648,11 @@ Page({
     if (this.data.ishowSpebtn == true || this.data.ismyOneContinue == true){
       console.log('首页')
       return app.commonShare()
+      // wx.hideShareMenu({
+      //   success:function(res){
+      //     console.log(res)
+      //   }
+      // })
     }
     else{
       return {
