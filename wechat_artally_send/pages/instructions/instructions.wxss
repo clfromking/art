@@ -34,6 +34,7 @@ page{
 .lq-instructions .m-con image{
   width: 100%;
   margin: 30rpx 0;
+  border:1rpx solid #e5e5e5;
 }
 .lq-instructions .m-t-icon{
   display: inline-block;
