@@ -144,7 +144,7 @@ Page({
     name = wx.getStorageSync('userInfo').username;
     return {
       title: (name ? name : "我")+"邀请您参与神马送礼的官方抽奖，请点击查看",
-      imageUrl: "https://pic.forunart.com/artgive/wx/lotterybg.jpg"
+      imageUrl: "https://pic.forunart.com/artgive/wx/lotterybg1.jpg"
     }
   },
 
