@@ -1,8 +1,8 @@
 {
-  "pages":["pages/custom/custom",
+  "pages":[
     "pages/index/index",
     "pages/lottery/lottery",
-    
+    "pages/custom/custom",
     "pages/my/my",
     "pages/mall/mall",
     "pages/mallAll/mallAll",

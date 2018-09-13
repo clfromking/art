@@ -1,6 +1,6 @@
 <view style='background:#fff;padding-bottom:30rpx'>
   <image class='jw-custom-banner' src='../imgs/1.png'></image>
-  <button class='jw-call-custom'>联系在线客服</button>
+  <button class='jw-call-custom' open-type='contact'>联系在线客服</button>
 </view>
 <view class='jw-questions'>
   <view class='jw-questions-el clear' wx:for='{{questions}}' wx:key='{{item}}'>
