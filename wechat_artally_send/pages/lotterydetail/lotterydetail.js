@@ -33,7 +33,8 @@ Page({
     ismyBtntext:'还要送礼物',
     ismy2haveBtntext:'邀请好友抽奖',
     isreceivePerson:false,
-    isshowWhite:true
+    isshowWhite:true,
+    banner_msgs:''
   },
   // 轮播改变事件
   swiperchange:function(e){
@@ -63,13 +64,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // app.post('order/client_add', { 'order_id': 69, 'inviter':20,'client':7}).then((res)=>{
-    //   console.log(res)
-    //   app.post('order/order_detail', { 'order_id': '69', 'uid': '7' }).then((res) => {
-    //     console.log(res)
-    //   })
-    // })
-    // return
     try {
       var res = wx.getStorageSync('userInfo')
       uid=res.uid
@@ -77,10 +71,22 @@ Page({
     } catch (e) {
 
     }
+    
     var that=this
     var isshowWhite = false
     var title_text='礼物准备完毕，送出去'
-    console.log(options)
+    app.post('banner/lists', { 'position': 4 }).then((res) => {
+      // console.log(res)
+      if (res.code == 200) {
+        // console.log(res.data.business_list[0])
+        that.setData({
+          banner_msgs: res.data.business_list[0]
+        })
+
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
     order_id = options.order_id
     // options.source='lottery'
     if(options.source=='index'){
@@ -542,5 +548,36 @@ Page({
     })
   },
 
-  a:function(){}
+  a:function(){},
+
+  //banner点击事件
+  bannerTap: function (e) {
+    switch (Number(e.currentTarget.dataset.go)) {
+      case 1:
+        break;
+      case 2:
+        wx.switchTab({
+          url: '../index/index',
+        })
+        break;
+      case 3:
+        wx.navigateTo({
+          url: '../hintDetail/hintDetail?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 4:
+        wx.navigateTo({
+          url: '../raffle/raffle?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 5:
+        wx.navigateTo({
+          url: '../subject/subject?id=' + e.currentTarget.dataset.go_id,
+        })
+        break;
+      case 6:
+        break;
+    }
+  },
+
 })

@@ -45,7 +45,7 @@
   </view>
   <!-- 其他入口 -->
   <view class='l-otherbox'>
-    <image mode='widthFix' src="https://pic.forunart.com/artgive/wx/mall_banner_img.png"></image>
+    <image mode='widthFix' bindtap='bannerTap'  data-id='{{banner_msgs.id}}' data-go='{{banner_msgs.go}}' data-go_id='{{banner_msgs.go_id}}' src='{{banner_msgs.avatar}}'></image>
   </view>
   <!-- 参与人数区 -->
   <view class='l-joinbox' hidden='{{ishideodds1}}'>
