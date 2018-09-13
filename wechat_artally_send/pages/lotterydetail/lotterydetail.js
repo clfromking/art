@@ -67,11 +67,8 @@ Page({
     try {
       var res = wx.getStorageSync('userInfo')
       uid=res.uid
-      // console.log(res)
     } catch (e) {
-
     }
-    
     var that=this
     var isshowWhite = false
     var title_text='礼物准备完毕，送出去'
@@ -579,5 +576,15 @@ Page({
         break;
     }
   },
+
+  gojoinPeople2:function(){
+    console.log(11)
+    if (this.data.heads.length == 0) {
+      return
+    }
+    wx.navigateTo({
+      url: '../joinpeople/joinpeople?order_id=' + order_id + '&uid=' + uid+'&inviter='+uid,
+    })
+  }
 
 })

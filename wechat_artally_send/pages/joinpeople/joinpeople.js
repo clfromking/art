@@ -8,6 +8,7 @@ Page({
   data: {
     heads: [
     ],
+    title:''
   },
 
   //预览大图
@@ -21,12 +22,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that=this
-    app.post('order/client_list',{'order_id':options.order_id,'uid':options.uid}).then((res)=>{
+    var title='参与'
+    var postData={}
+    if (options.inviter) {
+      postData = { 'order_id': options.order_id, 'uid': options.uid,'inviter':options.inviter}
+      title='为你助力'
+    }
+    else{
+      postData = { 'order_id': options.order_id, 'uid': options.uid}
+    }
+    app.post('order/client_list',postData).then((res)=>{
       console.log(res)
       if(res.code==200){
         that.setData({
-          heads:res.data.list
+          heads:res.data.list,
+          title
         })
       }
     }).catch((error)=>{

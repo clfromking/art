@@ -34,7 +34,7 @@
     </view>
 
     <view class='l-joinbox' hidden='{{gift_detail.inviter_count==0}}'>
-    <view class='l-j-num' style='text-align:left'>已有 <text style='text-decoration:none'>{{gift_detail.inviter.length}}</text> 人为你助力</view>
+    <view class='l-j-num' bindtap='gojoinPeople2' style='text-align:left'>已有 <text style='text-decoration:underline'>{{gift_detail.inviter.length}}</text> 人为你助力</view>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{gift_detail.inviter}}" wx:key="{{index}}">
         <image src="{{item?item:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
