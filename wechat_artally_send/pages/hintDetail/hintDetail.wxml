@@ -36,7 +36,8 @@
   <text bindtap='buyThis' class='jw-buy-btn'>立即购买</text>
 </view>
 <view class='jw-beg-gift-view'>
-  <image src='https://pic.forunart.com/artgive/wx/details_icon_gift.png'></image>
+  <button open-type='share' style='width:100%;height:100%;background:url("https://pic.forunart.com/artgive/wx/details_icon_gift.png") no-repeat;background-size:100% 100%;border:0;border-radius:none'></button>
+  
 </view>
 
 

@@ -1,4 +1,6 @@
 <!--pages/lotterydetail/lotterydetail.wxml-->
+
+<canvas canvas-id='myCanvas' class='myCanvas'></canvas>
 <view class='lq-lotdetail'>
   <!-- 状态区 -->
   <view class='l-statusbox'>

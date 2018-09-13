@@ -267,3 +267,6 @@ scroll-view{
   height: calc(100% - 663rpx);
   width: 100%
 }
+.jw-beg-gift-view button::after{
+  border: none
+}

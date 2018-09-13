@@ -38,3 +38,10 @@ overflow: hidden;
   opacity: 0;
   
 }
+
+.myCanvas{
+  position: absolute;
+  left: -10000000000000000000000000px;
+  width: 500px;
+  height: 400px
+}

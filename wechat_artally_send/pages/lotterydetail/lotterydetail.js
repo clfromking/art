@@ -1,5 +1,6 @@
 // pages/lotterydetail/lotterydetail.js\
 const app=getApp()
+const ctx=wx.createCanvasContext('myCanvas')
 let gift_detail={}
 let uid
 let order_id
@@ -34,7 +35,11 @@ Page({
     ismy2haveBtntext:'邀请好友抽奖',
     isreceivePerson:false,
     isshowWhite:true,
-    banner_msgs:''
+    banner_msgs:'',
+    shareTitle:'',
+    shareImg:'',
+    sharePath:''
+
   },
   // 轮播改变事件
   swiperchange:function(e){
@@ -309,7 +314,7 @@ Page({
               heads: gift_detail.client,
               isshowWhite
             })
-            
+            that.drawCanvas()
           }
           
         }).catch((error) => {
@@ -440,7 +445,61 @@ Page({
       console.log(postData)
       
     }
+
+
+    console.log(2)
+
+
+
   },
+
+  //画图
+  drawCanvas:function(){
+    // console.log(1)
+    if (this.data.gift_detail.condition == '礼物红包') {
+      ctx.setFillStyle('#f2f2f2')
+      ctx.fillRect(0, 0, 500, 400) 
+      ctx.setStrokeStyle('#999')
+      ctx.setLineWidth(8)
+      ctx.strokeRect(4, 4, 488, 392)
+      ctx.setFontSize(32)
+      ctx.setTextAlign('center')
+      ctx.fillStyle = "#da0202";
+      ctx.fillText('“' + this.data.gift_detail.wish + '”', 250, 100)
+      ctx.setFontSize(24)
+      ctx.fillText('礼物红包', 250, 160)
+      var that = this
+      wx.getImageInfo({
+        src: that.data.gifts[0].image,
+        success: function (res) {
+          ctx.drawImage(res.path, 40, 240, 120, 120)
+          ctx.rect(160, 240, 300, 120)
+          ctx.setFillStyle('#fff')
+          ctx.fill()
+          ctx.setTextAlign('left')
+          ctx.setFillStyle("#000")
+          var word = that.data.gifts[0].name
+          word = word.length > 10 ? word.substring(0, 10) + '...' : word
+          ctx.fillText(word, 190, 280)
+          ctx.fillText('x' + that.data.gifts[0].num, 190, 320)
+          ctx.draw()
+          wx.canvasToTempFilePath({
+            canvasId: 'myCanvas',
+            success: function (res) {
+              console.log(res.tempFilePath)
+              that.setData({
+                shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
+                shareImg:res.tempFilePath,
+                sharePath:'pages/index/index'
+              })
+            }
+          }, this)
+        }
+      })
+
+    }
+  },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -453,7 +512,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
   /**
@@ -488,27 +547,23 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
+    console.log(this.data.ishowSpebtn)
+    console.log(this.data.ismyOneContinue)
     console.log(this.data.gift_detail.condition)
-    console.log(this.data.gift_detail.id)
-    console.log(this.data.gift_detail.author_id)
-    var source='lottery'
-    // if (Number(this.data.gift_detail.author_id)==-1){
-    //   source='lottery'
-    // }
-    // else{
-    //   source='personalLaunch'
-    // }
-    if(res.from=='button'){
-
+    if (this.data.ishowSpebtn == true || this.data.ismyOneContinue == true){
+      console.log('首页')
+      return app.commonShare()
     }
     else{
+      return {
+        title:this.data.shareTitle,
+        path:this.data.sharePath,
+        imageUrl:this.data.shareImg
+      }
+      // ctx.drawImage()
+      
+    }
 
-    }
-    return {
-      title:'快来帮忙',
-      path: 'pages/raffle/raffle?time=' + this.data.gift_detail.condition + '&order_id=' + this.data.gift_detail.id+'&inviter='+uid+'&source=lottery',
-      imageUrl:'../imgs/1.png'
-    }
   },
 
 

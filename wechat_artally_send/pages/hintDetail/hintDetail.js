@@ -7,6 +7,7 @@ let iscommon=false
 var swiperLoadnum=0
 var swipersuccessload=false
 var detailsuccessload=false
+const ctx=wx.createCanvasContext('myCanvas')
 Page({
 
   /**
@@ -330,8 +331,8 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (res) {
+    
   },
   true:function()
   {}
