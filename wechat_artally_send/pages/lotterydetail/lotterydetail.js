@@ -487,16 +487,16 @@ Page({
       console.log(that.getimginfo(that.data.gifts[0].image))
       that.getimginfo(that.data.gifts[0].image).then((res)=>{
         console.log(res)
-        ctx.drawImage(res.path, 40, 260, 100, 100)
-        ctx.rect(140, 260, 320, 100)
+        ctx.drawImage(res.path, 20, 230, 120, 120)
+        ctx.rect(140, 230, 330, 120)
         ctx.setFillStyle('#fff')
         ctx.fill()
         ctx.setTextAlign('left')
         ctx.setFillStyle("#000")
         var word = that.data.gifts[0].name
         word = word.length > 10 ? word.substring(0, 10) + '...' : word
-        ctx.fillText(word, 170, 300)
-        ctx.fillText('x' + that.data.gifts[0].num, 170, 340)
+        ctx.fillText(word, 170, 280)
+        ctx.fillText('x' + that.data.gifts[0].num, 170, 320)
         that.canvasDraw()
         
       }).catch((error)=>{
@@ -510,12 +510,14 @@ Page({
         that.getimginfo(that.data.gifts[1].image),
         that.getimginfo(that.data.gifts[2].image)
       ]).then((res)=>{
-        ctx.drawImage(res[0].path, 40, 260, 100, 100)
-        ctx.drawImage(res[1].path, 160, 260, 100, 100)
-        ctx.drawImage(res[2].path, 280, 260, 100, 100)
+        ctx.drawImage(res[0].path, 20, 230, 120, 120)
+        ctx.drawImage(res[1].path, 150, 230, 120, 120)
+        ctx.drawImage(res[2].path, 280, 230, 120, 120)
         ctx.fillStyle = "#da0202";
         ctx.setFontSize(24)
-        ctx.fillText("· · ·", 420, 310)
+        ctx.setTextAlign('left')
+        ctx.font='normal bold 24px sans-serif'
+        ctx.fillText("···", 410, 300)
         that.canvasDraw()
         }).catch((error) => {
           console.log(error)
@@ -533,7 +535,7 @@ Page({
     var wishes = wish ? wish : '恭喜发财，大吉大利'
     ctx.setFillStyle('#f2f2f2')
     ctx.fillRect(0, 0, 500, 400)
-    ctx.setStrokeStyle('#999')
+    ctx.setStrokeStyle('#da0202')
     ctx.setLineWidth(8)
     ctx.strokeRect(4, 4, 488, 392)
     ctx.setFontSize(32)
