@@ -100,7 +100,7 @@ Page({
       mask: true
     })
     if(type==1){
-      temp.uid=2;
+      temp.uid = wx.getStorageSync('userInfo').uid;
       app.post('address/address_add',temp,1).then(res=>{
         // console.log(res)
         wx.hideLoading();

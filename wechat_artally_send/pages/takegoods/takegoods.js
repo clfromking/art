@@ -17,7 +17,8 @@ Page({
   // 获取地址
   getaddress:function(){
     let that=this;
-    app.post('address/address_lists',{uid:2},1).then(res=>{
+    let userInfo = wx.getStorageSync('userInfo');
+    app.post('address/address_lists', { uid: userInfo.uid},1).then(res=>{
       // console.log(res)
       if(res.code==200){
         if (res.data.address.length>0){

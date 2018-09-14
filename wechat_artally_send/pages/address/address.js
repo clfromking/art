@@ -91,7 +91,11 @@ Page({
       content: '您确认要删除该地址吗?',
       success: function (res) {
         if (res.confirm) {
-          app.post('address/address_del',{uid:2,id:id},1).then(res=>{
+          let userInfo = wx.getStorageSync('userInfo');
+          app.post('address/address_del',{
+            uid: userInfo.uid,
+            id:id
+          },1).then(res=>{
             // console.log(res)
             if(res.code==200){
               that.getaddlist();

@@ -38,6 +38,9 @@ Page({
     fullPersonInputVal:'',      //满人玩法时中奖人数value
     // gift_lists:''
   },
+  closeStro:function(){
+    wx.clearStorage()
+  },
   //显示玩法上拉类型列表
   showOptionsSheet:function(e){
     var that = this

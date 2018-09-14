@@ -226,7 +226,6 @@ Page({
    */
   onShow: function () {
     let userInfo =wx.getStorageSync('userInfo');
-    // console.log(userInfo)
     if (userInfo.uid){
       this.setData({
         islogin:true,
@@ -260,6 +259,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    let userInfo = wx.getStorageSync('userInfo');
+    if (!userInfo.uid) return
     this.getgiftlist();
     this.data.checkAllStatus = true;
     this.checkAll();

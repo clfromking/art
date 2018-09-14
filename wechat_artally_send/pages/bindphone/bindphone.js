@@ -101,7 +101,7 @@ Page({
     })
     // console.log(temp)
     let data={
-      uid:2,
+      uid: wx.getStorageSync('userInfo').uid,
       mobile: temp.phone,
       mobile_code:temp.code,
       models:6
