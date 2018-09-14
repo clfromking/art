@@ -1,4 +1,4 @@
-<scroll-view bindscrolltolower='scrolltolower' scroll-y style='height:100vh'>
+<scroll-view bindscrolltolower='scrolltolower' scroll-y >
   <swiper class='jw-banner-swiper' bindchange='changeSwiper' interval='3000' duration='500' circular autoplay indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
     <block wx:for='{{banner_src}}' wx:key='item' >
       <swiper-item data-id='{{item.id}}' data-go='{{item.go}}' data-go_id='{{item.go_id}}' bindtap='goSubject'>
@@ -49,7 +49,8 @@
     </view>
   </view>
   <text class='jw-bottom-hint'>没有更多了...</text>
-
+  <view style='width:100%;height:88rpx'></view>
+</scroll-view>
   <view class='jw-bottom-view'>
     <view class='jw-bottom-btns'>
       <image src='https://pic.forunart.com/artgive/wx/mall_nav_icon_chosen_pressed.png' class='jw-bottom-icon'></image>
@@ -60,4 +61,3 @@
       <text class='jw-bottom-alt jw-bottom-rightAlt'>全部</text>
     </view>
   </view>
-</scroll-view>

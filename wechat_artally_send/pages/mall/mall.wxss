@@ -1,8 +1,12 @@
 /* pages/mall/mall.wxss */
 page{
   background: #fff;
-  padding-bottom: 211rpx;
+  /* padding-bottom: 211rpx; */
   position: relative
+}
+scroll-view{
+  /* padding-bottom: 137rpx; */
+  height: calc(100vh - 88rpx)
 }
 .jw-banner-swiper{
   height: 310rpx;

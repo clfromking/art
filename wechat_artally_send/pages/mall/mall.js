@@ -17,7 +17,8 @@ Page({
     input_val:'',
     swiper_block:[],
     isshowIndicator:true,
-    swiper_block_width:''
+    swiper_block_width:'',
+    pages:1
   },
   search_input_focus:function(){
     this.setData({
@@ -167,16 +168,26 @@ Page({
     }).catch((error)=>{
       console.log(error)
     })
-    var data={"hot":1}
-    app.post('gifts/lists',data).then((res)=>{
-      if(res.code==200){
-        ware_list=res.data.lists
+    that.loadList()
+  },
+
+  //加载列表
+  loadList:function(){
+    var that=this
+    var data = { "hot": 1,'pages': that.data.pages}
+    app.post('gifts/lists', data).then((res) => {
+      if (res.code == 200) {
+        console.log(res)
+        for(var i=0;i<res.data.lists.length;i++){
+          ware_list.push(res.data.lists[i])
+        }
+        // ware_list = res.data.lists
         that.setData({
           ware_list
         })
         wx.hideLoading()
       }
-    }).catch((error)=>{
+    }).catch((error) => {
       console.log(error)
     })
   },
@@ -206,7 +217,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    ware_list=[]
   },
 
   /**
@@ -235,6 +246,9 @@ Page({
   },
 
   scrolltolower:function(e){
-    console.log(1)
+    var that=this
+    that.data.pages++
+    that.loadList()
+    // console.log(that.data.pages)
   }
 })

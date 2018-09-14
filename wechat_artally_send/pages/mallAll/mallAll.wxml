@@ -1,5 +1,5 @@
 <!--pages/mallAll/mallAll.wxml-->
-<scroll-view scroll-y='{{ishideScreen}}' scrollTop='{{scrollTop_num}}' bindscroll='scroll'>
+<scroll-view scroll-y='{{ishideScreen}}'  bindscrolltolower='scrolltolower' scrollTop='{{scrollTop_num}}' bindscroll='scroll'>
   <swiper bindchange='changeSwiper' interval='3000' duration='500' circular autoplay  class='jw-banner-swiper' indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
     <block wx:for='{{banner_src}}' wx:key='item'>
       <swiper-item data-id='{{item.id}}' data-go='{{item.go}}' data-go_id='{{item.go_id}}' bindtap='goSubject'>
@@ -59,8 +59,9 @@
       </view>
     </view>
     <text class='jw-bottom-hint'>没有更多了...</text>
+    <view style='width:100%;height:88rpx'></view>
   </view>
-
+</scroll-view>
   <view class='jw-bottom-view'>
     <view  bindtap='goMall' class='jw-bottom-btns'>
       <image src='https://pic.forunart.com/artgive/wx/mall_nav_icon_chosen_default.png' class='jw-bottom-icon'></image>
@@ -78,4 +79,3 @@
   </view>
 
   <image class='jw-backTop' bindtap='backTop' hidden='{{!isfixed}}' src='https://pic.forunart.com/artgive/wx/all_icon_top.png'></image>
-</scroll-view>

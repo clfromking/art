@@ -27,7 +27,8 @@ Page({
     select_name2: '',  //第二类类名
     select_id1:0,   //点击的第一类选项id
     select_id2: 0,   //点击的第二类选项id
-    swiper_block_width: ''
+    swiper_block_width: '',
+    pages:1
 
   },
 
@@ -265,20 +266,7 @@ Page({
     })
 
     //加载全部列表
-    var data = { "hot": 0 }
-    app.post('gifts/lists', data).then((res) => {
-      if (res.code == 200) {
-        ware_list = res.data.lists
-        that.setData({
-          ware_list
-        })
-        wx.hideLoading()
-
-      }
-    }).catch((error) => {
-      console.log(error)
-    })
-
+    that.loadList()
     //加载下拉选项数据
     app.post('gifts/types').then((res)=>{
       console.log(res)
@@ -301,6 +289,27 @@ Page({
         })
       }
     }).catch((error)=>{
+      console.log(error)
+    })
+  },
+
+  //加载列表
+  loadList: function () {
+    var that = this
+    var data = { "hot": 0, 'pages': that.data.pages }
+    app.post('gifts/lists', data).then((res) => {
+      if (res.code == 200) {
+        console.log(res)
+        for (var i = 0; i < res.data.lists.length; i++) {
+          ware_list.push(res.data.lists[i])
+        }
+        // ware_list = res.data.lists
+        that.setData({
+          ware_list
+        })
+        wx.hideLoading()
+      }
+    }).catch((error) => {
       console.log(error)
     })
   },
@@ -330,7 +339,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    ware_list=[]
   },
   
   /**
@@ -358,4 +367,12 @@ Page({
   getFormid: function (e) {
     app.getFormid(e)
   },
+
+  scrolltolower: function (e) {
+    var that = this
+    that.data.pages++
+    that.loadList()
+    // console.log(that.data.pages)
+  }
+
 })
