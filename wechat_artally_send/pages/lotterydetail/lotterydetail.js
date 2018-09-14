@@ -500,6 +500,7 @@ Page({
         that.canvasDraw()
         
       }).catch((error)=>{
+        that.drawImg()
         console.log(error)
       })
     }
@@ -521,6 +522,7 @@ Page({
         that.canvasDraw()
         }).catch((error) => {
           console.log(error)
+          that.drawImg()
         })
     }
     
