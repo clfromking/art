@@ -1,4 +1,6 @@
 <!--pages/hintDetail/hintDetail.wxml-->
+<navigator open-type="switchTab" url='/pages/index/index' class='lq-home' hidden='{{hidehome}}'></navigator>
+
 <canvas canvas-id='myCanvas1' class='myCanvas'></canvas>
 
 <scroll-view class='jw-body-scroll-view' scroll-y='{{isHidebuy}}'>

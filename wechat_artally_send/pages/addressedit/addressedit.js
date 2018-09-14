@@ -8,6 +8,7 @@ Page({
   data: {
     type:0,//==1表示新增,==2表示编辑
     temp:{
+      uid:"",
       id:"",
       name:"",
       phone:"",
@@ -17,6 +18,7 @@ Page({
       detail_address:"",
       default:false
     },
+    isdefault:false,
     olddata:{},
     region: []
   },
@@ -68,7 +70,9 @@ Page({
       type= this.data.type,
       temp = this.data.temp,
       olddata = this.data.olddata;
-    // console.log(temp, olddata)
+    // console.log(temp)
+    // console.log(olddata)
+    // return
     //type == 1表示新增,==2表示编辑
     if(!temp.name){
       wx.showToast({
@@ -100,7 +104,6 @@ Page({
       mask: true
     })
     if(type==1){
-      temp.uid = wx.getStorageSync('userInfo').uid;
       app.post('address/address_add',temp,1).then(res=>{
         // console.log(res)
         wx.hideLoading();
@@ -141,13 +144,15 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    let that = this, temp = {}, olddata={}, region=[];
+    let that = this, temp = {}, olddata = {}, region = [], userInfo = wx.getStorageSync('userInfo');
+    // console.log(userInfo)
     //options.type==1表示新增,==2表示编辑
     that.setData({
       type: options.type
     })
     if (options.type==1){
       // console.log('新增')
+      temp.uid = userInfo.uid;
       wx.chooseAddress({
         success: function (res) {
           temp.name = res.userName;
@@ -167,17 +172,23 @@ Page({
           // console.log(res)
         }
       })
+      that.setData({
+        temp: temp
+      })
     } else if (options.type == 2){
       // console.log('编辑')
       wx.setNavigationBarTitle({
         title: '编辑收货地址'
       })
       temp =olddata=wx.getStorageSync('addressedit');
+      olddata.uid = userInfo.uid;
+      temp.uid = userInfo.uid;
       // console.log(temp)
       region = [temp.province, temp.city, temp.area];
       that.setData({
         temp:temp,
         olddata: olddata,
+        isdefault: temp.default==1?true:false,
         region: region
       })
     }

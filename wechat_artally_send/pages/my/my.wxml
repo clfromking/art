@@ -80,7 +80,8 @@
         </view>
       </view>
     </view>
-    <!-- 操作选项 -->
+  </view>
+  <!-- 操作选项 -->
     <view class='g-cover'>
       <view class='g-callphone' style="bottom:{{operation?'110rpx':''}}" bindtap='callphone'></view>
       <view class='g-operate-box' hidden='{{!operation}}'>
@@ -89,7 +90,6 @@
         <view data-type='3' bindtap='operateGifts'>转赠</view>
       </view>
     </view>
-  </view>
 </view>
 
 

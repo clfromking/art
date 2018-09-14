@@ -1,4 +1,5 @@
 <!--pages/lotterydetail/lotterydetail.wxml-->
+<navigator open-type="switchTab" url='/pages/index/index' class='lq-home' hidden='{{hidehome}}'></navigator>
 
 <canvas canvas-id='myCanvas' class='myCanvas'></canvas>
 <!-- <image src='{{shareImg}}' bindload='canvasImgLoad'></image> -->

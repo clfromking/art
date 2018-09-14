@@ -27,17 +27,17 @@ Page({
   },
   // 获取礼物篮列表
   getgiftlist:function(){
-    wx.showLoading({
-      title: '数据加载中',
-      mask:true
-    })
+    // wx.showLoading({
+    //   title: '数据加载中',
+    //   mask:true
+    // })
     let that=this,
       orderNums = this.data.orderNums,
       gifts = [];
     let uid = wx.getStorageSync('userInfo').uid;
     app.post('order/giftbox',{uid:uid}).then(res=>{
       // console.log(res)
-      wx.hideLoading()
+      // wx.hideLoading()
       if(res.code==200){
         orderNums.receive = res.data.receive;
         orderNums.send= res.data.send;
@@ -51,6 +51,7 @@ Page({
           orderNums: orderNums,
           gifts: gifts
         })
+        wx.stopPullDownRefresh()
       }else{
         wx.showToast({
           title: res.msg,
@@ -58,7 +59,7 @@ Page({
         })
       }
     }).catch(error => {
-      wx.hideLoading();
+      // wx.hideLoading();
     })
   },
   // 点击选择按钮
@@ -264,7 +265,6 @@ Page({
     this.getgiftlist();
     this.data.checkAllStatus = true;
     this.checkAll();
-    wx.stopPullDownRefresh()
   },
 
   /**

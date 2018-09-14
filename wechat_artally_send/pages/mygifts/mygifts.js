@@ -29,21 +29,22 @@ Page({
   },
   // 获取我收到的订单列表
   getOrders:function(){
-    wx.showLoading({
-      title: '数据加载中',
-      mask: true
-    })
+    // wx.showLoading({
+    //   title: '数据加载中',
+    //   mask: true
+    // })
     let that=this,
       posturl = this.data.posturl,
       way = this.data.navIndex+1;
     let uid = wx.getStorageSync('userInfo').uid;
     app.post(posturl, { uid: uid, way: way}).then(res=>{
       // console.log(res)
-      wx.hideLoading()
+      // wx.hideLoading()
       if(res.code==200){
         that.setData({
           orderlist: res.data.lists
         })
+        wx.stopPullDownRefresh()
       }else{
         wx.showToast({
           title: res.msg,
@@ -51,7 +52,7 @@ Page({
         })
       }
     }).catch(error => {
-      wx.hideLoading();
+      // wx.hideLoading();
     })
   },
   // 进入详情
@@ -67,7 +68,7 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    let that=this,
+    let that = this,
       type = Number(options.type),
       nav = options.nav ? Number(options.nav) : 0,
       titles = this.data.titles,
@@ -116,14 +117,13 @@ Page({
    */
   onPullDownRefresh: function () {
     this.getOrders();
-    wx.stopPullDownRefresh()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    
   },
 
   /**
