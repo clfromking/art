@@ -18,7 +18,8 @@ Page({
     swiper_block:[],
     isshowIndicator:true,
     swiper_block_width:'',
-    pages:1
+    pages:1,
+    tip:'数据加载中...'
   },
   search_input_focus:function(){
     this.setData({
@@ -178,6 +179,12 @@ Page({
     app.post('gifts/lists', data).then((res) => {
       if (res.code == 200) {
         console.log(res)
+        if(res.data.lists.length<=0){
+          that.setData({
+            tip:'没有更多了...'
+          })
+          return
+        }
         for(var i=0;i<res.data.lists.length;i++){
           ware_list.push(res.data.lists[i])
         }

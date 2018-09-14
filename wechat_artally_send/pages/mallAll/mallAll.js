@@ -28,7 +28,8 @@ Page({
     select_id1:0,   //点击的第一类选项id
     select_id2: 0,   //点击的第二类选项id
     swiper_block_width: '',
-    pages:1
+    pages:1,
+    tip:'数据加载中...'
 
   },
 
@@ -300,6 +301,11 @@ Page({
     app.post('gifts/lists', data).then((res) => {
       if (res.code == 200) {
         console.log(res)
+        if(res.data.lists.length<=0){
+          that.setData({
+            tip:'没有更多了...'
+          })
+        }
         for (var i = 0; i < res.data.lists.length; i++) {
           ware_list.push(res.data.lists[i])
         }
