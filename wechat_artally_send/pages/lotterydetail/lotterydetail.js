@@ -550,6 +550,7 @@ Page({
   canvasDraw:function(){
     var that=this
     ctx.draw(false,function(e){
+      console.log(e)
       if(e){
         setTimeout(function () {
           wx.canvasToTempFilePath({
@@ -573,7 +574,7 @@ Page({
         }, 1000)
       }
       else{
-        this.canvasDraw()
+        that.canvasDraw()
       }
     })
   },
