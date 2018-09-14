@@ -1,5 +1,7 @@
 // pages/raffle/raffle.js
 const app=getApp()
+let order_id=0
+let inviter
 Page({
 
   /**
@@ -41,12 +43,24 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    var scene = decodeURIComponent(options.scene)
+    console.log(scene)
+    if(scene){
+      
+    }
+    else{
+
+    }
+    order_id = options.order_id
+    inviter = options.inviter
     this.setData({
-      order_id: options.order_id,
-      // order_id:149,
+      order_id,
+        // order_id:149,
       source: options.source,
-      inviter: options.inviter,
+      inviter,
     })
+
+    
     var that=this
     app.post('order/order_detail',{'order_id':options.order_id}).then((res)=>{
       var rafflecondition
@@ -85,38 +99,41 @@ Page({
    */
   onShow: function () {
     var that=this
-    
-    wx.getStorage({
-      key: 'userInfo',
-      success: function(res) {
-        var postData = { 'order_id': that.data.order_id, 'uid': res.data.uid }
-        console.log(postData)
-        app.post('order/client_exist', postData).then((res) => {
-          if(res.data==true){
-            console.log(that.data.isshowWhite)
-            app.addFormid()
-            wx.redirectTo({
-              url: '../lotterydetail/lotterydetail?source='+that.data.source+'&order_id=' + that.data.order_id,
-            })
-          }
-          else{
-            console.log(11)
-            that.setData({
-              isshowWhite:false
-            })
-          }
+    setTimeout(function(){
+      wx.getStorage({
+        key: 'userInfo',
+        success: function (res) {
+          console.log(that.data.order_id)
+          var postData = { 'order_id': order_id, 'uid': res.data.uid }
+          console.log(postData)
+          app.post('order/client_exist', postData).then((res) => {
+            if (res.data == true) {
+              console.log(that.data.isshowWhite)
+              app.addFormid()
+              wx.redirectTo({
+                url: '../lotterydetail/lotterydetail?source=' + that.data.source + '&order_id=' + that.data.order_id,
+              })
+            }
+            else {
+              console.log(11)
+              that.setData({
+                isshowWhite: false
+              })
+            }
 
-        }).catch((error) => {
-          console.log(error)
-        })
-      },
-      fail:function(){
-        console.log(11)
-        that.setData({
-          isshowWhite: false
-        })
-      }
-    })
+          }).catch((error) => {
+            console.log(error)
+          })
+        },
+        fail: function () {
+          // console.log(11)
+          that.setData({
+            isshowWhite: false
+          })
+        }
+      })
+    },500)
+    
   },
 
   /**
@@ -132,6 +149,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    console.log('销毁u')
     this.setData({
       isshowWhite: true
     })
