@@ -250,7 +250,7 @@ Page({
 
   //生成礼物红包
   makePacket: function () {
-    if (gift_lists == undefined || gift_lists.length == 0) {
+    if (this.data.gift_lists == undefined || this.data.gift_lists.length == 0) {
       wx.showToast({
         icon: 'none',
         mask: true,

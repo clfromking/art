@@ -497,27 +497,10 @@ Page({
         word = word.length > 10 ? word.substring(0, 10) + '...' : word
         ctx.fillText(word, 170, 300)
         ctx.fillText('x' + that.data.gifts[0].num, 170, 340)
-        ctx.draw(setTimeout(function(){
-          wx.canvasToTempFilePath({
-            canvasId: 'myCanvas',
-            success: function (res) {
-              console.log(res.tempFilePath)
-              that.setData({
-                // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
-                shareImg: res.tempFilePath,
-                // sharePath:'pages/index/index'
-              })
-
-              wx.hideLoading()
-              wx.showShareMenu({
-
-              })
-
-            },
-
-          }, this)
-        },1000))
+        that.canvasDraw()
         
+      }).catch((error)=>{
+        console.log(error)
       })
     }
     else{
@@ -533,29 +516,12 @@ Page({
         ctx.fillStyle = "#da0202";
         ctx.setFontSize(24)
         ctx.fillText("· · ·", 420, 310)
-        ctx.draw(setTimeout(function () {
-          wx.canvasToTempFilePath({
-            canvasId: 'myCanvas',
-            success: function (res) {
-              console.log(res.tempFilePath)
-              that.setData({
-                // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
-                shareImg: res.tempFilePath,
-                // sharePath:'pages/index/index'
-              })
-
-              wx.hideLoading()
-              wx.showShareMenu({
-
-              })
-
-            },
-
-          }, this)
-        }, 1000))
-      })
+        that.canvasDraw()
+        }).catch((error) => {
+          console.log(error)
+        })
     }
-      
+    
 
   },
   
@@ -578,6 +544,40 @@ Page({
     ctx.fillText(condition, 250, 160)
     this.drawImg()
   },
+
+
+  //画canvas
+  canvasDraw:function(){
+    var that=this
+    ctx.draw(false,function(e){
+      if(e){
+        setTimeout(function () {
+          wx.canvasToTempFilePath({
+            canvasId: 'myCanvas',
+            success: function (res) {
+              console.log(res.tempFilePath)
+              that.setData({
+                // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
+                shareImg: res.tempFilePath,
+                // sharePath:'pages/index/index'
+              })
+
+              wx.hideLoading()
+              wx.showShareMenu({
+
+              })
+
+            },
+
+          }, this)
+        }, 1000)
+      }
+      else{
+        this.canvasDraw()
+      }
+    })
+  },
+
 
   //获取图片信息
   getimginfo:function(img){
@@ -642,9 +642,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    console.log(this.data.ishowSpebtn)
-    console.log(this.data.ismyOneContinue)
-    console.log(this.data.gift_detail.condition)
     if (this.data.ishowSpebtn == true || this.data.ismyOneContinue == true){
       console.log('首页')
       return app.commonShare()
@@ -657,7 +654,7 @@ Page({
     else{
       return {
         title:this.data.shareTitle,
-        path:this.data.sharePath,
+        path: 'pages/raffle/raffle?time=' + this.data.gift_detail.condition + '&order_id=' + this.data.gift_detail.id + '&inviter=' + uid + '&source=lottery',
         imageUrl:this.data.shareImg
       }
       // ctx.drawImage()

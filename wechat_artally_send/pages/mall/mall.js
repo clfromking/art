@@ -233,4 +233,8 @@ Page({
   getFormid: function (e) {
     app.getFormid(e)
   },
+
+  scrolltolower:function(e){
+    console.log(1)
+  }
 })
