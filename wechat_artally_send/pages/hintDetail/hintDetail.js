@@ -276,7 +276,6 @@ Page({
           specification_repertory: specification[0].repertory,
           gift_id:options.id
         })
-        wx.hideLoading()
         // console.log(this.data.specification)
       }
     }).catch((error)=>{
