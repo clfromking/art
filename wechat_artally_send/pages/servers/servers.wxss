@@ -1,6 +1,7 @@
 /* pages/servers/servers.wxss */
 page{
   background: #fff;
+  color: #333;
 }
 .lq-servers{
   padding: 30rpx;
@@ -9,10 +10,14 @@ page{
 .bold{
   font-weight: bold;
   line-height: 2;
+  color: #000;
 }
 .center{
   text-align: center;
 }
 .line3{
   line-height: 3;
+}
+view{
+  text-align: justify;
 }

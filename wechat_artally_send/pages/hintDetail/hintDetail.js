@@ -1,5 +1,6 @@
 // pages/hintDetail/hintDetail.js
 const app=getApp()
+const ctx = wx.createCanvasContext('myCanvas1')
 let swiper_imgs = []
 let detail_msg={}
 let prec=[]
@@ -243,7 +244,7 @@ Page({
          
         }
         swiper_imgs=res.data.lists.imgs
-        detail_msg = { 'name': res.data.lists.name, 'describe': res.data.lists.describe, 'price': res.data.lists.price, smallimg: res.data.lists.price.mini_image}
+        detail_msg = { 'name': res.data.lists.name, 'describe': res.data.lists.describe, 'price': res.data.lists.price, smallimg: res.data.lists.mini_image}
         if (specification.length==0){
           wx.showToast({
             icon:'none',
@@ -329,27 +330,13 @@ Page({
   onReachBottom: function () {
   
   },
-  // 生成图片
-  createimg: function (img,name) {
-    var that = this;
-    wx.getImageInfo({
-      src: img,
-      success: function (res1) {
-        // console.log(res1)
-        const ctx = wx.createCanvasContext('myCanvas1')
-        ctx.setFillStyle('#f2f2f2')
-        ctx.fillRect(0, 0, 500, 400)
-        ctx.setStrokeStyle('#da0202')
-        ctx.setLineWidth(8)
-        ctx.strokeRect(4, 4, 488, 392)
-        ctx.setFillStyle('white')
-        ctx.fillRect(100, 30, 300, 340)
-        ctx.drawImage(res1.path, 100, 30, 300, 300)
-        ctx.setFontSize(16)
-        ctx.setFillStyle('black')
-        name = name.length > 16 ? name.substring(0, 16) + '...' : name;
-        ctx.fillText(name, 120, 355)
-        ctx.draw(setTimeout(function(){
+  // canvas draw
+  canvasDraw: function () {
+    var that = this
+    ctx.draw(false, function (e) {
+      console.log(e)
+      if (e.errMsg =='drawCanvas:ok') {
+        setTimeout(function () {
           wx.canvasToTempFilePath({
             x: 0,
             y: 0,
@@ -363,12 +350,39 @@ Page({
               that.setData({
                 shareimg: res2.tempFilePath
               })
+              wx.hideLoading()
               wx.showShareMenu()
-            },fail:function(){
+            }, fail: function () {
               wx.showShareMenu()
             }
           })
-        },1000));
+        }, 10)
+      }
+      else {
+        that.canvasDraw()
+      }
+    })
+  },
+  // 生成图片
+  createimg: function (img,name) {
+    var that = this;
+    wx.getImageInfo({
+      src: img,
+      success: function (res1) {
+        // console.log(res1)
+        ctx.setFillStyle('#f2f2f2')
+        ctx.fillRect(0, 0, 500, 400)
+        ctx.setStrokeStyle('#da0202')
+        ctx.setLineWidth(8)
+        ctx.strokeRect(4, 4, 488, 392)
+        ctx.setFillStyle('white')
+        ctx.fillRect(100, 30, 300, 340)
+        ctx.drawImage(res1.path, 100, 30, 300, 300)
+        ctx.setFontSize(16)
+        ctx.setFillStyle('black')
+        name = name.length > 16 ? name.substring(0, 16) + '...' : name;
+        ctx.fillText(name, 120, 355)
+        that.canvasDraw();
       },
       fail: function (res) {
         console.log(res)

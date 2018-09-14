@@ -1,4 +1,4 @@
-<button bindtap='closeStro'>清除缓存</button>
+<!-- <button bindtap='closeStro'>清除缓存</button> -->
 <image class="jw-index-banner" bindtap='bannerTap' data-go='{{banner_msgs.go}}' data-id='{{banner_msgs.id}}' data-go_id='{{banner_msgs.go_id}}' src="{{banner_msgs.avatar}}"></image>
 <view class='jw-index-body' >
   <view class='jw-gifts-view' hidden='{{!gift_lists}}'>

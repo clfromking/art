@@ -30,11 +30,16 @@ page{
   margin-bottom: 30rpx;
   color: #666;
   font-size: 34rpx;
+  text-align: justify;
 }
 .lq-instructions .m-con image{
   width: 100%;
   margin: 30rpx 0;
   border:1rpx solid #e5e5e5;
+}
+.lq-instructions .m-con text{
+  text-align: left;
+  display:inline-block;
 }
 .lq-instructions .m-t-icon{
   display: inline-block;
