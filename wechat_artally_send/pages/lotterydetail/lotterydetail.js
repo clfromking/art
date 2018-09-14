@@ -20,7 +20,7 @@ Page({
     title_text:'',
     condition:'',
     other_text:'邀请好友参与抽奖，提高中奖几率',
-    bless:'恭喜发财，大吉大利',
+    bless:'恭喜发财，大吉大利。',
     isfinish:false,
     gift_detail: gift_detail,
     uid:0,
@@ -63,7 +63,21 @@ Page({
     if(val==0){
 
     }else if(val==1){
-
+      console.log(this.data.shareTitle)
+      console.log(this.data.gift_detail.condition)
+      console.log(this.data.gift_detail.wish ? this.data.gift_detail.wish:'恭喜发财，大吉大利。')
+      console.log(this.data.gifts)
+      var momentsData = { 'shareTitle': this.data.shareTitle, 'condition': this.data.gift_detail.condition, 'wish': this.data.gift_detail.wish ? this.data.gift_detail.wish : '恭喜发财，大吉大利。', 'gifts': this.data.gifts, 'avatar': this.data.gift_detail.cavatar ? this.data.gift_detail.cavatar :'https://pic.forunart.com/artgive/wx/me_img.png'}
+      wx.setStorage({
+        key: 'moments',
+        data: momentsData,
+        success:function(res){
+          console.log(res)
+          wx.navigateTo({
+            url: '../saveImg/saveImg',
+          })
+        }
+      })
     }
   },
   /**
@@ -534,7 +548,7 @@ Page({
   drawText:function(wish,condition){
     console.log(wish)
     console.log(condition)
-    var wishes = wish ? wish : '恭喜发财，大吉大利'
+    var wishes = wish ? wish : '恭喜发财，大吉大利。'
     ctx.setFillStyle('#f2f2f2')
     ctx.fillRect(0, 0, 500, 400)
     ctx.setStrokeStyle('#da0202')

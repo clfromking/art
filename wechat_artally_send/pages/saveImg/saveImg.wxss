@@ -1,7 +1,35 @@
 /* pages/saveImg/saveImg.wxss */
+page{
+  background: #333
+}
 .jw-saveImg-btn{
-  height: 100rpx;
+  display: block;
+  margin: 22rpx auto 10rpx;
+  width: 710rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background-color: #da0202;
+  box-shadow: 0 2rpx 15rpx 0 rgba(218, 2, 2, 0.66);
+  text-align: center;
+  line-height: 80rpx;
+  color: #fff;
+  font-size: 28rpx;
   position: fixed;
-  width: 100%;
-  bottom: 0
+  bottom: 10rpx;
+  left: 20rpx
+}
+.canvas{
+  width: 691px !important;
+  height: 976px !important
+}
+.blackZ{
+  /* height: 100vh */
+  /* height: calc(100% - 0rpx) */
+  /* position: relative;
+  height: 80vh;
+  top: 0 */
+}
+.img{
+  margin: 130rpx 30rpx 100rpx
+
 }

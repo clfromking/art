@@ -1,2 +1,6 @@
-<image src='{{src}}'></image>
+<canvas canvas-id='myCanvas' class='myCanvas canvas'></canvas>
+<view class='blackZ'>
+  <image mode='widthFix' class='img' src='{{src}}' style='width:690rpx'></image>
+  
+</view>
 <button bindtap='saveImg' class='jw-saveImg-btn'>保存图片</button>
