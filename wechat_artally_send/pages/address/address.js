@@ -54,7 +54,8 @@ Page({
       index=e?e.currentTarget.dataset.index:index1,
       addresslist = this.data.addresslist;
     if (addresslist[index].default==1) return
-    app.post('address/address_defaults',{id:id},1).then(res=>{
+    let uid=wx.getStorageSync('userInfo').uid;
+    app.post('address/address_defaults',{id:id,uid:uid},1).then(res=>{
       // console.log(res)
       if(res.code==200){
         //flag表示提货页来需要返回

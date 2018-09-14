@@ -26,8 +26,10 @@
 .lq-addedit .ae-li text{
   width: 142rpx;
 }
-.lq-addedit .ae-li input,.lq-addedit .ae-li picker{
+.lq-addedit .ae-li input,.lq-addedit .ae-li picker,.lq-addedit .ae-li .picker{
   flex: 2;
+  height: 90rpx;
+  line-height: 90rpx;
 }
 .lq-addedit .ae-li.area{
   display: block;
@@ -42,7 +44,7 @@
   flex: 2;
 }
 .lq-addedit .ae-li .ae-switch{
-   zoom: .6; 
+   zoom: .8;
    width:76rpx;
 }
 .lq-addedit .a-savebtn{

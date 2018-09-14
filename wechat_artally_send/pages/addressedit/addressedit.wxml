@@ -20,7 +20,7 @@
     <text>详细地址</text>
     <textarea class='fr' placeholder='请填写详细地址' value='{{temp.detail_address}}' data-type='temp.detail_address' bindinput='blurSetInput'></textarea>
   </view>
-  <view class='ae-li default clear'>
+  <view class='ae-li default clear' hidden='{{isdefault}}'>
     <text>默认地址</text>
     <view class='ae-switch'><switch checked="{{temp.default==1}}" bindchange="switchChange"></switch></view>
   </view>

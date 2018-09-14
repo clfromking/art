@@ -25,7 +25,8 @@ Page({
     specification_repertory:0,
     gift_id:0,
     isshowindicator:false,
-    shareimg:""
+    shareimg:"",
+    hidehome: true,
   },
   buyThis:function(){
     this.setData({
@@ -215,6 +216,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app.showHome(this)
     console.log(iscommon)
     console.log(options)
     wx.hideShareMenu()

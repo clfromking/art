@@ -5,6 +5,19 @@ App({
     formIds:[],
   },
 
+  // 显示隐藏home-icon
+  showHome:function(th){
+    let historys = [], pages = getCurrentPages();
+    for (let i = 0; i < pages.length; i++) {
+      historys.push(pages[i].route)
+    }
+    // console.log(historys)
+    if (historys.length == 1) {
+      th.setData({
+        hidehome: false
+      })
+    }
+  },
   //添加formid
   addFormid:function(){
     var that=this

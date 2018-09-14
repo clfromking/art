@@ -39,8 +39,8 @@ Page({
     shareTitle:'',
     shareImg:'',
     sharePath:'',
-    isload:false
-
+    isload:false,
+    hidehome: true,
   },
   // 轮播改变事件
   swiperchange:function(e){
@@ -70,6 +70,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app.showHome(this)
     wx.showLoading({
       title: '数据加载中',
       mask:true

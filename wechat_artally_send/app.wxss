@@ -15,6 +15,18 @@ view[hidden]{display: none !important;}
 -webkit-line-clamp: 3;
 overflow: hidden;
 }
+/* 返回首页icon */
+.lq-home{
+  width:72rpx;
+  height:72rpx;
+  border-radius:50%;
+  background:#fff url('https://pic.forunart.com/artgive/wx/icon-home.png') no-repeat center;
+  background-size:cover;
+  position:fixed;
+  top:20rpx;
+  left:20rpx;
+  z-index:9;
+}
 /* 没有礼物 */
 .lq-nothing{
   text-align: center;
