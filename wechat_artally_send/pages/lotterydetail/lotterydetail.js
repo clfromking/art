@@ -37,6 +37,7 @@ Page({
     isshowWhite:true,
     banner_msgs:'',
     shareTitle:'',
+    shareTitle1: '',
     shareImg:'',
     sharePath:'',
     isload:false,
@@ -63,7 +64,7 @@ Page({
     if(val==0){
 
     }else if(val==1){
-      var momentsData = { 'shareTitle': this.data.shareTitle, 'condition': this.data.gift_detail.condition, 'wish': this.data.gift_detail.wish ? this.data.gift_detail.wish : '恭喜发财，大吉大利。', 'gifts': this.data.gifts, 'avatar': this.data.gift_detail.cavatar ? this.data.gift_detail.cavatar :'https://pic.forunart.com/artgive/wx/me_img.png','order_id':this.data.gift_detail.id,'inviter':uid}
+      var momentsData = { 'shareTitle': this.data.shareTitle,'shareTitle1':this.data.shareTitle1, 'condition': this.data.gift_detail.condition, 'wish': this.data.gift_detail.wish ? this.data.gift_detail.wish : '恭喜发财，大吉大利。', 'gifts': this.data.gifts, 'avatar': this.data.gift_detail.cavatar ? this.data.gift_detail.cavatar :'https://pic.forunart.com/artgive/wx/me_img.png','order_id':this.data.gift_detail.id,'inviter':uid}
       wx.setStorage({
         key: 'moments',
         data: momentsData,
@@ -114,6 +115,7 @@ Page({
       app.post('order/order_detail', { 'order_id': options.order_id }).then((res) => {
         console.log(res)
         var shareTitle=''
+        var shareTitle1= ''
         if (res.code == 200) {
           var ismy2haveBtntext = that.data.ismy2haveBtntext
           ismy2haveBtntext='发送给好友 '
@@ -121,15 +123,18 @@ Page({
           switch (Number(gift_detail.gameplaydata)) {
             case 2:
               gift_detail.condition = gift_detail.condition + '开奖'
-              shareTitle=gift_detail.cname+'邀请你参与抽奖，请点击查看。'
+              shareTitle=gift_detail.cname
+              shareTitle1='邀请你参与抽奖，请点击查看。'
               break;
             case 3:
               gift_detail.condition = '满' + gift_detail.condition + '人开奖'
-              shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
+              shareTitle = gift_detail.cname
+              shareTitle1 = '邀请你参与抽奖，请点击查看。'
               break;
             default:
               gift_detail.condition = '礼物红包'
-              shareTitle = gift_detail.cname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' :'个礼包')
+              shareTitle = gift_detail.cname
+              shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
               break;
           }
  
@@ -142,7 +147,8 @@ Page({
             uid: uid,
             isshowWhite,
             ismy2haveBtntext,
-            shareTitle
+            shareTitle,
+            shareTitle1
           })
           that.drawText(gift_detail.wish,gift_detail.condition)
         }
@@ -165,6 +171,7 @@ Page({
           var ishave = false
           var ishideodds1=false
           var shareTitle=''
+          var shareTitle1 = ''
           var other_text = that.data.other_text
           var isreceivePerson = that.data.isreceivePerson
           if (Number(gift_detail.giftbagdata) == 1) {
@@ -206,15 +213,18 @@ Page({
           switch (Number(gift_detail.gameplaydata)) {
             case 2:
               gift_detail.condition = gift_detail.condition + '开奖'
-              shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
+              shareTitle = gift_detail.cname 
+              shareTitle1='邀请你参与抽奖，请点击查看。'
               break;
             case 3:
               gift_detail.condition = '满' + gift_detail.condition + '人开奖'
-              shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
+              shareTitle = gift_detail.cname
+              shareTitle1 = '邀请你参与抽奖，请点击查看。'
               break;
             default:
               gift_detail.condition = '礼物红包'
-              shareTitle = gift_detail.cname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
+              shareTitle = gift_detail.cname
+              shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
               if (Number(gift_detail.status) == 0) {
                 title_text = '很遗憾，礼物已经抢光'
                 // ishowSpebtn = true
@@ -251,6 +261,7 @@ Page({
             ishave,
             isshowWhite,
             shareTitle,
+            shareTitle1,
             isreceivePerson
           })
           that.drawText(gift_detail.wish, gift_detail.condition)
@@ -278,6 +289,7 @@ Page({
             var ismyOneContinue=false
             var gift_detail = res.data.order
             var shareTitle=''
+            var shareTitle1=''
             var isreceivePerson = that.data.isreceivePerson
             if (Number(gift_detail.gameplaydata)==1) {     //点对点
               ishideodds = true
@@ -286,7 +298,8 @@ Page({
                 title_text ='礼物等待领取，莫着急'
                 gift_detail.condition = '礼物红包'
                 ismyOneContinue = false
-                shareTitle = gift_detail.cname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
+                shareTitle = gift_detail.cname
+                shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
               }
               else if (Number(gift_detail.giftbagdata) == 2){    //已完成
                 title_text = '礼物已被领取，好开心'
@@ -307,8 +320,8 @@ Page({
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = gift_detail.condition + '开奖'
-                shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
-                
+                shareTitle = gift_detail.cname
+                shareTitle1= '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text ='礼物已经抢光，好开心' 
@@ -328,7 +341,8 @@ Page({
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = '满'+gift_detail.condition+'人开奖'
-                shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
+                shareTitle = gift_detail.cname
+                shareTitle1 = '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text = '礼物已被抢光，好开心'
@@ -355,6 +369,7 @@ Page({
               heads: gift_detail.client,
               isshowWhite,
               shareTitle,
+              shareTitle1,
               isreceivePerson
             })
             console.log(gift_detail.condition)
@@ -385,6 +400,7 @@ Page({
             var ismy2haveBtntext = that.data.ismy2haveBtntext
             var ishowSpebtn=false
             var shareTitle=''
+            var shareTitle1=''
             if (Number(gift_detail.gameplaydata) == 1){     //点对点
               if (Number(gift_detail.giftbagdata) == 1){    //进行中
                 
@@ -410,7 +426,8 @@ Page({
               gift_detail.condition = gift_detail.condition + '开奖'
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text='请等待，成功参与抽奖'
-                shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
+                shareTitle = gift_detail.cname
+                shareTitle1 = '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {   //已完成
                 isfinish=true
@@ -439,7 +456,8 @@ Page({
               gift_detail.condition = '满'+gift_detail.condition + '人开奖'
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='请等待，成功参与抽奖'
-                shareTitle = gift_detail.cname + '邀请你参与抽奖，请点击查看。'
+                shareTitle = gift_detail.cname
+                shareTitle1 = '邀请你参与抽奖，请点击查看。'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {   //已完成
                 other_text=''
@@ -482,7 +500,8 @@ Page({
               ismy2haveBtntext,
               ishowSpebtn,
               isshowWhite,
-              shareTitle
+              shareTitle,
+              shareTitle1
             })
             that.drawText(gift_detail.wish, gift_detail.condition)
           }
@@ -675,7 +694,7 @@ Page({
     }
     else{
       return {
-        title:this.data.shareTitle,
+        title:this.data.shareTitle+this.data.shareTitle1,
         path: 'pages/raffle/raffle?order_id=' + this.data.gift_detail.id + '&inviter=' + uid + '&source=lottery',
         imageUrl:this.data.shareImg
       }

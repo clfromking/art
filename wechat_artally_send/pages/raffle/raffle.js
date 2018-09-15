@@ -46,51 +46,61 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    var scene = decodeURIComponent(options.scene)
-    console.log(scene)
-    if(scene){
-      
+
+    if(options.scene){
+      var scene = decodeURIComponent(options.scene)
+      scene=scene.split(',')
+      // console.log(scene)
+      order_id=scene[1]
+      inviter=scene[2]
+      this.setData({
+        order_id,
+        source: scene[0],
+        inviter,
+      })
+     
     }
     else{
-
-    }
-    order_id = options.order_id
-    inviter = options.inviter
-    this.setData({
-      order_id,
+      order_id = options.order_id
+      inviter = options.inviter
+      this.setData({
+        order_id,
         // order_id:149,
-      source: options.source,
-      inviter,
-    })
-
-    
+        source: options.source,
+        inviter,
+      })
+    }
     var that=this
-    app.post('order/order_detail',{'order_id':options.order_id}).then((res)=>{
-      var rafflecondition
-      var backgroundimage
-      if(res.code==200){
-        console.log(res)
-        if(Number(res.data.order.gameplaydata)==1){
-          rafflecondition='礼物红包'
-          backgroundimage ='https://pic.forunart.com/artgive/wx/gift_bg_img_1.png'
+    
+    setTimeout(function(){
+      console.log('order_id' + order_id)
+      app.post('order/order_detail', { 'order_id': that.data.order_id }).then((res) => {
+        var rafflecondition
+        var backgroundimage
+        if (res.code == 200) {
+          console.log(res)
+          if (Number(res.data.order.gameplaydata) == 1) {
+            rafflecondition = '礼物红包'
+            backgroundimage = 'https://pic.forunart.com/artgive/wx/gift_bg_img_1.png'
+          }
+          else if (Number(res.data.order.gameplaydata) == 2) {
+            rafflecondition = '发起一个抽奖，' + res.data.order.condition + '开奖'
+            backgroundimage = 'https://pic.forunart.com/artgive/wx/gift_bg_img_2.png'
+          }
+          else if (Number(res.data.order.gameplaydata) == 3) {
+            rafflecondition = '发起一个抽奖，满' + res.data.order.condition + '人开奖'
+            backgroundimage = 'https://pic.forunart.com/artgive/wx/gift_bg_img_2.png'
+          }
+          that.setData({
+            rafflecondition: rafflecondition,
+            backgroundimage,
+            name: res.data.order.uname,
+            avatar: res.data.order.avatar,
+            wish: res.data.order.wish ? res.data.order.wish : '恭喜发财，大吉大利。'
+          })
         }
-        else if (Number(res.data.order.gameplaydata) == 2){
-          rafflecondition='发起一个抽奖，'+res.data.order.condition+'开奖'
-          backgroundimage = 'https://pic.forunart.com/artgive/wx/gift_bg_img_2.png'
-        }
-        else if (Number(res.data.order.gameplaydata) == 3){
-          rafflecondition = '发起一个抽奖，满' + res.data.order.condition + '人开奖'
-          backgroundimage = 'https://pic.forunart.com/artgive/wx/gift_bg_img_2.png'
-        }
-        that.setData({
-          rafflecondition: rafflecondition,
-          backgroundimage,
-          name:res.data.order.uname,
-          avatar:res.data.order.avatar,
-          wish: res.data.order.wish ? res.data.order.wish:'恭喜发财，大吉大利。'
-        })
-      }
-    })
+      })
+    },0)
    
   },
 
@@ -111,7 +121,7 @@ Page({
         key: 'userInfo',
         success: function (res) {
           console.log(that.data.order_id)
-          var postData = { 'order_id': order_id, 'uid': res.data.uid }
+          var postData = { 'order_id': that.data.order_id, 'uid': res.data.uid }
           console.log(postData)
           app.post('order/client_exist', postData).then((res) => {
             if (res.data == true) {
@@ -155,7 +165,6 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log('销毁u')
     this.setData({
       isshowWhite: true
     })
