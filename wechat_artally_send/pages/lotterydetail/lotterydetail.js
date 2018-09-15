@@ -727,8 +727,7 @@ Page({
   },
 
   gojoinPeople2:function(){
-    console.log(11)
-    if (this.data.heads.length == 0) {
+    if (this.data.gift_detail.inviter.length == 0) {
       return
     }
     wx.navigateTo({
