@@ -578,7 +578,7 @@ Page({
     ctx.strokeRect(4, 4, 488, 392)
     ctx.setFontSize(32)
     ctx.setTextAlign('center')
-    ctx.fillStyle = "#da0202";
+    ctx.setFillStyle('#da0202')
     ctx.fillText('“' + wishes+ '”', 250, 100)
     ctx.setFontSize(24)
     ctx.fillText(condition, 250, 160)

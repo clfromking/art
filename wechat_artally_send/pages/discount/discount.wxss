@@ -124,6 +124,8 @@
   background-color: #ffffff;
 }
 .lq-discount .d-b-tip{
+  height: 40rpx;
+  line-height: 40rpx;
   font-size: 24rpx;
 	color: #ffffff;
   padding: 0 30rpx;

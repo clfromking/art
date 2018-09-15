@@ -49,7 +49,7 @@
 	box-shadow: 0 0 8rpx 0 rgba(0, 0, 0, 0.1);
 }
 .lq-takegoods .t-l-cen{
-  padding: 10rpx 20rpx 0;
+  padding: 10rpx 20rpx;
   display: flex;
   align-items: center;
 }
