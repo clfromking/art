@@ -13,7 +13,10 @@ Page({
     inviter:0,
     source:'',
     backgroundimage:'https://pic.forunart.com/artgive/wx/gift_bg_img_2.png',
-    isshowWhite:true
+    isshowWhite:true,
+    name:'',
+    avatar:'',
+    wish:''
   },
 
   openRaffle:function(){
@@ -66,6 +69,7 @@ Page({
       var rafflecondition
       var backgroundimage
       if(res.code==200){
+        console.log(res)
         if(Number(res.data.order.gameplaydata)==1){
           rafflecondition='礼物红包'
           backgroundimage ='https://pic.forunart.com/artgive/wx/gift_bg_img_1.png'
@@ -80,7 +84,10 @@ Page({
         }
         that.setData({
           rafflecondition: rafflecondition,
-          backgroundimage
+          backgroundimage,
+          name:res.data.order.uname,
+          avatar:res.data.order.avatar,
+          wish: res.data.order.wish ? res.data.order.wish:'恭喜发财，大吉大利。'
         })
       }
     })
@@ -115,7 +122,6 @@ Page({
               })
             }
             else {
-              console.log(11)
               that.setData({
                 isshowWhite: false
               })
