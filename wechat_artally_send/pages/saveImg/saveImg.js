@@ -412,6 +412,12 @@ Page({
       console.log(error)
     })
   },
+  // 预览图
+  previewimg:function(){
+    wx.previewImage({
+      urls: [this.data.src]
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
