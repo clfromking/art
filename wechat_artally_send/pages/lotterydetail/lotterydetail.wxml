@@ -37,7 +37,7 @@
       <text>邀请好友参与抽奖，提高中奖几率</text>
     </view>
 
-    <view class='l-joinbox' hidden='{{gift_detail.inviter_count==0}}'>
+    <view class='l-joinbox' hidden='{{Number(gift_detail.inviter_count)==0||Number(gift_detail.gameplaydata)==1}}'>
     <view class='l-j-num' bindtap='gojoinPeople2' style='text-align:left'>已有 <text style='text-decoration:underline'>{{gift_detail.inviter.length}}</text> 人为你助力</view>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{gift_detail.inviter}}" wx:key="{{index}}">

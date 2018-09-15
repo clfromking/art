@@ -132,7 +132,7 @@ Page({
               shareTitle = gift_detail.cname + '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' :'个礼包')
               break;
           }
-
+ 
           that.setData({
             ishideodds: true,
             ishideodds1: true,
@@ -166,6 +166,7 @@ Page({
           var ishideodds1=false
           var shareTitle=''
           var other_text = that.data.other_text
+          var isreceivePerson = that.data.isreceivePerson
           if (Number(gift_detail.giftbagdata) == 1) {
             title_text = '请等待，成功参与抽奖'
           }
@@ -224,6 +225,7 @@ Page({
                 ishideodds = true
                 ishideodds1=true
                 ishave = true
+                isreceivePerson=true
               }
 
               break;
@@ -248,7 +250,8 @@ Page({
             winList: gift_detail.win || '',
             ishave,
             isshowWhite,
-            shareTitle
+            shareTitle,
+            isreceivePerson
           })
           that.drawText(gift_detail.wish, gift_detail.condition)
 
@@ -275,6 +278,7 @@ Page({
             var ismyOneContinue=false
             var gift_detail = res.data.order
             var shareTitle=''
+            var isreceivePerson = that.data.isreceivePerson
             if (Number(gift_detail.gameplaydata)==1) {     //点对点
               ishideodds = true
               ishideodds1 = true
@@ -289,6 +293,7 @@ Page({
                 gift_detail.condition = '礼物红包'
                 isfinish=true
                 ismyOneContinue=true
+                isreceivePerson=true
               }
               else if (Number(gift_detail.giftbagdata) == 3){    //已过期
                 title_text = '礼物无人领取，已过期'
@@ -349,7 +354,8 @@ Page({
               ismyOneContinue,
               heads: gift_detail.client,
               isshowWhite,
-              shareTitle
+              shareTitle,
+              isreceivePerson
             })
             console.log(gift_detail.condition)
             that.drawText(gift_detail.wish, gift_detail.condition)
