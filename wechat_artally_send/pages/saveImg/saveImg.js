@@ -422,7 +422,16 @@ Page({
       mask: true
     })
     var that=this
-    app.post('getwxacode/get_wx_acode', { 'scene': 0 }, 1).then((res) => {   
+    var value 
+    try {
+      value  = wx.getStorageSync('moments')
+
+    } catch (e) {
+      // Do something when catch error
+    }
+    console.log(value)
+    var sceneData='source=lottery'+'&order_id='+value.order_id+'&inviter='+value.inviter
+    app.post('getwxacode/get_wx_acode', { 'scene': sceneData }, 1).then((res) => {   
       if (res) {
         that.setData({
           code1: res

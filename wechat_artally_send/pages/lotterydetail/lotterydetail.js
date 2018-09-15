@@ -63,11 +63,7 @@ Page({
     if(val==0){
 
     }else if(val==1){
-      console.log(this.data.shareTitle)
-      console.log(this.data.gift_detail.condition)
-      console.log(this.data.gift_detail.wish ? this.data.gift_detail.wish:'恭喜发财，大吉大利。')
-      console.log(this.data.gifts)
-      var momentsData = { 'shareTitle': this.data.shareTitle, 'condition': this.data.gift_detail.condition, 'wish': this.data.gift_detail.wish ? this.data.gift_detail.wish : '恭喜发财，大吉大利。', 'gifts': this.data.gifts, 'avatar': this.data.gift_detail.cavatar ? this.data.gift_detail.cavatar :'https://pic.forunart.com/artgive/wx/me_img.png'}
+      var momentsData = { 'shareTitle': this.data.shareTitle, 'condition': this.data.gift_detail.condition, 'wish': this.data.gift_detail.wish ? this.data.gift_detail.wish : '恭喜发财，大吉大利。', 'gifts': this.data.gifts, 'avatar': this.data.gift_detail.cavatar ? this.data.gift_detail.cavatar :'https://pic.forunart.com/artgive/wx/me_img.png','order_id':this.data.gift_detail.id,'inviter':uid}
       wx.setStorage({
         key: 'moments',
         data: momentsData,
