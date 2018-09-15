@@ -3,4 +3,4 @@
   <image mode='widthFix' class='img' src='{{src}}' style='width:690rpx'></image>
   
 </view>
-<button bindtap='saveImg' class='jw-saveImg-btn'>保存图片</button>
+<button bindtap='saveImg' hidden='{{!isshow}}' class='jw-saveImg-btn'>保存图片</button>

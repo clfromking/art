@@ -10,7 +10,8 @@ Page({
     src:'',
     isauthor:true,
     moments:{},
-    code1:''
+    code1:'',
+    isshow:false
   },
 
   saveImg:function(e){
@@ -382,6 +383,7 @@ Page({
               that.setData({
                 // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
                 src: res.tempFilePath,
+                isshow:true
                 // sharePath:'pages/index/index'
               })
 
