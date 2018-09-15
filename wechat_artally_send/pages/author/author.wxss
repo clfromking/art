@@ -9,7 +9,12 @@ page{
   background: #d8d8d8;
   margin: 0 auto;
   margin-top: 151rpx;
-  border-radius: 50%
+  border-radius: 50%;
+  overflow: hidden;
+}
+.jw-art-logo image{
+  width: 100%;
+  height: 100%;
 }
 .jw-art-name{
   display: block;

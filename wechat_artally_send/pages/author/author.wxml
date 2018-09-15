@@ -1,5 +1,4 @@
-<view class='jw-art-logo'>
-</view>
+<view class='jw-art-logo'><image src="https://pic.forunart.com/artgive/wx/logo.jpeg"></image></view>
 <text class='jw-art-name'>神马送礼</text>
 <view class='jw-fenge'></view>
 <view class='jw-author-body'>

@@ -15,16 +15,18 @@ Page({
 
   //点击抽奖事件
   goRaffle:function(e){
-    if (this.data.lottery_list[e.currentTarget.dataset.index].client==true){  
+    let index = e.currentTarget.dataset.index,
+      id = e.currentTarget.dataset.id;
+    if (this.data.lottery_list[index].client==true){
       app.addFormid()
       wx.navigateTo({
-        url: '../lotterydetail/lotterydetail?source=lottery&order_id=' + this.data.lottery_list[e.currentTarget.dataset.index].id,
+        url: '../lotterydetail/lotterydetail?source=lottery&order_id=' + id,
       })
       return
     }
     
     wx.navigateTo({
-      url: '../raffle/raffle?time=' + this.data.lottery_list[e.currentTarget.dataset.index].condition + '&order_id=' + this.data.lottery_list[e.currentTarget.dataset.index].id+'&inviter=-1&source=lottery',
+      url: '../raffle/raffle?order_id=' +id+'&inviter=-1&source=lottery',
     })
   },
 

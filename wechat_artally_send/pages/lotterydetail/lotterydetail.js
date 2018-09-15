@@ -674,7 +674,7 @@ Page({
     else{
       return {
         title:this.data.shareTitle,
-        path: 'pages/raffle/raffle?time=' + this.data.gift_detail.condition + '&order_id=' + this.data.gift_detail.id + '&inviter=' + uid + '&source=lottery',
+        path: 'pages/raffle/raffle?order_id=' + this.data.gift_detail.id + '&inviter=' + uid + '&source=lottery',
         imageUrl:this.data.shareImg
       }
       // ctx.drawImage()

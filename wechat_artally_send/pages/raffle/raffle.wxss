@@ -20,11 +20,13 @@ page{
   margin: auto
 }
 .jw-art-logo{
-  width: 90rpx;
-  height: 90rpx;
+  width: 85rpx;
+  height: 85rpx;
+  padding: 5rpx;
   position: absolute;
   top: 159rpx;
   border-radius: 50%;
+  overflow: hidden;
   background: #fff;
   left: 273rpx
 }
