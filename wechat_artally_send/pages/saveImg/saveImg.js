@@ -127,7 +127,7 @@ Page({
             // ctx.setFillStyle('#da0202')
             ctx.fill()
             ctx.clip()
-            ctx.drawImage(res[1].path, 320.5, 501)
+            ctx.drawImage(res[1].path, 320.5, 501,60,60)
             ctx.restore()
             that.canvasDraw()
           }).catch((error) => {
@@ -187,7 +187,7 @@ Page({
             // ctx.setFillStyle('#da0202')
             ctx.fill()
             ctx.clip()
-            ctx.drawImage(res[1].path, 320.5, 501)
+            ctx.drawImage(res[1].path, 320.5, 501,60,60)
             ctx.restore()
             that.canvasDraw()
           }).catch((error) => {
@@ -255,7 +255,7 @@ Page({
             // ctx.setFillStyle('#da0202')
             ctx.fill()
             ctx.clip()
-            ctx.drawImage(res[1].path, 320.5, 501)
+            ctx.drawImage(res[1].path, 320.5, 501,60,60)
             ctx.restore()
             that.canvasDraw()
           }).catch((error) => {
@@ -336,7 +336,7 @@ Page({
             // ctx.setFillStyle('#da0202')
             ctx.fill()
             ctx.clip()
-            ctx.drawImage(res[1].path, 320.5, 501)
+            ctx.drawImage(res[1].path, 320.5, 501,60,60)
             ctx.restore()
             that.canvasDraw()
           }).catch((error)=>{
