@@ -63,20 +63,23 @@ Page({
 
 
   //画字
-  drawText:function(shareTitle,wish,condition){
+  drawText:function(shareTitle,shareTitle1,wish,condition){
     ctx.setFontSize(24)
     ctx.setTextAlign('center')
     ctx.fillStyle = "#FFFEC5";
-    ctx.fillText('先到先得', 345.5, 930)
-    ctx.fillText('长按小程序码领礼物', 345.5, 884)
+    // ctx.fillText('先到先得', 345.5, 950)
+    ctx.fillText('长按小程序码领礼物', 345.5, 934)
     ctx.setFontSize(30)
     ctx.fillStyle = "#FFF587";
-    ctx.fillText(condition, 345.5, 822)
-    ctx.setFontSize(48)
-    ctx.fillText(wish, 345.5, 730)
+    ctx.fillText(condition, 345.5, 880)
+    ctx.setFontSize(42)
+    console.log(wish)
+    ctx.fillText(wish, 345.5, 802)
     ctx.setFontSize(30)
     ctx.fillStyle = "#FFFE8D";
-    ctx.fillText(shareTitle, 345.5,650)
+    ctx.fillText(shareTitle, 345.5,660)
+    ctx.setFontSize(26)
+    ctx.fillText(shareTitle1, 345.5, 710)
     this.drawImg()
     
   },
@@ -132,6 +135,7 @@ Page({
             ctx.restore()
             that.canvasDraw()
           }).catch((error) => {
+            console.log(error)
             that.drawImg()
           })
 
@@ -260,6 +264,7 @@ Page({
             ctx.restore()
             that.canvasDraw()
           }).catch((error) => {
+            console.log(error)
             that.drawImg()
           })
 
@@ -435,12 +440,16 @@ Page({
     } catch (e) {
       // Do something when catch error
     }
-    console.log(value)
-    var sceneData='source=lottery'+'&order_id='+value.order_id+'&inviter='+value.inviter
-    app.post('getwxacode/get_wx_acode', { 'scene': sceneData }, 1).then((res) => {   
-      if (res) {
+    // console.log(value)
+    var postdata = {
+      scene: 'lottery' + ',' + value.order_id + ',' + value.inviter,
+      page: "pages/raffle/raffle"
+    }
+    app.post('getwxacode/get_wx_acode', postdata, 1).then((res) => {   
+      console.log(res)
+      if (res.code==200) {
         that.setData({
-          code1: res
+          code1: res.data
         })
         wx.getImageInfo({
           src: 'https://pic.forunart.com/artgive/wx/fenxiangtupian%282%29_hongbao@3x.png',
@@ -452,7 +461,7 @@ Page({
                 that.setData({
                   moments: res.data
                 })
-                that.drawText(res.data.shareTitle, res.data.wish, res.data.condition)
+                that.drawText(res.data.shareTitle,res.data.shareTitle1, res.data.wish, res.data.condition)
               },
             })
 

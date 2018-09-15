@@ -124,17 +124,17 @@ Page({
             case 2:
               gift_detail.condition = gift_detail.condition + '开奖'
               shareTitle=gift_detail.cname
-              shareTitle1='邀请你参与抽奖，请点击查看。'
+              shareTitle1='邀请你参与抽奖'
               break;
             case 3:
               gift_detail.condition = '满' + gift_detail.condition + '人开奖'
               shareTitle = gift_detail.cname
-              shareTitle1 = '邀请你参与抽奖，请点击查看。'
+              shareTitle1 = '邀请你参与抽奖'
               break;
             default:
               gift_detail.condition = '礼物红包'
               shareTitle = gift_detail.cname
-              shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
+              shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物' : '个礼包')
               break;
           }
  
@@ -214,17 +214,17 @@ Page({
             case 2:
               gift_detail.condition = gift_detail.condition + '开奖'
               shareTitle = gift_detail.cname 
-              shareTitle1='邀请你参与抽奖，请点击查看。'
+              shareTitle1='邀请你参与抽奖'
               break;
             case 3:
               gift_detail.condition = '满' + gift_detail.condition + '人开奖'
               shareTitle = gift_detail.cname
-              shareTitle1 = '邀请你参与抽奖，请点击查看。'
+              shareTitle1 = '邀请你参与抽奖'
               break;
             default:
               gift_detail.condition = '礼物红包'
               shareTitle = gift_detail.cname
-              shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
+              shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物' : '个礼包')
               if (Number(gift_detail.status) == 0) {
                 title_text = '很遗憾，礼物已经抢光'
                 // ishowSpebtn = true
@@ -299,7 +299,7 @@ Page({
                 gift_detail.condition = '礼物红包'
                 ismyOneContinue = false
                 shareTitle = gift_detail.cname
-                shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物，请点击查看。' : '个礼包')
+                shareTitle1 = '赠送给你一' + (gift_detail.gifts.length == 1 ? '种礼物' : '个礼包')
               }
               else if (Number(gift_detail.giftbagdata) == 2){    //已完成
                 title_text = '礼物已被领取，好开心'
@@ -321,7 +321,7 @@ Page({
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = gift_detail.condition + '开奖'
                 shareTitle = gift_detail.cname
-                shareTitle1= '邀请你参与抽奖，请点击查看。'
+                shareTitle1= '邀请你参与抽奖'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text ='礼物已经抢光，好开心' 
@@ -342,7 +342,7 @@ Page({
                 title_text ='礼物等待开奖，莫着急'
                 gift_detail.condition = '满'+gift_detail.condition+'人开奖'
                 shareTitle = gift_detail.cname
-                shareTitle1 = '邀请你参与抽奖，请点击查看。'
+                shareTitle1 = '邀请你参与抽奖'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {    //已完成
                 title_text = '礼物已被抢光，好开心'
@@ -427,7 +427,7 @@ Page({
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text='请等待，成功参与抽奖'
                 shareTitle = gift_detail.cname
-                shareTitle1 = '邀请你参与抽奖，请点击查看。'
+                shareTitle1 = '邀请你参与抽奖'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {   //已完成
                 isfinish=true
@@ -457,7 +457,7 @@ Page({
               if (Number(gift_detail.giftbagdata) == 1) {    //进行中
                 title_text ='请等待，成功参与抽奖'
                 shareTitle = gift_detail.cname
-                shareTitle1 = '邀请你参与抽奖，请点击查看。'
+                shareTitle1 = '邀请你参与抽奖'
               }
               else if (Number(gift_detail.giftbagdata) == 2) {   //已完成
                 other_text=''
@@ -597,7 +597,7 @@ Page({
             success: function (res) {
               console.log(res.tempFilePath)
               that.setData({
-                // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物，请点击查看。',
+                // shareTitle: that.data.gift_detail.uname+'赠送给你一种礼物',
                 shareImg: res.tempFilePath,
                 // sharePath:'pages/index/index'
               })
