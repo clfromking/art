@@ -68,20 +68,21 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
-    let that = this,
+      let that = this,
       type = Number(options.type),
       nav = options.nav ? Number(options.nav) : 0,
       titles = this.data.titles,
       posturl = this.data.titleUrls[type];
-    wx.setNavigationBarTitle({
-      title:titles[type]
-    })
-    that.setData({
-      titleIndex: type,
-      navIndex: nav,
-      posturl:posturl
-    })
-    that.getOrders();
+      that.setData({
+        titleIndex: type,
+        navIndex: nav,
+        posturl:posturl
+      })
+      wx.setNavigationBarTitle({
+        title: titles[type]
+      })
+      that.getOrders();
+      
   },
 
   /**

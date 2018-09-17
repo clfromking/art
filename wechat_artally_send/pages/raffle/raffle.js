@@ -121,10 +121,10 @@ Page({
       wx.getStorage({
         key: 'userInfo',
         success: function (res) {
-          console.log(that.data.order_id)
           var postData = { 'order_id': that.data.order_id, 'uid': res.data.uid }
           console.log(postData)
           app.post('order/client_exist', postData).then((res) => {
+            console.log(res)
             if (res.data == true) {
               console.log(that.data.isshowWhite)
               app.addFormid()

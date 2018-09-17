@@ -1,6 +1,6 @@
 // pages/lottery/lottery.js
 const app=getApp()
-let lottery_list = []
+let lottery_list = [1]
 Page({
 
   /**
