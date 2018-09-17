@@ -8,8 +8,7 @@
       <image src='{{item.image}}' class='jw-question-icon'></image>
       <text class='jw-question-name'>{{item.name}}</text>
     </view>
-    <view class='fr jw-question-right'>
-      {{item.describe}}
+    <view class='fr jw-question-right'>{{item.describe}}
     </view>
   </view>
 </view>
