@@ -57,7 +57,7 @@ Page({
     }
     
     that.data.pages=1
-    app.post('gifts/lists', { 'search': that.data.input_val,'pages':that.data.pages }).then((res) => {
+    app.post('gifts/lists', { "hot": 1,'search': that.data.input_val,'pages':that.data.pages }).then((res) => {
       console.log(res)
       if (res.code == 200) {
         if (res.data.lists.length <= 0) {
@@ -226,7 +226,7 @@ Page({
     else {
       tip = '数据加载中...'
     }
-    app.post('gifts/lists', { 'search': that.data.input_val, 'pages': that.data.pages }).then((res) => {
+    app.post('gifts/lists', { "hot": 1,'search': that.data.input_val, 'pages': that.data.pages }).then((res) => {
       console.log(res)
       if (res.code == 200) {
         if (res.data.lists.length <= 0) {
