@@ -123,7 +123,7 @@ swiper{
 .jw-screen-title-view{
   width: 670rpx;
   margin: 20rpx auto 0;
-  height: 73.5rpx
+  /* height: 73.5rpx */
 }
 .jw-screen-title-img{
   width: 100%;
