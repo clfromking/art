@@ -76,8 +76,8 @@ Page({
     wx.setNavigationBarTitle({
       title:titles[type]
     })
-    this.setData({
-      titleIndex: options.type,
+    that.setData({
+      titleIndex: type,
       navIndex: nav,
       posturl:posturl
     })
