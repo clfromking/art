@@ -77,6 +77,7 @@ Page({
       app.post('order/order_detail', { 'order_id': that.data.order_id }).then((res) => {
         var rafflecondition
         var backgroundimage
+        console.log(res)
         if (res.code == 200) {
           console.log(res)
           if (Number(res.data.order.gameplaydata) == 1) {

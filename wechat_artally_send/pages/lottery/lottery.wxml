@@ -31,4 +31,8 @@
     </view>
   </form>
 </view>
+ <view class='lq-nothing' hidden='{{gifts.length>0}}'>
+    <image mode='widthFix' src='https://pic.forunart.com/artgive/wx/no_gifts.png'></image>
+    <text>官方暂时还没有抽奖</text>
+  </view>
 <!-- <text>暂无每日抽奖</text> -->

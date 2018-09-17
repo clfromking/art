@@ -1,10 +1,12 @@
 /* pages/lotterydetail/lotterydetail.wxss */
 page{
-  /* background: #da0202; */
+ background: #fff;
+ 
 }
 .lq-lotdetail{
   background: #fff;
   padding-bottom: 120rpx;
+  /* height: 100vh */
 }
 /* 状态区 */
 .lq-lotdetail .l-statusbox{

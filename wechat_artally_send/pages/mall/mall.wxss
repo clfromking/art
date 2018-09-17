@@ -131,7 +131,7 @@ swiper{
 }
 .jw-ware-list-view{
   width: 670rpx;
-  margin:40rpx auto 0;
+  margin:70rpx auto 0;
 }
 .jw-el-ware{
   width: 325rpx;

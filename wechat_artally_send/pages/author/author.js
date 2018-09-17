@@ -20,11 +20,6 @@ Page({
           wx.getUserInfo({
             withCredentials:true,
             success:function(res1){
-              console.log(res.code)
-              console.log(res1)
-              // console.log(e.detail.encryptedData)
-              // console.log(e.detail.iv)
-              // return
               var postData = { 'code': res.code, 'encryptedData': res1.encryptedData, 'iv': res1.iv }
               app.post('wxpay/get_miniprogram_userinfo', postData, 1).then((res) => {
                 console.log(res)

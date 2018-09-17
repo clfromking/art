@@ -159,6 +159,7 @@ Page({
     }
     else if(options.source=='lottery'){
       var postData = { 'order_id': options.order_id, 'uid': uid }
+      console.log(postData)
       // postData={'order_id':149,'uid':77}
       app.post('order/order_detail', postData).then((res) => {
         console.log(res)
