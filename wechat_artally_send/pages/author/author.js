@@ -16,35 +16,46 @@ Page({
     if(e.detail.userInfo){
       wx.login({
         success:function(res){
-          console.log(res.code)
-          console.log(e.detail.encryptedData)
-          console.log(e.detail.iv)
-          var postData = { 'code': res.code, 'encryptedData': e.detail.encryptedData, 'iv': e.detail.iv}
-          app.post('wxpay/get_miniprogram_userinfo',postData,1).then((res)=>{
-            console.log(res)
-            // res.code=600
-            if(res.code==600){
-              wx.showToast({
-                icon:'none',
-                title: '获取信息失败，请重试',
-              })
-              // that.bindgetuserinfo(e)
-            }
-            else if(res.code==200){
-              console.log(res)
-              wx.setStorage({
-                key: 'userInfo',
-                data:res.data,
-                success: function(res) {
-                  wx.navigateBack({
-                   
-                    
+
+          wx.getUserInfo({
+            withCredentials:true,
+            success:function(res1){
+              console.log(res.code)
+              console.log(res1)
+              // console.log(e.detail.encryptedData)
+              // console.log(e.detail.iv)
+              // return
+              var postData = { 'code': res.code, 'encryptedData': res1.encryptedData, 'iv': res1.iv }
+              app.post('wxpay/get_miniprogram_userinfo', postData, 1).then((res) => {
+                console.log(res)
+                // res.code=600
+                if (res.code == 600) {
+                  wx.showToast({
+                    icon: 'none',
+                    title: '获取信息失败，请重试',
                   })
-                },
+                  // that.bindgetuserinfo(e)
+                }
+                else if (res.code == 200) {
+                  console.log(res)
+                  wx.setStorage({
+                    key: 'userInfo',
+                    data: res.data,
+                    success: function (res) {
+                      wx.navigateBack({
+
+
+                      })
+                    },
+                  })
+                }
+              }).catch((error) => {
+                console.log(error)
               })
+            },
+            fail: function (error){
+              console.log(error)
             }
-          }).catch((error)=>{
-            console.log(error)
           })
         }
       })
