@@ -54,15 +54,13 @@ Page({
 
   //点击搜索
   search_msg: function () {
-    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2, 'search': this.data.input_val }
+    this.data.pages = 1
+    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2, 'search': this.data.input_val,'pages':this.data.pages }
     var that = this
     var tip
-    if (that.data.input_val == '' && that.data.select_id1 == '' && that.data.select_id2==''){
+    // if (that.data.input_val == '' && that.data.select_id1 == '' && that.data.select_id2==''){
       tip='数据加载中...'
-    }
-    else{
-      tip='没有更多了...'
-    }
+    // }
     app.post('gifts/lists', data).then((res) => {
       console.log(res)
       if (res.code == 200) {
@@ -72,9 +70,17 @@ Page({
             tip: '暂无搜索内容'
           })
         }
-        else {
+        else if (res.data.lists.length < 10) {
+          ware_list = res.data.lists
           that.setData({
-            ware_list: res.data.lists,
+            ware_list: ware_list,
+            tip: '没有更多了...'
+          })
+        }
+        else {
+          ware_list=res.data.lists
+          that.setData({
+            ware_list: ware_list,
             tip: tip
           })
         }
@@ -196,15 +202,14 @@ Page({
       ishideScreen:true,
       isScreen:isScreen
     })
-    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2,'search':this.data.input_val}
+    this.data.pages=1
+    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2,'search':this.data.input_val,'pages':this.data.pages}
     var that=this
     var tip
-    if (this.data.input_val == '' && this.data.select_id1 == '' && this.data.select_id2 == '') {
+    // if (this.data.input_val == '' && this.data.select_id1 == '' && this.data.select_id2 == '') {
       tip = '数据加载中...'
-    }
-    else {
-      tip = '没有更多了...'
-    }
+    // }
+    
     app.post('gifts/lists', data).then((res) => {
       console.log(res)
       if (res.code == 200) {
@@ -214,9 +219,17 @@ Page({
             tip: '暂无筛选内容'
           })
         }
-        else {
+        else if (res.data.lists.length<10){
+          ware_list = res.data.lists
           that.setData({
-            ware_list: res.data.lists,
+            ware_list: ware_list,
+            tip: '没有更多了...'
+          })
+        }
+        else {
+          ware_list=res.data.lists
+          that.setData({
+            ware_list: ware_list,
             tip: tip
           })
         }
@@ -350,6 +363,42 @@ Page({
     })
   },
 
+
+  //加载搜索列表
+  loadsearchlist: function () {
+    var data = { 'price': this.data.select_id1, 'sort': this.data.select_id2, 'search': this.data.input_val, 'pages': this.data.pages }
+    var that = this
+    var tip
+    if (that.data.ware_list.length == 0) {
+      tip = '暂无搜索内容'
+    }
+    else {
+      tip = '数据加载中...'
+    }
+    app.post('gifts/lists', data).then((res) => {
+      console.log(res)
+      if (res.code == 200) {
+        if (res.data.lists.length <= 0) {
+          that.setData({
+            tip: '没有更多了...'
+          })
+          return
+        }
+        for (var i = 0; i < res.data.lists.length; i++) {
+          ware_list.push(res.data.lists[i])
+        }
+        // ware_list = res.data.lists
+        that.setData({
+          ware_list,
+          tip: tip
+        })
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -409,6 +458,9 @@ Page({
     that.data.pages++
     if (that.data.input_val == '' && that.data.priceCover == '' && that.data.scCover==''){
       that.loadList()
+    }
+    else{
+      that.loadsearchlist()
     }
     // that.loadList()
     // console.log(that.data.pages)
