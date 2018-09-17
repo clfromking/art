@@ -76,6 +76,10 @@ Page({
         }
       })
     }
+    let notShare = this.data.notShare;
+    this.setData({
+      notShare: !notShare
+    })
   },
   /**
    * 生命周期函数--监听页面加载
