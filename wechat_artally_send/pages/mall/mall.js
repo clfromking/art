@@ -50,25 +50,35 @@ Page({
 
   //点击搜索
   search_msg:function(){
-    console.log(this.data.input_val)
     var that=this
-    app.post('gifts/lists',{'search':this.data.input_val}).then((res)=>{
+    var tip
+    if (that.data.input_val == '') {
+      tip = '数据加载中...'
+    }
+    else {
+      tip = '没有更多了...'
+    }
+    app.post('gifts/lists', { 'search': that.data.input_val }).then((res) => {
       console.log(res)
-      if(res.code==200){
-        if(res.data.lists.length<=0){
+      if (res.code == 200) {
+        if (res.data.lists.length <= 0) {
           that.setData({
-            ware_list:''
+            ware_list: '',
+            tip: '暂无搜索内容'
           })
         }
-        else{
+        else {
           that.setData({
-            ware_list:res.data.lists
+            ware_list: res.data.lists,
+            tip: tip
           })
         }
       }
-    }).catch((error)=>{
+    }).catch((error) => {
       console.log(error)
     })
+
+
   },
 
 
@@ -255,7 +265,10 @@ Page({
   scrolltolower:function(e){
     var that=this
     that.data.pages++
-    that.loadList()
+    if (that.data.input_val == '') {
+      that.loadList()
+    }
+    // that.loadList()
     // console.log(that.data.pages)
   }
 })
