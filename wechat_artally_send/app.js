@@ -158,6 +158,7 @@ App({
       key: 'gifts',
       success: function(res) {},
     })
+    wx.removeStorageSync('waitOperateGifts')
   },
 
   /**

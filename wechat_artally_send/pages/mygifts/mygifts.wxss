@@ -93,6 +93,7 @@
 .lq-gifts .g-l-b-pic,.lq-gifts .g-l-b-pic image{
   width: 50rpx;
 	height: 50rpx;
+  border-radius: 50%;
 }
 
 
