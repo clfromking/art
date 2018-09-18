@@ -39,13 +39,13 @@
     <view class='d-o-li'>
       <text>手续费 {{poundage}}%</text>
       <view class='fr'>
-        <text>{{data.totalprice*poundage/100}} 元</text>
+        <text>{{deductprice}} 元</text>
       </view>
     </view>
     <view class='d-o-li'>
       <text>实际折现</text>
       <view class='price fr'>
-        <text>{{data.totalprice*(100-poundage)/100}} 元</text>
+        <text>{{realprice}} 元</text>
       </view>
     </view>
     <view class='d-o-li' hidden="{{temp.phone!='暂未绑定'}}">
@@ -63,15 +63,15 @@
   <!-- 底部栏 -->
   <view class="d-botbox {{ishowtip?'active':''}}">
     <view class="d-b-tip" bindtap='toggletip'>
-      <text>请仔细阅读《折现/退款须知》</text>
+      <text>请仔细阅读《折现须知》</text>
       <image class='db-icon' mode='widthFix' src='https://pic.forunart.com/artgive/wx/icon_arrow.png'></image>
     </view>
     <view class="d-b-word">
-      每个微信账户每日折现/退款上限为10笔，总金额不超过20000元。多笔折现/退款建议使用多选按钮，进行批量操作。
+      每个微信账户每日折现上限为10笔，总金额不超过20000元。多笔折现/退款建议使用多选按钮，进行批量操作。
     </view>
     <view class='d-b-main clear'>
       <view class='d-b-left'>
-        <text>合计：{{data.totalprice*(100-poundage)/100}} 元</text>
+        <text>合计：{{realprice}} 元</text>
         <text class='fr'>共 {{data.totalnum}} 件</text>
       </view>
       <button class='d-b-btn' form-type='submit'>确认折现</button>

@@ -19,6 +19,8 @@ Page({
       totalnum:0
     },
     poundage:1,//手续费
+    realprice:0,
+    deductprice:0,
     codeObj: {
       text: '获取验证码',
       canclick: true,
@@ -159,13 +161,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this, poundage,
+    let that = this, poundage, realprice, deductprice,
       data = wx.getStorageSync('waitOperateGifts');
     app.post('order/fee',{}).then(res=>{
       if(res.code==200){
         poundage = res.data;
+        deductprice = (data.totalprice * poundage / 100).toFixed(2);
+        realprice = (data.totalprice - deductprice).toFixed(2);
         that.setData({
           data: data,
+          realprice: realprice,
+          deductprice: deductprice,
           poundage: poundage
         })
       }else{
