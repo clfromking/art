@@ -30,7 +30,7 @@
     </block>
   </swiper>
   <view class='jw-screen-title-view'>
-    <image mode='widthFix' class='jw-screen-title-img' src='https://pic.forunart.com/artgive/wx/mall_1.png'></image>
+    <image mode='widthFix' class='jw-screen-title-img' src='https://pic.forunart.com/artgive/wx/mall_2.png'></image>
   </view>
   <view class='jw-ware-list-view'>
     <view style='position:relative' class='jw-el-ware' wx:for='{{ware_list}}'  wx:key='{{item}}'>

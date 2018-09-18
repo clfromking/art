@@ -31,7 +31,7 @@
     </view>
   </form>
 </view>
- <view class='lq-nothing' hidden='{{lottery_list.length>0}}'>
+ <view class='lq-nothing' hidden='{{isnothing}}'>
     <image mode='widthFix' src='https://pic.forunart.com/artgive/wx/no_gifts.png'></image>
     <text>官方暂时还没有抽奖</text>
   </view>
