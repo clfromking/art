@@ -89,7 +89,7 @@
     <text class='jw-bless-hint'>送上心意，撰写祝福语</text>
     <picker style='position:relative' class='jw-choose-bless' mode='selector' range="{{bless_arr}}" value='{{bless_index}}' bindchange='blessConfirm'>
       <form bindsubmit='getFormid' report-submit='true'>
-        <button form-type='submit' style='opacity:0;position:absolute' >选择祝福语</button>
+        <button form-type='submit' style='opacity:0;position:absolute;height:44rpx' >选择祝福语</button>
         <view >选择祝福语</view>
       </form>
     </picker>
