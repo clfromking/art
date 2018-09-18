@@ -315,7 +315,7 @@ Page({
               }
               else if (Number(gift_detail.giftbagdata) == 3){    //已过期
                 title_text = '礼物无人领取，已过期'
-                gift_detail.condition = '礼物红包(已为您安排退款)'
+                gift_detail.condition = '礼物红包(已为您退回)'
                 ismyOneContinue = true
               }
             }
@@ -336,10 +336,10 @@ Page({
               }
               else if (Number(gift_detail.giftbagdata) == 3) {    //已过期
                 title_text ='抽奖无人参与，已过期'
-                gift_detail.condition = gift_detail.condition + '开奖(已为您安排退款)'
+                gift_detail.condition = gift_detail.condition + '开奖(已为您退回)'
                 ismyOneContinue = true
               }
-            }
+            } 
             else{     //满人
               ishideodds = true
               ishideodds1 = false
@@ -357,7 +357,7 @@ Page({
               }
               else if (Number(gift_detail.giftbagdata) == 3) {    //已过期
                 title_text = '抽奖参与未满，已过期'
-                gift_detail.condition = '满' + gift_detail.condition + '人开奖(已为您安排退款)'
+                gift_detail.condition = '满' + gift_detail.condition + '人开奖(已为您退回)'
                 ismyOneContinue = true
               }
             }
