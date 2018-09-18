@@ -1,5 +1,5 @@
 
-<image class='jw-lottery-banner' bindtap='bannerTap'  data-id='{{banner_msgs.id}}' data-go='{{banner_msgs.go}}' data-go_id='{{banner_msgs.go_id}}' src='{{banner_msgs.avatar}}'></image>
+<image mode='widthFix' class='jw-lottery-banner' bindtap='bannerTap'  data-id='{{banner_msgs.id}}' data-go='{{banner_msgs.go}}' data-go_id='{{banner_msgs.go_id}}' src='{{banner_msgs.avatar}}'></image>
 <text class='jw-lottery-title'>每日抽奖</text>
 <view class='jw-lottery-view'>
   <form report-submit='true' bindsubmit='getFormid'>
