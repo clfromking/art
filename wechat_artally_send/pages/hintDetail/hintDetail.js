@@ -341,10 +341,10 @@ Page({
           wx.canvasToTempFilePath({
             x: 0,
             y: 0,
-            width: 500,
-            height: 400,
-            destWidth: 500,
-            destHeight: 400,
+            width: 500*2,
+            height: 400*2,
+            destWidth: 500*2,
+            destHeight: 400*2,
             canvasId: 'myCanvas1',
             success: function (res2) {
               // console.log(res2.tempFilePath)
@@ -372,17 +372,17 @@ Page({
       success: function (res1) {
         // console.log(res1)
         ctx.setFillStyle('#f2f2f2')
-        ctx.fillRect(0, 0, 500, 400)
+        ctx.fillRect(0, 0, 500*2, 400*2)
         ctx.setStrokeStyle('#da0202')
-        ctx.setLineWidth(8)
-        ctx.strokeRect(4, 4, 488, 392)
+        ctx.setLineWidth(8*2)
+        ctx.strokeRect(4*2, 4*2, 488*2, 392*2)
         ctx.setFillStyle('white')
-        ctx.fillRect(100, 30, 300, 340)
-        ctx.drawImage(res1.path, 100, 30, 300, 300)
-        ctx.setFontSize(16)
+        ctx.fillRect(100*2, 30*2, 300*2, 340*2)
+        ctx.drawImage(res1.path, 100*2, 30*2, 300*2, 300*2)
+        ctx.setFontSize(20*2)
         ctx.setFillStyle('black')
-        name = name.length > 16 ? name.substring(0, 16) + '...' : name;
-        ctx.fillText(name, 120, 355)
+        name = name.length > 12 ? name.substring(0, 12) + '...' : name;
+        ctx.fillText(name, 120*2, 355*2)
         that.canvasDraw();
       },
       fail: function (res) {

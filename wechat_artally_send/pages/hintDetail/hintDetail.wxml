@@ -1,7 +1,7 @@
 <!--pages/hintDetail/hintDetail.wxml-->
 <navigator open-type="switchTab" url='/pages/index/index' class='lq-home' hidden='{{hidehome}}'></navigator>
 
-<canvas canvas-id='myCanvas1' class='myCanvas'></canvas>
+<canvas canvas-id='myCanvas1' class='myCanvas' style='width:1000px;height:800px;'></canvas>
 
 <scroll-view class='jw-body-scroll-view' scroll-y='{{isHidebuy}}'>
   <swiper indicator-dots="{{isshowindicator}}" indicator-color="#e9e9e9" indicator-active-color="#da0202">
