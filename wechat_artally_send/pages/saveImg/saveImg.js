@@ -153,22 +153,22 @@ Page({
         ]).then((res) => {
           ctx.setStrokeStyle('#da0202')
           ctx.setLineWidth(2)
-          ctx.strokeRect(80.5, 35, 248, 248)
+          ctx.strokeRect(80.5, 85, 248, 248)
 
           ctx.beginPath()
-          ctx.rect(81.5, 36, 246, 246)
+          ctx.rect(81.5, 86, 246, 246)
           ctx.setFillStyle('#fff')
           ctx.fill()
-          ctx.drawImage(res[0].path, 98.5, 53, 214, 214)
+          ctx.drawImage(res[0].path, 98.5, 103, 214, 214)
           ctx.closePath()
 
-          ctx.strokeRect(360.5, 35, 248, 248)
+          ctx.strokeRect(360.5, 85, 248, 248)
 
           ctx.beginPath()
-          ctx.rect(361.5, 36, 246, 246)
+          ctx.rect(361.5, 86, 246, 246)
           ctx.setFillStyle('#fff')
           ctx.fill()
-          ctx.drawImage(res[1].path, 378.5, 53, 214, 214)
+          ctx.drawImage(res[1].path, 378.5, 103, 214, 214)
           ctx.closePath()
 
 
