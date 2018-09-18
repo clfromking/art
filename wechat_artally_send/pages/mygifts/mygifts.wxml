@@ -33,13 +33,13 @@
       </view>
       <!-- 已折现 -->
       <view class='g-l-info' wx:if="{{titleIndex==0&&navIndex==1}}">
-        <view class='bold'>{{item.name}}</view>
+        <view class='bold ellipsis'>{{item.name}}</view>
         <view class='thin'>x{{item.num}}</view>
         <view>
           <text class='bold'>折现价 {{filter.currency(item.price)}}</text>
           <text> 原价 {{filter.currency(item.price)}}</text>
         </view>
-        <view class='thin'>申请时间 {{item.updatetime}} 预计3-5天到账）</view> 
+        <view class='thin'>申请时间 {{item.updatetime}}</view> 
       </view>
     </view>
     <!-- 底部送礼人 -->
@@ -49,17 +49,19 @@
         <view class='g-l-b-pic fl'>
           <image lazy-load mode='aspectFit' src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
         </view>
-        <view class='time'>{{item.updatetime}} 收到 {{item.uname}} 的礼物</view>
+        <view class='fl'>{{item.updatetime}} 收到</view>
+        <view class='fl ellipsis' style="max-width:190rpx;margin:0 10rpx;">{{item.uname}}</view>
+        <view class='fl'>的礼物</view>
       </view>
       <!-- 我送出的和我参与的,显示 -->
       <view wx:if="{{titleIndex!=0}}">
         <view class='g-l-b-pic fl' wx:if="{{titleIndex==2}}">
           <image lazy-load mode='aspectFit' src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
         </view>
-        <view class='fl' wx:if="{{titleIndex==2}}">{{item.uname}} </view>
-        <view class='time' wx:if="{{navIndex==0}}">{{item.createtime}} 送出</view>
-        <view class='time' wx:if="{{navIndex==1}}">{{item.condition}} 开奖</view>
-        <view class='time' wx:if="{{navIndex==2}}">满 {{item.condition}} 人开奖</view>
+        <view class='fl ellipsis' wx:if="{{titleIndex==2}}" style='max-width:280rpx;margin-right:10rpx;'>{{item.uname}}</view>
+        <view class='time' wx:if="{{navIndex==0}}"> {{item.createtime}} 送出</view>
+        <view class='time' wx:if="{{navIndex==1}}"> {{item.condition}} 开奖</view>
+        <view class='time' wx:if="{{navIndex==2}}"> 满 {{item.condition}} 人开奖</view>
       </view>
     </view>
   </view>

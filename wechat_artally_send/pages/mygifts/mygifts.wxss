@@ -88,7 +88,7 @@
   padding: 10rpx 20rpx;
 }
 .lq-gifts .g-l-b-pic{
-  margin-right: 30rpx;
+  margin-right: 20rpx;
 }
 .lq-gifts .g-l-b-pic,.lq-gifts .g-l-b-pic image{
   width: 50rpx;
