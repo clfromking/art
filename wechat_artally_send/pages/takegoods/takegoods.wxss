@@ -63,6 +63,7 @@
   height: 200rpx;
 }
 .lq-takegoods .t-l-info{
+  width:450rpx;
   font-size: 26rpx;
 	font-weight: 500;
 	color: #111111;

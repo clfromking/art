@@ -23,7 +23,7 @@
         <image mode='aspectFit' src="{{item.image}}"></image>
       </view>
       <view class='t-l-info'>
-        <view>{{item.name}}</view>
+        <view class='ellipsis'>{{item.name}}</view>
         <view class='num'>x{{item.choosenum}}</view>
         <view>{{item.price}}</view>
       </view>
