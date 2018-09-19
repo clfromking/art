@@ -1,5 +1,5 @@
 <view style='background:#fff;padding-bottom:30rpx'>
-  <image mode='widthFix' class='jw-custom-banner' src='https://pic.forunart.com/artgive/wx/banner@3x.png'></image>
+  <image mode='widthFix' class='jw-custom-banner' style='height:360rpx' src='https://pic.forunart.com/artgive/wx/banner@3x.png'></image>
   <button class='jw-call-custom' open-type='contact'>联系在线客服</button>
 </view>
 <view class='jw-questions'>
