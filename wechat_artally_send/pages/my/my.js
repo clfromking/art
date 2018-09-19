@@ -158,11 +158,19 @@ Page({
       url;
     for (let i = 0; i < gifts.length; i++) {
       if (gifts[i].selected){
-        if (type == 2 && gifts[i].uid== -1 ){
-          wx.showToast({
-            title: '官方发布的奖品不能折现',
-            icon:"none"
-          })
+        if (gifts[i].uid== -1 ){
+          if (type == 2){
+            wx.showToast({
+              title: '官方发布的奖品不能折现',
+              icon: "none"
+            })
+          }
+          else if (type == 3){
+            wx.showToast({
+              title: '官方发布的奖品不能转赠',
+              icon: "none"
+            })
+          }
           return
         }
         data.gifts.push(gifts[i]);
