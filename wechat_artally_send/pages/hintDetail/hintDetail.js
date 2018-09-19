@@ -27,6 +27,7 @@ Page({
     isshowindicator:false,
     shareimg:"",
     hidehome: true,
+    imgHeight:''
   },
   buyThis:function(){
     this.setData({
@@ -268,11 +269,12 @@ Page({
             }
           })
         }
-        that.createimg(detail_msg.smallimg,detail_msg.name)
+        that.createimg(detail_msg.smallimg,detail_msg.name) 
         that.setData({
           swiper_imgs:swiper_imgs,
           detail_msg:detail_msg,
           detail_image: res.data.lists.detail_image,
+          imgHeight:Number(res.data.lists.detail_ratio)*750+'rpx',
           specification: specification,
           specification_img: specification[0].image,
           specification_repertory: specification[0].repertory,
@@ -391,13 +393,14 @@ Page({
     })
   },
   /**
-   * 用户点击右上角分享
+   * 用户点击右上角分享**
    */
   onShareAppMessage: function (res) {
     let that = this, 
       name = wx.getStorageSync('userInfo').username;
+      name=name.length>12?name.substring(0,12)+'...':name
     return{
-      title: (name ? name : "我") + "觉得这款商品不错，邀请你去看看",
+      title: (name ? name: "我") + "觉得这款商品不错，邀请你去看看",
       imageUrl: that.data.shareimg
     }
   },
