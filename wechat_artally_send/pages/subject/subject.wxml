@@ -1,5 +1,5 @@
 <!--pages/subject/subject.wxml-->
-<image mode='widthFix' src='{{title_img_src}}' class='jw-title-img'></image>
+<image mode='widthFix' src='{{title_img_src}}' class='jw-title-img' style='height:89rpx'></image>
 <view class='jw-ware-list-view'>
   <view style='position:relative' class='jw-el-ware' wx:for='{{ware_list}}'  wx:key='{{item}}'>
     <form report-submit='true' bindsubmit='getFormid'>
