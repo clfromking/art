@@ -67,7 +67,7 @@
       <image class='db-icon' mode='widthFix' src='https://pic.forunart.com/artgive/wx/icon_arrow.png'></image>
     </view>
     <view class="d-b-word">
-      每个微信账户每日折现上限为10笔，总金额不超过20000元。多笔折现/退款建议使用多选按钮，进行批量操作。
+      每个微信账户每日折现上限为10笔，每笔不得低于1元，总金额不超过20000元。多笔折现建议使用多选按钮，进行批量操作。
     </view>
     <view class='d-b-main clear'>
       <view class='d-b-left'>

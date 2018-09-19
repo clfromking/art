@@ -46,8 +46,16 @@ Page({
   getcode: function () {
     let that = this,
       temp=that.data.temp,
+      realprice = this.data.realprice,
       codeObj = that.data.codeObj;
     if (!codeObj.canclick) return
+    if (realprice < 1) {
+      wx.showToast({
+        title: '折现金额不得低于1元',
+        icon: 'none'
+      })
+      return
+    }
     if (temp.phone =="暂未绑定") {
       wx.showToast({
         title: '请先绑定手机号',
@@ -106,8 +114,16 @@ Page({
   discountok:function(e){
     let that=this,
       temp=this.data.temp,
+      realprice = this.data.realprice,
       data = this.data.data;
-    if(!temp.phone){
+    if (realprice<1) {
+      wx.showToast({
+        title: '折现金额不得低于1元',
+        icon: 'none'
+      })
+      return
+    }
+    if (!temp.phone || temp.phone =="暂未绑定"){
       wx.showToast({
         title: '请先绑定手机号',
         icon: 'none'

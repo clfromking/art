@@ -1,4 +1,7 @@
 /* pages/discount/discount.wxss */
+page{
+  padding-bottom: 180rpx;
+}
 /* 提示栏 */
 .lq-discount .d-tip{
   height: 80rpx;
@@ -61,7 +64,6 @@
 .lq-discount .d-other{
   background: #fff;
   margin-top: 30rpx;
-  margin-bottom: 180rpx;
 }
 .lq-discount .d-o-li{
   line-height: 80rpx;
