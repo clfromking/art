@@ -36,7 +36,7 @@
         <view class='bold ellipsis'>{{item.name}}</view>
         <view class='thin'>x{{item.num}}</view>
         <view>
-          <text class='bold'>折现价 {{filter.currency(item.price)}}</text>
+          <text class='bold'>折现价 {{filter.currency(item.express)}}</text>
           <text> 原价 {{filter.currency(item.price)}}</text>
         </view>
         <view class='thin'>申请时间 {{item.updatetime}}</view> 

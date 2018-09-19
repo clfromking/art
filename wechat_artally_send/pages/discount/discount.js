@@ -182,8 +182,11 @@ Page({
     app.post('order/fee',{}).then(res=>{
       if(res.code==200){
         poundage = res.data;
-        deductprice = (data.totalprice * poundage / 100).toFixed(2);
-        realprice = (data.totalprice - deductprice).toFixed(2);
+        //toFixed有兼容性问题
+        // deductprice = (data.totalprice * poundage / 100).toFixed(2);
+        // realprice = (data.totalprice - deductprice).toFixed(2);
+        deductprice = Math.round(data.totalprice * poundage) / 100;
+        realprice = Math.round((data.totalprice - deductprice) * 100) / 100;
         that.setData({
           data: data,
           realprice: realprice,
