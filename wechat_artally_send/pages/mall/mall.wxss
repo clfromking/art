@@ -105,7 +105,8 @@ swiper{
 .jw-el-mainImg{
   width: 124rpx;
   height: 124rpx;
-  display: block
+  display: block;
+  border-radius: 50%;
 }
 .jw-el-otherImg{
   width: 90rpx;
