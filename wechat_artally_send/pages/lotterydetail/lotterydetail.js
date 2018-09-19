@@ -154,6 +154,7 @@ Page({
             shareTitle,
             shareTitle1
           })
+          
           that.drawText(gift_detail.wish,gift_detail.condition)
         }
       }).catch((error) => {
@@ -269,8 +270,15 @@ Page({
             shareTitle1,
             isreceivePerson
           })
-          that.drawText(gift_detail.wish, gift_detail.condition)
+          if (ishowSpebtn == true) {
+            wx.hideLoading()
+            wx.showShareMenu({
 
+            })
+          }
+          else{
+            that.drawText(gift_detail.wish, gift_detail.condition)
+          }
         }
       }).catch((error) => {
         console.log(error)
@@ -378,7 +386,15 @@ Page({
               isreceivePerson
             })
             console.log(gift_detail.condition)
-            that.drawText(gift_detail.wish, gift_detail.condition)
+            if (ismyOneContinue == true) {
+              wx.hideLoading()
+              wx.showShareMenu({
+
+              })
+            }
+            else{
+              that.drawText(gift_detail.wish, gift_detail.condition)
+            }
           }
           
         }).catch((error) => {
@@ -508,7 +524,15 @@ Page({
               shareTitle,
               shareTitle1
             })
-            that.drawText(gift_detail.wish, gift_detail.condition)
+            if (ishowSpebtn == true ||ismyOneContinue == true) {
+              wx.hideLoading()
+              wx.showShareMenu({
+
+              })
+            }
+            else{
+              that.drawText(gift_detail.wish, gift_detail.condition)
+            }
           }
         }).catch((error)=>{
           console.log(error)
@@ -586,6 +610,7 @@ Page({
     ctx.setFillStyle('#da0202')
     ctx.fillText('“' + wishes+ '”', 250, 100)
     ctx.setFontSize(24)
+    ctx.setFillStyle('#da0202')
     ctx.fillText(condition, 250, 160)
     this.drawImg()
   },
@@ -618,7 +643,6 @@ Page({
         }, 0)
       }
       else{
-        console.log(1111)
         that.canvasDraw()
       }
     })
@@ -691,11 +715,6 @@ Page({
     if (this.data.ishowSpebtn == true || this.data.ismyOneContinue == true){
       console.log('首页')
       return app.commonShare()
-      // wx.hideShareMenu({
-      //   success:function(res){
-      //     console.log(res)
-      //   }
-      // })
     }
     else{
       return {

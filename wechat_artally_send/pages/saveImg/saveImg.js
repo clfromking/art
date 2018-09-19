@@ -106,7 +106,8 @@ Page({
           ctx.setTextAlign('center')
           ctx.fillStyle = "#000";
           var word = that.data.moments.gifts[0].name
-          word = word.length > 20 ? word.substring(0, 20) + '...' : word
+          word = word.length > 16 ? word.substring(0, 16) + '...' : word
+          ctx.fillStyle = "#000";
           ctx.fillText(word, 345.5, 349)
           ctx.fillStyle = "#da0202";
           ctx.fillText('x' + that.data.moments.gifts[0].num, 345.5, 399)
