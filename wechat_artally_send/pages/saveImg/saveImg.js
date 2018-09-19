@@ -66,17 +66,20 @@ Page({
   drawText:function(shareTitle,shareTitle1,wish,condition){
     ctx.setFontSize(24)
     ctx.setTextAlign('center')
-    ctx.fillStyle = "#FFFEC5";
+    // ctx.fillStyle = "#FFFEC5";
+    ctx.setFillStyle('#FFFEC5')
     // ctx.fillText('先到先得', 345.5, 950)
     ctx.fillText('长按小程序码领礼物', 345.5, 934)
     ctx.setFontSize(30)
-    ctx.fillStyle = "#FFF587";
+    ctx.setFillStyle('#FFF587')
+    // ctx.fillStyle = "#FFF587";
     ctx.fillText(condition, 345.5, 880)
     ctx.setFontSize(42)
     console.log(wish)
     ctx.fillText(wish, 345.5, 802)
     ctx.setFontSize(30)
-    ctx.fillStyle = "#FFFE8D";
+    // ctx.fillStyle = "#FFFE8D";
+    ctx.setFillStyle('#FFFE8D')
     ctx.fillText(shareTitle, 345.5,660)
     ctx.setFontSize(26)
     ctx.fillText(shareTitle1, 345.5, 710)
