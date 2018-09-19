@@ -22,7 +22,7 @@
         <view class='jw-swiper-main-view'>      
           <view class='jw-el-view' data-id='{{item.id}}' bindtap='labelScreen' wx:for='{{swiper_msgs[index]}}' wx:key='item'>
             <image lazy-load='{{true}}' mode='widthFix' src="{{item.image}}" class='jw-el-mainImg'></image>
-            <image lazy-load='{{true}}' src="https://pic.forunart.com/artgive/wx/mall_label_img.png" class='jw-el-otherImg'></image>
+            <!-- <image lazy-load='{{true}}' src="https://pic.forunart.com/artgive/wx/mall_label_img.png" class='jw-el-otherImg'></image> -->
             <text class='jw-el-alts'>{{item.name}}</text>
           </view>
         </view>

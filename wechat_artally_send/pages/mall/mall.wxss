@@ -119,7 +119,7 @@ swiper{
   color: #111;
   display: block;
   text-align: center;
-  margin-top: 16rpx
+  /* margin-top: 16rpx */
 }
 .jw-screen-title-view{
   width: 670rpx;
