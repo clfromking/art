@@ -250,8 +250,20 @@ image{
   left: 0;
   z-index:2;
 }
-.lq-giftbox .g-operate-box view{
+.lq-giftbox .g-operate-box .gob-li{
+  width: 33.33%;
+  text-align: center;
   line-height: 88rpx;
+}
+.lq-giftbox .g-operate-box .gob-li button{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+}
+.lq-giftbox .g-operate-box .gob-li button::after{
+  background: transparent;
+  border: 0;
 }
 
 

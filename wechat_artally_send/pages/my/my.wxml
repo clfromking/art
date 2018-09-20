@@ -85,9 +85,15 @@
     <view class='g-cover'>
       <view class='g-callphone' style="bottom:{{operation?'110rpx':''}}" bindtap='callphone'></view>
       <view class='g-operate-box' hidden='{{!operation}}'>
-        <view data-type='1' bindtap='operateGifts'>提货</view>
-        <view data-type='2' bindtap='operateGifts'>折现</view>
-        <view data-type='3' bindtap='operateGifts'>转赠</view>
+        <form class='gob-li' report-submit='true' data-type='1' bindsubmit='operateGifts'>
+          <button form-type='submit'>提货</button>
+        </form>
+        <form class='gob-li' report-submit='true' data-type='2' bindsubmit='operateGifts'>
+          <button form-type='submit'>折现</button>
+        </form>
+        <form class='gob-li' report-submit='true' data-type='3' bindsubmit='operateGifts'>
+          <button form-type='submit'>转赠</button>
+        </form>
       </view>
     </view>
 </view>

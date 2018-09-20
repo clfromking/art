@@ -146,6 +146,7 @@ Page({
   },
   // 底部操作
   operateGifts:function(e){
+    app.getFormid(e);
     let data = { 
         gifts: [], 
         selectids: [], 
