@@ -913,6 +913,9 @@ Page({
       fullPersonInputVal: '',      //满人玩法时中奖人数value
 
     })
-  }
+  },
+  getFormid: function (e) {
+    app.getFormid(e)
+  },
 
 })
