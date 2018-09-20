@@ -38,6 +38,7 @@ App({
 
   //收集formid
   getFormid:function(e){
+    if (e.detail.formId =='the formId is a mock one') return
     var timestamp = Date.parse(new Date()) / 1000;
     var pushData = e.detail.formId + '-' + timestamp
     this.data.formIds.push(pushData)
