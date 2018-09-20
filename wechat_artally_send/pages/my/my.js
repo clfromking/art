@@ -164,14 +164,15 @@ Page({
               title: '官方发布的奖品不能折现',
               icon: "none"
             })
+            return
           }
           else if (type == 3){
             wx.showToast({
               title: '官方发布的奖品不能转赠',
               icon: "none"
             })
+            return
           }
-          return
         }
         data.gifts.push(gifts[i]);
         data.selectids.push(gifts[i].id);
