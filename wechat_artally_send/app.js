@@ -47,12 +47,13 @@ App({
 
   //promise封装post请求
   post: function (url, data, params){
+    // console.log(this.globalData.url)
     var promise=new Promise((resolve,reject)=>{
       var that=this
       var postData=data
       var _url = params == 1 ? 'users/api/' : 'gift/api/' 
       wx.request({
-        url: that.data.url + _url+url,
+        url: that.globalData.url + _url+url,
         data:postData,
         method:'POST',
         header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -149,6 +150,17 @@ App({
    */
   onLaunch: function () { 
     var that = this
+    wx.request({
+      url: 'https://server.artally.com.cn/gift/api/template/get_gift_url',
+      method:'POST',
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      success:function(res){
+        console.log(res)
+        that.globalData.url=res.data.data.url
+        console.log(that.globalData.url)
+      }
+
+    })
     wx.getSystemInfo({
       success: function (res) {
         that.globalData.barHeight = (47 + res.statusBarHeight) * Number(Rpx) + 'rpx'
@@ -187,6 +199,7 @@ App({
     
   },
   globalData:{
-    barHeight:''
+    barHeight:'',
+    url:''
   }
 })
