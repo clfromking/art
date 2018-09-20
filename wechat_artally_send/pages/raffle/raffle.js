@@ -117,6 +117,7 @@ Page({
    */
   onShow: function () {
     var that=this
+    // that.getFormid()
     setTimeout(function(){
       wx.getStorage({
         key: 'userInfo',
@@ -194,5 +195,6 @@ Page({
 
   getFormid: function (e) {
     app.getFormid(e)
+    app.addFormid()
   },
 })
