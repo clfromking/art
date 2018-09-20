@@ -13,7 +13,7 @@ scroll-view{
 }
 .swiper_block_view{
   position: absolute;
-  top:240rpx;
+  top:255rpx;
   height: 3rpx;
   left: 0;
   right: 0;
@@ -40,9 +40,9 @@ scroll-view{
 }
 .jw-zhanwei{
   position: absolute;
-  height: 24rpx;
+  height:40rpx;
   width: 100%;
-  top: 300rpx;
+  top: 310rpx;
   z-index: 5;
   background: #fff
 }
@@ -57,7 +57,7 @@ scroll-view{
 .jw-search-view{
   width: 670rpx;
   height: 64rpx;
-  margin: -60rpx auto;
+  margin: -35rpx auto;
   border-radius: 32rpx;
   box-shadow: 0 0 6rpx 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
@@ -93,7 +93,7 @@ scroll-view{
 }
 .jw-screen-view{
   height: 80rpx;
-  margin-top: 64rpx;
+  margin-top: 40rpx;
   border-bottom:1rpx solid #e9e9e9;
   position: relative;
   z-index: 9;
