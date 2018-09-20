@@ -742,6 +742,7 @@ Page({
 
   //生成订单
   addOrder: function () {
+    
     console.log(waitOperateGifts)
     var condition
     var play
@@ -782,6 +783,7 @@ Page({
         var that = this
         var postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'winnum': winnum,'shop_id':res.data.shop_id }
         app.post('order/order_add', postData).then((res) => {
+          app.addFormid()
           console.log(res)
           if (res.code == 200) {
             console.log(res)
