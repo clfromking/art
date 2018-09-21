@@ -1,6 +1,6 @@
 <!--pages/mallAll/mallAll.wxml-->
 <scroll-view scroll-y='{{ishideScreen}}'  bindscrolltolower='scrolltolower' scrollTop='{{scrollTop_num}}' bindscroll='scroll'>
-  <swiper bindchange='changeSwiper' interval='3000' duration='500' circular autoplay  class='jw-banner-swiper' indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
+  <swiper bindchange='changeSwiper' interval='3000' duration='500' circular autoplay  class='jw-banner-swiper'  indicator-color='#e9e9e9' indicator-active-color="#da0202">
     <block wx:for='{{banner_src}}' wx:key='item'>
       <swiper-item data-id='{{item.id}}' data-go='{{item.go}}' data-go_id='{{item.go_id}}' bindtap='goSubject'>
         <image lazy-load class='jw-mall-banner' src='{{item.avatar}}'></image>

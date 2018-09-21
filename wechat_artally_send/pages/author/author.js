@@ -22,8 +22,6 @@ Page({
             success:function(res1){
               var postData = { 'code': res.code, 'encryptedData': res1.encryptedData, 'iv': res1.iv }
               app.post('wxpay/get_miniprogram_userinfo', postData, 1).then((res) => {
-                console.log(res)
-                // res.code=600
                 if (res.code == 600) {
                   wx.showToast({
                     icon: 'none',
@@ -32,7 +30,6 @@ Page({
                   // that.bindgetuserinfo(e)
                 }
                 else if (res.code == 200) {
-                  console.log(res)
                   wx.setStorage({
                     key: 'userInfo',
                     data: res.data,

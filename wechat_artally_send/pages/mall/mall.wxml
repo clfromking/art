@@ -1,5 +1,5 @@
 <scroll-view bindscrolltolower='scrolltolower' scroll-y >
-  <swiper class='jw-banner-swiper' bindchange='changeSwiper' interval='3000' duration='500' circular autoplay indicator-dots='true' indicator-color='#e9e9e9' indicator-active-color="#da0202">
+  <swiper class='jw-banner-swiper' bindchange='changeSwiper' interval='3000' duration='500' circular autoplay indicator-color='#e9e9e9' indicator-active-color="#da0202">
     <block wx:for='{{banner_src}}' wx:key='item' >
       <swiper-item data-id='{{item.id}}' data-go='{{item.go}}' data-go_id='{{item.go_id}}' bindtap='goSubject'>
         <image lazy-load='{{true}}' class='jw-mall-banner' src='{{item.avatar}}'></image>
