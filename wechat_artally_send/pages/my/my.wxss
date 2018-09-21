@@ -260,6 +260,7 @@ image{
   height: 100%;
   background: transparent;
   border: 0;
+  line-height:88rpx;
 }
 .lq-giftbox .g-operate-box .gob-li button::after{
   background: transparent;
