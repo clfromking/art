@@ -81,6 +81,13 @@ Page({
                 isnothing:false
               })
             }
+            else{
+              that.setData({
+                isnothing: true
+              })
+            }
+            // console.log(res.data.lists.length)
+            // console.log(that.data.isnothing)
             for (var i = 0; i < res.data.lists.length; i++) {
               var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number, 'client': res.data.lists[i].client }
               lottery_list.push(lotteryObj)
@@ -104,6 +111,13 @@ Page({
                 isnothing: false
               })
             }
+            else{
+              that.setData({
+                isnothing: true
+              })
+            }
+            // console.log(res.data.lists.length)
+            // console.log(that.data.isnothing)
             for (var i = 0; i < res.data.lists.length; i++) {
               var lotteryObj = { 'src': res.data.lists[i].gifts[0].image, 'name': res.data.lists[i].gifts[0].name, 'alt': res.data.lists[i].gifts[0].describe, 'num': res.data.lists[i].total, 'price': res.data.lists[i].price, 'condition': res.data.lists[i].condition, 'id': res.data.lists[i].id, 'number': res.data.lists[i].number, 'client': res.data.lists[i].client }
               lottery_list.push(lotteryObj)
