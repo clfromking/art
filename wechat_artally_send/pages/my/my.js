@@ -183,7 +183,7 @@ Page({
         data.totalnum += Number(gifts[i].choosenum);
       }
     };
-    data.totalprice = Math.round(data.totalprice * 100) / 100;
+    data.totalprice = (Math.round(data.totalprice * 100) / 100).toFixed(2);
     wx.setStorage({
       key: 'waitOperateGifts',
       data: data,
