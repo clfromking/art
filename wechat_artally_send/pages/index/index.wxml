@@ -95,7 +95,7 @@
     </picker>
   </view>
   
-  <input class='jw-bless-input' bindfocus='blessFocus' bindinput='blessInput' bindblur='blessBlur'  maxlength='10' value='{{bless_value}}'></input>
+  <input class='jw-bless-input' bindfocus='blessFocus' bindinput='blessInput' bindblur='blessBlur'  maxlength='12' value='{{bless_value}}'></input>
   <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view>
   <form report-submit='true' bindsubmit='getFormid'>
     <button form-type='submit' bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
