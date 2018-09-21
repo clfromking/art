@@ -348,6 +348,7 @@ Page({
           that.setData({
             tip:'没有更多了...'
           })
+          wx.hideLoading()
         }
         for (var i = 0; i < res.data.lists.length; i++) {
           ware_list.push(res.data.lists[i])
@@ -358,6 +359,7 @@ Page({
         })
         wx.hideLoading()
       }
+      wx.hideLoading()
     }).catch((error) => {
       console.log(error)
     })

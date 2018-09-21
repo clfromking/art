@@ -136,6 +136,7 @@ Page({
     var that=this
     wx.showLoading({
       title: '数据加载中',
+      mask:true
     })
     app.post('banner/lists',{'position':2}).then((res) => {
       console.log(res)
@@ -200,6 +201,7 @@ Page({
           that.setData({
             tip:'没有更多了...'
           })
+          wx.hideLoading()
           return
         }
         for(var i=0;i<res.data.lists.length;i++){
@@ -211,6 +213,7 @@ Page({
         })
         wx.hideLoading()
       }
+      wx.hideLoading()
     }).catch((error) => {
       console.log(error)
     })
