@@ -25,11 +25,17 @@ Page({
                 if (res.code == 600) {
                   wx.showToast({
                     icon: 'none',
-                    title: '获取信息失败，请重试',
+                    title: res.msg,
+                    mask:true
                   })
                   // that.bindgetuserinfo(e)
                 }
                 else if (res.code == 200) {
+                  wx.showToast({
+                    icon:'none',
+                    title: '登录成功',
+                    mask:true
+                  })
                   wx.setStorage({
                     key: 'userInfo',
                     data: res.data,
@@ -42,6 +48,11 @@ Page({
                   })
                 }
               }).catch((error) => {
+                wx.showToast({
+                  icon: 'none',
+                  title: '获取信息失败，请重试',
+                  mask: true
+                })
                 console.log(error)
               })
             },
