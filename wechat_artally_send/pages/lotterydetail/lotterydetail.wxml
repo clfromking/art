@@ -53,7 +53,7 @@
   </view>
   <!-- 参与人数区 -->
   <view class='l-joinbox' hidden='{{ishideodds1}}'>
-    <view bindtap='gojoinPeople' class='l-j-num'>已有 <text>{{heads.length}}</text> 人参与</view>
+    <view bindtap='gojoinPeople' class='l-j-num'>已有 <text>{{gift_detail.client_count}}</text> 人参与</view>
     <view class='l-j-peoples'>
       <view class='l-j-headimg' wx:for="{{heads}}" wx:key="{{index}}">
         <image src="{{item?item:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
