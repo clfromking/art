@@ -1,6 +1,7 @@
 /* pages/joinpeople/joinpeople.wxss */
 page{
   background: #fff;
+  padding-bottom: 120rpx
 }
 .lq-joinpeople .j-num{
   line-height: 3;
