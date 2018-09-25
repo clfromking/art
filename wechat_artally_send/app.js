@@ -61,8 +61,8 @@ App({
         success: function (res) {
           resolve(res.data)
         },
-        error: function (e) {
-          reject('网络出错');
+        fail: function (res) {
+          reject(res);
         }
       })   
     })
