@@ -21,7 +21,7 @@
   <!-- 礼物轮播区 -->
   <view class='l-giftsbox'>
     <swiper previous-margin="160rpx" next-margin="160rpx" circular bindchange="swiperchange">
-      <swiper-item wx:for="{{gifts}}" wx:key="index" class="{{currentSwiper==index?'active':''}}">
+      <swiper-item wx:for="{{gifts}}" bindtap='gohintDetail' data-id='{{item.id}}' wx:key="index" class="{{currentSwiper==index?'active':''}}">
         <view class="slide-image">
           <image mode='aspectFit' src="{{item.image}}"/>
         </view>
