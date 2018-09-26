@@ -95,7 +95,13 @@ page{
 	height: 50rpx;
   border-radius: 50%;
 }
-
+.lq-gifts .nomore{
+  color:#999999;
+  font-size: 28rpx;
+  line-height: 3;
+  text-align: center;
+  margin-top: 30rpx;
+}
 
 
 

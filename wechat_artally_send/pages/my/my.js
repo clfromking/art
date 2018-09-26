@@ -272,7 +272,13 @@ Page({
    */
   onPullDownRefresh: function () {
     let userInfo = wx.getStorageSync('userInfo');
-    if (!userInfo.uid) return
+    if (!userInfo.uid) {
+      wx.stopPullDownRefresh()
+      wx.navigateTo({
+        url: '/pages/author/author',
+      })
+      return
+    }
     this.getgiftlist();
     this.data.checkAllStatus = true;
     this.checkAll();

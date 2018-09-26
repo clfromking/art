@@ -65,4 +65,6 @@
       </view>
     </view>
   </view>
+  <!-- 没有更多 -->
+  <view class='nomore' hidden='{{orderlist.length==0&&nomore}}'>没有更多了...</view>
 </view>

@@ -121,7 +121,7 @@ page{
 }
 /* 参与人数区 */
 .lq-lotdetail .l-joinbox{
-  padding: 40rpx 40rpx 40rpx 60rpx;
+  padding: 40rpx 60rpx;
   font-size: 24rpx;
 	text-align: center;
 	color: #111111;
@@ -132,11 +132,15 @@ page{
 .lq-lotdetail .l-j-peoples{
   display: flex;
   flex-wrap:wrap;
+  justify-content: space-between;
   margin-top: 10rpx;
 }
 .lq-lotdetail .l-j-headimg{
   margin-top: 20rpx;
   margin-right: 20rpx;
+}
+.lq-lotdetail .l-j-headimg:nth-child(8n){
+  margin-right: 0;
 }
 .lq-lotdetail .l-j-headimg,.lq-lotdetail .l-j-headimg image{
   width: 60rpx;

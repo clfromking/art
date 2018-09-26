@@ -36,9 +36,9 @@
 }
 .lq-addedit .ae-li.area textarea{
   width: 548rpx;
-	height: 153rpx;
+	height: 120rpx;
   margin: 25rpx 0;
-  line-height: 1;
+  line-height:1.4;
 }
 .lq-addedit .ae-li.default text{
   flex: 2;

@@ -16,14 +16,19 @@ Page({
       ['礼物红包', '限时开奖','人满开奖']
     ],
     navIndex: 0,
-    orderlist:[]
+    orderlist:[],
+    pages:1,
+    nomore:false
   },
   // 导航栏筛选
   chooseNav:function(e){
     let val=e.currentTarget.dataset.index;
     if (val == this.data.navIndex) return
     this.setData({
-      navIndex: val
+      navIndex: val,
+      pages:1,
+      nomore:false,
+      orderlist:[]
     })
     this.getOrders();
   },
@@ -35,15 +40,28 @@ Page({
     // })
     let that=this,
       posturl = this.data.posturl,
-      way = this.data.navIndex+1;
-    let uid = wx.getStorageSync('userInfo').uid;
-    app.post(posturl, { uid: uid, way: way}).then(res=>{
+      way = this.data.navIndex+1,
+      pages=this.data.pages,
+      orderlist = this.data.orderlist;
+    let postdata={
+      uid :wx.getStorageSync('userInfo').uid,
+      way: way,
+      pages:pages
+    }
+    app.post(posturl, postdata).then(res=>{
       // console.log(res)
       // wx.hideLoading()
+      that.setData({
+        nomore: true
+      })
       if(res.code==200){
-        that.setData({
-          orderlist: res.data.lists
-        })
+        if (res.data.lists.length>0){
+          orderlist = orderlist.concat(res.data.lists);
+          that.setData({
+            orderlist: orderlist,
+            nomore: false
+          })
+        }
         wx.stopPullDownRefresh()
       }else{
         wx.showToast({
@@ -53,6 +71,13 @@ Page({
       }
     }).catch(error => {
       // wx.hideLoading();
+      that.setData({
+        nomore: true
+      })
+      wx.showToast({
+        title: '服务器繁忙，请稍后重试',
+        icon: 'none'
+      })
     })
   },
   // 进入详情
@@ -117,6 +142,11 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.setData({
+      pages:1,
+      nomore:false,
+      orderlist:[]
+    })
     this.getOrders();
   },
 
@@ -124,7 +154,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    let pages=this.data.pages,nomore=this.data.nomore;
+    if (nomore) return
+    this.setData({
+      pages: ++pages
+    })
+    this.getOrders();
   },
 
   /**
