@@ -217,6 +217,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let historys = [], pages = getCurrentPages();
+    for (let i = 0; i < pages.length; i++) {
+      historys.push(pages[i].route)
+    }
     app.showHome(this)
     console.log(iscommon)
     console.log(options)
@@ -248,28 +252,34 @@ Page({
         }
         swiper_imgs=res.data.lists.imgs
         detail_msg = { 'name': res.data.lists.name, 'describe': res.data.lists.describe, 'price': res.data.lists.price, smallimg: res.data.lists.mini_image}
-        if (specification.length==0){
-          wx.showToast({
-            icon:'none',
-            mask:true,
-            duration:2000,
-            title: '该商品已售罄，正在补货中',
-            success:function(){
-              that.setData({
-                swiper_imgs: swiper_imgs,
-                detail_msg: detail_msg,
-                detail_image: res.data.lists.detail_image,
-              })
-              setTimeout(function(){
-                wx.navigateBack({
-                  
-                })
-              },2000)
-              return
+        if (specification.length == 0 || res.data.lists.shelfdata==0){
+          wx.hideLoading()
+          that.setData({
+            swiper_imgs: swiper_imgs,
+            detail_msg: detail_msg,
+            detail_image: res.data.lists.detail_image,
+          })
+          wx.showModal({
+            title: '提示',
+            content: '该商品已售罄！',
+            showCancel:false,
+            confirmText: "立即返回",
+            success: function (res) {
+              if (res.confirm) {
+                // console.log('用户点击确定')
+                if (historys.length == 1) {
+                  wx.switchTab({
+                    url: '/pages/index/index',
+                  })
+                } else {
+                  wx.navigateBack({})
+                }
+              }
             }
           })
+          return
         }
-        that.createimg(detail_msg.smallimg,detail_msg.name) 
+        // that.createimg(detail_msg.smallimg,detail_msg.name) 
         that.setData({
           swiper_imgs:swiper_imgs,
           detail_msg:detail_msg,
@@ -278,8 +288,11 @@ Page({
           specification: specification,
           specification_img: specification[0].image,
           specification_repertory: specification[0].repertory,
-          gift_id:options.id
+          gift_id:options.id,
+          shareimg: res.data.lists.shareimg
         })
+        wx.hideLoading()
+        wx.showShareMenu()
         // console.log(this.data.specification)
       }
     }).catch((error)=>{
@@ -334,64 +347,64 @@ Page({
   
   },
   // canvas draw
-  canvasDraw: function () {
-    var that = this
-    ctx.draw(false, function (e) {
-      console.log(e)
-      if (e.errMsg =='drawCanvas:ok') {
-        setTimeout(function () {
-          wx.canvasToTempFilePath({
-            x: 0,
-            y: 0,
-            width: 500*2,
-            height: 400*2,
-            destWidth: 500*2,
-            destHeight: 400*2,
-            canvasId: 'myCanvas1',
-            success: function (res2) {
-              // console.log(res2.tempFilePath)
-              that.setData({
-                shareimg: res2.tempFilePath
-              })
-              wx.hideLoading()
-              wx.showShareMenu()
-            }, fail: function () {
-              wx.showShareMenu()
-            }
-          })
-        }, 10)
-      }
-      else {
-        that.canvasDraw()
-      }
-    })
-  },
+  // canvasDraw: function () {
+  //   var that = this
+  //   ctx.draw(false, function (e) {
+  //     console.log(e)
+  //     if (e.errMsg =='drawCanvas:ok') {
+  //       setTimeout(function () {
+  //         wx.canvasToTempFilePath({
+  //           x: 0,
+  //           y: 0,
+  //           width: 500*2,
+  //           height: 400*2,
+  //           destWidth: 500*2,
+  //           destHeight: 400*2,
+  //           canvasId: 'myCanvas1',
+  //           success: function (res2) {
+  //             // console.log(res2.tempFilePath)
+  //             that.setData({
+  //               shareimg: res2.tempFilePath
+  //             })
+  //             wx.hideLoading()
+  //             wx.showShareMenu()
+  //           }, fail: function () {
+  //             wx.showShareMenu()
+  //           }
+  //         })
+  //       }, 10)
+  //     }
+  //     else {
+  //       that.canvasDraw()
+  //     }
+  //   })
+  // },
   // 生成图片
-  createimg: function (img,name) {
-    var that = this;
-    wx.getImageInfo({
-      src: img,
-      success: function (res1) {
-        // console.log(res1)
-        ctx.setFillStyle('#f2f2f2')
-        ctx.fillRect(0, 0, 500*2, 400*2)
-        ctx.setStrokeStyle('#da0202')
-        ctx.setLineWidth(8*2)
-        ctx.strokeRect(4*2, 4*2, 488*2, 392*2)
-        ctx.setFillStyle('white')
-        ctx.fillRect(100*2, 30*2, 300*2, 340*2)
-        ctx.drawImage(res1.path, 100*2, 30*2, 300*2, 300*2)
-        ctx.setFontSize(20*2)
-        ctx.setFillStyle('black')
-        name = name.length > 12 ? name.substring(0, 12) + '...' : name;
-        ctx.fillText(name, 120*2, 355*2)
-        that.canvasDraw();
-      },
-      fail: function (res) {
-        console.log(res)
-      }
-    })
-  },
+  // createimg: function (img,name) {
+  //   var that = this;
+  //   wx.getImageInfo({
+  //     src: img,
+  //     success: function (res1) {
+  //       // console.log(res1)
+  //       ctx.setFillStyle('#f2f2f2')
+  //       ctx.fillRect(0, 0, 500*2, 400*2)
+  //       ctx.setStrokeStyle('#da0202')
+  //       ctx.setLineWidth(8*2)
+  //       ctx.strokeRect(4*2, 4*2, 488*2, 392*2)
+  //       ctx.setFillStyle('white')
+  //       ctx.fillRect(100*2, 30*2, 300*2, 340*2)
+  //       ctx.drawImage(res1.path, 100*2, 30*2, 300*2, 300*2)
+  //       ctx.setFontSize(20*2)
+  //       ctx.setFillStyle('black')
+  //       name = name.length > 12 ? name.substring(0, 12) + '...' : name;
+  //       ctx.fillText(name, 120*2, 355*2)
+  //       that.canvasDraw();
+  //     },
+  //     fail: function (res) {
+  //       console.log(res)
+  //     }
+  //   })
+  // },
   /**
    * 用户点击右上角分享**
    */

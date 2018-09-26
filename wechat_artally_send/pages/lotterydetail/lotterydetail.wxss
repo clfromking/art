@@ -132,19 +132,22 @@ page{
 .lq-lotdetail .l-j-peoples{
   display: flex;
   flex-wrap:wrap;
-  justify-content: space-between;
+  justify-content:start;
   margin-top: 10rpx;
 }
 .lq-lotdetail .l-j-headimg{
   margin-top: 20rpx;
-  margin-right: 20rpx;
-}
-.lq-lotdetail .l-j-headimg:nth-child(8n){
-  margin-right: 0;
+  margin-right: 21.8rpx;
 }
 .lq-lotdetail .l-j-headimg,.lq-lotdetail .l-j-headimg image{
   width: 60rpx;
 	height: 60rpx;
+}
+.lq-lotdetail .l-chance .l-j-headimg{
+  margin-right:24rpx;
+}
+.lq-lotdetail .l-j-headimg:nth-child(8n){
+  margin-right: 0;
 }
 /* 中奖人区 */
 .lq-lotdetail .l-winners{

@@ -70,8 +70,18 @@ page{
 	font-weight: 500;
 	color: #ffffff;
 }
-
-
+.lq-address .lq-nothing{
+  height: 340rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 100rpx;
+  margin: auto;
+}
+.lq-address .lq-nothing image{
+  margin: 0 auto;
+}
 
 
 
