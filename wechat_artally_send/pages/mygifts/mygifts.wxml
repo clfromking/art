@@ -25,14 +25,14 @@
         <image lazy-load mode='aspectFit' src="{{item.image}}"></image>
       </view>
       <!-- 基本样式 -->
-      <view class='g-l-info' wx:if="{{titleIndex!=0 || (titleIndex==0&&navIndex==0)}}">
+      <view class='g-l-info' wx:if="{{titleIndex!=0 || (titleIndex==0&&item.way==1)}}">
         <view class='bold ellipsis'>{{item.name}}</view>
         <view class='thin'>x{{item.num}}</view>
         <view class='bold'>{{filter.currency(item.price)}}</view>
-        <view class='thin' wx:if="{{titleIndex==0&&navIndex==0}}">提货时间 {{item.updatetime}}</view> 
+        <view class='thin' wx:if="{{titleIndex==0&&item.way==1}}">提货时间 {{item.updatetime}}</view> 
       </view>
       <!-- 已折现 -->
-      <view class='g-l-info' wx:if="{{titleIndex==0&&navIndex==1}}">
+      <view class='g-l-info' wx:if="{{titleIndex==0&&item.way==2}}">
         <view class='bold ellipsis'>{{item.name}}</view>
         <view class='thin'>x{{item.num}}</view>
         <view>
@@ -59,9 +59,9 @@
           <image lazy-load mode='aspectFit' src="{{item.avatar?item.avatar:'https://pic.forunart.com/artgive/wx/me_img.png'}}"></image>
         </view>
         <view class='fl ellipsis' wx:if="{{titleIndex==2}}" style='max-width:280rpx;margin-right:10rpx;'>{{item.uname}}</view>
-        <view class='time' wx:if="{{navIndex==0}}"> {{item.createtime}} 送出</view>
-        <view class='time' wx:if="{{navIndex==1}}"> {{item.condition}} 开奖</view>
-        <view class='time' wx:if="{{navIndex==2}}"> 满 {{item.condition}} 人开奖</view>
+        <view class='time' wx:if="{{item.gameplaydata==1}}"> {{item.createtime}} 送出</view>
+        <view class='time' wx:if="{{item.gameplaydata==2}}"> {{item.condition}} 开奖</view>
+        <view class='time' wx:if="{{item.gameplaydata==3}}"> 满 {{item.condition}} 人开奖</view>
       </view>
     </view>
   </view>
