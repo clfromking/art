@@ -22,7 +22,7 @@
   <!-- 为收集formid改造页面 -->
   <form class='pr n-li' report-submit='true' bindsubmit='getFormid'>
     <view>提货/折现记录<text>{{orderNums.receive}}</text></view>
-    <button form-type='submit' class='getFormIdBtn' data-url="/pages/mygifts/mygifts?type=0&nav=0"  bindtap='goMygifts'></button>
+    <button form-type='submit' class='getFormIdBtn' data-url="/pages/mygifts/mygifts?type=0"  bindtap='goMygifts'></button>
   </form>
   <form class='pr n-li' report-submit='true' bindsubmit='getFormid'>
     <view>我送出的<text>{{orderNums.send}}</text></view>

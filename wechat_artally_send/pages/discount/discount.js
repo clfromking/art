@@ -161,7 +161,7 @@ Page({
       if(res.code==200){
         wx.removeStorageSync("waitOperateGifts");
         wx.redirectTo({
-          url: '/pages/mygifts/mygifts?type=0&nav=1',
+          url: '/pages/mygifts/mygifts?type=0&nav=2',
         })
       }else{
         wx.showToast({
