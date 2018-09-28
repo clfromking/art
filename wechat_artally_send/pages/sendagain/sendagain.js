@@ -789,10 +789,12 @@ Page({
             console.log(res)
             wx.hideLoading()
             isinit = true
-            
-            wx.redirectTo({
-              url: '../lotterydetail/lotterydetail?source=index&order_id=' +res.data.order_id,
+            app.post('order/share_img_add', { 'order_id': res.data.order_id }).then((res1) => {
+              wx.redirectTo({
+                url: '../lotterydetail/lotterydetail?source=index&order_id=' + res.data.order_id,
+              })
             })
+           
             // that.Pay(res.data.order_id, res.data.number)
           }
           else if (res.code == 600) {

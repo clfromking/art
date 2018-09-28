@@ -895,7 +895,10 @@ Page({
     app.post('order/order_add', postData).then((res) => {
       console.log(res)
       if (res.code == 200) {
-        that.Pay(res.data.order_id,res.data.number)
+        app.post('order/share_img_add',{'order_id':res.data.order_id}).then((res1)=>{
+          that.Pay(res.data.order_id, res.data.number)
+        })
+        
       }
       else if(res.code==600){
         wx.hideLoading()

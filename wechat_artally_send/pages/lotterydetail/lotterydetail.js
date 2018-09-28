@@ -269,13 +269,18 @@ Page({
             isshowWhite,
             ismy2haveBtntext,
             shareTitle,
-            shareTitle1
+            shareTitle1,
+            shareImg:gift_detail.shareimg
+          })
+          wx.hideLoading()
+          wx.showShareMenu({
+
           })
           wx.stopPullDownRefresh()
           if(sign!==1){
             return
           }
-          that.drawText(gift_detail.wish, gift_detail.condition)
+          // that.drawText(gift_detail.wish, gift_detail.condition)
         }
       }).catch((error) => {
         console.log(error)
@@ -388,7 +393,12 @@ Page({
             isshowWhite,
             shareTitle,
             shareTitle1,
-            isreceivePerson
+            isreceivePerson,
+            shareImg: gift_detail.shareimg
+          })
+          wx.hideLoading()
+          wx.showShareMenu({
+
           })
           wx.stopPullDownRefresh()
           if (ishowSpebtn == true) {
@@ -401,7 +411,7 @@ Page({
             if (sign !== 1) {
               return
             }
-            that.drawText(gift_detail.wish, gift_detail.condition)
+            // that.drawText(gift_detail.wish, gift_detail.condition)
           }
         }
       }).catch((error) => {
@@ -505,7 +515,12 @@ Page({
               isshowWhite,
               shareTitle,
               shareTitle1,
-              isreceivePerson
+              isreceivePerson,
+              shareImg: gift_detail.shareimg
+            })
+            wx.hideLoading()
+            wx.showShareMenu({
+
             })
             wx.stopPullDownRefresh()
             console.log(gift_detail.condition)
@@ -519,7 +534,7 @@ Page({
               if (sign !== 1) {
                 return
               }
-              that.drawText(gift_detail.wish, gift_detail.condition)
+              // that.drawText(gift_detail.wish, gift_detail.condition)
             }
           }
 
@@ -590,7 +605,7 @@ Page({
                     ishowSpebtn = true
                     break;
                 }
-
+ 
 
               }
               else if (Number(gift_detail.giftbagdata) == 3) {     //已过期
@@ -648,7 +663,12 @@ Page({
               ishowSpebtn,
               isshowWhite,
               shareTitle,
-              shareTitle1
+              shareTitle1,
+              shareImg: gift_detail.shareimg
+            })
+            wx.hideLoading()
+            wx.showShareMenu({
+
             })
             wx.stopPullDownRefresh()
             if (ishowSpebtn == true || ismyOneContinue == true) {
@@ -661,7 +681,7 @@ Page({
               if (sign !== 1) {
                 return
               }
-              that.drawText(gift_detail.wish, gift_detail.condition)
+              // that.drawText(gift_detail.wish, gift_detail.condition)
             }
           }
         }).catch((error) => {
@@ -739,7 +759,6 @@ Page({
    */
   onShareAppMessage: function (res) {
     if (this.data.ishowSpebtn == true || this.data.ismyOneContinue == true){
-      console.log('首页')
       return app.commonShare()
     }
     else{
