@@ -11,9 +11,9 @@ Page({
     titleUrls: ['order/mygifts_receive', 'order/mygifts_send','order/mygifts_participation'],
     posturl: '',
     navlist:[
-      ['全部','已提货', '已折现'],
-      ['全部','礼物红包', '限时开奖', '人满开奖'],
-      ['全部','礼物红包', '限时开奖','人满开奖']
+      ['已提货', '已折现'],
+      ['礼物红包', '限时开奖', '人满开奖'],
+      ['礼物红包', '限时开奖','人满开奖']
     ],
     navIndex: 0,
     orderlist:[],
@@ -40,7 +40,7 @@ Page({
     // })
     let that=this,
       posturl = this.data.posturl,
-      way = this.data.navIndex,
+      way = this.data.navIndex+1,
       pages=this.data.pages,
       orderlist = this.data.orderlist;
     let postdata={
