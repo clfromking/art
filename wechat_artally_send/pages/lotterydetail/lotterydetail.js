@@ -22,7 +22,7 @@ Page({
     title_text:'',
     condition:'',
     other_text:'邀请好友参与抽奖，提高中奖几率',
-    bless:'恭喜发财，大吉大利。',
+    bless:'浮云人生，神马送礼！',
     isfinish:false,
     gift_detail: gift_detail,
     uid:0,
@@ -66,7 +66,7 @@ Page({
     if(val==0){
 
     }else if(val==1){
-      var momentsData = { 'shareTitle': this.data.shareTitle,'shareTitle1':this.data.shareTitle1, 'condition': this.data.gift_detail.condition, 'wish': this.data.gift_detail.wish ? this.data.gift_detail.wish : '恭喜发财，大吉大利。', 'gifts': this.data.gifts, 'avatar': this.data.gift_detail.cavatar ? this.data.gift_detail.cavatar :'https://pic.forunart.com/artgive/wx/me_img.png','order_id':this.data.gift_detail.id,'inviter':uid}
+      var momentsData = { 'shareTitle': this.data.shareTitle,'shareTitle1':this.data.shareTitle1, 'condition': this.data.gift_detail.condition, 'wish': this.data.gift_detail.wish ? this.data.gift_detail.wish : '浮云人生，神马送礼！', 'gifts': this.data.gifts, 'avatar': this.data.gift_detail.cavatar ? this.data.gift_detail.cavatar :'https://pic.forunart.com/artgive/wx/me_img.png','order_id':this.data.gift_detail.id,'inviter':uid}
       wx.setStorage({
         key: 'moments',
         data: momentsData,
@@ -174,7 +174,7 @@ Page({
   drawText:function(wish,condition){
     console.log(wish)
     console.log(condition)
-    var wishes = wish ? wish : '恭喜发财，大吉大利。'
+    var wishes = wish ? wish : '浮云人生，神马送礼！'
     ctx.setFillStyle('#f2f2f2')
     ctx.fillRect(0, 0, 500, 400)
     ctx.setStrokeStyle('#da0202')
