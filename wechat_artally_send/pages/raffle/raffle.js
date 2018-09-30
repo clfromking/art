@@ -97,7 +97,7 @@ Page({
             backgroundimage,
             name: res.data.order.uname,
             avatar: res.data.order.avatar,
-            wish: res.data.order.wish ? res.data.order.wish : '恭喜发财，大吉大利。'
+            wish: res.data.order.wish ? res.data.order.wish : '浮云人生，神马送礼！'
           })
         }
       })
