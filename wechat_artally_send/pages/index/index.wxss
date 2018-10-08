@@ -228,7 +228,8 @@ action-sheet-item{
 .jw-gift-lists{
   height: 240rpx;
   background: #fff;
-  margin-top: 1rpx
+  margin-top: 1rpx;
+  position: relative
 }
 .jw-gifts-main-view{
   width: 666rpx;
@@ -259,7 +260,8 @@ action-sheet-item{
   font-size: 28rpx;
   font-weight: 600;
   color: #111;
-  display: block
+  display: block;
+  width: 380rpx
 }
 .jw-gifts-msg-alt,.jw-gifts-msg-stock{
   font-size: 22rpx;
@@ -355,4 +357,12 @@ action-sheet-item{
 .jw-gifts-add-btn{
   background:url('https://pic.forunart.com/artgive/wx/add.png') no-repeat center !important;
   background-size: 26rpx !important
+}
+.jw-delete-img{
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  position: absolute;
+  top: 20rpx;
+  right: 22rpx
 }
