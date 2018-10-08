@@ -86,7 +86,8 @@
   </view>
   
   <input disabled='{{true}}' class='jw-bless-input' bindfocus='blessFocus' bindinput='blessInput' bindblur='blessBlur'  maxlength='12' value='{{bless_value}}'></input>
-  <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view>
+  <!-- <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view> -->
+  <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>0.00</text></view>
   <form report-submit='true' bindsubmit='getFormid'>
     <button form-type='submit' bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
   </form>
