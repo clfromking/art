@@ -1,4 +1,4 @@
-<button bindtap='closeStro'>清除缓存</button>
+<!-- <button bindtap='closeStro'>清除缓存</button> -->
 <image mode='widthFix' class="jw-index-banner" bindtap='bannerTap' data-go='{{banner_msgs.go}}' data-id='{{banner_msgs.id}}' data-go_id='{{banner_msgs.go_id}}' src="{{banner_msgs.avatar}}"></image>
 <view class='jw-index-body' >
   <view class='jw-gifts-view' hidden='{{!gift_lists}}'>
@@ -9,7 +9,7 @@
         </view>
         <view class='jw-gifts-msg-view'>
           <text class='jw-gifts-msg-title ellipsis'>{{item.name}}</text>
-          <image class='jw-delete-img' data-id='{{item.id}}' bindtap='deleteGifts' src='../imgs/delete.png'></image>
+          <image class='jw-delete-img' data-index='{{index}}' data-id='{{item.id}}' bindtap='deleteGifts' src='../imgs/delete.png'></image>
           <text class='jw-gifts-msg-alt ellipsis'>{{item.describe}}</text>
           <text class='jw-gifts-msg-stock'>{{item.new_repertory}}</text>
           <view class='clear' style='margin-top: 36rpx'>

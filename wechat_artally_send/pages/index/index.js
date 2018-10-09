@@ -530,7 +530,15 @@ Page({
 
 
   deleteGifts:function(e){
-    console.log(e)
+    gift_lists.splice(e.currentTarget.dataset.index, 1)
+    if (gift_lists.length == 0) {
+      gift_lists = ''
+    }
+    this.setData({
+      gift_lists
+    })
+    this.giftTotal()
+    this.giftTotalMoney()
   },
 
 
