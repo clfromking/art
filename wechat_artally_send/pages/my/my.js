@@ -62,6 +62,12 @@ Page({
       // wx.hideLoading();
     })
   },
+  //跳转到商品详情
+  goDetail: function (e) {
+    wx.navigateTo({
+      url: '/pages/hintDetail/hintDetail?id=' + e.currentTarget.dataset.id
+    })
+  },
   // 点击选择按钮
   chooseitem:function(e){
     let that= this,
@@ -159,7 +165,7 @@ Page({
       url;
     for (let i = 0; i < gifts.length; i++) {
       if (gifts[i].selected){
-        if (gifts[i].uid== -1 ){
+        if (gifts[i].official == 1){
           if (type == 2){
             wx.showToast({
               title: '官方发布的奖品不能折现',

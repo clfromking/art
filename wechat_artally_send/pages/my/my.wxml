@@ -62,10 +62,13 @@
           <text class='g-m-h-name ellipsis'>{{item.uname}}</text>
           <text class='g-m-h-time'>{{item.updatetime}}</text>
         </view>
-        <view class='g-m-info'>
+        <view class='g-m-info' data-id="{{item.gift_id}}" bindtap='goDetail'>
           <image lazy-load mode='aspectFit' src='{{item.image}}'></image>
           <view class='g-m-con'>
-            <view class='ellipsis'>{{item.name}}</view>
+            <view class='clear'>
+            <image hidden='{{item.official==0}}' lazy-load style="width:59rpx;height:30rpx;border-radius:0;margin:6rpx 10rpx 0 0;float:left;" src="https://pic.forunart.com/artgive/wx/official_sign.png"></image>
+            <text style='width:310rpx;float:left;' class='ellipsis'>{{item.name}}</text>
+            </view>
             <view class='g-m-des ellipsis'>{{item.title}}</view>
             <view class='price'>{{filter.currency(item.price)}}</view>
             <view class='g-m-numbox'>

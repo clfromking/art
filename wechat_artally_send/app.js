@@ -2,8 +2,8 @@ const Rpx = 750 / wx.getSystemInfoSync().windowWidth
 // 01059756813
 App({
   data:{
-    url:'https://api.buybuyart.com/',
-    // url: 'https://server.artally.com.cn/',
+    // url:'https://api.buybuyart.com/',
+    url: 'https://server.artally.com.cn/',
     formIds:[],
   },
 
@@ -163,6 +163,47 @@ App({
       success: function(res) {},
     })
     wx.removeStorageSync('waitOperateGifts')
+    // 更新用户信息
+    wx.getStorage({
+      key: 'userInfo',
+      success: function(res) {
+        // console.log(res)
+        var userInfo=res.data;
+        wx.getUserInfo({
+          success: function (res1) {
+            // console.log(res1)
+            var newuserdata=res1.userInfo;
+            if (newuserdata.nickName == userInfo.username && newuserdata.avatarUrl == userInfo.avatar){
+              return
+            }
+            var postdata = {
+              uid: userInfo.uid,
+              openid: userInfo.openid,
+              username: newuserdata.nickName,
+              avatar: newuserdata.avatarUrl
+            }
+            that.post('wxpay/get_miniprogram_update', postdata, 1).then(res2 => {
+              // console.log(res2)
+              if (res2.code == 200) {
+                userInfo.username = newuserdata.nickName;
+                userInfo.avatar = newuserdata.avatarUrl;
+                wx.setStorageSync('userInfo', userInfo)
+              } else {
+                wx.showToast({
+                  title: res.msg,
+                  icon: 'none'
+                })
+              }
+            }).catch(error => {
+              console.log(error)
+            })
+          }
+        })
+      },
+      fail:function(res){
+        console.log(res)
+      }
+    })
   },
 
   /**
