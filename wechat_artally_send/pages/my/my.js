@@ -206,21 +206,8 @@ Page({
   },
   // 打电话
   callphone:function(){
-    wx.showModal({
-      title: '',
-      content: '客服电话:010-5975-6813',
-      success: function (res) {
-        console.log(res)
-        if (res.confirm == true) {
-          wx.makePhoneCall({
-            phoneNumber: '01059756813'
-          })
-        }
-
-      },
-      fail: function (res) {
-        console.log(res)
-      }
+    wx.makePhoneCall({
+      phoneNumber: '01059756813'
     })
   },
   getFormid(e){
