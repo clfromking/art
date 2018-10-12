@@ -20,14 +20,16 @@
               <text class='jw-lottery-elNum ellipsis'>{{item.num}}件</text>
             </view>
             <view  class='clear  ellipsis'>
-              <text class='jw-lottery-elTime  ellipsis'>{{item.condition}} 开奖</text>
+              <text class='jw-lottery-elTime  ellipsis' hidden='{{item.join_status==0}}'>{{item.condition}} 开奖</text>
+              <text class='jw-lottery-elTime  ellipsis' hidden='{{item.join_status==1}}'>{{item.join_time}} 开始</text>
             </view>
-            <text class='jw-lottery-btn {{item.client?"jw-client-btn":""}}'>{{item.client==true?'已参与':'立即抽奖'}}</text>
+            <text class='jw-lottery-btn {{item.client?"jw-client-btn":""}}'  hidden='{{item.join_status==0}}'>{{item.client==true?'已参与':'立即抽奖'}}</text>
+            <text class='jw-lottery-btn jw-client-btn' hidden='{{item.join_status==1}}'>未开始</text>
           </view>
           
         </view>
       </view>
-      <button form-type='submit' class='getFormIdBtn' bindtap='goRaffle' data-index='{{index}}' data-id='{{item.id}}' ></button>
+      <button form-type='submit' class='getFormIdBtn' bindtap='goRaffle' data-join_status='{{item.join_status}}' data-index='{{index}}' data-id='{{item.id}}' ></button>
     </view>
   </form>
 </view>

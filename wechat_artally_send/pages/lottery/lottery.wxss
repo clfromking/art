@@ -80,7 +80,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  display: block;
+  /* display: block; */
   height: 56rpx;
   width: 178rpx;
   border-radius: 26.5rpx;
