@@ -265,15 +265,12 @@ Page({
             showCancel:false,
             confirmText: "立即返回",
             success: function (res) {
-              if (res.confirm) {
-                // console.log('用户点击确定')
-                if (historys.length == 1) {
-                  wx.switchTab({
-                    url: '/pages/index/index',
-                  })
-                } else {
-                  wx.navigateBack({})
-                }
+              if (historys.length == 1) {
+                wx.switchTab({
+                  url: '/pages/index/index',
+                })
+              } else {
+                wx.navigateBack({})
               }
             }
           })
