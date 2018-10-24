@@ -2,8 +2,8 @@ const Rpx = 750 / wx.getSystemInfoSync().windowWidth
 // 01059756813
 App({
   data:{
-    url:'https://api.buybuyart.com/',
-    // url: 'https://server.artally.com.cn/',
+    // url:'https://api.buybuyart.com/',
+    url: 'https://server.artally.com.cn/',
     formIds:[],
   },
 
