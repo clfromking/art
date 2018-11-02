@@ -16,7 +16,8 @@ Page({
     gifts:[],
     selectids: [],
     operation:false,
-    checkAllStatus:false
+    checkAllStatus:false,
+    integralNum:0
   },
   // 跳转到mygifts页面
   goMygifts(e){
@@ -256,6 +257,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.setData({
+      integralNum: app.globalData.integralNum
+    })
     let userInfo =wx.getStorageSync('userInfo');
     if (userInfo.uid){
       this.setData({

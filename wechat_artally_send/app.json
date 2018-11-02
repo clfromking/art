@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages":[ 
     "pages/index/index",
     "pages/lottery/lottery",
     "pages/custom/custom",
@@ -22,7 +22,9 @@
     "pages/author/author",
     "pages/servers/servers",
     "pages/instructions/instructions",
-    "pages/saveImg/saveImg"
+    "pages/saveImg/saveImg",
+    "pages/card/card"
+   
     
   ],
   "window":{

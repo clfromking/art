@@ -198,7 +198,7 @@ action-sheet-item{
   height: 112rpx;
   line-height: 112rpx;
   margin-top: 30rpx;
-  margin-bottom: 20rpx;
+  /* margin-bottom: 20rpx; */
   text-align: center;
   font-weight: 600
 }
@@ -365,4 +365,27 @@ action-sheet-item{
   position: absolute;
   top: 20rpx;
   right: 22rpx
+}
+.jw-use-integral{
+  text-align: center;
+  height: 42rpx;
+  margin-bottom: 47rpx
+}
+.jw-choose-integral{
+  width: 37rpx;
+  height: 37rpx;
+  /* background: red; */
+  display: inline-block;
+  border: 1rpx solid #999;
+  margin-right: 11rpx
+}
+.jw-integral-num{
+  font-family: PingFangSC;
+  font-size: 28rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  display: inline-block;
+  color: #999;
+  vertical-align: top;
+  letter-spacing: normal;
 }

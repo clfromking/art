@@ -1,4 +1,5 @@
 <!--pages/hintDetail/hintDetail.wxml-->
+<integral catchtouchmove ishide="{{integralHide}}"></integral>
 <navigator open-type="switchTab" url='/pages/index/index' class='lq-home' hidden='{{hidehome}}'></navigator>
 
 <canvas canvas-id='myCanvas1' class='myCanvas' style='width:1000px;height:800px;'></canvas>

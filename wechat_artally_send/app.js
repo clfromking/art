@@ -2,8 +2,8 @@ const Rpx = 750 / wx.getSystemInfoSync().windowWidth
 // 01059756813
 App({
   data:{
-    // url:'https://api.buybuyart.com/',
-    url: 'https://server.artally.com.cn/',
+    url:'https://api.buybuyart.com/',
+    // url: 'https://server.artally.com.cn/',
     formIds:[],
   },
 
@@ -129,29 +129,73 @@ App({
     }
   },
 
-  //用法
-  //const app=getApp()  在需要用到request请求的页面中的顶部获取app.js中的App
-  // app.post('https://server.artally.com.cn/zuzu/api/painting/paintinghot').then((res) => {
-  //   console.log(res)
-    
-  // }).catch((error) => {
-  //   console.log(error)
-  // })
 
-  // app.post().then((res) => {
-  //   console.log(res)
-  //   if (res.data.code == 200) {
+  LaunchSetIntegral:function(){
+    var that=this
+    const UserInfo = wx.getStorageSync('userInfo')
+    console.log(UserInfo.uid)
+    if (UserInfo.uid) {
+      var a=new Promise(function (resolve, reject){
+        wx.request({
+          url: that.data.url + "gift/api/grade/cat",
+          data: { "uid": UserInfo.uid },
+          method: 'POST',
+          header: { 'content-type': 'application/x-www-form-urlencoded' },
+          success: function (res) {
+            console.log(res)
+            if(res.data.code==600){
+              that.globalData.ishideIntegral = false
+              var data={"status":false,"num":0}
+              resolve(data)
+            }
+            else{
+              that.globalData.ishideIntegral = true
+              that.globalData.integralNum=res.data.data
+              var data = { "status": true, "num": res.data.data }
+              resolve(data)
+            }
+            // resolve(res.data)
+          },
+          fail: function (res) {
+            reject(res);
+          }
+        })
+      })
+      return a
+    }
+    else {
+      
+      var a = new Promise(function (resolve, reject){
+        that.globalData.ishideIntegral = false
+        var data = { "status": false, "num": 0 }
+        resolve(data)
+      })
+      return a
+    }
+  },
 
-  //   }
-  // }).catch((error) => {
-  //   console.log(error)
-  // })
+  setLimit:function(){
+    var that=this
+    that.post('grade/sub_rule').then((res)=>{
+      // console.log(res)
+      if(res.code==200){
+        that.globalData.score=res.data.score
+        that.globalData.money=res.data.money
+      }
+    }).catch((error)=>{
+      console.log(error)
+    })
+  },
 
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
    */
   onLaunch: function () { 
-    var that = this
+    // this.LaunchSetIntegral().then((res)=>{
+    //   console.log(res)
+    // })
+    this.setLimit()
+    var that=this
     wx.getSystemInfo({
       success: function (res) {
         that.globalData.barHeight = (47 + res.statusBarHeight) * Number(Rpx) + 'rpx'
@@ -167,15 +211,13 @@ App({
     wx.getStorage({
       key: 'userInfo',
       success: function(res) {
-        // console.log(res)
         var userInfo=res.data;
         wx.getUserInfo({
           success: function (res1) {
-            // console.log(res1)
             var newuserdata=res1.userInfo;
-            if (newuserdata.nickName == userInfo.username && newuserdata.avatarUrl == userInfo.avatar){
-              return
-            }
+            // if (newuserdata.nickName == userInfo.username && newuserdata.avatarUrl == userInfo.avatar){
+            //   return
+            // }
             var postdata = {
               uid: userInfo.uid,
               openid: userInfo.openid,
@@ -183,14 +225,14 @@ App({
               avatar: newuserdata.avatarUrl
             }
             that.post('wxpay/get_miniprogram_update', postdata, 1).then(res2 => {
-              // console.log(res2)
+              console.log(res2)
               if (res2.code == 200) {
                 userInfo.username = newuserdata.nickName;
                 userInfo.avatar = newuserdata.avatarUrl;
                 wx.setStorageSync('userInfo', userInfo)
               } else {
                 wx.showToast({
-                  title: res.msg,
+                  title: res2.msg,
                   icon: 'none'
                 })
               }
@@ -232,6 +274,11 @@ App({
   },
   globalData:{
     barHeight:'',
-    url:''
+    url:'',
+    ishideIntegral:true,
+    integralNum:0,
+    sign:false,
+    score:0,
+    money:0
   }
 })

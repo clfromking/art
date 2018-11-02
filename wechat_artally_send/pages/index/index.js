@@ -36,6 +36,9 @@ Page({
     ClickNum: 0,          //控制单双击
     lotteryPersonInputVal:'',   //开奖人数value
     fullPersonInputVal:'',      //满人玩法时中奖人数value
+    integralHide:true,
+    isuseIntegral:false,
+    integralNum:0
     // gift_lists:''
   },
   closeStro:function(){
@@ -475,7 +478,8 @@ Page({
       gift_lists[e.currentTarget.dataset.index].num = gift_lists[e.currentTarget.dataset.index].repertory
     }
     this.setData({
-      gift_lists: gift_lists
+      gift_lists: gift_lists,
+      isuseIntegral: false
     })
     this.giftTotal();
     this.giftTotalMoney()
@@ -491,7 +495,8 @@ Page({
       gift_lists=''
     }
     this.setData({
-      gift_lists: gift_lists
+      gift_lists: gift_lists,
+      isuseIntegral: false
     })
     this.giftTotal()
     this.giftTotalMoney()
@@ -506,7 +511,8 @@ Page({
       gift_lists[e.currentTarget.dataset.index].num=1
     }
     this.setData({
-      gift_lists
+      gift_lists,
+      isuseIntegral: false
     })
     this.giftTotal()
     this.giftTotalMoney()
@@ -520,7 +526,8 @@ Page({
         gift_lists = ''
       }
       this.setData({
-        gift_lists
+        gift_lists,
+        isuseIntegral: false
       })
       this.giftTotal()
       this.giftTotalMoney()
@@ -535,7 +542,8 @@ Page({
       gift_lists = ''
     }
     this.setData({
-      gift_lists
+      gift_lists,
+      isuseIntegral:false
     })
     this.giftTotal()
     this.giftTotalMoney()
@@ -547,6 +555,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // app.LaunchSetIntegral(app)
+    if (app.globalData.sign) {
+
+    }
+    else {
+      app.LaunchSetIntegral().then((res) => {
+        console.log(res)
+        this.setData({
+          integralHide: res.status,
+          integralNum: res.num
+        })
+      })
+    }
+   
+    // app.globalData.ishideIntegral=true
     var that=this
     var postData={'position':1}
     app.post('banner/lists',postData).then((res)=>{
@@ -581,8 +604,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // console.log(getCurrentPages())
-    var that=this
+    
+    var that = this
+    console.log(app.globalData.integralNum)
+    that.setData({
+      integralHide:app.globalData.ishideIntegral,
+      integralNum:app.globalData.integralNum
+    })
+    
     wx.getStorage({
       key: 'gifts',
       success: function (res) {
@@ -625,6 +654,11 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    app.globalData.ishideIntegral=true
+    app.globalData.sign = true
+    this.setData({
+      isuseIntegral: false
+    })
     // console.log(isinit)
     if(isinit){
       this.init()
@@ -663,7 +697,11 @@ Page({
    */
   onUnload: function () {
     // console.log('销毁')
-    
+    app.globalData.ishideIntegral=true 
+    app.globalData.sign = true
+    this.setData({
+      isuseIntegral:false
+    })
   },
 
   /**
@@ -839,12 +877,7 @@ Page({
       openid = res.data.openid
       
       app.addFormid()
-      // app.post('template/get_forms_id',postData).then((res)=>{
-      //   console.log(res)
-      // }).catch((error)=>{
-
-      // })
-      // console.log(res)
+      
       that.addOrder()
     }).catch((res) => {
       // console.log(res)
@@ -906,12 +939,45 @@ Page({
       // console.log(this.data.fullPersonInputVal)
     }
     var that=this
-    var postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'goods_id': goods_id, 'goods_num': goods_num ,'winnum':winnum}
+    console.log(that.data.isuseIntegral)
+    var postData={}
+    if (that.data.isuseIntegral){
+      var Usemoney = Number(app.globalData.integralNum) / Number(app.globalData.score) * Number(app.globalData.money)
+      var money = 0
+      for (var i = 0; i < gift_lists.length; i++) {
+        money += Number(gift_lists[i].num) * Number(gift_lists[i].price)
+      }
+      console.log(Usemoney)
+      console.log(money)
+      if(money>=Usemoney){
+        postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'goods_id': goods_id, 'goods_num': goods_num, 'winnum': winnum, 'grade': that.data.integralNum }
+      }
+      else{
+        postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'goods_id': goods_id, 'goods_num': goods_num, 'winnum': winnum, 'grade': money / Number(app.globalData.money) * Number(app.globalData.score) }
+      }
+    }
+    else{
+      postData = { 'uid': uid, 'gameplaydata': play, 'condition': condition, 'wish': this.data.bless_value, 'goods_id': goods_id, 'goods_num': goods_num, 'winnum': winnum,'grade':0 }
+    }
+    
     app.post('order/order_add', postData).then((res) => {
       console.log(res)
       if (res.code == 200) {
         app.post('order/share_img_add',{'order_id':res.data.order_id}).then((res1)=>{
-          that.Pay(res.data.order_id, res.data.number)
+          if (Number(that.data.money)<=0){
+            app.LaunchSetIntegral().then((res)=>{                                                                                       
+
+            })
+            wx.hideLoading()
+            isinit = true
+            wx.navigateTo({
+              url: '../lotterydetail/lotterydetail?source=index&order_id=' + res.data.order_id,
+            })
+          }
+          else{
+            that.Pay(res.data.order_id, res.data.number)
+          }
+          
         })
         
       }
@@ -976,13 +1042,6 @@ Page({
 
   //支付
   Pay:function(order_id,num){
-    // wx.navigateTo({
-    //   url: '../lotterydetail/lotterydetail?source=lottery&order_id=' + order_id,
-    // })
-    // return
-    console.log(uid)
-    console.log(openid)
-    console.log(num)
     var that=this
     var postData={'uid':uid,'openid':openid,'order_sn':num}
     app.post('wxpay/wxgiftjspayRequest',postData).then((res)=>{
@@ -999,7 +1058,9 @@ Page({
             console.log(res)
             wx.hideLoading()
             isinit = true
+            app.LaunchSetIntegral().then((res) => {
 
+            })
             wx.navigateTo({
               url: '../lotterydetail/lotterydetail?source=index&order_id=' + order_id,
             })
@@ -1042,6 +1103,60 @@ Page({
     
   },
 
+
+  //选择使用积分
+  chooseIntegral:function(){
+    // console.log(this.data.money)
+    // if(Number(this.data.money)==0){
+    //   return
+    // }
+    // var integralNum=app.globalData.integralNum
+    var integralNum=this.data.integralNum
+    if(Number(integralNum<=0)){
+      // console.log(Number(this.data.money))
+      
+    }
+    else{
+      this.setData({
+        isuseIntegral: !this.data.isuseIntegral
+      }) 
+      console.log(this.data.isuseIntegral)
+      var money = 0
+      for (var i = 0; i < gift_lists.length; i++) {
+        money += Number(gift_lists[i].num) * Number(gift_lists[i].price)
+      }
+      // var money = this.giftTotalMoney()
+      if(this.data.isuseIntegral){
+        var that=this
+        app.post('grade/sub_rule').then((res) => {
+          var limit=Number(integralNum)/Number(res.data.score)*Number(res.data.money)
+          console.log(limit)
+          if (Number(that.data.money) <= limit) {
+            that.setData({
+              money: '0.00'
+            })
+          }
+          else {
+            that.setData({
+              money: (((Number(money)*100) - (limit*100))/100).toFixed(2)
+            })
+          }
+          console.log(res)
+        }).catch((error) => {
+          console.log(error)
+        })
+        
+      }
+      else{
+        this.setData({
+          money:Number(money).toFixed(2)
+        })
+      }
+    }
+    
+  },
+
+
   //初始化所有
   init:function(){
     gift_lists=''
@@ -1069,5 +1184,16 @@ Page({
   getFormid:function(e){
     app.getFormid(e)
   },
+  myEventListener:function(e){
+    console.log(e)
+    var that = this
+    app.LaunchSetIntegral().then((res) => {
+      that.setData({
+        integralHide: app.globalData.ishideIntegral,
+        integralNum: app.globalData.integralNum
+      })
+
+    })
+  }
 
 })

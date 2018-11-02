@@ -27,7 +27,8 @@ Page({
     isshowindicator:false,
     shareimg:"",
     hidehome: true,
-    imgHeight:''
+    imgHeight:'',
+    integralHide: ''
   },
   buyThis:function(){
     this.setData({
@@ -217,11 +218,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (app.globalData.sign) {
+
+    }
+    else {
+      app.LaunchSetIntegral().then((res) => {
+        console.log(res)
+        this.setData({
+          integralHide: res.status,
+          // integralNum: res.num
+        })
+      })
+    }
+    
     let historys = [], pages = getCurrentPages();
     for (let i = 0; i < pages.length; i++) {
       historys.push(pages[i].route)
     }
     app.showHome(this)
+    // return
     console.log(iscommon)
     console.log(options)
     wx.hideShareMenu()
@@ -309,14 +324,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.setData({
+      integralHide: app.globalData.ishideIntegral
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+    app.globalData.ishideIntegral = true
+    app.globalData.sign = true
    
   },
 
@@ -324,6 +342,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    app.globalData.ishideIntegral = true
+    app.globalData.sign = true
     swipersuccessload = false
     detailsuccessload = false
     iscommon = false

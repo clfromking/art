@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    issaveImg:false
+    issaveImg:false,
+    scene:''
   },
 
   //获取用户信息按钮回调
@@ -35,15 +36,87 @@ Page({
                   wx.setStorage({
                     key: 'userInfo',
                     data: res.data,
-                    success: function (res) {
+                    success: function (res1) {
+                      app.post('grade/cat',{"uid":res.data.uid}).then((res)=>{
+                        console.log(res)
+                        if(res.code==200){
+                          app.globalData.integralNum = res.data
+                          if(that.scene=='integral'){
+
+                          }
+                          else{
+                            setTimeout(function(){
+                              wx.navigateBack({
+
+                              })
+                            },500)
+                          }
+                        }
+                        
+                      }).catch((error)=>{
+                        console.log(error)
+                      })
                       wx.showToast({
                         icon: 'none',
                         title: '登录成功',
                         mask: true
                       })
-                      wx.navigateBack({
+                      if(that.data.scene=='integral'){
+                        console.log(res.data)
+                        app.post("grade/cat",{"uid":res.data.uid}).then((res1)=>{
+                          console.log(res1)
+                          if(res1.code==600){
+                            app.post('grade/add',{"uid":res.data.uid,"type":"login"}).then((res2)=>{
+                              console.log(res2)
+                              app.post("grade/cat", { "uid": res.data.uid }).then((res)=>{
+                                console.log(res)
+                                app.globalData.integralNum = res.data
+                                wx.navigateBack({
+                                  success: function () {
+                                    
+                                    // console.log('返回')
+                                    wx.showToast({
+                                      title: '领取成功',
+                                      mask: true
+                                    })
+                                  }
+                                })
+                              }).catch((error)=>{
 
-                      })
+                              })
+                            }).catch((error)=>{
+                              console.log(error)
+                            })
+                            console.log('没领过')
+                          }
+                          else{
+                            console.log('领过')
+                            app.globalData.integralNum = res1.data
+                            console.log(app.globalData.integralNum)
+                            wx.navigateBack({
+                              success: function () {
+                                
+                                // console.log('返回')
+                                wx.showToast({
+                                  title: '您已领取',
+                                  mask: true
+                                })
+                              }
+                            })
+                          }
+                        }).catch((error)=>{
+                          console.log(error)
+                        })
+                        
+                      }
+                      else{
+                        setTimeout(function () {
+                          wx.navigateBack({
+
+                          })
+                        }, 500)
+                      }
+                     
                     },
                     fail:function(res){
                       wx.showToast({
@@ -98,6 +171,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options.scene)
+    if (options.scene=='integral'){
+      this.setData({
+        scene:'integral'
+      })
+    }
     if(options.type=='saveImg'){
       this.setData({
         issaveImg:true

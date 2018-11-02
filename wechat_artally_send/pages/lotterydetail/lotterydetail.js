@@ -44,6 +44,7 @@ Page({
     sharePath:'',
     isload:false,
     hidehome: true,
+    integralHide: ''
   },
   // 轮播改变事件
   swiperchange:function(e){
@@ -87,6 +88,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (app.globalData.sign) {
+
+    }
+    else {
+      app.LaunchSetIntegral().then((res) => {
+        console.log(res)
+        this.setData({
+          integralHide: res.status,
+          // integralNum: res.num
+        })
+      })
+    }
+    
     app.showHome(this)
     wx.showLoading({
       title: '数据加载中',
@@ -723,21 +737,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.setData({
+      integralHide: app.globalData.ishideIntegral
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    app.globalData.ishideIntegral = true
+    app.globalData.sign = true
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    app.globalData.ishideIntegral = true
+    app.globalData.sign = true
   },
 
   /**

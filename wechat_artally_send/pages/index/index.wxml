@@ -1,4 +1,5 @@
 <!-- <button bindtap='closeStro'>清除缓存</button> -->
+<integral catchtouchmove ishide="{{integralHide}}" bindmyevent="myEventListener"></integral>
 <image mode='widthFix' class="jw-index-banner" bindtap='bannerTap' data-go='{{banner_msgs.go}}' data-id='{{banner_msgs.id}}' data-go_id='{{banner_msgs.go_id}}' src="{{banner_msgs.avatar}}"></image>
 <view class='jw-index-body' >
   <view class='jw-gifts-view' hidden='{{!gift_lists}}'>
@@ -98,6 +99,10 @@
   
   <input disabled='{{true}}' class='jw-bless-input' bindfocus='blessFocus' bindinput='blessInput' bindblur='blessBlur'  maxlength='12' value='{{bless_value}}'></input>
   <view class='jw-money'><text class='jw-money-one'>￥</text><text class='jw-money-main'>{{money}}</text></view>
+  <view class='jw-use-integral'>
+    <text class='jw-choose-integral' bindtap='chooseIntegral' style='background:url({{isuseIntegral?"https://pic.forunart.com/artgive/wx/choose.png":""}}) no-repeat;background-size:100% 100%'></text>
+    <text class='jw-integral-num'>使用积分({{integralNum}})</text>
+  </view>
   <form report-submit='true' bindsubmit='getFormid'>
     <button form-type='submit' bindtap='makePacket' class='jw-compound-gift'>生成礼物红包</button>
   </form>

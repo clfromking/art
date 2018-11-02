@@ -9,7 +9,8 @@
   </view>
   <view class="h-name">
     <!-- <open-data type='userNickName'></open-data> -->
-    <text>{{userInfo.username}}</text>
+    <text style='display:block'>{{userInfo.username}}</text>
+    <text>积分:{{integralNum}}</text>
   </view>  
   <view class="h-set">
   <navigator url='/pages/setting/setting'>

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "礼物详情"
+  "navigationBarTitleText": "礼物详情",
+  "usingComponents": {
+    "integral": "../components/integral"
+  }
 }

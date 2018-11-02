@@ -1,0 +1,16 @@
+<!--pages/components/integral.wxml-->
+<!-- <text catchtouchmove=''>{{ishide}}</text> -->
+<view catchtouchmove='' hidden='{{ishide||iscontrolhide==true}}' class='jw-shade'></view>
+<view catchtouchmove='' hidden='{{ishide||iscontrolhide==true}}' class='jw-integral-window'>
+  <view class='jw-shade-close' bindtap='closeIntegral'></view>
+  <view class='jw-top-window'>
+    <text class='jw-integral-title'>神马送祥瑞，积分赠与您</text>
+    <text class='jw-integral-num'>1000</text>
+    <text class='jw-integral-rule'>使用规则：100积分等于1元人民币（积分有效期为1年，超出1年积分会自动清零，请及时使用）</text>
+  </view>
+  <view class='jw-line'></view>
+  <view class='jw-bottom-window'>
+    <button class='jw-receive-btn' bindtap='receive'>立即领取</button>
+  </view>
+</view>
+ 

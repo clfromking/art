@@ -11,7 +11,8 @@ Page({
     lottery_btnText:'立即抽奖',
     banner_msgs:{},
     shareimg:'',
-    isnothing:true
+    isnothing:true,
+    integralHide:''
   },
 
   //点击抽奖事件
@@ -26,7 +27,7 @@ Page({
       return
     }
     let index = e.currentTarget.dataset.index,
-      id = e.currentTarget.dataset.id;
+    id = e.currentTarget.dataset.id;
     if (this.data.lottery_list[index].client==true){
       app.addFormid()
       wx.navigateTo({
@@ -48,6 +49,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(1)
+    if(app.globalData.sign){
+
+    }
+    else{
+      app.LaunchSetIntegral().then((res) => {
+        console.log(res)
+        this.setData({
+          integralHide: res.status,
+          // integralNum: res.num
+        })
+      })
+    }
+    
     var that=this
     app.post('banner/lists', {'position':3}).then((res) => {
       // console.log(res)
@@ -75,6 +90,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // console.log(app.globalData.ishideIntegral)
+    // var that=this
+    // setTimeout(function () {
+    //   console.log(app.globalData.integralNum)
+    //   that.setData({
+    //     integralHide: app.globalData.ishideIntegral,
+    //     // integralNum: app.globalData.integralNum
+    //   })
+    // }, 200)
+    this.setData({
+      integralHide:app.globalData.ishideIntegral
+    })
     this.loadLottery()
   },
 
@@ -82,14 +109,16 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    app.globalData.ishideIntegral = true
+    app.globalData.sign=true
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    app.globalData.ishideIntegral = true
+    app.globalData.sign = true
   },
 
   /**

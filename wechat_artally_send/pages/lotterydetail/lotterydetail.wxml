@@ -1,4 +1,5 @@
 <!--pages/lotterydetail/lotterydetail.wxml-->
+<integral catchtouchmove ishide="{{integralHide}}"></integral>
 <navigator open-type="switchTab" url='/pages/index/index' class='lq-home' hidden='{{hidehome}}'></navigator>
 
 <canvas canvas-id='myCanvas' class='myCanvas'></canvas>
