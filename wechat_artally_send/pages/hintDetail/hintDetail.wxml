@@ -27,7 +27,8 @@
   <view class='jw-detail-main-view'>
     <text class='jw-detail-main-title'>产品详情</text>
     <!-- <video class='{{isHidebuy==false?"aa":""}}' src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'></video> -->
-    <image mode='widthFix' bindload='detailImgLoad' class='jw-detail-showImg' src='{{detail_image}}' style='height:{{imgHeight}}'></image>
+    <!-- <image mode='widthFix' bindload='detailImgLoad' class='jw-detail-showImg' src='{{detail_image}}' style='height:{{imgHeight}}'></image> -->
+    <rich-text nodes="{{html}}"></rich-text>
   </view>
 
 </scroll-view>
@@ -56,7 +57,7 @@
       <image mode="aspectFit" style="width:100%;height:100%;" class='jw-buy-coverImg' src='{{specification_img}}'></image>
     </view>
     <image bindtap='closeBuy' class='jw-close-buy' src='https://pic.forunart.com/artgive/wx/details_add_icon_close.png'></image>
-    <text class='jw-buy-money'>￥{{detail_msg.price}}</text>
+    <text class='jw-buy-money'>￥{{specification_price}}</text>
     <text class='jw-buy-num'>库存{{specification_repertory}}件</text>
   </view>
   <scroll-view scroll-y>

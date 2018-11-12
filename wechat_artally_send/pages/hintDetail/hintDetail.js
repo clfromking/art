@@ -22,13 +22,16 @@ Page({
     detail_image:'',
     specification:[],
     specification_img:'',
+    specification_price:'',
     specification_repertory:0,
     gift_id:0,
     isshowindicator:false,
     shareimg:"",
     hidehome: true,
     imgHeight:'',
-    integralHide: ''
+    integralHide: '',
+    html:'',
+    html1: '<img style="width:100%;" src="https://img.yzcdn.cn/upload_files/2018/04/24/FjEqxBCPHSg8awgYW1tfLZbzCB52.jpg!730x0.jpg" />'
   },
   buyThis:function(){
     this.setData({
@@ -51,6 +54,7 @@ Page({
     this.setData({
       specification: prec_arr,
       specification_img: prec_arr[e.currentTarget.dataset.id].image,
+      specification_price: prec_arr[e.currentTarget.dataset.id].price,
       specification_repertory: prec_arr[e.currentTarget.dataset.id].repertory,
       gifts_num:1
     })
@@ -112,7 +116,7 @@ Page({
         if (res.keys.indexOf('gifts')<=-1){
           var data=[]
           
-          var giftObj = { 'name': that.data.detail_msg.name, 'describe': that.data.detail_msg.describe, 'price': that.data.detail_msg.price }
+          var giftObj = { 'name': that.data.detail_msg.name, 'describe': that.data.detail_msg.describe, 'price': that.data.specification_price }
          
           for(var i=0;i<that.data.specification.length;i++){
             if(that.data.specification[i].isselect==true){
@@ -144,7 +148,7 @@ Page({
             key: 'gifts',
             success: function(res) {
               var data=res.data
-              var giftObj = { 'name': that.data.detail_msg.name, 'describe': that.data.detail_msg.describe, 'price': that.data.detail_msg.price }
+              var giftObj = { 'name': that.data.detail_msg.name, 'describe': that.data.detail_msg.describe, 'price': that.data.specification_price }
               for (var i = 0; i < that.data.specification.length; i++) {
                 if (that.data.specification[i].isselect == true) {
                   for(var j=0;j<data.length;j++){
@@ -244,11 +248,13 @@ Page({
       mask:true,
       title: '数据加载中',
     })
-    // options.id=70
+    // options.id=359
     var data={'giftid':options.id}
     var that=this
     app.post('gifts/detail', data).then((res)=>{
-      console.log(res)
+      
+      var rich_img = res.data.lists.desc.replace(/\<img/gi, '<img class="rich-img" ');
+      // console.log(rich_img)
       if(res.code== 200){
         var specification = res.data.lists.specification
         if(res.data.lists.imgs.length>1){
@@ -273,6 +279,7 @@ Page({
             swiper_imgs: swiper_imgs,
             detail_msg: detail_msg,
             detail_image: res.data.lists.detail_image,
+            html: rich_img
           })
           wx.showModal({
             title: '提示',
@@ -299,9 +306,11 @@ Page({
           imgHeight:Number(res.data.lists.detail_ratio)*750+'rpx',
           specification: specification,
           specification_img: specification[0].image,
+          specification_price: specification[0].price,
           specification_repertory: specification[0].repertory,
           gift_id:options.id,
-          shareimg: res.data.lists.shareimg
+          shareimg: res.data.lists.shareimg,
+          html: rich_img
         })
         wx.hideLoading()
         wx.showShareMenu()
